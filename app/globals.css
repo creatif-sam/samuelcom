@@ -1807,3 +1807,165 @@ body {
   .adm-stat-num  { font-size: 36px !important; }
 }
 
+/* ── TESTIMONIALS SECTION ──────────────────────────────────────────────────── */
+.ts-section {
+  padding: 120px 0;
+  background: #0d0c0a;
+  position: relative;
+  overflow: hidden;
+}
+.ts-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(201,168,76,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ts-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 56px;
+}
+.ts-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+.ts-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .38em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  margin-bottom: 28px;
+}
+.ts-label-line {
+  width: 36px;
+  height: 1px;
+  background: #c9a84c;
+  display: block;
+}
+.ts-headline {
+  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  color: #f0ece4;
+  line-height: 1.05;
+  margin-bottom: 18px;
+}
+.ts-headline em {
+  font-style: italic;
+  color: #c9a84c;
+}
+.ts-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 1.6vw, 20px);
+  font-style: italic;
+  color: #6b6358;
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+.ts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.ts-card {
+  background: #111009;
+  border: 1px solid rgba(240,236,228,.06);
+  padding: 44px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color .35s, background .35s;
+}
+.ts-card:hover {
+  border-color: rgba(201,168,76,.18);
+  background: #141210;
+}
+.ts-card--featured {
+  grid-column: span 2;
+  background: #141210;
+  border-color: rgba(201,168,76,.12);
+}
+.ts-card--featured .ts-quote {
+  font-size: clamp(18px, 2vw, 26px);
+}
+.ts-stars {
+  display: flex;
+  gap: 3px;
+}
+.ts-star {
+  font-size: 14px;
+}
+.ts-star--on  { color: #c9a84c; }
+.ts-star--off { color: rgba(201,168,76,.2); }
+.ts-quote {
+  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-style: italic;
+  color: #e8e0d0;
+  line-height: 1.65;
+  flex: 1;
+}
+.ts-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(240,236,228,.06);
+}
+.ts-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(201,168,76,.2);
+  flex-shrink: 0;
+}
+.ts-avatar-initials {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(201,168,76,.12);
+  border: 1px solid rgba(201,168,76,.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-size: 16px;
+  color: #c9a84c;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+.ts-author-name {
+  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-size: 15px;
+  color: #f0ece4;
+  font-weight: 600;
+}
+.ts-author-role {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(240,236,228,.35);
+  margin-top: 3px;
+}
+
+@media (max-width: 900px) {
+  .ts-grid { grid-template-columns: 1fr 1fr; }
+  .ts-card--featured { grid-column: span 2; }
+  .ts-inner { padding: 0 32px; }
+}
+@media (max-width: 600px) {
+  .ts-section { padding: 80px 0; }
+  .ts-grid { grid-template-columns: 1fr; }
+  .ts-card--featured { grid-column: span 1; }
+  .ts-inner { padding: 0 20px; }
+  .ts-header { margin-bottom: 48px; }
+}
+
+

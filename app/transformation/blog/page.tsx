@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { createAnonClient } from "@/lib/supabase/anon";
+import { SiteFooter } from "@/components/organisms/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Transformation — Blog",
@@ -59,7 +60,7 @@ const samplePosts: Post[] = [
 export default async function TransformationBlogPage() {
   let posts: Post[] = samplePosts;
   try {
-    const supabase = await createClient();
+    const supabase = createAnonClient();
     const { data } = await supabase
       .from("blog_posts")
       .select("id, title, slug, excerpt, created_at, read_time_minutes")
@@ -114,11 +115,8 @@ export default async function TransformationBlogPage() {
         )}
       </section>
 
-      <footer className="tb-footer">
-        <div className="tb-f-name">Samuel Kobina Gyasi</div>
-        <div className="tb-f-copy">© {new Date().getFullYear()} · All Rights Reserved</div>
-        <Link href="/transformation" className="tb-f-link">← Transformation</Link>
-      </footer>
+      {/* FOOTER */}
+      <SiteFooter />
     </div>
   );
 }

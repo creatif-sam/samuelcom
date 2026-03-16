@@ -8,7 +8,7 @@ import {
   LayoutDashboard, BarChart3, FileText, Users, MessageSquare,
   Mail, Phone, Send, Inbox, Clock, BookOpen, Eye, Trash2,
   Pencil, Plus, CheckCheck, X, Globe, ExternalLink,
-  Code, AlignLeft, Reply, Menu, Copy,
+  Code, AlignLeft, Reply, Menu, Copy, Star,
 } from "lucide-react";
 
 // ── TYPES ──────────────────────────────────────────────────────────────────
@@ -50,8 +50,13 @@ interface AnalyticsData {
   topPages: { path: string; count: number }[];
   dailyViews: { date: string; count: number }[];
 }
+interface Testimonial {
+  id: string; name: string; role: string | null; company: string | null;
+  avatar_url: string | null; quote: string; rating: number;
+  published: boolean; sort_order: number; created_at: string;
+}
 
-type Tab = "overview" | "analytics" | "posts" | "subscribers" | "messages" | "mail" | "whatsapp";
+type Tab = "overview" | "analytics" | "posts" | "subscribers" | "messages" | "mail" | "whatsapp" | "testimonials";
 type MailSubTab = "compose" | "inbox" | "sent" | "templates";
 
 const CATEGORIES = ["faith", "leadership", "intellectuality", "transformation"] as const;
@@ -61,13 +66,14 @@ function slugify(t: string) {
 }
 
 const NAV: { id: Tab; label: string; Icon: React.ComponentType<{ size?: number }> }[] = [
-  { id: "overview",     label: "Overview",    Icon: LayoutDashboard },
-  { id: "analytics",   label: "Analytics",   Icon: BarChart3       },
-  { id: "posts",       label: "Blog Posts",  Icon: FileText        },
-  { id: "subscribers", label: "Subscribers", Icon: Users           },
-  { id: "messages",    label: "Messages",    Icon: MessageSquare   },
-  { id: "mail",        label: "Mail",        Icon: Mail            },
-  { id: "whatsapp",    label: "WhatsApp",    Icon: Phone           },
+  { id: "overview",     label: "Overview",      Icon: LayoutDashboard },
+  { id: "analytics",   label: "Analytics",     Icon: BarChart3       },
+  { id: "posts",       label: "Blog Posts",    Icon: FileText        },
+  { id: "subscribers", label: "Subscribers",   Icon: Users           },
+  { id: "messages",    label: "Messages",      Icon: MessageSquare   },
+  { id: "mail",        label: "Mail",          Icon: Mail            },
+  { id: "whatsapp",    label: "WhatsApp",      Icon: Phone           },
+  { id: "testimonials",label: "Testimonials",  Icon: Star            },
 ];
 
 // ── ADMIN PAGE ─────────────────────────────────────────────────────────────
@@ -86,6 +92,9 @@ export default function AdminPage() {
   const [editPost, setEditPost]   = useState<BlogPost | null>(null);
   const [showTpl, setShowTpl]     = useState(false);
   const [editTpl, setEditTpl]     = useState<EmailTemplate | null>(null);
+  const [showTestimonial, setShowTestimonial] = useState(false);
+  const [editTestimonial, setEditTestimonial] = useState<Testimonial | null>(null);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [confirm, setConfirm]     = useState<{ msg: string; fn: () => Promise<void> } | null>(null);
   const [navOpen, setNavOpen]     = useState(false);
 
@@ -93,7 +102,7 @@ export default function AdminPage() {
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [pR, sR, mR, lR, iR, tR, aR] = await Promise.all([
+    const [pR, sR, mR, lR, iR, tR, aR, tsR] = await Promise.all([
       db.from("blog_posts").select("*").order("created_at", { ascending: false }),
       db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }),
       db.from("contact_messages").select("*").order("created_at", { ascending: false }),
@@ -102,6 +111,7 @@ export default function AdminPage() {
       db.from("email_templates").select("*").order("created_at", { ascending: false }),
       db.from("page_views").select("page_path,visitor_id,created_at")
         .gte("created_at", new Date(Date.now() - 30 * 86400000).toISOString()),
+      db.from("testimonials").select("*").order("sort_order", { ascending: true }).order("created_at", { ascending: false }),
     ]);
     setPosts(pR.data ?? []);
     setSubs(sR.data ?? []);
@@ -109,6 +119,7 @@ export default function AdminPage() {
     setLogs(lR.data ?? []);
     setInbox(iR.data ?? []);
     setTemplates(tR.data ?? []);
+    setTestimonials(tsR.data ?? []);
 
     const views: PageViewRow[] = aR.data ?? [];
     const totalViews     = views.length;
@@ -230,10 +241,35 @@ export default function AdminPage() {
               />
             )}
             {tab === "whatsapp"     && <WhatsApp />}
+            {tab === "testimonials" && (
+              <TestimonialsTab
+                testimonials={testimonials}
+                onNew={() => { setEditTestimonial(null); setShowTestimonial(true); }}
+                onEdit={(t) => { setEditTestimonial(t); setShowTestimonial(true); }}
+                onDelete={(id, name) => ask(`Delete testimonial from "${name}"?`, async () => {
+                  const { error } = await db.from("testimonials").delete().eq("id", id);
+                  if (error) { toast.error("Delete failed"); return; }
+                  toast.success("Deleted"); await load();
+                })}
+                onToggle={async (id, val) => {
+                  const { error } = await db.from("testimonials").update({ published: val }).eq("id", id);
+                  if (error) { toast.error("Update failed"); return; }
+                  toast.success(val ? "Published" : "Unpublished"); await load();
+                }}
+              />
+            )}
           </>
         )}
       </main>
 
+      {showTestimonial && (
+        <TestimonialModal
+          testimonial={editTestimonial}
+          onClose={() => setShowTestimonial(false)}
+          onSave={async () => { setShowTestimonial(false); await load(); }}
+          db={db}
+        />
+      )}
       {showPost && (
         <PostModal post={editPost} onClose={() => setShowPost(false)} onSave={async () => { setShowPost(false); await load(); }} db={db} />
       )}
@@ -992,6 +1028,199 @@ function WhatsApp() {
 }
 
 // ── POST MODAL ────────────────────────────────────────────────────────────
+// ── TESTIMONIALS TAB ──────────────────────────────────────────────────────
+function TestimonialsTab({ testimonials, onNew, onEdit, onDelete, onToggle }: {
+  testimonials: Testimonial[];
+  onNew: () => void;
+  onEdit: (t: Testimonial) => void;
+  onDelete: (id: string, name: string) => void;
+  onToggle: (id: string, val: boolean) => Promise<void>;
+}) {
+  const published = testimonials.filter((t) => t.published).length;
+  return (
+    <>
+      <div className="adm-header">
+        <div>
+          <div className="adm-page-title">Testimonials</div>
+          <p className="adm-page-sub">{published} published · {testimonials.length} total</p>
+        </div>
+        <button className="adm-btn adm-btn--gold" onClick={onNew} style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+          <Plus size={12} /> Add Testimonial
+        </button>
+      </div>
+
+      {testimonials.length === 0 ? (
+        <div className="adm-empty" style={{ padding: "60px 0", textAlign: "center" }}>
+          No testimonials yet. Add the first one.
+        </div>
+      ) : (
+        <div className="adm-table-wrap">
+          <table className="adm-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Role / Company</th>
+                <th>Rating</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {testimonials.map((t) => (
+                <tr key={t.id}>
+                  <td style={{ color: "#f0ece4", maxWidth: "200px" }}>
+                    <div style={{ fontWeight: 600 }}>{t.name}</div>
+                    <div style={{ fontSize: "11px", color: "rgba(240,236,228,.4)", marginTop: "2px", fontStyle: "italic" }}>
+                      {t.quote.slice(0, 60)}{t.quote.length > 60 ? "…" : ""}
+                    </div>
+                  </td>
+                  <td style={{ fontSize: "12px", color: "rgba(240,236,228,.5)" }}>
+                    {[t.role, t.company].filter(Boolean).join(" · ") || "—"}
+                  </td>
+                  <td>
+                    <span style={{ color: "#c9a84c", letterSpacing: "2px" }}>
+                      {"★".repeat(t.rating)}{"☆".repeat(5 - t.rating)}
+                    </span>
+                  </td>
+                  <td>
+                    <button
+                      className={`adm-badge ${t.published ? "adm-badge--published" : "adm-badge--draft"}`}
+                      style={{ cursor: "pointer", background: "none", border: "none" }}
+                      onClick={() => onToggle(t.id, !t.published)}
+                      title={t.published ? "Click to unpublish" : "Click to publish"}
+                    >
+                      {t.published ? "Published" : "Draft"}
+                    </button>
+                  </td>
+                  <td>
+                    <div className="adm-action-row">
+                      <button className="adm-btn adm-btn--ghost adm-btn--sm" onClick={() => onEdit(t)}>
+                        <Pencil size={10} />
+                      </button>
+                      <button className="adm-btn adm-btn--danger adm-btn--sm" onClick={() => onDelete(t.id, t.name)}>
+                        <Trash2 size={10} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  );
+}
+
+// ── TESTIMONIAL MODAL ─────────────────────────────────────────────────────
+function TestimonialModal({ testimonial, onClose, onSave, db }: {
+  testimonial: Testimonial | null;
+  onClose: () => void;
+  onSave: () => Promise<void>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  db: any;
+}) {
+  const [name,      setName]      = useState(testimonial?.name       ?? "");
+  const [role,      setRole]      = useState(testimonial?.role       ?? "");
+  const [company,   setCompany]   = useState(testimonial?.company    ?? "");
+  const [avatarUrl, setAvatarUrl] = useState(testimonial?.avatar_url ?? "");
+  const [quote,     setQuote]     = useState(testimonial?.quote      ?? "");
+  const [rating,    setRating]    = useState(testimonial?.rating     ?? 5);
+  const [published, setPub]       = useState(testimonial?.published  ?? false);
+  const [sortOrder, setSort]       = useState(testimonial?.sort_order ?? 0);
+  const [saving,    setSaving]    = useState(false);
+
+  async function handleSave() {
+    if (!name.trim() || !quote.trim()) { toast.error("Name and quote are required"); return; }
+    setSaving(true);
+    const payload = {
+      name: name.trim(),
+      role: role.trim() || null,
+      company: company.trim() || null,
+      avatar_url: avatarUrl.trim() || null,
+      quote: quote.trim(),
+      rating,
+      published,
+      sort_order: sortOrder,
+    };
+    const { error } = testimonial
+      ? await db.from("testimonials").update(payload).eq("id", testimonial.id)
+      : await db.from("testimonials").insert(payload);
+    setSaving(false);
+    if (error) { toast.error("Save failed: " + error.message); return; }
+    toast.success(testimonial ? "Testimonial updated" : "Testimonial added");
+    await onSave();
+  }
+
+  return (
+    <div className="adm-form-overlay" onClick={onClose}>
+      <div className="adm-form-panel" onClick={(e) => e.stopPropagation()}>
+        <div className="adm-form-header">
+          <div className="adm-form-title">{testimonial ? "Edit Testimonial" : "New Testimonial"}</div>
+          <button className="adm-icon-btn" onClick={onClose}><X size={16} /></button>
+        </div>
+        <div className="adm-form-body">
+          <div className="adm-form-row">
+            <div className="adm-field">
+              <label className="adm-label">Name *</label>
+              <input className="adm-input" value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" />
+            </div>
+            <div className="adm-field">
+              <label className="adm-label">Role</label>
+              <input className="adm-input" value={role} onChange={(e) => setRole(e.target.value)} placeholder="e.g. Professor, Director" />
+            </div>
+          </div>
+          <div className="adm-form-row">
+            <div className="adm-field">
+              <label className="adm-label">Company / Organisation</label>
+              <input className="adm-input" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="e.g. UM6P, World Bank" />
+            </div>
+            <div className="adm-field">
+              <label className="adm-label">Avatar URL</label>
+              <input className="adm-input" value={avatarUrl} onChange={(e) => setAvatarUrl(e.target.value)} placeholder="https://…" />
+            </div>
+          </div>
+          <div className="adm-field">
+            <label className="adm-label">Quote *</label>
+            <textarea className="adm-textarea" style={{ minHeight: "100px" }} value={quote} onChange={(e) => setQuote(e.target.value)} placeholder="What did they say about Samuel?" />
+          </div>
+          <div className="adm-form-row">
+            <div className="adm-field">
+              <label className="adm-label">Rating (1–5)</label>
+              <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+                {[1,2,3,4,5].map((n) => (
+                  <button key={n} type="button" onClick={() => setRating(n)}
+                    style={{ background: "none", border: "none", cursor: "pointer", fontSize: "24px", color: n <= rating ? "#c9a84c" : "rgba(201,168,76,.2)", padding: "0" }}>
+                    ★
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="adm-field">
+              <label className="adm-label">Sort Order (lower = first)</label>
+              <input className="adm-input" type="number" min={0} value={sortOrder} onChange={(e) => setSort(Number(e.target.value))} />
+            </div>
+          </div>
+          <div className="adm-field" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <input type="checkbox" id="ts-pub" checked={published} onChange={(e) => setPub(e.target.checked)}
+              style={{ width: "16px", height: "16px", accentColor: "#c9a84c", cursor: "pointer" }} />
+            <label htmlFor="ts-pub" className="adm-label" style={{ margin: 0, cursor: "pointer" }}>
+              Publish immediately (visible on site)
+            </label>
+          </div>
+        </div>
+        <div className="adm-form-actions">
+          <button className="adm-btn adm-btn--ghost" onClick={onClose}>Cancel</button>
+          <button className="adm-btn adm-btn--gold" onClick={handleSave} disabled={saving}>
+            {saving ? "Saving…" : testimonial ? "Update" : "Add Testimonial"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── POST MODAL (original) ─────────────────────────────────────────────────
 function PostModal({ post, onClose, onSave, db }: {
   post: BlogPost | null; onClose: () => void;
   onSave: () => Promise<void>;

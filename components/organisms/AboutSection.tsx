@@ -22,8 +22,9 @@ export function AboutSection() {
           <ScrollReveal className="about-body" delay="0.2s">
             <p>
               Samuel Gyasi is a thinker, leader, and servant of God whose life is anchored in
-              the timeless truths of Scripture. His journey is one of deliberate growth — from
-              the depth of personal devotion to the heights of communal impact.
+              the timeless truths of Scripture. Having completed his Master’s in Collective
+              Intelligence at UM6P in 2025, he now serves as a Junior Program Officer at the
+              School of Collective Intelligence, University Mohammed VI Polytechnic in Morocco.
             </p>
             <p>
               Guided by Biblical wisdom, Samuel approaches every sphere of life — intellectual

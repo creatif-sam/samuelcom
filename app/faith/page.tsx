@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
+import { SiteFooter } from "@/components/organisms/SiteFooter";
+import { TestimonialsClient } from "@/components/organisms/TestimonialsClient";
 
 const css = `
 /* ── DESIGN TOKENS ── */
@@ -625,11 +627,8 @@ export default function FaithPage() {
       </section>
 
       {/* FOOTER */}
-      <footer>
-        <div className="f-name">Samuel Kobina Gyasi</div>
-        <div className="f-copy">Faith &amp; Beliefs · © 2026</div>
-        <Link href="/" className="f-link">← Portfolio</Link>
-      </footer>
+      <TestimonialsClient />
+      <Suspense fallback={null}><SiteFooter /></Suspense>
     </div>
   );
 }

@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
+import { SiteFooter } from "@/components/organisms/SiteFooter";
+import { TestimonialsClient } from "@/components/organisms/TestimonialsClient";
 
 const css = `
 /* ── DESIGN TOKENS (scoped) ── */
@@ -812,11 +814,8 @@ export default function IntellectualityPage() {
         </section>
 
         {/* FOOTER */}
-        <footer>
-          <div className="f-name">Samuel Kobina Gyasi</div>
-          <div className="f-copy">Intellectuality · © 2026</div>
-          <Link href="/" className="f-link">← Portfolio</Link>
-        </footer>
+        <TestimonialsClient />
+        <Suspense fallback={null}><SiteFooter /></Suspense>
       </div>
     </>
   );

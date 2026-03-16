@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { createAnonClient } from "@/lib/supabase/anon";
+import { SiteFooter } from "@/components/organisms/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Beliefs & Faith — Blog",
@@ -59,7 +60,7 @@ const samplePosts: Post[] = [
 export default async function FaithBlogPage() {
   let posts: Post[] = samplePosts;
   try {
-    const supabase = await createClient();
+    const supabase = createAnonClient();
     const { data } = await supabase
       .from("blog_posts")
       .select("id, title, slug, excerpt, created_at, read_time_minutes")
@@ -120,11 +121,7 @@ export default async function FaithBlogPage() {
       </section>
 
       {/* FOOTER */}
-      <footer>
-        <div className="f-name">Samuel Kobina Gyasi</div>
-        <div className="f-copy">© {new Date().getFullYear()} · All Rights Reserved</div>
-        <Link href="/faith" className="f-link">← Back to Beliefs</Link>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

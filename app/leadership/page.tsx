@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import Link from "next/link";
+import { SiteFooter } from "@/components/organisms/SiteFooter";
+import { TestimonialsClient } from "@/components/organisms/TestimonialsClient";
 
 const css = `
 /* ── DESIGN TOKENS (scoped) ── */
@@ -488,7 +490,7 @@ export default function LeadershipPage() {
             Samuel<br /><span>Kobina</span><br />Gyasi
           </h1>
           <p className="hero-role">
-            Master&apos;s Student in Collective Intelligence · Graduate Leader · Researcher · Innovator
+            Junior Program Officer · School of Collective Intelligence · UM6P · Researcher · Innovator
           </p>
           <div className="hero-stats">
             <div className="stat-item">
@@ -529,7 +531,6 @@ export default function LeadershipPage() {
                 <div className="tl-role">President</div>
                 <div className="tl-org">Collective Intelligence Consortium</div>
                 <div className="tl-location">UM6P · Rabat, Morocco</div>
-                <div className="tl-badge">Current</div>
               </div>
             </div>
 
@@ -540,7 +541,6 @@ export default function LeadershipPage() {
                 <div className="tl-role">Academic Affairs Delegate</div>
                 <div className="tl-org">International Students Club</div>
                 <div className="tl-location">UM6P · Morocco</div>
-                <div className="tl-badge">Current</div>
               </div>
             </div>
 
@@ -551,7 +551,6 @@ export default function LeadershipPage() {
                 <div className="tl-role">Financial Secretary</div>
                 <div className="tl-org">Ghanaian Students Association in Morocco</div>
                 <div className="tl-location">Morocco</div>
-                <div className="tl-badge">Current</div>
               </div>
             </div>
 
@@ -562,7 +561,6 @@ export default function LeadershipPage() {
                 <div className="tl-role">School Ambassador</div>
                 <div className="tl-org">School of Collective Intelligence</div>
                 <div className="tl-location">UM6P · Rabat, Morocco</div>
-                <div className="tl-badge">Current</div>
               </div>
             </div>
 
@@ -573,7 +571,6 @@ export default function LeadershipPage() {
                 <div className="tl-role">Student Representative</div>
                 <div className="tl-org">School of Collective Intelligence</div>
                 <div className="tl-location">UM6P · Morocco</div>
-                <div className="tl-badge">Current</div>
               </div>
             </div>
 
@@ -620,6 +617,19 @@ export default function LeadershipPage() {
           </div>
 
           <div className="exp-grid">
+            <div className="exp-card">
+              <div className="exp-period">Oct 2025 —<br />Present</div>
+              <div className="exp-content">
+                <div className="exp-role">Junior Program Officer</div>
+                <div className="exp-org">School of Collective Intelligence, University Mohammed VI Polytechnic · Rabat, Morocco</div>
+                <ul className="exp-bullets">
+                  <li>Design and coordinate programs fostering collective intelligence approaches within the School of Collective Intelligence.</li>
+                  <li>Support research initiatives, stakeholder engagement, and capacity-building activities for students and faculty.</li>
+                  <li>Collaborate with academic and administrative teams to advance the school&apos;s mission of transformative education.</li>
+                </ul>
+              </div>
+            </div>
+
             <div className="exp-card">
               <div className="exp-period">Jul 2024 —<br />Sep 2024</div>
               <div className="exp-content">
@@ -673,7 +683,7 @@ export default function LeadershipPage() {
             <div className="edu-card">
               <div className="edu-degree">MSc. Collective Intelligence</div>
               <div className="edu-school">University Mohammed VI Polytechnic</div>
-              <div className="edu-period">Since October 2023</div>
+              <div className="edu-period">Oct 2023 — Jul 2025 · Graduated</div>
               <div className="edu-location">Rabat, Morocco</div>
             </div>
             <div className="edu-card">
@@ -877,20 +887,17 @@ export default function LeadershipPage() {
             <div className="contact-cta">Let&apos;s<br />Connect &amp;<br /><span>Collaborate</span></div>
           </div>
           <div className="contact-details">
-            <div className="contact-item">samuel.gyasi@um6p.ma</div>
+            <div className="contact-item">impact@samuelgyasi.com</div>
             <div className="contact-item">+212 684 893 821</div>
             <div className="contact-item">Rabat, Morocco</div>
             <div className="contact-item">Open to Remote Work</div>
-            <div className="contact-item">@samuel kobina gyasi Msc.Collective Intelligence</div>
+            <div className="contact-item">Junior Program Officer · School of Collective Intelligence · UM6P</div>
           </div>
         </section>
 
         {/* FOOTER */}
-        <footer>
-          <div className="footer-name">Samuel Kobina Gyasi</div>
-          <div className="footer-copy">© 2026 · Leadership Portfolio</div>
-          <Link href="/" className="footer-link">← Back to Portfolio</Link>
-        </footer>
+        <TestimonialsClient />
+        <Suspense fallback={null}><SiteFooter /></Suspense>
       </div>
     </>
   );

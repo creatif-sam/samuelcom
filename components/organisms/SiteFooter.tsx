@@ -199,7 +199,7 @@ export function SiteFooter() {
       {/* ── BOTTOM BAR ── */}
       <div className="sf-rule" />
       <div className="sf-bottom">
-        <span className="sf-copy">© {new Date().getFullYear()} Samuel Kobina Gyasi · All Rights Reserved</span>
+        <span className="sf-copy" suppressHydrationWarning>© {new Date().getFullYear()} Samuel Kobina Gyasi · All Rights Reserved</span>
         <span className="sf-emblem">✦</span>
         <span className="sf-credit">Built with purpose · samuelgyasi.com</span>
       </div>
