@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
@@ -8,7 +9,7 @@ import {
   LayoutDashboard, BarChart3, FileText, Users, MessageSquare,
   Mail, Phone, Send, Inbox, Clock, BookOpen, Eye, Trash2,
   Pencil, Plus, CheckCheck, X, Globe, ExternalLink,
-  Code, AlignLeft, Reply, Menu, Copy, Star,
+  Code, AlignLeft, Reply, Menu, Copy, Star, LogOut,
 } from "lucide-react";
 
 // ── TYPES ──────────────────────────────────────────────────────────────────
@@ -21,6 +22,7 @@ interface BlogPost {
 interface Subscriber {
   id: string; email: string; name: string | null;
   created_at: string; confirmed: boolean;
+  interests?: string[] | null;
 }
 interface Message {
   id: string; name: string; email: string; subject: string | null;
@@ -97,8 +99,14 @@ export default function AdminPage() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [confirm, setConfirm]     = useState<{ msg: string; fn: () => Promise<void> } | null>(null);
   const [navOpen, setNavOpen]     = useState(false);
+  const router = useRouter();
 
   const db = createClient();
+
+  const handleLogout = async () => {
+    await db.auth.signOut();
+    router.push("/auth/login");
+  };
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -175,10 +183,18 @@ export default function AdminPage() {
             );
           })}
         </nav>
-        <div style={{ padding: "0 28px 24px", marginTop: "auto" }}>
+        <div style={{ padding: "0 28px 24px", marginTop: "auto", display: "flex", flexDirection: "column", gap: "10px" }}>
           <Link href="/" style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(240,236,228,.3)", textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}>
             <Globe size={10} /> Back to Site
           </Link>
+          <button
+            onClick={handleLogout}
+            style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(240,236,228,.35)", background: "none", border: "1px solid rgba(240,236,228,.1)", padding: "8px 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", width: "100%", transition: "border-color .2s, color .2s" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,168,76,.4)"; (e.currentTarget as HTMLButtonElement).style.color = "#c9a84c"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(240,236,228,.1)"; (e.currentTarget as HTMLButtonElement).style.color = "rgba(240,236,228,.35)"; }}
+          >
+            <LogOut size={10} /> Log Out
+          </button>
         </div>
       </aside>
 
@@ -504,12 +520,21 @@ function SubsTab({ subs, onDelete }: { subs: Subscriber[]; onDelete: (id: string
       {subs.length === 0 ? <p className="adm-empty">No subscribers yet.</p> : (
         <div className="adm-table-wrap">
           <table className="adm-table">
-            <thead><tr><th>Email</th><th>Name</th><th>Confirmed</th><th>Joined</th><th></th></tr></thead>
+            <thead><tr><th>Email</th><th>Name</th><th>Interests</th><th>Confirmed</th><th>Joined</th><th></th></tr></thead>
             <tbody>
               {subs.map((s) => (
                 <tr key={s.id}>
                   <td style={{ color: "#f0ece4" }}>{s.email}</td>
                   <td>{s.name ?? "—"}</td>
+                  <td style={{ maxWidth: 220 }}>
+                    {s.interests && s.interests.length > 0
+                      ? s.interests.map((i) => (
+                          <span key={i} className="adm-badge adm-badge--draft" style={{ marginRight: 4, marginBottom: 2, display: "inline-block", textTransform: "capitalize" }}>
+                            {i.replace(/_/g, " ")}
+                          </span>
+                        ))
+                      : <span style={{ color: "rgba(245,243,239,0.3)" }}>—</span>}
+                  </td>
                   <td><span className={`adm-badge ${s.confirmed ? "adm-badge--published" : "adm-badge--draft"}`}>{s.confirmed ? "Yes" : "Pending"}</span></td>
                   <td>{new Date(s.created_at).toLocaleDateString("en-GB")}</td>
                   <td><button className="adm-btn adm-btn--danger adm-btn--sm" onClick={() => onDelete(s.id, s.email)}><Trash2 size={9} /></button></td>

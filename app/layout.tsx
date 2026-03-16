@@ -4,6 +4,7 @@ import "./globals.css";
 import { CustomCursor } from "@/components/organisms/CustomCursor";
 import { CookieBanner } from "@/components/organisms/CookieBanner";
 import { Analytics } from "@/components/Analytics";
+import { Providers } from "./providers";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -139,10 +140,12 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${cormorant.variable} ${spaceMono.variable}`}
       >
-        <CustomCursor />
-        <Analytics />
-        {children}
-        <CookieBanner />
+        <Providers>
+          <CustomCursor />
+          <Analytics />
+          {children}
+          <CookieBanner />
+        </Providers>
       </body>
     </html>
   );

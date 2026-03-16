@@ -4,6 +4,14 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
+const INTERESTS = [
+  { value: "faith",           label: "Faith & Spirituality" },
+  { value: "leadership",      label: "Leadership"            },
+  { value: "intellectuality", label: "Intellectuality"       },
+  { value: "transformation",  label: "Transformation"        },
+  { value: "group_intelligence", label: "Group Intelligence" },
+];
+
 const socialLinks = [
   {
     label: "LinkedIn",
@@ -51,10 +59,17 @@ const pillarsLinks = [
 ];
 
 export function SiteFooter() {
-  const [email, setEmail]     = useState("");
-  const [status, setStatus]   = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
-  const inputRef              = useRef<HTMLInputElement>(null);
+  const [email, setEmail]         = useState("");
+  const [interests, setInterests] = useState<string[]>([]);
+  const [status, setStatus]       = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage]     = useState("");
+  const inputRef                  = useRef<HTMLInputElement>(null);
+
+  function toggleInterest(value: string) {
+    setInterests((prev) =>
+      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+    );
+  }
 
   async function handleSubscribe(e: React.FormEvent) {
     e.preventDefault();
@@ -68,7 +83,7 @@ export function SiteFooter() {
       const supabase = createClient();
       const { error } = await supabase
         .from("newsletter_subscribers")
-        .insert({ email: email.trim().toLowerCase() });
+        .insert({ email: email.trim().toLowerCase(), interests });
       if (error && error.code === "23505") {
         setStatus("success");
         setMessage("You're already subscribed — thank you!");
@@ -78,6 +93,7 @@ export function SiteFooter() {
         setStatus("success");
         setMessage("Subscribed! Expect words that matter.");
         setEmail("");
+        setInterests([]);
       }
     } catch {
       setStatus("error");
@@ -122,6 +138,26 @@ export function SiteFooter() {
           </p>
         </div>
         <form className="sf-nl-form" onSubmit={handleSubscribe} noValidate>
+          {/* Interest checkboxes */}
+          <div className="sf-nl-interests">
+            <p className="sf-nl-interests-label">I&apos;m interested in:</p>
+            <div className="sf-nl-checks">
+              {INTERESTS.map((item) => (
+                <label key={item.value} className="sf-nl-check-item">
+                  <input
+                    type="checkbox"
+                    className="sf-nl-checkbox"
+                    value={item.value}
+                    checked={interests.includes(item.value)}
+                    onChange={() => toggleInterest(item.value)}
+                    disabled={status === "loading" || status === "success"}
+                  />
+                  <span>{item.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
           <input
             ref={inputRef}
             type="email"

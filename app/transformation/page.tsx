@@ -452,6 +452,44 @@ body.on-tdp .cursor-ring {
   letter-spacing:.2em; color:var(--ember); text-decoration:none; text-transform:uppercase;
 }
 
+/* ── BLOG STRIP ── */
+.tdp .blog-strip {
+  background: var(--void); padding: 80px 56px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--line);
+}
+.tdp .bs-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: .35em; text-transform: uppercase;
+  color: var(--ember); display: flex; align-items: center; gap: 16px;
+}
+.tdp .bs-eyebrow::before, .tdp .bs-eyebrow::after { content: ''; width: 36px; height: 1px; background: var(--ember); }
+.tdp .bs-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px,4vw,52px); color: var(--white); line-height: 1.1;
+}
+.tdp .bs-title em { font-style: italic; color: var(--ember); }
+.tdp .bs-sub {
+  font-size: 17px; font-style: italic; font-weight: 300; color: var(--sub);
+  max-width: 480px; line-height: 1.6;
+}
+.tdp .bs-btns {
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px;
+}
+.tdp .bs-btn {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase;
+  padding: 14px 32px; background: var(--ember); color: #fff;
+  text-decoration: none; transition: background .25s, color .25s;
+}
+.tdp .bs-btn:hover { background: var(--white); color: var(--void); }
+.tdp .bs-btn.ghost {
+  background: transparent; color: var(--ember); border: 1px solid rgba(232,105,42,.4);
+}
+.tdp .bs-btn.ghost:hover { background: var(--ember); color: var(--void); }
+
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
   .tdp nav { padding:0 24px; }
@@ -470,6 +508,7 @@ body.on-tdp .cursor-ring {
   .tdp .hero-stats { flex-direction:column; width:100%; }
   .tdp .hs-item { border-right:none; border-bottom:1px solid var(--line); }
   .tdp footer { flex-direction:column; gap:12px; text-align:center; padding:20px; }
+  .tdp .blog-strip { padding:60px 24px; }
 }
 `;
 
@@ -672,6 +711,17 @@ export default function TransformationPage() {
           </div>
         </div>
       </section>
+
+      {/* BLOG STRIP */}
+      <div className="blog-strip">
+        <div className="bs-eyebrow">The Transformation Journal</div>
+        <h2 className="bs-title">Writings on<br /><em>Transformation</em></h2>
+        <p className="bs-sub">Essays on change, systems thinking, and the work of making things better — in organisations, communities, and people.</p>
+        <div className="bs-btns">
+          <Link href="/transformation/blog" className="bs-btn">Read the Blog →</Link>
+          <Link href="/blog" className="bs-btn ghost">All Writings →</Link>
+        </div>
+      </div>
 
       {/* CONNECT */}
       <section id="connect">

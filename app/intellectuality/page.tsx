@@ -440,6 +440,44 @@ body.on-idp .cursor-ring {
 .idp .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
 .idp .reveal.visible { opacity: 1; transform: none; }
 
+/* ── BLOG STRIP ── */
+.idp .blog-strip {
+  background: var(--paper); padding: 80px 56px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--line);
+}
+.idp .bs-eyebrow {
+  font-family: 'Space Mono', monospace; font-size: 9px;
+  letter-spacing: .35em; text-transform: uppercase;
+  color: var(--red); display: flex; align-items: center; gap: 16px;
+}
+.idp .bs-eyebrow::before, .idp .bs-eyebrow::after { content: ''; width: 36px; height: 1px; background: var(--red); }
+.idp .bs-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px,4vw,52px); color: var(--ink); line-height: 1.1;
+}
+.idp .bs-title em { font-style: italic; color: var(--red); }
+.idp .bs-sub {
+  font-size: 17px; font-style: italic; font-weight: 300; color: var(--sub);
+  max-width: 480px; line-height: 1.6;
+}
+.idp .bs-btns {
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px;
+}
+.idp .bs-btn {
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase;
+  padding: 14px 32px; background: var(--red); color: #fff;
+  text-decoration: none; transition: background .25s, color .25s;
+}
+.idp .bs-btn:hover { background: var(--ink); }
+.idp .bs-btn.ghost {
+  background: transparent; color: var(--red); border: 1px solid rgba(192,57,43,.4);
+}
+.idp .bs-btn.ghost:hover { background: var(--red); color: #fff; }
+
 /* ── RESPONSIVE ── */
 @media(max-width:900px) {
   .idp nav { padding: 0 24px; }
@@ -453,6 +491,7 @@ body.on-idp .cursor-ring {
   .idp #connect { flex-direction: column; }
   .idp .hero-metrics { flex-direction: column; }
   .idp .hm-item { border-right: none; border-bottom: 1px solid rgba(244,241,235,.08); }
+  .idp .blog-strip { padding: 60px 24px; }
 }
 `;
 
@@ -798,6 +837,17 @@ export default function IntellectualityPage() {
             <div className="qb-attr">Matthew 22:37 · The intellectual&apos;s calling</div>
           </div>
         </section>
+
+        {/* BLOG STRIP */}
+        <div className="blog-strip">
+          <div className="bs-eyebrow">The Intellectuality Journal</div>
+          <h2 className="bs-title">Writings on<br /><em>Ideas & Intellect</em></h2>
+          <p className="bs-sub">Essays on data, technology, research, and the ideas that shape how we understand the world.</p>
+          <div className="bs-btns">
+            <Link href="/intellectuality/blog" className="bs-btn">Read the Blog →</Link>
+            <Link href="/blog" className="bs-btn ghost">All Writings →</Link>
+          </div>
+        </div>
 
         {/* CONNECT */}
         <section id="connect">

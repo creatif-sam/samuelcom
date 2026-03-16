@@ -1,42 +1,100 @@
-import { SectionLabel } from "@/components/atoms/SectionLabel";
-import { ScrollReveal } from "@/components/molecules/ScrollReveal";
+﻿"use client";
+
+import { useEffect, useRef } from "react";
+
+const timelineEntries = [
+  {
+    year: "The Beginning",
+    title: "Foundations of Faith",
+    body: "Born and raised with deep roots in Christian faith, Samuel's earliest formation came through Scripture, community, and a conviction that every life carries divine purpose. These foundations never left him.",
+  },
+  {
+    year: "The Formation",
+    title: "Education & Early Leadership",
+    body: "Samuel pursued academic and leadership development with the same intentionality he brought to faith. Early in his journey he began understanding that knowledge without service is incomplete — a lesson that would shape every season ahead.",
+  },
+  {
+    year: "The Field",
+    title: "Fifteen Years of Practice",
+    body: "Over fifteen years, Samuel worked across sectors — education, governance, civil society, and the private sector — facilitating groups, building leadership culture, and contributing to institutional transformation across Africa and beyond.",
+  },
+  {
+    year: "2023 – 2025",
+    title: "Master's in Collective Intelligence",
+    body: "At UM6P — University Mohammed VI Polytechnic in Morocco — Samuel completed a rigorous Master's programme in Collective Intelligence, fusing his leadership experience with data science, organisational theory, and systems thinking.",
+  },
+  {
+    year: "Now",
+    title: "School of Collective Intelligence",
+    body: "Today Samuel serves as Junior Program Officer at the School of Collective Intelligence, UM6P — designing programmes, facilitating strategic learning, and working to unlock the potential already present in people, teams, and institutions.",
+  },
+];
 
 export function AboutSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const entries = sectionRef.current?.querySelectorAll<HTMLElement>(".tl-entry");
+    if (!entries) return;
+
+    const observer = new IntersectionObserver(
+      (obs) => {
+        obs.forEach((o) => {
+          if (o.isIntersecting) {
+            (o.target as HTMLElement).classList.add("tl-visible");
+            observer.unobserve(o.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+
+    entries.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="about" className="portfolio-section about-section">
-      <div className="section-inner">
-        <SectionLabel dark>About Samuel</SectionLabel>
+    <section id="my-story" className="about-section about-timeline-section">
+      <div className="tl-inner" ref={sectionRef}>
 
-        <div className="about-grid">
-          <ScrollReveal>
-            <h2 className="about-headline">
-              A Man <em>Built</em> on the Word &amp; <em>Moved</em> by Purpose
-            </h2>
-            <blockquote className="about-quote">
-              &ldquo;For I know the plans I have for you,&rdquo; declares the Lord, &ldquo;plans
-              to prosper you and not to harm you, plans to give you hope and a future.&rdquo;
-              <cite>— Jeremiah 29:11</cite>
-            </blockquote>
-          </ScrollReveal>
-
-          <ScrollReveal className="about-body" delay="0.2s">
-            <p>
-              Samuel Gyasi is a thinker, leader, and servant of God whose life is anchored in
-              the timeless truths of Scripture. Having completed his Master’s in Collective
-              Intelligence at UM6P in 2025, he now serves as a Junior Program Officer at the
-              School of Collective Intelligence, University Mohammed VI Polytechnic in Morocco.
-            </p>
-            <p>
-              Guided by Biblical wisdom, Samuel approaches every sphere of life — intellectual
-              discourse, organizational leadership, and personal growth — as sacred ground where
-              faith meets action.
-            </p>
-            <p>
-              He believes that genuine transformation begins within, shaped by the Spirit, and
-              radiates outward to communities, institutions, and generations yet unborn.
-            </p>
-          </ScrollReveal>
+        <div className="tl-header">
+          <span className="tl-eyebrow">My Story</span>
+          <h2 className="tl-main-title">
+            A Life <em>Built</em> on Purpose,{" "}
+            <span>Faith &amp; Collective Growth</span>
+          </h2>
         </div>
+
+        <div className="tl-track">
+          <div className="tl-spine" aria-hidden="true" />
+
+          {timelineEntries.map((entry, i) => (
+            <div
+              key={i}
+              className="tl-entry"
+              style={{ transitionDelay: `${i * 0.12}s` }}
+            >
+              <div className="tl-dot" aria-hidden="true">
+                <div className="tl-dot-inner" />
+              </div>
+
+              <div className="tl-content">
+                <div className="tl-year">{entry.year}</div>
+                <h3 className="tl-title">{entry.title}</h3>
+                <p className="tl-body">{entry.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="tl-quote-wrap">
+          <blockquote className="tl-quote">
+            &ldquo;For I know the plans I have for you,&rdquo; declares the Lord,
+            &ldquo;plans to prosper you and not to harm you, plans to give you hope and a future.&rdquo;
+            <cite>— Jeremiah 29:11</cite>
+          </blockquote>
+        </div>
+
       </div>
     </section>
   );

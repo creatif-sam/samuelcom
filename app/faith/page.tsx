@@ -1,9 +1,21 @@
 "use client";
 
-import { useEffect, useRef, Suspense } from "react";
-import Link from "next/link";
+import { useEffect, useRef, useState, Suspense } from "react";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
 import { TestimonialsClient } from "@/components/organisms/TestimonialsClient";
+import type { Lang } from "./translations";
+
+/* ── Atomic / Molecular components ── */
+import { FaithParticles }  from "./atoms/FaithParticles";
+import { FaithNav }        from "./molecules/FaithNav";
+import { FaithHero }       from "./molecules/FaithHero";
+import { FaithBeliefs }    from "./molecules/FaithBeliefs";
+import { FaithJourney }    from "./molecules/FaithJourney";
+import { FaithScriptures } from "./molecules/FaithScriptures";
+import { FaithPractice }   from "./molecules/FaithPractice";
+import { FaithReflection } from "./molecules/FaithReflection";
+import { FaithBlogStrip }  from "./molecules/FaithBlogStrip";
+import { FaithConnect }    from "./molecules/FaithConnect";
 
 const css = `
 /* ── DESIGN TOKENS ── */
@@ -14,6 +26,7 @@ const css = `
   --cream:  #e8e0d0;
   --gold:   #c9a84c;
   --gold2:  #a8863a;
+  --gold-grad: linear-gradient(90deg,#ffde59,#ff914d);
   --dim:    #7a7060;
   --dimmer: #3e3830;
   --line:   rgba(240,236,228,.06);
@@ -21,6 +34,30 @@ const css = `
   min-height: 100vh;
   position: relative;
 }
+
+/* ── LANG TOGGLE ── */
+.fdp-lang-toggle {
+  background: transparent;
+  border: 1px solid rgba(255,222,89,0.3);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  color: var(--dim);
+  cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  transition: border-color .25s, color .25s;
+}
+.fdp-lang-toggle:hover { border-color: #ffde59; color: #ffde59; }
+.fdp-lang-toggle .active {
+  background: linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+.fdp-lang-toggle .sep { opacity: .35; }
 
 body.on-fdp {
   background: #080807;
@@ -34,7 +71,7 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 .fdp-particles { position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden; }
 .fdp-p {
   position:absolute;width:1px;height:1px;border-radius:50%;
-  background:#c9a84c;opacity:0;
+  background:linear-gradient(90deg,#ffde59,#ff914d);opacity:0;
   animation:fdp-float var(--dur,20s) var(--delay,0s) linear infinite;
 }
 @keyframes fdp-float {
@@ -49,15 +86,16 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
   position:fixed;top:0;left:0;right:0;z-index:200;
   padding:22px 56px;
   display:flex;justify-content:space-between;align-items:center;
-  background:rgba(8,8,7,.88);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
+  background:rgba(6,6,5,.96);backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,222,89,.08);
 }
 .fdp .nav-back {
   font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;
   text-transform:uppercase;color:var(--dim);text-decoration:none;
   display:flex;align-items:center;gap:10px;transition:color .3s;
 }
-.fdp .nav-back:hover { color:var(--gold); }
+.fdp .nav-back:hover { color:#ffde59; }
 .fdp .nav-back::before { content:'←';font-size:13px; }
 .fdp .nav-logo {
   font-family:var(--font-playfair),'Playfair Display',serif;font-size:17px;
@@ -65,8 +103,39 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 }
 .fdp .nav-tag {
   font-family:'Space Mono',monospace;font-size:10px;
-  letter-spacing:.22em;color:var(--gold);text-transform:uppercase;
+  letter-spacing:.22em;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  text-transform:uppercase;
 }
+
+/* ── NAV LINKS ── */
+.fdp .nav-links {
+  display:flex;align-items:center;gap:28px;
+}
+.fdp .nav-link {
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--dim);text-decoration:none;
+  transition:color .25s;
+  position:relative;
+  padding-bottom:2px;
+}
+.fdp .nav-link::after {
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s ease;
+}
+.fdp .nav-link:hover { color:#ffde59; }
+.fdp .nav-link:hover::after { transform:scaleX(1); }
+.fdp .nav-link--active {
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.fdp .nav-link--active::after { transform:scaleX(1); }
 
 /* ── HERO ── */
 .fdp #hero {
@@ -97,7 +166,10 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 .fdp .hero-eyebrow {
   font-family:'Space Mono',monospace;font-size:9px;
   letter-spacing:.4em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:24px;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:24px;
   opacity:0;animation:fdp-rise .9s .2s ease forwards;
 }
 .fdp .hero-title {
@@ -107,7 +179,10 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
   opacity:0;animation:fdp-rise .9s .4s ease forwards;
 }
 .fdp .hero-title em {
-  font-style:italic;color:var(--gold);
+  font-style:italic;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
   display:block;font-size:.75em;
 }
 .fdp .hero-subtitle {
@@ -118,10 +193,11 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 }
 .fdp .hero-verse {
   margin-top:48px;padding:28px 36px;
-  border-left:2px solid var(--gold);
+  border-left:3px solid transparent;
+  border-image:linear-gradient(180deg,#ffde59,#ff914d) 1;
   max-width:640px;
   opacity:0;animation:fdp-rise .9s .8s ease forwards;
-  background:rgba(201,168,76,.04);
+  background:rgba(255,222,89,.04);
 }
 .fdp .hero-verse p {
   font-family:var(--font-playfair),'Playfair Display',serif;font-size:20px;
@@ -130,7 +206,11 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 .fdp .hero-verse cite {
   display:block;margin-top:12px;
   font-family:'Space Mono',monospace;font-size:9px;
-  letter-spacing:.2em;color:var(--gold);text-transform:uppercase;
+  letter-spacing:.2em;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  text-transform:uppercase;
   font-style:normal;
 }
 .fdp .hero-scroll-hint {
@@ -158,10 +238,13 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 .fdp .s-label {
   font-family:'Space Mono',monospace;font-size:9px;
   letter-spacing:.35em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:56px;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:56px;
   display:flex;align-items:center;gap:16px;
 }
-.fdp .s-label::before { content:'';width:36px;height:1px;background:var(--gold); }
+.fdp .s-label::before { content:'';width:36px;height:1px;background:linear-gradient(90deg,#ffde59,#ff914d); }
 
 /* ── CORE BELIEFS ── */
 .fdp #beliefs { background:var(--bg2); }
@@ -178,11 +261,11 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
   cursor:none;
 }
 .fdp .belief-card.visible { opacity:1;transform:none; }
-.fdp .belief-card:hover { border-color:rgba(201,168,76,.2); }
+.fdp .belief-card:hover { border-color:rgba(255,222,89,.2); }
 .fdp .belief-card::after {
   content:'';
   position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  background:linear-gradient(90deg,transparent,#ffde59,#ff914d,transparent);
   opacity:0;transition:opacity .4s;
 }
 .fdp .belief-card:hover::after { opacity:.5; }
@@ -202,7 +285,11 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 .fdp .bc-verse {
   margin-top:24px;
   font-family:var(--font-playfair),'Playfair Display',serif;font-size:14px;
-  font-style:italic;color:var(--gold);opacity:.8;line-height:1.5;
+  font-style:italic;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  opacity:.9;line-height:1.5;
 }
 
 /* ── SPIRITUAL JOURNEY ── */
@@ -216,7 +303,11 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
   font-size:clamp(36px,4vw,56px);
   color:var(--white);line-height:1.05;
 }
-.fdp .journey-headline em { font-style:italic;color:var(--gold); }
+.fdp .journey-headline em { font-style:italic;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 .fdp .journey-desc {
   font-size:17px;line-height:1.8;color:var(--dim);
   margin-top:24px;font-style:italic;font-weight:300;
@@ -231,7 +322,7 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
   cursor:none;
 }
 .fdp .journey-entry.visible { opacity:1;transform:none; }
-.fdp .journey-entry:hover { border-left-color:var(--gold);background:#141210; }
+.fdp .journey-entry:hover { border-left-color:#ffde59;background:#141210; }
 .fdp .je-title {
   font-family:var(--font-playfair),'Playfair Display',serif;font-size:24px;
   color:var(--white);
@@ -242,9 +333,13 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 }
 .fdp .je-verse {
   margin-top:16px;padding:14px 20px;
-  border-left:2px solid rgba(201,168,76,.3);
+  border-left:2px solid rgba(255,222,89,.3);
   font-family:var(--font-playfair),'Playfair Display',serif;font-style:italic;
-  font-size:14px;color:var(--gold);opacity:.85;line-height:1.55;
+  font-size:14px;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  opacity:.85;line-height:1.55;
 }
 
 /* ── SCRIPTURE GALLERY ── */
@@ -272,7 +367,7 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
   cursor:none;min-height:200px;
 }
 .fdp .sm-card.visible { opacity:1;transform:scale(1); }
-.fdp .sm-card:hover { border-color:rgba(201,168,76,.2); }
+.fdp .sm-card:hover { border-color:rgba(255,222,89,.2); }
 .fdp .sm-text {
   font-family:var(--font-playfair),'Playfair Display',serif;
   font-size:clamp(16px,1.6vw,22px);
@@ -282,7 +377,10 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 .fdp .sm-ref {
   font-family:'Space Mono',monospace;font-size:9px;
   letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold);margin-top:20px;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-top:20px;
 }
 
 /* ── PILLARS OF PRACTICE ── */
@@ -298,11 +396,14 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
   cursor:none;
 }
 .fdp .pr-item.visible { opacity:1;transform:none; }
-.fdp .pr-item:hover { border-color:rgba(201,168,76,.2); }
+.fdp .pr-item:hover { border-color:rgba(255,222,89,.2); }
 .fdp .pr-num {
   padding:36px 24px;
   font-family:var(--font-playfair),'Playfair Display',serif;font-size:40px;
-  color:var(--gold);opacity:.35;border-right:1px solid var(--line);
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  opacity:.4;border-right:1px solid var(--line);
   text-align:center;line-height:1;
 }
 .fdp .pr-name {
@@ -323,7 +424,11 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 }
 .fdp .reflection-inner { max-width:780px;margin:0 auto; }
 .fdp .refl-ornament {
-  font-size:32px;color:var(--gold);opacity:.4;
+  font-size:32px;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  opacity:.6;
   margin-bottom:40px;letter-spacing:.4em;
   animation:fdp-shimmer 4s ease-in-out infinite;
 }
@@ -336,7 +441,12 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
   font-style:italic;color:var(--white);
   line-height:1.3;
 }
-.fdp .refl-quote strong { font-style:normal;color:var(--gold); }
+.fdp .refl-quote strong {
+  font-style:normal;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 .fdp .refl-ref {
   margin-top:32px;
   font-family:'Space Mono',monospace;font-size:10px;
@@ -360,7 +470,12 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
   font-size:clamp(36px,5vw,68px);
   color:var(--bg);line-height:1.05;
 }
-.fdp .connect-title em { font-style:italic;color:var(--gold2); }
+.fdp .connect-title em {
+  font-style:italic;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 .fdp .connect-body {
   font-size:17px;line-height:1.7;color:#555;
   max-width:400px;margin-top:16px;font-style:italic;font-weight:300;
@@ -377,29 +492,62 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
 .fdp .c-link:hover { background:#1a1814;padding-left:42px; }
 .fdp .c-link span { font-size:18px; }
 
-/* ── FOOTER ── */
-.fdp footer {
-  background:var(--bg);border-top:1px solid var(--line);
-  padding:28px 56px;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.fdp .f-name {
-  font-family:var(--font-playfair),'Playfair Display',serif;font-size:16px;
-  color:var(--white);
-}
-.fdp .f-copy {
-  font-family:'Space Mono',monospace;font-size:9px;
-  letter-spacing:.2em;color:var(--dim);text-transform:uppercase;
-}
-.fdp .f-link {
-  font-family:'Space Mono',monospace;font-size:9px;
-  letter-spacing:.2em;color:var(--gold);
-  text-decoration:none;text-transform:uppercase;
-}
-
 /* ── RESPONSIVE ── */
+/* ── BLOG STRIP ── */
+.fdp .blog-strip {
+  background:var(--bg2);
+  padding:80px 56px;
+  text-align:center;
+  display:flex; flex-direction:column; align-items:center; gap:20px;
+  position:relative; z-index:1;
+  border-top:1px solid var(--line);
+}
+.fdp .bs-eyebrow {
+  font-family:'Space Mono',monospace; font-size:9px;
+  letter-spacing:.35em; text-transform:uppercase;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  display:flex; align-items:center; gap:16px;
+}
+.fdp .bs-eyebrow::before,.fdp .bs-eyebrow::after {
+  content:''; width:36px; height:1px;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+}
+.fdp .bs-title {
+  font-family:var(--font-playfair),'Playfair Display',serif;
+  font-size:clamp(30px,4vw,52px); color:var(--white); line-height:1.05;
+}
+.fdp .bs-title em { font-style:italic;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.fdp .bs-sub {
+  font-size:17px; font-style:italic; color:var(--dim);
+  max-width:480px; line-height:1.6;
+}
+.fdp .bs-btns {
+  display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:8px;
+}
+.fdp .bs-btn {
+  font-family:'Space Mono',monospace; font-size:10px;
+  letter-spacing:.22em; text-transform:uppercase;
+  padding:14px 32px;
+  background:linear-gradient(90deg,#ffde59,#ff914d);
+  color:#0a0a0a;
+  text-decoration:none; transition:opacity .25s;
+  cursor:none;
+}
+.fdp .bs-btn:hover { opacity:.8; }
+.fdp .bs-btn.ghost {
+  background:transparent; color:#ffde59; border:1px solid #ffde59;
+}
+.fdp .bs-btn.ghost:hover { background:linear-gradient(90deg,#ffde59,#ff914d); color:#0a0a0a; border-color:transparent; }
+
 @media(max-width:900px){
   .fdp nav { padding:18px 24px; }
+  .fdp .nav-links { display:none; }
   .fdp .section,.fdp .hero-text { padding-left:24px;padding-right:24px; }
   .fdp .beliefs-grid { grid-template-columns:1fr; }
   .fdp .journey-layout { grid-template-columns:1fr; }
@@ -409,22 +557,16 @@ body.on-fdp .cursor-ring { border-color: rgba(201,168,76,.35); mix-blend-mode: n
   .fdp .pr-item { grid-template-columns:60px 1fr; }
   .fdp .pr-desc { display:none; }
   .fdp #connect { flex-direction:column; }
-  .fdp footer { flex-direction:column;gap:12px;text-align:center;padding:24px; }
   .fdp #reflection { padding:80px 24px; }
   .fdp .hero-scroll-hint { display:none; }
+  .fdp .blog-strip { padding:60px 24px; }
 }
 `;
 
-const particles = Array.from({ length: 18 }, (_, i) => ({
-  left: `${(i * 5.5 + 3) % 100}%`,
-  dur: `${15 + (i * 3.1) % 12}s`,
-  delay: `${(i * 2.3) % 10}s`,
-  op: `${0.15 + (i % 4) * 0.08}`,
-  drift: `${-20 + (i % 5) * 12}px`,
-}));
-
 export default function FaithPage() {
+  const [lang, setLang] = useState<Lang>("en");
   const sectionRef = useRef<HTMLDivElement>(null);
+  const toggleLang = () => setLang((l) => (l === "en" ? "fr" : "en"));
 
   useEffect(() => {
     document.body.classList.add("on-fdp");
@@ -440,193 +582,43 @@ export default function FaithPage() {
       ".fdp .belief-card, .fdp .journey-entry, .fdp .sm-card, .fdp .pr-item"
     ).forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [lang]);
 
   return (
     <div className="fdp" ref={sectionRef}>
       <style>{css}</style>
 
-      {/* Particles */}
-      <div className="fdp-particles">
-        {particles.map((p, i) => (
-          <div key={i} className="fdp-p" style={{
-            left: p.left, bottom: 0,
-            ["--dur" as string]: p.dur,
-            ["--delay" as string]: p.delay,
-            ["--op" as string]: p.op,
-            ["--drift" as string]: p.drift,
-          }} />
-        ))}
-      </div>
+      {/* ── Ambient particles ── */}
+      <FaithParticles />
 
-      {/* NAV */}
-      <nav>
-        <Link href="/" className="nav-back">Portfolio</Link>
-        <div className="nav-logo">Samuel Kobina Gyasi</div>
-        <div className="nav-tag">Beliefs</div>
-      </nav>
+      {/* ── Navigation ── */}
+      <FaithNav lang={lang} onToggleLang={toggleLang} />
 
-      {/* HERO */}
-      <section id="hero">
-        <svg className="mandala" width="900" height="900" viewBox="-450 -450 900 900">
-          <g className="m1">
-            <circle r="200" /><circle r="280" /><circle r="360" />
-          </g>
-          <g className="m2">
-            <polygon className="m-poly" points="0,-320 277,160 -277,160" />
-            <polygon className="m-poly" points="0,320 -277,-160 277,-160" />
-          </g>
-          <g className="m3">
-            <circle r="120" />
-            <line x1="-360" y1="0" x2="360" y2="0" stroke="#c9a84c" strokeWidth=".3" opacity=".06" />
-            <line x1="0" y1="-360" x2="0" y2="360" stroke="#c9a84c" strokeWidth=".3" opacity=".06" />
-            <line x1="-255" y1="-255" x2="255" y2="255" stroke="#c9a84c" strokeWidth=".3" opacity=".04" />
-            <line x1="255" y1="-255" x2="-255" y2="255" stroke="#c9a84c" strokeWidth=".3" opacity=".04" />
-          </g>
-        </svg>
+      {/* ── Hero ── */}
+      <FaithHero lang={lang} />
 
-        <div className="hero-text">
-          <div className="hero-eyebrow">Faith · Belief · Conviction · Wisdom</div>
-          <h1 className="hero-title">
-            <em>Beliefs</em>
-          </h1>
-          <p className="hero-subtitle">
-            A life anchored in sacred wisdom, shaped by scripture, and illuminated by an unshakeable conviction that truth is both found and lived.
-          </p>
-          <blockquote className="hero-verse">
-            <p>&ldquo;Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.&rdquo;</p>
-            <cite>Proverbs 3:5–6 · The foundation of Samuel&rsquo;s journey</cite>
-          </blockquote>
-        </div>
-        <div className="hero-scroll-hint">Explore</div>
-      </section>
+      {/* ── Core Beliefs ── */}
+      <FaithBeliefs lang={lang} />
 
-      {/* CORE BELIEFS */}
-      <section id="beliefs" className="section">
-        <div className="s-label">Core Convictions</div>
-        <div className="beliefs-grid">
-          {[
-            { num: "I", title: "The Living Word", body: "Samuel holds the Bible not as a historical relic but as a living, breathing guide — a lamp that illuminates every decision, relationship, and ambition. Scripture is the lens through which all of life is interpreted and understood.", verse: '"All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness." — 2 Timothy 3:16' },
-            { num: "II", title: "Faith Over Fear", body: "At every crossroads — as a scholar, as a leader, as a young man far from home — Samuel's faith has been the anchor that refuses to yield to doubt or circumstance. Courage is not the absence of fear; it is faith in motion.", verse: '"For I am the Lord your God who takes hold of your right hand and says to you, \'Do not fear; I will help you.\'" — Isaiah 41:13' },
-            { num: "III", title: "Purpose-Driven Existence", body: "Every talent, every scholarship, every position of leadership is understood as a stewardship — entrusted by God for a reason greater than personal gain. Samuel believes his life is a narrative being written by a hand wiser than his own.", verse: '"For we are God\'s handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do." — Ephesians 2:10' },
-            { num: "IV", title: "Transformation from Within", body: "True change — in communities, in nations, in minds — begins not with systems or strategies but with the renewal of the human spirit. Samuel believes that inward transformation is the seed of all outward revolution.", verse: '"Do not conform to the pattern of this world, but be transformed by the renewing of your mind." — Romans 12:2' },
-          ].map((card) => (
-            <div className="belief-card" key={card.num}>
-              <div className="bc-number">{card.num}</div>
-              <div className="bc-title">{card.title}</div>
-              <div className="bc-body">{card.body}</div>
-              <div className="bc-verse">{card.verse}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* ── Spiritual Journey ── */}
+      <FaithJourney lang={lang} />
 
-      {/* SPIRITUAL JOURNEY */}
-      <section id="journey" className="section">
-        <div className="s-label">The Inner Story</div>
-        <div className="journey-layout">
-          <div className="journey-left">
-            <h2 className="journey-headline">A Pilgrim&rsquo;s<br /><em>Path</em></h2>
-            <p className="journey-desc">Faith is not a destination arrived at once. It is a road walked daily — through Ghana, through Morocco, through the halls of academia and the quiet rooms of prayer.</p>
-          </div>
-          <div className="journey-right">
-            {[
-              { title: "Rooted in Ghana", body: "From the Ghana-China Friendship School to Saint John's, Samuel grew up in an environment where faith was woven into community life. The early discipline of stewardship — caring for others, showing up with integrity — was shaped by deeply held beliefs about service and honour.", verse: '"Start children off on the way they should go, and even when they are old they will not turn from it." — Proverbs 22:6' },
-              { title: "Stretched Across Borders", body: "Moving from Ghana to Morocco for university required more than academic ambition — it demanded a faith resilient enough to sustain through cultural displacement and personal challenge. In Fez and then Rabat, Samuel learned that conviction does not depend on geography.", verse: '"Even though I walk through the darkest valley, I will fear no evil, for you are with me." — Psalm 23:4' },
-              { title: "Scholarship as Testimony", body: "Four fully-funded scholarships — from the Government of Ghana, Golden Star Gold Mines, IBN ROCHD, and an Excellence Award — are not coincidences. Samuel views each as a tangible expression of providential favour: evidence that diligence and faith working together open doors no human hand alone could unlock.", verse: '"Commit to the Lord whatever you do, and he will establish your plans." — Proverbs 16:3' },
-              { title: "Collective Intelligence as Calling", body: "The choice to study Collective Intelligence at UM6P is, for Samuel, a spiritual one. He sees the pursuit of shared knowledge, collaborative decision-making, and community empowerment as a form of sacred stewardship — using the mind God gave him to serve the world God loves.", verse: '"Love the Lord your God with all your heart and with all your soul and with all your mind." — Matthew 22:37' },
-            ].map((entry) => (
-              <div className="journey-entry" key={entry.title}>
-                <div className="je-title">{entry.title}</div>
-                <div className="je-body">{entry.body}</div>
-                <div className="je-verse">{entry.verse}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── Scripture Gallery ── */}
+      <FaithScriptures lang={lang} />
 
-      {/* SCRIPTURE GALLERY */}
-      <section id="scriptures" className="section">
-        <div className="s-label">Words That Anchor</div>
-        <p className="scriptures-intro">These are the verses Samuel returns to — in quiet mornings, in difficult seasons, in moments of decision.</p>
-        <div className="scripture-mosaic">
-          <div className="sm-card sm-tall">
-            <div className="sm-text">&ldquo;I can do all this through him who gives me strength.&rdquo;</div>
-            <div className="sm-ref">Philippians 4:13</div>
-          </div>
-          <div className="sm-card sm-wide">
-            <div className="sm-text">&ldquo;For I know the plans I have for you, declares the Lord — plans to prosper you and not to harm you, plans to give you hope and a future.&rdquo;</div>
-            <div className="sm-ref">Jeremiah 29:11</div>
-          </div>
-          <div className="sm-card">
-            <div className="sm-text">&ldquo;Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.&rdquo;</div>
-            <div className="sm-ref">Joshua 1:9</div>
-          </div>
-          <div className="sm-card">
-            <div className="sm-text">&ldquo;The heart of man plans his way, but the Lord establishes his steps.&rdquo;</div>
-            <div className="sm-ref">Proverbs 16:9</div>
-          </div>
-          <div className="sm-card sm-wide">
-            <div className="sm-text">&ldquo;And we know that in all things God works for the good of those who love him, who have been called according to his purpose.&rdquo;</div>
-            <div className="sm-ref">Romans 8:28</div>
-          </div>
-          <div className="sm-card">
-            <div className="sm-text">&ldquo;With unveiled faces we are being transformed into his image with ever-increasing glory.&rdquo;</div>
-            <div className="sm-ref">2 Corinthians 3:18</div>
-          </div>
-        </div>
-      </section>
+      {/* ── Pillars of Practice ── */}
+      <FaithPractice lang={lang} />
 
-      {/* PILLARS OF PRACTICE */}
-      <section id="practice" className="section">
-        <div className="s-label">How Faith Shows Up</div>
-        <div className="practice-row">
-          {[
-            { num: "01", name: "Daily Study of Scripture", desc: "The Bible is not reserved for Sundays. Samuel approaches scripture with the same intellectual rigour he brings to research — reading deeply, questioning carefully, and allowing the text to challenge and reshape his thinking." },
-            { num: "02", name: "Prayer as Orientation", desc: "Before decisions, before difficult conversations, before new seasons — Samuel grounds himself in prayer. It is not a ritual of words but a discipline of attentiveness: positioning himself to hear before he speaks." },
-            { num: "03", name: "Servant Leadership", desc: "Every position of authority Samuel has held — from Class Prefect to President of the Collective Intelligence Consortium — has been exercised with the understanding that leadership is service. The model is clear: to lead is to give, not to take." },
-            { num: "04", name: "Community & Belonging", desc: "Faith, for Samuel, is never solitary. From his roots in Ghana to his community in Morocco, he has consistently sought and built spaces where people encourage one another, bear one another's burdens, and grow together." },
-            { num: "05", name: "Gratitude as a Posture", desc: "Each scholarship, each opportunity, each relationship is received with gratitude — not entitlement. Samuel views his story as a gift, and generosity with time, knowledge, and encouragement is his way of passing that gift forward." },
-          ].map((p) => (
-            <div className="pr-item" key={p.num}>
-              <div className="pr-num">{p.num}</div>
-              <div className="pr-name">{p.name}</div>
-              <div className="pr-desc">{p.desc}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* ── Central Reflection ── */}
+      <FaithReflection lang={lang} />
 
-      {/* CENTRAL REFLECTION */}
-      <section id="reflection">
-        <div className="reflection-inner">
-          <div className="refl-ornament">✦ ✦ ✦</div>
-          <blockquote className="refl-quote">
-            &ldquo;I am not defined by where I started,<br />
-            nor limited by where I stand today.<br />
-            I am being <strong>transformed</strong> —<br />
-            and that is enough to move forward.&rdquo;
-          </blockquote>
-          <div className="refl-ref">— Samuel Kobina Gyasi</div>
-          <p className="refl-body">Faith is not the elimination of questions. It is the courage to carry them forward, trusting that the One who began a good work will be faithful to complete it.</p>
-        </div>
-      </section>
+      {/* ── Blog Strip ── */}
+      <FaithBlogStrip lang={lang} />
 
-      {/* CONNECT */}
-      <section id="connect">
-        <div>
-          <h2 className="connect-title">Spiritual<br />Dialogue &amp;<br /><em>Connection</em></h2>
-          <p className="connect-body">Samuel welcomes conversations about faith, belief, meaning, and the intersection of spirituality with leadership, intellect, and transformation.</p>
-        </div>
-        <div className="connect-links">
-          <a href="mailto:samuel.gyasi@um6p.ma" className="c-link">Email Samuel <span>→</span></a>
-          <Link href="/leadership" className="c-link">Leadership Page <span>→</span></Link>
-          <Link href="/" className="c-link">Full Portfolio <span>→</span></Link>
-        </div>
-      </section>
+      {/* ── Connect ── */}
+      <FaithConnect lang={lang} />
 
-      {/* FOOTER */}
+      {/* ── Testimonials & Footer ── */}
       <TestimonialsClient />
       <Suspense fallback={null}><SiteFooter /></Suspense>
     </div>

@@ -2,19 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const navLinks = [
-  { href: "#about",   label: "About"   },
-  { href: "#pillars", label: "Pillars" },
-  { href: "#vision",  label: "Vision"  },
-  { href: "#connect", label: "Connect" },
-];
-
-const pillarLinks = [
-  { href: "/faith",          label: "Beliefs"          },
-  { href: "/leadership",     label: "Leadership"        },
-  { href: "/intellectuality",label: "Intellectuality"   },
-  { href: "/transformation", label: "Transformation"    },
+  { href: "/my-story",  label: "My Story", external: false },
+  { href: "/credo",     label: "Credo",    external: false },
+  { href: "/blog",      label: "Blog",     external: false },
+  { href: "/#what-i-do",label: "What I Do",external: false },
+  { href: "/#vision",   label: "Vision",   external: false },
+  { href: "/#connect",  label: "Connect",  external: false },
 ];
 
 export function Navbar() {
@@ -44,9 +40,12 @@ export function Navbar() {
         {/* Desktop links */}
         <ul className="nav-links nav-desktop">
           {navLinks.map((l) => (
-            <li key={l.href}><a href={l.href}>{l.label}</a></li>
+            <li key={l.href}><Link href={l.href}>{l.label}</Link></li>
           ))}
         </ul>
+
+        {/* Theme toggle (desktop) */}
+        <ThemeSwitcher />
 
         {/* Hamburger */}
         <button
@@ -77,21 +76,7 @@ export function Navbar() {
           <ul className="nd-links">
             {navLinks.map((l, i) => (
               <li key={l.href} style={{ "--i": i } as React.CSSProperties}>
-                <a href={l.href} onClick={close}>{l.label}</a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="nd-divider" />
-
-          {/* Pillar pages */}
-          <p className="nd-sub-label">Pillars</p>
-          <ul className="nd-pillar-links">
-            {pillarLinks.map((l, i) => (
-              <li key={l.href} style={{ "--i": (i + navLinks.length) } as React.CSSProperties}>
-                <Link href={l.href} onClick={close}>
-                  <span className="nd-arrow">→</span>{l.label}
-                </Link>
+                <Link href={l.href} onClick={close}>{l.label}</Link>
               </li>
             ))}
           </ul>
@@ -99,6 +84,7 @@ export function Navbar() {
           <div className="nd-bottom">
             <span className="nd-name">Samuel Kobina Gyasi</span>
             <a href="mailto:impact@samuelgyasi.com" className="nd-email">impact@samuelgyasi.com</a>
+            <ThemeSwitcher />
             <div className="nd-social-row">
               <a href="https://www.linkedin.com/in/samuel-k-gyasi/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="nd-social-link">in</a>
               <a href="https://www.instagram.com/samuel_gsi?igsh=MWswMzRycjk1dXZ0cw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="nd-social-link">ig</a>

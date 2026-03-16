@@ -385,6 +385,47 @@ body.on-ldp .cursor-ring {
 .ldp .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
 .ldp .reveal.visible { opacity: 1; transform: none; }
 
+/* ── BLOG STRIP ── */
+.ldp .blog-strip {
+  background: #0f0e0c;
+  padding: 80px 56px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--line);
+}
+.ldp .bs-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: .35em; text-transform: uppercase;
+  color: var(--gold); display: flex; align-items: center; gap: 16px;
+}
+.ldp .bs-eyebrow::before, .ldp .bs-eyebrow::after { content: ''; width: 36px; height: 1px; background: var(--gold); }
+.ldp .bs-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(30px,4vw,56px); color: var(--white); line-height: 1;
+  letter-spacing: .04em;
+}
+.ldp .bs-title span { color: var(--gold); }
+.ldp .bs-sub {
+  font-size: 17px; font-style: italic; font-weight: 300; color: var(--gray-light);
+  max-width: 480px; line-height: 1.6;
+}
+.ldp .bs-btns {
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px;
+}
+.ldp .bs-btn {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: .22em; text-transform: uppercase;
+  padding: 14px 32px; background: var(--gold); color: var(--bg);
+  text-decoration: none; transition: background .25s, color .25s;
+  cursor: none;
+}
+.ldp .bs-btn:hover { background: var(--white); }
+.ldp .bs-btn.ghost {
+  background: transparent; color: var(--gold); border: 1px solid var(--gold);
+}
+.ldp .bs-btn.ghost:hover { background: var(--gold); color: var(--bg); }
+
 /* ── RESPONSIVE ── */
 @media(max-width:900px) {
   .ldp nav { padding: 18px 24px; }
@@ -396,6 +437,21 @@ body.on-ldp .cursor-ring {
   .ldp #contact { flex-direction: column; gap: 40px; align-items: flex-start; }
   .ldp .contact-details { align-items: flex-start; }
   .ldp footer { padding: 24px; flex-direction: column; gap: 12px; }
+  .ldp .blog-strip { padding: 60px 24px; }
+}
+
+/* Gold gradient text */
+.ldp .nav-tag, .ldp .hero-label, .ldp .ldp-hero-name span,
+.ldp .stat-num, .ldp .section-tag, .ldp .tl-period, .ldp .tl-badge,
+.ldp .exp-period, .ldp .edu-school, .ldp .award-icon,
+.ldp .skill-group-title, .ldp .cert-issuer, .ldp .cert-status.done,
+.ldp .ref-role, .ldp .contact-cta span, .ldp .footer-link,
+.ldp .bs-eyebrow, .ldp .bs-title span {
+  background: var(--gold-gradient) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
 }
 `;
 
@@ -880,6 +936,17 @@ export default function LeadershipPage() {
             </div>
           </div>
         </section>
+
+        {/* BLOG STRIP */}
+        <div className="blog-strip">
+          <div className="bs-eyebrow">The Leadership Journal</div>
+          <div className="bs-title">Writings on <span>Leadership</span></div>
+          <p className="bs-sub">Essays on servant leadership, decision-making at scale, and the hard-won lessons of 15+ years leading people and institutions.</p>
+          <div className="bs-btns">
+            <Link href="/leadership/blog" className="bs-btn">Read the Blog →</Link>
+            <Link href="/blog" className="bs-btn ghost">All Writings →</Link>
+          </div>
+        </div>
 
         {/* CONTACT */}
         <section id="contact">

@@ -70,10 +70,10 @@ export function HeroSection() {
             className="hero-photo-img"
           />
         </div>
-        <div className="hero-photo-badge">
+        <Link href="/group-intelligence-facilitator" className="hero-photo-badge" style={{ textDecoration: 'none', cursor: 'pointer' }}>
           <span className="hpb-line">Group Intelligence Facilitator</span>
           <span className="hpb-sub"></span>
-        </div>
+        </Link>
       </div>
 
       {/* ── right panel: pillars ── */}
