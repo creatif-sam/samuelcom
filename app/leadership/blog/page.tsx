@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
+import { Navbar } from "@/components/organisms/Navbar";
 
 export const metadata: Metadata = {
   title: "Leadership — Blog",
@@ -16,6 +17,7 @@ interface Post {
   excerpt: string | null;
   created_at: string;
   read_time_minutes: number;
+  featured_image_url: string | null;
 }
 
 const samplePosts: Post[] = [
@@ -27,6 +29,7 @@ const samplePosts: Post[] = [
       "True leadership is less about speaking and more about creating the conditions in which others can speak, think, and contribute at full capacity.",
     created_at: "2026-02-18",
     read_time_minutes: 8,
+    featured_image_url: null,
   },
   {
     id: "l2",
@@ -36,6 +39,7 @@ const samplePosts: Post[] = [
       "Authority without relationship is just power. Power without character is just threat. The seeds of servant leadership were planted long before I understood the concept.",
     created_at: "2026-01-30",
     read_time_minutes: 6,
+    featured_image_url: null,
   },
   {
     id: "l3",
@@ -45,6 +49,7 @@ const samplePosts: Post[] = [
       "The paradox of leadership: the higher you ascend, the more you are called to serve. True servant leadership transforms people, cultures, and entire organisations.",
     created_at: "2026-01-10",
     read_time_minutes: 9,
+    featured_image_url: null,
   },
   {
     id: "l4",
@@ -54,6 +59,7 @@ const samplePosts: Post[] = [
       "Moving between two cultures taught me that leadership is contextual. What works in one room can alienate in another. Cultural intelligence isn't optional — it is foundational.",
     created_at: "2025-12-15",
     read_time_minutes: 7,
+    featured_image_url: null,
   },
 ];
 
@@ -63,90 +69,204 @@ export default async function LeadershipBlogPage() {
     const supabase = createAnonClient();
     const { data } = await supabase
       .from("blog_posts")
-      .select("id, title, slug, excerpt, created_at, read_time_minutes")
+      .select("id, title, slug, excerpt, created_at, read_time_minutes, featured_image_url")
       .eq("category", "leadership")
       .eq("published", true)
       .order("created_at", { ascending: false });
     if (data && data.length > 0) posts = data;
   } catch { /* fallback */ }
 
+  const [featured, ...rest] = posts;
+
   return (
-    <div className="ldp" style={{ minHeight: "100vh" }}>
+    <>
       <style>{blogCss}</style>
+      <Navbar />
 
-      <nav>
-        <Link href="/leadership" className="nav-back">Leadership</Link>
-        <div className="nav-logo">Samuel Kobina Gyasi</div>
-        <div className="nav-tag">Blog</div>
-      </nav>
+      <main className="lb-page">
+        {/* Breadcrumb */}
+        <nav className="lb-breadcrumb" aria-label="Breadcrumb">
+          <Link href="/">Home</Link>
+          <span>›</span>
+          <Link href="/leadership">Leadership</Link>
+          <span>›</span>
+          <span>Blog</span>
+        </nav>
 
-      <header className="lb-header">
-        <div className="s-label" style={{ color: "var(--gold)" }}>Writings on Leadership</div>
-        <h1 className="lb-title">
-          Lead with<br /><em>Purpose</em>
-        </h1>
-        <p className="lb-subtitle">
-          Insights on authority, service, and building organisations that outlast their founders.
-        </p>
-      </header>
+        {/* Page header */}
+        <header className="lb-header">
+          <div className="lb-eyebrow">Writings on Leadership</div>
+          <h1 className="lb-title">
+            Lead with <em>Purpose</em>
+          </h1>
+          <p className="lb-subtitle">
+            Insights on authority, service, and building organisations that outlast their founders.
+          </p>
+        </header>
 
-      <section className="section">
-        {posts.length === 0 ? (
-          <p className="lb-empty">Leadership reflections coming soon.</p>
-        ) : (
-          <div className="lb-grid">
-            {posts.map((post, i) => (
-              <Link
-                key={post.id}
-                href={`/leadership/blog/${post.slug}`}
-                className={`lb-card ${i === 0 ? "lb-card--featured" : ""}`}
-              >
-                <div className="lb-card-tag">Leadership</div>
-                <h2 className="lb-card-title">{post.title}</h2>
-                {post.excerpt && <p className="lb-card-excerpt">{post.excerpt}</p>}
-                <div className="lb-card-meta">
-                  <span>{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
-                  <span>{post.read_time_minutes} min read</span>
+        {/* Posts */}
+        <section className="lb-content">
+          {posts.length === 0 ? (
+            <p className="lb-empty">Leadership reflections coming soon.</p>
+          ) : (
+            <>
+              {/* Featured post */}
+              {featured && (
+                <Link href={`/leadership/blog/${featured.slug}`} className="lb-featured">
+                  {featured.featured_image_url && (
+                    <div className="lb-featured-img">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={featured.featured_image_url} alt={featured.title} />
+                    </div>
+                  )}
+                  <div className="lb-featured-body">
+                    <div className="lb-card-label">Leadership</div>
+                    <h2 className="lb-featured-title">{featured.title}</h2>
+                    {featured.excerpt && <p className="lb-featured-excerpt">{featured.excerpt}</p>}
+                    <div className="lb-card-meta">
+                      <span>{new Date(featured.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
+                      <span>·</span>
+                      <span>{featured.read_time_minutes} min read</span>
+                    </div>
+                    <div className="lb-read-link">Read essay →</div>
+                  </div>
+                </Link>
+              )}
+
+              {/* Rest of posts grid */}
+              {rest.length > 0 && (
+                <div className="lb-grid">
+                  {rest.map((post) => (
+                    <Link key={post.id} href={`/leadership/blog/${post.slug}`} className="lb-card">
+                      {post.featured_image_url && (
+                        <div className="lb-card-img">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={post.featured_image_url} alt={post.title} />
+                        </div>
+                      )}
+                      <div className="lb-card-body">
+                        <div className="lb-card-label">Leadership</div>
+                        <h2 className="lb-card-title">{post.title}</h2>
+                        {post.excerpt && <p className="lb-card-excerpt">{post.excerpt}</p>}
+                        <div className="lb-card-meta">
+                          <span>{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
+                          <span>·</span>
+                          <span>{post.read_time_minutes} min read</span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
-              </Link>
-            ))}
-          </div>
-        )}
-      </section>
+              )}
+            </>
+          )}
+        </section>
+      </main>
 
-      {/* FOOTER */}
       <SiteFooter />
-    </div>
+    </>
   );
 }
 
 const blogCss = `
-.ldp { --bg:#0c0b09; --white:#f0ede8; --gold:#22c55e; --gray:#6b6560; --line:rgba(240,237,232,0.07); --card:#141210; }
-.ldp footer { background:var(--bg);border-top:1px solid var(--line);padding:28px 56px;display:flex;justify-content:space-between;align-items:center; }
-.f-name { font-family:'Playfair Display',serif;font-size:16px;color:var(--white); }
-.f-copy { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase; }
-.f-link { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--gold);text-decoration:none;text-transform:uppercase; }
-.lb-header { padding:160px 56px 60px; background:var(--bg); }
-.s-label { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.4em;text-transform:uppercase;margin-bottom:20px; }
-.lb-title { font-family:'Playfair Display',serif;font-size:clamp(52px,8vw,110px);line-height:.9;color:var(--white);margin:16px 0 24px; }
-.lb-title em { font-style:italic;color:var(--gold);display:block;font-size:.8em; }
-.lb-subtitle { font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.8vw,20px);font-style:italic;color:var(--gray);max-width:560px;line-height:1.65;font-weight:300; }
-.lb-empty { font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--gray);padding:60px 0;text-align:center; }
-.section { padding:60px 56px; background:var(--bg); }
-.lb-grid { display:grid;grid-template-columns:1fr 1fr;gap:2px; }
-.lb-card--featured { grid-column:1/-1; }
-.lb-card { background:var(--card);border:1px solid var(--line);padding:44px 40px;text-decoration:none;color:var(--white);display:flex;flex-direction:column;gap:14px;transition:border-color .3s,padding-left .3s;cursor:none; }
-.lb-card:hover { border-color:rgba(34,197,94,.3);padding-left:52px; }
-.lb-card--featured { padding:56px 52px; }
-.lb-card--featured:hover { padding-left:64px; }
-.lb-card-tag { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold); }
-.lb-card-title { font-family:'Playfair Display',serif;color:var(--white);line-height:1.15; }
-.lb-card--featured .lb-card-title { font-size:clamp(24px,3vw,38px); }
-.lb-card:not(.lb-card--featured) .lb-card-title { font-size:clamp(18px,2vw,24px); }
-.lb-card-excerpt { font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--gray);line-height:1.65;font-weight:300;flex:1; }
-.lb-card-meta { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);display:flex;gap:20px;margin-top:8px; }
-.nav-back { font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .3s; }
-.nav-back:hover { color:var(--gold); }
-.nav-back::before { content:'←';font-size:13px; }
-@media(max-width:768px){ .lb-grid { grid-template-columns:1fr; } .lb-card--featured { grid-column:1; } .lb-header,.section { padding-left:24px;padding-right:24px; } .ldp footer { flex-direction:column;gap:12px;text-align:center;padding:24px; } }
+/* ── Leadership blog listing ──────────────────────────────── */
+.lb-page {
+  --bg: #0c0b09;
+  --white: #f0ede8;
+  --gold: #22c55e;
+  --gray: #6b6560;
+  --line: rgba(240,237,232,.07);
+  --card: #141210;
+  background: var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+  padding-top: 72px;
+}
+
+/* Breadcrumb */
+.lb-breadcrumb {
+  display: flex; align-items: center; gap: 10px;
+  padding: 18px 56px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gray);
+  border-bottom: 1px solid var(--line);
+}
+.lb-breadcrumb a { color: var(--gray); text-decoration: none; transition: color .25s; }
+.lb-breadcrumb a:hover { color: var(--gold); }
+.lb-breadcrumb span:last-child { color: rgba(240,237,232,.6); }
+
+/* Header */
+.lb-header { padding: 60px 56px 44px; }
+.lb-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: .4em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 18px;
+}
+.lb-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 7vw, 96px); line-height: .95;
+  color: var(--white); margin: 0 0 22px; font-weight: 700;
+}
+.lb-title em { font-style: italic; color: var(--gold); display: inline; }
+.lb-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 1.8vw, 20px); font-style: italic;
+  color: var(--gray); max-width: 540px; line-height: 1.65; font-weight: 300;
+}
+
+/* Content */
+.lb-content { padding: 0 56px 80px; display: flex; flex-direction: column; gap: 28px; }
+.lb-empty { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--gray); padding: 60px 0; text-align: center; }
+
+/* Featured card */
+.lb-featured {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 340px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px; overflow: hidden;
+  text-decoration: none; color: var(--white);
+  transition: border-color .3s, box-shadow .3s;
+}
+.lb-featured:hover { border-color: rgba(34,197,94,.3); box-shadow: 0 8px 40px rgba(0,0,0,.4); }
+.lb-featured-img { width: 100%; height: 100%; overflow: hidden; background: rgba(255,255,255,.04); }
+.lb-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+.lb-featured:hover .lb-featured-img img { transform: scale(1.04); }
+.lb-featured-body { padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+.lb-featured-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.15; color: var(--white); }
+.lb-featured-excerpt { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: var(--gray); line-height: 1.65; font-weight: 300; flex: 1; }
+.lb-read-link { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
+
+/* Labels & meta */
+.lb-card-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+.lb-card-meta { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--gray); display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Grid cards */
+.lb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.lb-card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 10px; overflow: hidden;
+  text-decoration: none; color: var(--white);
+  display: flex; flex-direction: column;
+  transition: border-color .3s, transform .3s;
+}
+.lb-card:hover { border-color: rgba(34,197,94,.25); transform: translateY(-3px); }
+.lb-card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: rgba(255,255,255,.04); }
+.lb-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+.lb-card:hover .lb-card-img img { transform: scale(1.05); }
+.lb-card-body { padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.lb-card-title { font-family: 'Playfair Display', serif; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.2; color: var(--white); }
+.lb-card-excerpt { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: var(--gray); line-height: 1.6; font-weight: 300; flex: 1; }
+
+/* Responsive */
+@media (max-width: 900px) { .lb-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) {
+  .lb-breadcrumb, .lb-header, .lb-content { padding-left: 20px; padding-right: 20px; }
+  .lb-featured { grid-template-columns: 1fr; }
+  .lb-featured-img { aspect-ratio: 16/7; height: auto; }
+  .lb-featured-body { padding: 28px 24px; }
+  .lb-grid { grid-template-columns: 1fr; }
+}
 `;
+

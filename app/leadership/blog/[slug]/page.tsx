@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { Navbar } from "@/components/organisms/Navbar";
+import { SiteFooter } from "@/components/organisms/SiteFooter";
 
 interface Props { params: Promise<{ slug: string }>; }
 
@@ -46,13 +48,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function LeadershipBlogPostPage({ params }: Props) {
   const { slug } = await params;
-  let post: { title: string; excerpt: string | null; content: string; created_at: string; read_time_minutes: number } | null = null;
+  let post: { title: string; excerpt: string | null; content: string; created_at: string; read_time_minutes: number; cover_image_url: string | null; mid_image_url: string | null; infographic_url: string | null } | null = null;
 
   try {
     const supabase = await createClient();
     const { data } = await supabase
       .from("blog_posts")
-      .select("title, excerpt, content, created_at, read_time_minutes")
+      .select("title, excerpt, content, created_at, read_time_minutes, cover_image_url, mid_image_url, infographic_url")
       .eq("slug", slug).eq("category", "leadership").eq("published", true).single();
     if (data) post = data;
   } catch { /* fallback */ }
@@ -60,60 +62,114 @@ export default async function LeadershipBlogPostPage({ params }: Props) {
   if (!post) {
     const sample = samplePosts[slug];
     if (!sample) notFound();
-    post = sample;
+    post = { ...sample, cover_image_url: null, mid_image_url: null, infographic_url: null };
   }
 
   return (
-    <div className="ldp" style={{ minHeight: "100vh" }}>
+    <>
       <style>{articleCss}</style>
-      <nav>
-        <Link href="/leadership/blog" className="nav-back">Blog</Link>
-        <div className="nav-logo" style={{ fontFamily: "var(--font-playfair,'Playfair Display',serif)", color: "var(--white,#f0ede8)" }}>Samuel Kobina Gyasi</div>
-        <div style={{ fontFamily: "'Space Mono',monospace", fontSize: "10px", letterSpacing: ".22em", color: "#22c55e", textTransform: "uppercase" }}>Leadership</div>
-      </nav>
-      <article className="la-article">
-        <header className="la-header">
-          <div className="la-tag">Leadership</div>
-          <h1 className="la-title">{post.title}</h1>
-          <div className="la-meta">
-            <span>{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
-            <span>·</span>
-            <span>{post.read_time_minutes} min read</span>
+      <Navbar />
+
+      <main className="la-page">
+        <nav className="la-breadcrumb" aria-label="Breadcrumb">
+          <Link href="/">Home</Link>
+          <span>›</span>
+          <Link href="/leadership">Leadership</Link>
+          <span>›</span>
+          <Link href="/leadership/blog">Blog</Link>
+          <span>›</span>
+          <span>{post.title.length > 45 ? post.title.slice(0, 45) + "\u2026" : post.title}</span>
+        </nav>
+
+        {post.cover_image_url && (
+          <div className="la-cover">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={post.cover_image_url} alt={post.title} />
           </div>
-          {post.excerpt && <p className="la-lead">{post.excerpt}</p>}
-        </header>
-        <div className="la-body" dangerouslySetInnerHTML={{ __html: post.content }} />
-        <footer className="la-footer">
-          <Link href="/leadership/blog" className="la-back">← All Leadership Writings</Link>
-        </footer>
-      </article>
-      <footer style={{ background: "var(--bg,#0c0b09)", borderTop: "1px solid rgba(240,237,232,0.07)", padding: "28px 56px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "16px", color: "#f0ede8" }}>Samuel Kobina Gyasi</div>
-        <div style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", letterSpacing: ".2em", textTransform: "uppercase", color: "#6b6560" }}>© {new Date().getFullYear()}</div>
-        <Link href="/" style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", letterSpacing: ".2em", color: "#22c55e", textDecoration: "none", textTransform: "uppercase" }}>Home</Link>
-      </footer>
-    </div>
+        )}
+
+        <article className="la-article">
+          <header className="la-header">
+            <div className="la-tag">Leadership</div>
+            <h1 className="la-title">{post.title}</h1>
+            <div className="la-meta">
+              <span>{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
+              <span>·</span>
+              <span>{post.read_time_minutes} min read</span>
+            </div>
+            {post.excerpt && <p className="la-lead">{post.excerpt}</p>}
+          </header>
+
+          <div className="la-body" dangerouslySetInnerHTML={{ __html: post.content }} />
+
+          {post.mid_image_url && (
+            <div className="la-mid-img">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={post.mid_image_url} alt="Illustration" />
+            </div>
+          )}
+
+          {post.infographic_url && (
+            <div className="la-infographic">
+              <div className="la-infographic-label">Key Insights</div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={post.infographic_url} alt="Infographic: key insights" />
+            </div>
+          )}
+
+          <footer className="la-footer">
+            <Link href="/leadership/blog" className="la-back">← All Leadership Writings</Link>
+          </footer>
+        </article>
+      </main>
+
+      <SiteFooter />
+    </>
   );
 }
 
 const articleCss = `
-.ldp { --bg:#0c0b09; --white:#f0ede8; --gold:#22c55e; --gray:#6b6560; --line:rgba(240,237,232,.07); }
-.ldp nav { position:fixed;top:0;left:0;right:0;z-index:200;padding:22px 56px;display:flex;justify-content:space-between;align-items:center;background:rgba(12,11,9,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line); }
-.nav-back { font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .3s; }
-.nav-back:hover { color:var(--gold); }
-.nav-back::before { content:'←';font-size:13px; }
-.la-article { padding:160px 56px 80px; max-width:760px; }
-.la-tag { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:24px; }
-.la-title { font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,60px);color:var(--white);line-height:1.08;margin-bottom:24px; }
-.la-meta { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap; }
-.la-lead { font-family:'Playfair Display',serif;font-size:clamp(17px,2.2vw,23px);font-style:italic;color:rgba(240,237,232,.8);line-height:1.55;padding:28px 36px;border-left:2px solid var(--gold);background:rgba(34,197,94,.04);margin:24px 0 48px; }
-.la-body { font-family:'Cormorant Garamond',serif;font-size:clamp(17px,1.8vw,20px);line-height:1.9;color:var(--gray);font-weight:300; }
-.la-body h2 { font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,30px);color:var(--white);margin:52px 0 20px;font-weight:700; }
-.la-body p { margin-bottom:24px; }
-.la-body em { color:rgba(240,237,232,.85); }
-.la-body strong { color:var(--white); }
-.la-body blockquote { border-left:2px solid var(--gold);padding:20px 32px;background:rgba(34,197,94,.04);font-style:italic;font-size:18px;color:rgba(240,237,232,.8);margin:36px 0; }
-.la-footer { margin-top:72px;padding-top:40px;border-top:1px solid var(--line); }
-.la-back { font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none; }
-@media(max-width:768px){ .la-article { padding:120px 24px 60px; } .ldp nav { padding:18px 24px; } }
+/* ── Leadership article ──────────────────────────────────── */
+.la-page {
+  --bg: #0c0b09; --white: #f0ede8; --gold: #22c55e;
+  --gray: #6b6560; --line: rgba(240,237,232,.07);
+  background: var(--bg); color: var(--white);
+  min-height: 100vh; padding-top: 72px;
+}
+.la-breadcrumb {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 18px 56px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gray); border-bottom: 1px solid var(--line);
+}
+.la-breadcrumb a { color: var(--gray); text-decoration: none; transition: color .25s; }
+.la-breadcrumb a:hover { color: var(--gold); }
+.la-breadcrumb span:last-child { color: rgba(240,237,232,.65); }
+.la-cover { width: 100%; max-height: 480px; overflow: hidden; }
+.la-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.la-article { padding: 52px 56px 80px; max-width: 800px; }
+.la-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; }
+.la-title { font-family: 'Playfair Display', serif; font-size: clamp(32px,5vw,60px); color: var(--white); line-height: 1.08; margin-bottom: 22px; }
+.la-meta { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--gray); display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+.la-lead { font-family: 'Playfair Display', serif; font-size: clamp(17px,2.2vw,23px); font-style: italic; color: rgba(240,237,232,.85); line-height: 1.55; padding: 28px 36px; border-left: 2px solid var(--gold); background: rgba(34,197,94,.04); margin: 0 0 48px; }
+.la-body { font-family: 'Cormorant Garamond', serif; font-size: clamp(17px,1.8vw,20px); line-height: 1.95; color: var(--gray); font-weight: 300; }
+.la-body h2 { font-family: 'Playfair Display', serif; font-size: clamp(22px,3vw,30px); color: var(--white); margin: 52px 0 20px; font-weight: 700; }
+.la-body p { margin-bottom: 24px; }
+.la-body em { color: rgba(240,237,232,.85); }
+.la-body strong { color: var(--white); }
+.la-body blockquote { border-left: 2px solid var(--gold); padding: 20px 32px; background: rgba(34,197,94,.04); font-style: italic; font-size: 18px; color: rgba(240,237,232,.8); margin: 36px 0; }
+.la-mid-img { margin: 52px 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+.la-mid-img img { width: 100%; display: block; }
+.la-infographic { margin: 52px 0; padding: 16px; background: rgba(255,255,255,.03); border: 1px solid var(--line); border-radius: 10px; }
+.la-infographic-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.la-infographic img { width: 100%; display: block; border-radius: 6px; }
+.la-footer { margin-top: 72px; padding-top: 36px; border-top: 1px solid var(--line); }
+.la-back { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
+.la-back:hover { opacity: .7; }
+@media (max-width: 768px) {
+  .la-breadcrumb, .la-article { padding-left: 20px; padding-right: 20px; }
+  .la-article { padding-top: 32px; }
+  .la-cover { max-height: 260px; }
+}
 `;

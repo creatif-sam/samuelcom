@@ -17,6 +17,8 @@ interface BlogPost {
   id: string; title: string; slug: string; category: string;
   published: boolean; excerpt: string | null; content: string | null;
   read_time_minutes: number; featured_image_url: string | null;
+  cover_image_url: string | null; mid_image_url: string | null;
+  infographic_url: string | null;
   created_at: string;
 }
 interface Subscriber {
@@ -1260,6 +1262,9 @@ function PostModal({ post, onClose, onSave, db }: {
     content:            post?.content            ?? "",
     read_time_minutes:  post?.read_time_minutes  ?? 5,
     featured_image_url: post?.featured_image_url ?? "",
+    cover_image_url:    post?.cover_image_url    ?? "",
+    mid_image_url:      post?.mid_image_url      ?? "",
+    infographic_url:    post?.infographic_url    ?? "",
     published:          post?.published          ?? false,
   });
   const [busy, setBusy] = useState(false);
@@ -1306,6 +1311,11 @@ function PostModal({ post, onClose, onSave, db }: {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
             <div className="adm-field"><label className="adm-label">Featured Image URL</label><input className="adm-input" value={form.featured_image_url} onChange={(e) => setF("featured_image_url", e.target.value)} placeholder="https://…" /></div>
             <div className="adm-field"><label className="adm-label">Read Time (min)</label><input className="adm-input" type="number" min={1} max={60} value={form.read_time_minutes} onChange={(e) => setF("read_time_minutes", parseInt(e.target.value, 10) || 5)} /></div>
+          </div>
+          <div className="adm-field"><label className="adm-label">Cover Image URL <span style={{fontSize:"11px",opacity:.5}}>(hero banner at top of post)</span></label><input className="adm-input" value={form.cover_image_url} onChange={(e) => setF("cover_image_url", e.target.value)} placeholder="https://… (full-width header image)" /></div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+            <div className="adm-field"><label className="adm-label">Mid-Article Image URL <span style={{fontSize:"11px",opacity:.5}}>(shown mid-content)</span></label><input className="adm-input" value={form.mid_image_url} onChange={(e) => setF("mid_image_url", e.target.value)} placeholder="https://…" /></div>
+            <div className="adm-field"><label className="adm-label">Infographic URL <span style={{fontSize:"11px",opacity:.5}}>(summary visual at end)</span></label><input className="adm-input" value={form.infographic_url} onChange={(e) => setF("infographic_url", e.target.value)} placeholder="https://…" /></div>
           </div>
           <div className="adm-toggle-row">
             <button type="button" className={`adm-toggle${form.published ? " on" : ""}`} onClick={() => setF("published", !form.published)} aria-label="Toggle published" />
