@@ -31,23 +31,23 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://samuelgyasi.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Samuel Gyasi — Spirituality · Leadership · Transformation",
+    default: "Samuel Gyasi — Technology · Leadership · Intelligence · Transformation",
     template: "%s | Samuel Kobina Gyasi",
   },
   description:
-    "Samuel Kobina Gyasi — Rooted in the Word. Refined by Purpose. Rising to Transform. Scholar, leader, and speaker committed to faith-driven transformation.",
+    "Samuel Kobina Gyasi — Scholar, leader, and speaker dedicated to technology, leadership, collective intelligence, and transformative change.",
   keywords: [
     "Samuel Gyasi",
     "Samuel Kobina Gyasi",
     "Samuel K Gyasi",
     "Samuel Gyasi Ghana",
     "Samuel Gyasi leadership",
-    "Samuel Gyasi faith",
+    "Samuel Gyasi technology",
     "Samuel Gyasi transformation",
     "Samuel Gyasi speaker",
     "Samuel Gyasi scholar",
     "Ghanaian leader",
-    "faith leadership transformation",
+    "leadership intelligence transformation",
   ],
   authors: [{ name: "Samuel Kobina Gyasi", url: siteUrl }],
   creator: "Samuel Kobina Gyasi",
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Samuel Kobina Gyasi",
-    title: "Samuel Kobina Gyasi — Spirituality · Leadership · Transformation",
+    title: "Samuel Kobina Gyasi — Technology · Leadership · Intelligence · Transformation",
     description:
-      "Rooted in the Word. Refined by Purpose. Rising to Transform.",
+      "Scholar, leader, and builder at the intersection of technology, leadership, and collective intelligence.",
     images: [
       {
         url: "/photo-hero.png",
@@ -108,7 +108,7 @@ const jsonLd = {
   image: `${siteUrl}/photo-hero.png`,
   jobTitle: "Scholar · Leader · Speaker",
   description:
-    "Samuel Kobina Gyasi is a scholar, leader, and speaker rooted in faith, dedicated to transformative leadership and community impact.",
+    "Samuel Kobina Gyasi is a scholar, leader, and speaker dedicated to technology, leadership, collective intelligence, and transformative impact.",
   nationality: { "@type": "Country", name: "Ghana" },
   sameAs: [
     "https://www.linkedin.com/in/samuel-k-gyasi/",
@@ -117,7 +117,7 @@ const jsonLd = {
     "https://www.tiktok.com/@samuel_gsi",
   ],
   knowsAbout: [
-    "Faith",
+    "Technology",
     "Leadership",
     "Collective Intelligence",
     "Transformation",

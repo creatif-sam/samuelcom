@@ -14,8 +14,7 @@ const css = `
 /* â”€â”€ HERO â”€â”€ */
 .cdp-hero {
   padding: 140px 8% 80px;
-  border-bottom: 1px solid rgba(201,168,76,.18);
-  max-width: 1100px;
+  border-bottom: 1px solid rgba(34,197,94,.18);
   margin: 0 auto;
 }
 .cdp-hero-eyebrow {
@@ -42,8 +41,7 @@ const css = `
   gap: 80px;
   align-items: end;
   padding: 48px 0;
-  border-top: 1px solid rgba(201,168,76,.18);
-  margin-top: 40px;
+  border-top: 1px solid rgba(34,197,94,.18);
 }
 .cdp-hero-deck {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
@@ -73,7 +71,7 @@ const css = `
   grid-template-columns: 80px 1fr;
   gap: 40px;
   padding-bottom: 72px;
-  border-bottom: 1px solid rgba(201,168,76,.1);
+  border-bottom: 1px solid rgba(34,197,94,.1);
   margin-bottom: 0;
   opacity: 0;
   transform: translateY(20px);
@@ -100,7 +98,7 @@ const css = `
 .cdp-article-line {
   flex: 1;
   width: 1px;
-  background: rgba(201,168,76,.2);
+  background: rgba(34,197,94,.2);
   margin: 12px 0;
   min-height: 40px;
 }
@@ -135,9 +133,9 @@ const css = `
 
 /* â”€â”€ DECLARATION â”€â”€ */
 .cdp-declaration {
-  background: rgba(201,168,76,.06);
-  border-top: 1px solid rgba(201,168,76,.18);
-  border-bottom: 1px solid rgba(201,168,76,.18);
+  background: rgba(34,197,94,.06);
+  border-top: 1px solid rgba(34,197,94,.18);
+  border-bottom: 1px solid rgba(34,197,94,.18);
   padding: 72px 8%;
   margin-top: 80px;
 }
@@ -163,14 +161,14 @@ const css = `
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
-  background: rgba(201,168,76,.12);
+  background: rgba(34,197,94,.12);
 }
 .cdp-decl-item {
   padding: 28px 32px;
   background: var(--black);
-  border-bottom: 1px solid rgba(201,168,76,.06);
+  border-bottom: 1px solid rgba(34,197,94,.06);
 }
-.cdp-decl-item:hover { background: rgba(201,168,76,.04); }
+.cdp-decl-item:hover { background: rgba(34,197,94,.04); }
 .cdp-decl-num {
   font-family: var(--font-space-mono), 'Space Mono', monospace;
   font-size: 9px;
@@ -200,7 +198,7 @@ const css = `
   color: var(--gold);
   margin-bottom: 28px;
   padding-bottom: 14px;
-  border-bottom: 1px solid rgba(201,168,76,.18);
+  border-bottom: 1px solid rgba(34,197,94,.18);
 }
 .cdp-ref-item {
   display: flex;

@@ -8,7 +8,7 @@ export function VerseStrip() {
           transformed into his image with ever-increasing glory.&rdquo;
         </p>
         <p className="verse-ref">
-          2 Corinthians 3:18 — The anchor of Samuel&apos;s transformational mission
+          The anchor of Samuel&apos;s transformational mission
         </p>
       </div>
     </div>

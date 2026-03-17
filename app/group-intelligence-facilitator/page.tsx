@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { SiteFooter } from "@/components/organisms/SiteFooter";
 
 const css = `
   .gif-page {
     --bg: #0a0a0a;
     --bg2: #111109;
-    --line: rgba(201,168,76,0.15);
-    --gold: #c9a84c;
-    --gold2: #e8c96a;
+    --line: rgba(34,197,94,0.15);
+    --gold: #22c55e;
+    --gold2: #86efac;
     --white: #f5f3ef;
     --gray: rgba(245,243,239,0.55);
     --sub: rgba(245,243,239,0.4);
@@ -93,7 +94,7 @@ const css = `
     border-left: 2px solid var(--gold);
     padding: 20px 28px;
     margin: 32px 0;
-    background: rgba(201,168,76,0.05);
+    background: rgba(34,197,94,0.05);
   }
   .gif-pullquote-text {
     font-family: 'Playfair Display', serif;
@@ -195,9 +196,47 @@ const css = `
   .gif-cta-btn:hover { background: var(--gold2); }
   .gif-cta-btn.ghost {
     background: transparent; color: var(--gold);
-    border: 1px solid rgba(201,168,76,.35);
+    border: 1px solid rgba(34,197,94,.35);
   }
-  .gif-cta-btn.ghost:hover { background: rgba(201,168,76,.08); }
+  .gif-cta-btn.ghost:hover { background: rgba(34,197,94,.08); }
+
+  /* JUNIOR PROGRAMME OFFICER SECTION */
+  .gif-role-section {
+    padding: 64px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  .gif-role-header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 44px; }
+  .gif-role-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 9px;
+    letter-spacing: .3em; text-transform: uppercase; color: var(--gold);
+  }
+  .gif-role-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 2.5vw, 32px); color: var(--white);
+  }
+  .gif-role-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  }
+  .gif-role-col-title {
+    font-family: 'Space Mono', monospace; font-size: 10px;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line);
+  }
+  .gif-role-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .gif-role-list li {
+    font-size: 14px; line-height: 1.75; color: var(--gray);
+    padding-left: 16px; position: relative;
+  }
+  .gif-role-list li::before { content: '–'; position: absolute; left: 0; color: var(--gold); opacity: .7; }
+  .gif-logistics-note {
+    margin-top: 36px; padding: 22px 28px;
+    border-left: 2px solid var(--gold); background: rgba(34,197,94,0.04);
+  }
+  .gif-logistics-text {
+    font-family: 'Playfair Display', serif; font-size: 17px;
+    font-style: italic; color: var(--gray); line-height: 1.7;
+  }
+  .gif-logistics-text strong { color: var(--white); font-style: normal; font-weight: 600; }
 
   @media (max-width: 900px) {
     .gif-nav { padding: 20px 24px; }
@@ -207,12 +246,36 @@ const css = `
     .gif-cards { grid-template-columns: 1fr; }
     .gif-terms-grid { grid-template-columns: 1fr; }
     .gif-cta { padding: 60px 0 80px; }
+    .gif-role-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  @media (max-width: 640px) {
+    .gif-hero {
+      background: url('/mystorybackground.jpg') center/cover no-repeat;
+      position: relative;
+      min-height: 55vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 28px 60px;
+      max-width: 100%;
+    }
+    .gif-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(10,10,10,0.65);
+      pointer-events: none;
+    }
+    .gif-hero > * { position: relative; z-index: 1; }
+    .gif-hero-eyebrow { justify-content: center; }
+    .gif-hero-lead { text-align: center; margin: 0 auto; }
   }
 
   /* Gold gradient text */
   .gif-nav-back, .gif-hero-eyebrow, .gif-hero-title em,
   .gif-def-label, .gif-card-num, .gif-section-title span,
-  .gif-term-name, .gif-stat-num, .gif-cta-title em {
+  .gif-term-name, .gif-stat-num, .gif-cta-title em,
+  .gif-role-eyebrow, .gif-role-col-title {
     background: var(--gold-gradient) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
@@ -357,6 +420,45 @@ export default function GroupIntelligenceFacilitatorPage() {
             </div>
           </div>
 
+          {/* JUNIOR PROGRAMME OFFICER */}
+          <div className="gif-role-section">
+            <div className="gif-role-header">
+              <div className="gif-role-eyebrow">Current Role</div>
+              <h2 className="gif-role-title">Junior Programme Officer — What I Do</h2>
+            </div>
+            <div className="gif-role-grid">
+              <div className="gif-role-col">
+                <div className="gif-role-col-title">Event Coordination</div>
+                <ul className="gif-role-list">
+                  <li>Collaborate with faculty to design agendas and coordinate with the operations officer for event logistics (SCI Talks, PhD mini-seminars, workshops, social gatherings, student activities, open days, etc.).</li>
+                  <li>Build and maintain partnerships with other departments and student clubs to co-organise initiatives.</li>
+                  <li>Support the communication partner in representing the school at job fairs and student-oriented events.</li>
+                </ul>
+              </div>
+              <div className="gif-role-col">
+                <div className="gif-role-col-title">Student Engagement &amp; Career Support</div>
+                <ul className="gif-role-list">
+                  <li>Welcome and guide new students during their first days on campus, in coordination with the student liaison team.</li>
+                  <li>Assist students with internship and job application processes, including reviewing CVs and preparing for interviews.</li>
+                  <li>Work closely with the Career Center to coordinate on-campus events and company visits.</li>
+                </ul>
+              </div>
+              <div className="gif-role-col">
+                <div className="gif-role-col-title">Communication &amp; Content</div>
+                <ul className="gif-role-list">
+                  <li>Implement internal and external communication strategies for the department.</li>
+                  <li>Update content and maintain an active presence on Instagram, LinkedIn, and Spotify (for podcasts).</li>
+                  <li>Produce and post multimedia content promoting student success stories, academic updates, and upcoming opportunities — in collaboration with the multimedia team.</li>
+                </ul>
+              </div>
+            </div>
+            <div className="gif-logistics-note">
+              <p className="gif-logistics-text">
+                I also manage the <strong>logistics of staff, guests, and students</strong> — ensuring people, spaces, and schedules align to create seamless experiences across all programme activities.
+              </p>
+            </div>
+          </div>
+
           {/* SAMUEL'S CONTEXT */}
           <div className="gif-context">
             <div className="gif-context-side">
@@ -379,10 +481,10 @@ export default function GroupIntelligenceFacilitatorPage() {
                 Samuel Kobina Gyasi has spent over fifteen years working at the intersection of leadership, organisational culture, and group dynamics. His work as a Group Intelligence Facilitator grows from a conviction that <strong>most organisations are dramatically underusing the collective intelligence already present in their people</strong>.
               </p>
               <p className="gif-def-text">
-                Drawing on foundations in transformational leadership, data-informed decision-making, and faith-rooted values, Samuel designs and holds spaces where leadership teams move from surface-level conversation to genuine strategic clarity — and from individual opinion to collective commitment.
+                Drawing on foundations in transformational leadership, data-informed decision-making, and values-driven practice, Samuel designs and holds spaces where leadership teams move from surface-level conversation to genuine strategic clarity — and from individual opinion to collective commitment.
               </p>
               <p className="gif-def-text">
-                His practice spans executive team alignment, community deliberation, institutional strategy, and learning system design. He has worked with governments, universities, NGOs, faith communities, and private sector organisations across Africa, Europe, and beyond.
+                His practice spans executive team alignment, community deliberation, institutional strategy, and learning system design. He has worked with governments, universities, NGOs, and private sector organisations across Africa, Europe, and beyond.
               </p>
               <div className="gif-pullquote">
                 <p className="gif-pullquote-text">
@@ -404,6 +506,7 @@ export default function GroupIntelligenceFacilitatorPage() {
 
         </div>
       </div>
+      <SiteFooter />
     </>
   );
 }

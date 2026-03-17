@@ -5,13 +5,13 @@ import { useEffect, useRef } from "react";
 const timelineEntries = [
   {
     year: "The Beginning",
-    title: "Foundations of Faith",
-    body: "Born and raised with deep roots in Christian faith, Samuel's earliest formation came through Scripture, community, and a conviction that every life carries divine purpose. These foundations never left him.",
+    title: "Early Formation",
+    body: "Born and raised in Mpohor, Ghana, Samuel's earliest formation came through a strong sense of community, the discipline of craftwork, and a conviction that every life carries purpose. These foundations — integrity, service, and curiosity — never left him.",
   },
   {
     year: "The Formation",
     title: "Education & Early Leadership",
-    body: "Samuel pursued academic and leadership development with the same intentionality he brought to faith. Early in his journey he began understanding that knowledge without service is incomplete — a lesson that would shape every season ahead.",
+    body: "Samuel pursued academic and leadership development with the same intentionality he brought to every endeavour. Early in his journey he began understanding that knowledge without service is incomplete — a lesson that would shape every season ahead.",
   },
   {
     year: "The Field",
@@ -61,7 +61,7 @@ export function AboutSection() {
           <span className="tl-eyebrow">My Story</span>
           <h2 className="tl-main-title">
             A Life <em>Built</em> on Purpose,{" "}
-            <span>Faith &amp; Collective Growth</span>
+            <span>Excellence &amp; Collective Growth</span>
           </h2>
         </div>
 

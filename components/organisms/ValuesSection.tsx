@@ -65,8 +65,8 @@ export function ValuesSection() {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(201,168,76,.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(201,168,76,.04) 1px, transparent 1px);
+            linear-gradient(rgba(34,197,94,.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(34,197,94,.04) 1px, transparent 1px);
           background-size: 80px 80px;
           pointer-events: none;
         }
@@ -78,7 +78,7 @@ export function ValuesSection() {
           top: -120px; left: 50%;
           transform: translateX(-50%);
           width: 600px; height: 600px;
-          background: radial-gradient(circle, rgba(201,168,76,.06) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(34,197,94,.06) 0%, transparent 70%);
           pointer-events: none;
         }
 
@@ -150,7 +150,7 @@ export function ValuesSection() {
           position: relative;
           padding: 56px 40px 48px;
           background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(201,168,76,0.1);
+          border: 1px solid rgba(34,197,94,0.1);
           overflow: hidden;
           opacity: 0;
           transform: translateY(50px);
@@ -170,8 +170,8 @@ export function ValuesSection() {
         }
 
         .vs-card:hover {
-          background: rgba(201,168,76,0.05);
-          border-color: rgba(201,168,76,0.35);
+          background: rgba(34,197,94,0.05);
+          border-color: rgba(34,197,94,0.35);
         }
 
         /* animated corner accent on hover */
@@ -203,14 +203,14 @@ export function ValuesSection() {
           font-family: var(--font-playfair), 'Playfair Display', serif;
           font-size: 180px;
           font-weight: 900;
-          color: rgba(201,168,76,0.04);
+          color: rgba(34,197,94,0.04);
           line-height: 1;
           pointer-events: none;
           transition: color 0.4s, transform 0.5s;
           user-select: none;
         }
         .vs-card:hover .vs-card-bg-letter {
-          color: rgba(201,168,76,0.08);
+          color: rgba(34,197,94,0.08);
           transform: scale(1.05) translateY(-8px);
         }
 
@@ -291,7 +291,7 @@ export function ValuesSection() {
           left: 0; top: 50%;
           transform: translateY(-50%);
           height: 36px; width: 1px;
-          background: rgba(201,168,76,0.25);
+          background: rgba(34,197,94,0.25);
         }
 
         .vts-big {

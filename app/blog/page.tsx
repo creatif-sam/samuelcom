@@ -3,6 +3,8 @@
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { createAnonClient } from "@/lib/supabase/anon";
+import { SiteFooter } from "@/components/organisms/SiteFooter";
+import { Navbar } from "@/components/organisms/Navbar";
 
 interface Post {
   id: string;
@@ -16,510 +18,482 @@ interface Post {
 }
 
 const SAMPLE_POSTS: Post[] = [
-  { id: "s1", title: "When the Word Becomes the Map: Navigating Life Abroad by Scripture", slug: "when-the-word-becomes-the-map", category: "faith", excerpt: "What does it mean to orient a 21st-century intellectual life by a 2,000-year-old text? Samuel explores the surprising coherence of Biblical wisdom and modern academic life.", created_at: "2026-03-01", read_time_minutes: 7, featured_image_url: null },
   { id: "s2", title: "Fifteen Years of Leading: What No One Taught Me", slug: "fifteen-years-of-leading", category: "leadership", excerpt: "A personal inventory of hard-won lessons — from Class Prefect to Consortium President — about what leadership actually costs and what it gives back.", created_at: "2026-02-10", read_time_minutes: 6, featured_image_url: null },
-  { id: "s3", title: "SARIMAX and the Sermon: Forecasting, Faith & Uncertainty", slug: "sarimax-and-the-sermon", category: "intellectuality", excerpt: "While modelling irradiation data in Benguerrir, Samuel found unexpected parallels between statistical confidence intervals and theological trust.", created_at: "2026-01-22", read_time_minutes: 5, featured_image_url: null },
+  { id: "s3", title: "SARIMAX and Systems: Forecasting & Uncertainty", slug: "sarimax-and-systems", category: "intellectuality", excerpt: "While modelling irradiation data in Benguerrir, Samuel found unexpected parallels between statistical confidence intervals and the nature of strategic planning.", created_at: "2026-01-22", read_time_minutes: 5, featured_image_url: null },
   { id: "s4", title: "Why Africa's Next Revolution Will Be Intellectual", slug: "africa-next-revolution", category: "transformation", excerpt: "Resources are not what Africa lacks. The missing ingredient is epistemic infrastructure — ways of knowing and deciding that belong to Africa itself.", created_at: "2025-12-15", read_time_minutes: 8, featured_image_url: null },
-  { id: "s5", title: "On Gratitude as a Daily Discipline", slug: "on-gratitude", category: "faith", excerpt: "Four scholarships. Three countries. One life. Samuel reflects on the practice of gratitude not as an emotion but as a deliberate posture of the will.", created_at: "2025-11-10", read_time_minutes: 4, featured_image_url: null },
   { id: "s6", title: "The Servant at the Centre: Rethinking Authority", slug: "servant-at-the-centre", category: "leadership", excerpt: "True authority is not claimed from above — it is granted from below, by the people you serve.", created_at: "2025-10-05", read_time_minutes: 5, featured_image_url: null },
   { id: "s7", title: "Collective Intelligence: A Primer for the Genuinely Curious", slug: "collective-intelligence-primer", category: "intellectuality", excerpt: "How do groups think? What happens when diverse minds work on the same problem? A beginner's guide to the science Samuel studies every day.", created_at: "2025-09-18", read_time_minutes: 6, featured_image_url: null },
   { id: "s8", title: "The Scholarship That Changed Everything", slug: "scholarship-that-changed-everything", category: "transformation", excerpt: "The moment a Government of Ghana award letter arrived — and the quiet understanding that it was not a reward for past effort but a commission for future work.", created_at: "2025-08-22", read_time_minutes: 4, featured_image_url: null },
-  { id: "s9", title: "What Proverbs 3:5 Taught Me About Uncertainty", slug: "proverbs-3-5-uncertainty", category: "faith", excerpt: '"Lean not on your own understanding." For a data scientist who builds predictive models, this instruction is both counter-intuitive and deeply clarifying.', created_at: "2025-07-14", read_time_minutes: 4, featured_image_url: null },
   { id: "s10", title: "Managing Director at 17: What Running a Business Early Taught Me", slug: "managing-director-at-17", category: "leadership", excerpt: "Cash Washing Bay, Mpohor, 2017. Samuel's first experience of P&L, staff decisions, and the sharp education of early entrepreneurship.", created_at: "2025-06-08", read_time_minutes: 5, featured_image_url: null },
-  { id: "s11", title: "Reading Non-Fiction as a Spiritual Practice", slug: "nonfiction-as-spiritual-practice", category: "intellectuality", excerpt: "Every book is a conversation with a mind sharper than the moment. Samuel reflects on how reading non-fiction has been as formative as any formal education.", created_at: "2025-05-20", read_time_minutes: 5, featured_image_url: null },
+  { id: "s11", title: "Reading Non-Fiction as a Discipline", slug: "nonfiction-as-discipline", category: "intellectuality", excerpt: "Every book is a conversation with a mind sharper than the moment. Samuel reflects on how reading non-fiction has been as formative as any formal education.", created_at: "2025-05-20", read_time_minutes: 5, featured_image_url: null },
   { id: "s12", title: "Ghana to Morocco: The Interior Journey", slug: "ghana-to-morocco", category: "transformation", excerpt: "Geography changes everything — the food, the language, the weather — but the deepest transformation happens in the interior landscape of assumptions and certainties.", created_at: "2025-04-11", read_time_minutes: 7, featured_image_url: null },
 ];
 
-const CAT_MAP: Record<string, { label: string; cls: string; href: string }> = {
-  faith:          { label: "Faith & Beliefs",  cls: "faith",    href: "/faith" },
-  leadership:     { label: "Leadership",        cls: "lead",     href: "/leadership" },
-  intellectuality:{ label: "Intellectuality",   cls: "intel",    href: "/intellectuality" },
-  transformation: { label: "Transformation",    cls: "trans",    href: "/transformation" },
+const CAT_MAP: Record<string, { label: string; color: string; bg: string; href: string }> = {
+  leadership:     { label: "Leadership",     color: "#d4a843", bg: "rgba(212,168,67,0.12)",  href: "/leadership"     },
+  intellectuality:{ label: "Intellectuality", color: "#5b9ef9", bg: "rgba(91,158,249,0.12)", href: "/intellectuality" },
+  transformation: { label: "Transformation", color: "#e05757", bg: "rgba(224,87,87,0.12)",   href: "/transformation" },
 };
 
+const TAGS = ["Leadership Philosophy", "Collective Intelligence", "Data Science", "Africa", "Student Life", "Scholarships", "Morocco", "Ghana", "Research", "Gratitude", "Identity", "Purpose", "Technology", "Personal Growth"];
+
 function fmt(d: string) {
+  return new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+}
+
+function fmtShort(d: string) {
   return new Date(d).toLocaleDateString("en-GB", { month: "short", year: "numeric" });
 }
 
-const journalCss = `
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Unbounded:wght@300;400;600;700;900&family=Azeret+Mono:wght@300;400;500&display=swap');
+const CATS = [
+  { key: "all",            label: "All Posts",      count: 9 },
+  { key: "leadership",     label: "Leadership",     count: 3 },
+  { key: "intellectuality",label: "Intellectuality",count: 3 },
+  { key: "transformation", label: "Transformation", count: 3 },
+];
 
-.gyasi-journal {
-  --parchment:  #f0ead8;
-  --parchment2: #e8e0cc;
-  --parchment3: #ddd4be;
-  --ink:        #0e0d0a;
-  --ink2:       #1e1c18;
-  --ink-mid:    #4a4640;
-  --ink-faint:  #8a8278;
-  --rule:       rgba(14,13,10,.12);
-  --faith:      #2d5a3d;
-  --leadership: #8b6914;
-  --intellect:  #1a3a5c;
-  --transform:  #8b2020;
-  --gold:       #c9a84c;
-  min-height: 100vh;
-  background: var(--parchment);
-  color: var(--ink);
-  font-family: 'Libre Baskerville', Georgia, serif;
-  overflow-x: hidden;
-}
+const blogCss = `
+  /* ── BLOG PAGE ── */
+  .wpb {
+    --bg:        #0f0f0f;
+    --surface:   #181818;
+    --surface2:  #202020;
+    --border:    rgba(255,255,255,0.08);
+    --border2:   rgba(255,255,255,0.12);
+    --text:      #edebe6;
+    --muted:     #787068;
+    --muted2:    #a09890;
+    --green:     #22c55e;
+    --green-dim: rgba(34,197,94,0.15);
+    --lead:      #d4a843;
+    --intel:     #5b9ef9;
+    --trans:     #e05757;
+    --radius:    14px;
+    --radius-lg: 20px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+  }
 
-/* Paper texture */
-.gyasi-journal::before {
-  content:'';
-  position:fixed; inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
-  pointer-events:none; z-index:0; opacity:.6;
-}
+  /* ── BLOG HEADER ── */
+  .wpb-header {
+    background: linear-gradient(160deg, #141414 0%, #0f0f0f 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 100px 0 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wpb-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(34,197,94,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .wpb-header-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 32px;
+    position: relative; z-index: 1;
+  }
+  .wpb-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 20px;
+  }
+  .wpb-eyebrow::before {
+    content: ''; display: block;
+    width: 24px; height: 1px; background: var(--green);
+  }
+  .wpb-title {
+    font-size: clamp(38px, 6vw, 72px);
+    font-weight: 900; letter-spacing: -0.03em; line-height: 1.0;
+    margin-bottom: 18px;
+  }
+  .wpb-title span { color: var(--green); }
+  .wpb-desc {
+    font-size: clamp(15px, 1.5vw, 18px);
+    color: var(--muted2); line-height: 1.7;
+    max-width: 560px;
+  }
+  .wpb-header-stats {
+    display: flex; gap: 32px; margin-top: 36px; flex-wrap: wrap;
+  }
+  .wpb-stat {
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  .wpb-stat-val {
+    font-size: 24px; font-weight: 800; letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .wpb-stat-val span { color: var(--green); }
+  .wpb-stat-label { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
 
-/* NAV / MASTHEAD */
-.gj-nav {
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  background:var(--parchment);
-  border-bottom:2px solid var(--ink);
-}
-.gj-masthead {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:8px 56px;
-  border-bottom:1px solid var(--rule);
-}
-.gj-back {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.2em; text-transform:uppercase;
-  color:var(--ink-faint); text-decoration:none;
-  display:flex; align-items:center; gap:8px;
-  transition:color .25s;
-}
-.gj-back:hover { color:var(--ink); }
-.gj-back::before { content:'←'; }
-.gj-nav-date {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.15em; color:var(--ink-faint); text-transform:uppercase;
-}
-.gj-nav-issue {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.15em; color:var(--ink-faint); text-transform:uppercase;
-}
-.gj-title-row {
-  text-align:center; padding:14px 56px 12px;
-  position:relative;
-}
-.gj-journal-name {
-  font-family:'Unbounded',sans-serif; font-weight:900;
-  font-size:clamp(22px,3vw,38px);
-  letter-spacing:-.01em; color:var(--ink);
-  text-transform:uppercase;
-}
-.gj-tagline {
-  font-family:'Libre Baskerville',serif; font-style:italic;
-  font-size:11px; color:var(--ink-mid);
-  margin-top:3px; letter-spacing:.08em;
-}
-.gj-topics {
-  display:flex; justify-content:center; gap:0;
-  border-top:1px solid var(--rule);
-  flex-wrap:wrap;
-}
-.gj-topic-btn {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.2em; text-transform:uppercase;
-  color:var(--ink); background:transparent; border:none;
-  padding:8px 24px; border-right:1px solid var(--rule);
-  transition:background .2s, color .2s; cursor:pointer;
-}
-.gj-topic-btn:first-child { border-left:1px solid var(--rule); }
-.gj-topic-btn:hover { background:var(--ink); color:var(--parchment); }
-.gj-topic-btn.active { background:var(--ink); color:var(--parchment); }
-.gj-topic-btn.faith.active    { background:var(--faith); }
-.gj-topic-btn.lead.active     { background:var(--leadership); }
-.gj-topic-btn.intel.active    { background:var(--intellect); }
-.gj-topic-btn.trans.active    { background:var(--transform); }
+  /* ── CATEGORY BAR ── */
+  .wpb-cats-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 90;
+  }
+  .wpb-cats-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 32px;
+    display: flex; align-items: center; gap: 4px;
+    overflow-x: auto; scrollbar-width: none;
+    padding-top: 1px;
+  }
+  .wpb-cats-inner::-webkit-scrollbar { display: none; }
+  .wpb-cat-btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 14px 18px;
+    font-size: 13px; font-weight: 600;
+    color: var(--muted); background: none; border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer; white-space: nowrap;
+    transition: color 0.18s, border-color 0.18s;
+    flex-shrink: 0;
+  }
+  .wpb-cat-btn .cnt {
+    font-size: 10px; padding: 2px 6px; border-radius: 10px;
+    background: var(--surface2); color: var(--muted);
+    font-weight: 700; transition: background 0.18s, color 0.18s;
+  }
+  .wpb-cat-btn:hover { color: var(--text); }
+  .wpb-cat-btn.active { color: var(--text); border-bottom-color: var(--green); }
+  .wpb-cat-btn.active .cnt { background: var(--green-dim); color: var(--green); }
 
-/* HERO / FRONT PAGE */
-#gj-hero {
-  padding:148px 56px 0;
-  position:relative; z-index:1;
-}
-.gj-hero-rule { width:100%; height:3px; background:var(--ink); margin-bottom:4px; }
-.gj-hero-rule2 { width:100%; height:1px; background:var(--ink); margin-bottom:40px; }
+  /* ── MAIN LAYOUT ── */
+  .wpb-layout {
+    max-width: 1200px; margin: 0 auto;
+    padding: 52px 32px 80px;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 52px;
+    align-items: start;
+  }
 
-.gj-hero-layout {
-  display:grid;
-  grid-template-columns:1fr 2px 1fr 2px 1fr;
-  gap:0;
-  padding-bottom:48px;
-  border-bottom:2px solid var(--ink);
-}
-.gj-col-divider { background:var(--rule); }
+  /* ── FEATURED POST ── */
+  .wpb-featured {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 36px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .wpb-featured:hover {
+    border-color: rgba(34,197,94,0.3);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+  .wpb-feat-image {
+    height: 220px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #222 50%, #1a1a1a 100%);
+    position: relative; overflow: hidden;
+  }
+  .wpb-feat-image-pattern {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(34,197,94,0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .wpb-feat-image-accent {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+  }
+  .wpb-feat-image-accent.lead  { background: linear-gradient(90deg, #d4a843, #f0c060); }
+  .wpb-feat-image-accent.intel { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+  .wpb-feat-image-accent.trans { background: linear-gradient(90deg, #e05757, #f07070); }
+  .wpb-feat-badge {
+    position: absolute; top: 20px; left: 20px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 20px;
+    backdrop-filter: blur(8px);
+  }
+  .wpb-feat-badge.lead  { background: rgba(212,168,67,0.2);  color: #d4a843; border: 1px solid rgba(212,168,67,0.3); }
+  .wpb-feat-badge.intel { background: rgba(91,158,249,0.2);  color: #5b9ef9; border: 1px solid rgba(91,158,249,0.3); }
+  .wpb-feat-badge.trans { background: rgba(224,87,87,0.2);   color: #e05757; border: 1px solid rgba(224,87,87,0.3); }
+  .wpb-feat-body {
+    padding: 28px 32px 32px;
+  }
+  .wpb-feat-featured-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 14px;
+  }
+  .wpb-feat-featured-pill::before {
+    content: ''; display: block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--green);
+    animation: wpb-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes wpb-pulse {
+    0%,100%{opacity:1;transform:scale(1);}
+    50%{opacity:0.4;transform:scale(1.4);}
+  }
+  .wpb-feat-title {
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 800; letter-spacing: -0.025em; line-height: 1.2;
+    margin-bottom: 12px;
+    transition: color 0.2s;
+  }
+  .wpb-featured:hover .wpb-feat-title { color: var(--green); }
+  .wpb-feat-excerpt {
+    font-size: 15px; line-height: 1.75;
+    color: var(--muted2); margin-bottom: 22px;
+  }
+  .wpb-feat-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 18px; border-top: 1px solid var(--border);
+    flex-wrap: wrap; gap: 12px;
+  }
+  .wpb-feat-meta {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 12px; color: var(--muted);
+  }
+  .wpb-feat-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--muted); }
+  .wpb-read-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    background: var(--green-dim); color: var(--green);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 10px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .wpb-featured:hover .wpb-read-btn { background: rgba(34,197,94,0.25); border-color: rgba(34,197,94,0.4); }
 
-/* FEATURED */
-.gj-feat {
-  padding:0 40px 0 0;
-  animation:gj-ink-in .9s .1s ease both;
-}
-@keyframes gj-ink-in {
-  from{opacity:0;transform:translateY(12px);}
-  to{opacity:1;transform:none;}
-}
+  /* ── SECTION HEADING ── */
+  .wpb-section-heading {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 24px;
+  }
+  .wpb-section-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); white-space: nowrap;
+  }
+  .wpb-section-rule { flex: 1; height: 1px; background: var(--border); }
 
-.gj-feat-cat {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.3em; text-transform:uppercase;
-  padding:3px 10px; margin-bottom:16px; display:inline-block;
-}
-.gj-feat-cat.faith    { background:var(--faith);    color:white; }
-.gj-feat-cat.lead     { background:var(--leadership);color:white; }
-.gj-feat-cat.intel    { background:var(--intellect); color:white; }
-.gj-feat-cat.trans    { background:var(--transform); color:white; }
+  /* ── POST CARDS GRID ── */
+  .wpb-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-bottom: 32px;
+  }
+  .wpb-card {
+    display: flex; flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .wpb-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .wpb-card-accent {
+    height: 3px; flex-shrink: 0;
+  }
+  .wpb-card-accent.lead  { background: linear-gradient(90deg, #d4a843, #f0c060); }
+  .wpb-card-accent.intel { background: linear-gradient(90deg, #3b82f6, #5b9ef9); }
+  .wpb-card-accent.trans { background: linear-gradient(90deg, #e05757, #f07070); }
+  .wpb-card-body { padding: 22px 22px 20px; flex: 1; display: flex; flex-direction: column; }
+  .wpb-card-cat {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .wpb-card-cat.lead  { color: var(--lead); }
+  .wpb-card-cat.intel { color: var(--intel); }
+  .wpb-card-cat.trans { color: var(--trans); }
+  .wpb-card-title {
+    font-size: 15px; font-weight: 700; line-height: 1.4;
+    letter-spacing: -0.01em; margin-bottom: 10px;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    transition: color 0.2s;
+  }
+  .wpb-card:hover .wpb-card-title { color: var(--green); }
+  .wpb-card-excerpt {
+    font-size: 13px; line-height: 1.7; color: var(--muted2);
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    flex: 1; margin-bottom: 16px;
+  }
+  .wpb-card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px; border-top: 1px solid var(--border);
+    font-size: 11px; color: var(--muted);
+  }
+  .wpb-card-arrow {
+    font-size: 14px; color: var(--green);
+    transition: transform 0.2s;
+  }
+  .wpb-card:hover .wpb-card-arrow { transform: translateX(4px); }
 
-.gj-feat-headline {
-  font-family:'Unbounded',sans-serif; font-weight:700;
-  font-size:clamp(22px,3vw,36px);
-  line-height:1.05; letter-spacing:-.02em; color:var(--ink);
-}
-.gj-feat-deck {
-  font-size:15px; font-style:italic; line-height:1.6;
-  color:var(--ink-mid); margin-top:14px;
-}
-.gj-feat-meta {
-  margin-top:20px; display:flex; align-items:center; gap:14px;
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.15em; text-transform:uppercase; color:var(--ink-faint);
-}
-.gj-feat-meta .dot::before { content:'·'; margin-right:14px; }
-.gj-feat-body {
-  margin-top:20px; font-size:15px; line-height:1.85;
-  color:var(--ink2);
-}
-.gj-feat-body p+p { margin-top:14px; }
-.gj-feat-readmore {
-  margin-top:22px; display:inline-block;
-  font-family:'Azeret Mono',monospace; font-size:10px;
-  letter-spacing:.22em; text-transform:uppercase;
-  color:var(--ink); border-bottom:1px solid var(--ink);
-  padding-bottom:2px; text-decoration:none;
-  transition:letter-spacing .3s;
-}
-.gj-feat-readmore:hover { letter-spacing:.3em; }
+  /* ── SIDEBAR ── */
+  .wpb-sidebar { display: flex; flex-direction: column; gap: 28px; }
+  .wpb-widget {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .wpb-widget-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .wpb-widget-icon {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0;
+  }
+  .wpb-widget-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted);
+  }
 
-/* MIDDLE COL */
-.gj-mid-col {
-  padding:0 36px;
-  display:flex; flex-direction:column; gap:32px;
-  animation:gj-ink-in .9s .25s ease both;
-}
-.gj-mid-art { padding-bottom:28px; border-bottom:1px solid var(--rule); }
-.gj-mid-art:last-child { border-bottom:none; }
-.gj-mid-cat {
-  font-family:'Azeret Mono',monospace; font-size:8px;
-  letter-spacing:.3em; text-transform:uppercase;
-  padding:2px 8px; margin-bottom:10px; display:inline-block;
-}
-.gj-mid-cat.faith    { background:var(--faith);    color:white; }
-.gj-mid-cat.lead     { background:var(--leadership);color:white; }
-.gj-mid-cat.intel    { background:var(--intellect); color:white; }
-.gj-mid-cat.trans    { background:var(--transform); color:white; }
-.gj-mid-headline {
-  font-family:'Unbounded',sans-serif; font-weight:600;
-  font-size:clamp(15px,1.6vw,19px);
-  line-height:1.15; letter-spacing:-.01em; color:var(--ink);
-}
-.gj-mid-deck {
-  font-size:13px; font-style:italic; color:var(--ink-mid);
-  margin-top:8px; line-height:1.6;
-}
-.gj-mid-meta {
-  margin-top:10px;
-  font-family:'Azeret Mono',monospace; font-size:8px;
-  letter-spacing:.15em; text-transform:uppercase; color:var(--ink-faint);
-}
+  /* About widget */
+  .wpb-about-body { padding: 20px; }
+  .wpb-about-name {
+    font-size: 16px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 8px;
+  }
+  .wpb-about-name span { color: var(--green); }
+  .wpb-about-desc {
+    font-size: 13px; line-height: 1.7; color: var(--muted2); margin-bottom: 14px;
+  }
+  .wpb-about-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; color: var(--green);
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .wpb-about-link:hover { gap: 10px; }
 
-/* RIGHT COL */
-.gj-right-col {
-  padding:0 0 0 36px;
-  display:flex; flex-direction:column; gap:0;
-  animation:gj-ink-in .9s .4s ease both;
-}
-.gj-right-col h3 {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.3em; text-transform:uppercase; color:var(--ink);
-  padding-bottom:8px; border-bottom:2px solid var(--ink);
-  margin-bottom:20px;
-}
-.gj-sidebar-item {
-  display:flex; gap:14px;
-  padding:14px 0; border-bottom:1px solid var(--rule);
-  transition:background .2s;
-}
-.gj-si-num {
-  font-family:'Unbounded',sans-serif; font-weight:900;
-  font-size:20px; color:var(--parchment3);
-  line-height:1; min-width:28px; padding-top:2px;
-}
-.gj-si-title {
-  font-family:'Unbounded',sans-serif; font-weight:600;
-  font-size:12px; line-height:1.3; letter-spacing:-.01em; color:var(--ink);
-}
-.gj-si-cat {
-  font-family:'Azeret Mono',monospace; font-size:8px;
-  letter-spacing:.15em; text-transform:uppercase;
-  color:var(--ink-faint); margin-top:4px;
-}
-.gj-sidebar-quote {
-  margin-top:28px; padding:20px 22px;
-  background:var(--ink); color:var(--parchment);
-}
-.gj-sq-text {
-  font-family:'Libre Baskerville',serif; font-style:italic;
-  font-size:14px; line-height:1.6;
-}
-.gj-sq-attr {
-  font-family:'Azeret Mono',monospace; font-size:8px;
-  letter-spacing:.15em; text-transform:uppercase;
-  color:var(--gold); margin-top:10px;
-}
+  /* Categories widget */
+  .wpb-cat-list { padding: 8px 0; }
+  .wpb-cat-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px;
+    text-decoration: none; color: var(--text);
+    border-bottom: 1px solid var(--border);
+    font-size: 13px; font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+  }
+  .wpb-cat-item:last-child { border-bottom: none; }
+  .wpb-cat-item:hover { background: var(--surface2); }
+  .wpb-cat-item:hover .wpb-cat-item-label { color: var(--green); }
+  .wpb-cat-item-row { display: flex; align-items: center; gap: 8px; }
+  .wpb-cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .wpb-cat-count {
+    font-size: 10px; font-weight: 700;
+    padding: 2px 7px; border-radius: 10px;
+    background: var(--surface2); color: var(--muted);
+  }
 
-/* SECTION BANNER */
-.gj-section-banner {
-  padding:18px 56px;
-  background:var(--ink); color:var(--parchment);
-  display:flex; justify-content:space-between; align-items:center;
-  position:relative; z-index:1;
-}
-.gj-sb-title {
-  font-family:'Unbounded',sans-serif; font-weight:900;
-  font-size:13px; letter-spacing:.15em; text-transform:uppercase;
-}
-.gj-sb-rule { flex:1; height:1px; background:rgba(240,234,216,.15); margin:0 24px; }
-.gj-sb-count {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.2em; color:rgba(240,234,216,.5); text-transform:uppercase;
-  white-space:nowrap;
-}
+  /* Newsletter widget */
+  .wpb-nl-body { padding: 20px; }
+  .wpb-nl-heading {
+    font-size: 15px; font-weight: 800; letter-spacing: -0.01em;
+    margin-bottom: 8px; line-height: 1.3;
+  }
+  .wpb-nl-heading span { color: var(--green); }
+  .wpb-nl-desc { font-size: 12px; line-height: 1.65; color: var(--muted2); margin-bottom: 16px; }
+  .wpb-nl-input {
+    width: 100%; padding: 10px 14px; border-radius: 10px;
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); font-size: 13px; font-family: inherit;
+    outline: none; margin-bottom: 8px;
+    transition: border-color 0.2s;
+  }
+  .wpb-nl-input:focus { border-color: rgba(34,197,94,0.4); }
+  .wpb-nl-input::placeholder { color: var(--muted); }
+  .wpb-nl-btn {
+    width: 100%; padding: 11px;
+    background: var(--green); color: #0a0a0a;
+    border: none; border-radius: 10px;
+    font-size: 13px; font-weight: 700; font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .wpb-nl-btn:hover { opacity: 0.85; }
+  .wpb-nl-msg { font-size: 11px; color: var(--green); margin-top: 6px; }
 
-/* ARTICLES GRID */
-#gj-articles { padding:0 56px 80px; position:relative; z-index:1; }
+  /* Tags widget */
+  .wpb-tags-body { padding: 16px 20px; }
+  .wpb-tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+  .wpb-tag {
+    padding: 5px 12px; border-radius: 20px;
+    background: var(--surface2); border: 1px solid var(--border);
+    font-size: 11px; font-weight: 500; color: var(--muted2);
+    transition: color 0.15s, border-color 0.15s;
+    cursor: default;
+  }
+  .wpb-tag:hover { color: var(--text); border-color: var(--border2); }
 
-.gj-filter-bar {
-  display:flex; gap:0; padding:20px 0;
-  border-bottom:1px solid var(--rule);
-  margin-bottom:40px; flex-wrap:wrap;
-}
-.gj-filter-btn {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.22em; text-transform:uppercase;
-  padding:7px 18px; border:1px solid var(--rule);
-  border-right:none; background:transparent;
-  color:var(--ink-faint); cursor:pointer;
-  transition:all .25s;
-}
-.gj-filter-btn:last-child { border-right:1px solid var(--rule); }
-.gj-filter-btn:hover, .gj-filter-btn.active { background:var(--ink); color:var(--parchment); border-color:var(--ink); }
-.gj-filter-btn.active.faith    { background:var(--faith);    border-color:var(--faith); }
-.gj-filter-btn.active.lead     { background:var(--leadership);border-color:var(--leadership); }
-.gj-filter-btn.active.intel    { background:var(--intellect); border-color:var(--intellect); }
-.gj-filter-btn.active.trans    { background:var(--transform); border-color:var(--transform); }
+  /* Recent posts widget */
+  .wpb-recent-list { padding: 4px 0; }
+  .wpb-recent-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none; color: inherit;
+    transition: background 0.15s;
+  }
+  .wpb-recent-item:last-child { border-bottom: none; }
+  .wpb-recent-item:hover { background: var(--surface2); }
+  .wpb-recent-num {
+    font-size: 16px; font-weight: 900;
+    color: rgba(255,255,255,0.06);
+    flex-shrink: 0; width: 26px; text-align: right; line-height: 1;
+    padding-top: 2px;
+  }
+  .wpb-recent-title {
+    font-size: 13px; font-weight: 600; line-height: 1.45;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    margin-bottom: 4px;
+    transition: color 0.15s;
+  }
+  .wpb-recent-item:hover .wpb-recent-title { color: var(--green); }
+  .wpb-recent-date { font-size: 11px; color: var(--muted); }
 
-.gj-articles-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px; background:var(--rule);
-}
+  /* ── EMPTY STATE ── */
+  .wpb-empty {
+    grid-column: 1 / -1;
+    text-align: center; padding: 80px 20px;
+    color: var(--muted); font-size: 15px; font-style: italic;
+  }
 
-.gj-card {
-  background:var(--parchment);
-  padding:36px 32px;
-  position:relative;
-  opacity:0; transform:translateY(16px);
-  transition:opacity .6s ease, transform .6s ease, background .25s;
-  cursor:pointer;
-  text-decoration:none;
-  display:block;
-  color:inherit;
-}
-.gj-card.visible { opacity:1; transform:none; }
-.gj-card:hover { background:var(--parchment2); }
+  /* ── BLOG QUOTE BANNER ── */
+  .wpb-quote-banner {
+    background: linear-gradient(135deg, var(--surface) 0%, #1a1a1a 100%);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin-bottom: 36px;
+  }
+  .wpb-quote-text {
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-style: italic; line-height: 1.65;
+    color: var(--text); margin-bottom: 10px;
+  }
+  .wpb-quote-attr {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    color: var(--green); text-transform: uppercase;
+  }
 
-.gj-card::before {
-  content:'';
-  position:absolute; top:0; left:0; right:0; height:3px;
-  opacity:0; transition:opacity .3s;
-}
-.gj-card[data-cat="faith"]::before          { background:var(--faith); }
-.gj-card[data-cat="leadership"]::before     { background:var(--leadership); }
-.gj-card[data-cat="intellectuality"]::before{ background:var(--intellect); }
-.gj-card[data-cat="transformation"]::before { background:var(--transform); }
-.gj-card:hover::before { opacity:1; }
-.gj-card.wide { grid-column:span 2; display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start; }
-
-.gj-ac-cat {
-  font-family:'Azeret Mono',monospace; font-size:8px;
-  letter-spacing:.28em; text-transform:uppercase;
-  padding:2px 10px; margin-bottom:14px; display:inline-block;
-}
-.gj-ac-cat.faith          { background:var(--faith);       color:white; }
-.gj-ac-cat.lead           { background:var(--leadership);  color:white; }
-.gj-ac-cat.intel          { background:var(--intellect);   color:white; }
-.gj-ac-cat.trans          { background:var(--transform);   color:white; }
-
-.gj-ac-title {
-  font-family:'Unbounded',sans-serif; font-weight:700;
-  font-size:clamp(14px,1.4vw,18px);
-  line-height:1.15; letter-spacing:-.01em; color:var(--ink);
-  margin-bottom:10px;
-}
-.gj-ac-excerpt {
-  font-size:13px; line-height:1.75; color:var(--ink-mid);
-  font-style:italic;
-}
-.gj-ac-footer {
-  margin-top:20px; padding-top:14px; border-top:1px solid var(--rule);
-  display:flex; justify-content:space-between; align-items:center;
-}
-.gj-ac-meta {
-  font-family:'Azeret Mono',monospace; font-size:8px;
-  letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint);
-}
-.gj-ac-read {
-  font-family:'Azeret Mono',monospace; font-size:8px;
-  letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint);
-}
-
-/* NEWSLETTER SECTION */
-#gj-newsletter {
-  background:var(--ink); color:var(--parchment);
-  padding:72px 56px;
-  display:grid; grid-template-columns:1fr 1fr; gap:80px;
-  align-items:center;
-  position:relative; z-index:1;
-}
-.gj-nl-heading {
-  font-family:'Unbounded',sans-serif; font-weight:900;
-  font-size:clamp(28px,4vw,52px); letter-spacing:-.02em; line-height:.95;
-}
-.gj-nl-heading span { color:var(--gold); }
-.gj-nl-subtext {
-  font-size:16px; font-style:italic; font-weight:300;
-  color:rgba(240,234,216,.6); margin-top:18px; line-height:1.6;
-}
-.gj-nl-form { display:flex; flex-direction:column; gap:12px; }
-.gj-nl-label {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.25em; text-transform:uppercase;
-  color:rgba(240,234,216,.5); margin-bottom:4px;
-}
-.gj-nl-input {
-  width:100%; padding:14px 18px;
-  background:rgba(240,234,216,.06);
-  border:1px solid rgba(240,234,216,.15);
-  color:var(--parchment); font-family:'Libre Baskerville',serif;
-  font-size:15px; font-style:italic; outline:none;
-  transition:border-color .3s;
-}
-.gj-nl-input::placeholder { color:rgba(240,234,216,.3); }
-.gj-nl-input:focus { border-color:var(--gold); }
-.gj-nl-btn {
-  padding:14px 32px; background:var(--gold);
-  border:none; color:var(--ink);
-  font-family:'Azeret Mono',monospace; font-size:10px;
-  letter-spacing:.28em; text-transform:uppercase;
-  cursor:pointer; transition:background .25s, letter-spacing .25s;
-  align-self:flex-start;
-}
-.gj-nl-btn:hover { background:var(--parchment); letter-spacing:.35em; }
-.gj-nl-note {
-  font-family:'Azeret Mono',monospace; font-size:8px;
-  letter-spacing:.12em; color:rgba(240,234,216,.3);
-  text-transform:uppercase; margin-top:4px;
-}
-
-/* TOPICS */
-#gj-topics {
-  padding:56px;
-  border-top:1px solid var(--rule);
-  border-bottom:2px solid var(--ink);
-  display:flex; gap:32px; align-items:center;
-  flex-wrap:wrap;
-  position:relative; z-index:1;
-}
-.gj-topics-label {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.28em; text-transform:uppercase; color:var(--ink-faint);
-  white-space:nowrap;
-}
-.gj-topic-tags { display:flex; flex-wrap:wrap; gap:8px; }
-.gj-tag {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.18em; text-transform:uppercase;
-  padding:5px 14px; border:1px solid var(--rule);
-  color:var(--ink-mid); text-decoration:none;
-  transition:all .25s;
-}
-.gj-tag:hover { background:var(--ink); color:var(--parchment); border-color:var(--ink); }
-
-/* FOOTER */
-.gj-footer {
-  background:var(--ink); color:var(--parchment);
-  padding:40px 56px;
-  display:grid; grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  border-top:3px solid var(--gold);
-  position:relative; z-index:1;
-}
-.gj-f-name {
-  font-family:'Unbounded',sans-serif; font-weight:900;
-  font-size:14px; letter-spacing:.1em; text-transform:uppercase;
-}
-.gj-f-center {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.2em; text-transform:uppercase;
-  color:rgba(240,234,216,.35); text-align:center;
-}
-.gj-f-links {
-  display:flex; gap:24px; justify-content:flex-end; flex-wrap:wrap;
-}
-.gj-f-link {
-  font-family:'Azeret Mono',monospace; font-size:9px;
-  letter-spacing:.18em; text-transform:uppercase;
-  color:var(--gold); text-decoration:none; transition:color .25s;
-}
-.gj-f-link:hover { color:var(--parchment); }
-
-/* RESPONSIVE */
-@media(max-width:1100px){
-  .gj-hero-layout { grid-template-columns:1fr 2px 1fr; }
-  .gj-right-col { display:none; }
-  .gj-articles-grid { grid-template-columns:1fr 1fr; }
-  .gj-card.wide { grid-column:span 2; }
-}
-@media(max-width:760px){
-  .gj-nav { position:fixed; }
-  .gj-masthead { padding:8px 20px; }
-  .gj-title-row { padding:10px 20px 8px; }
-  .gj-topics { }
-  .gj-topic-btn { padding:6px 12px; font-size:8px; }
-  #gj-hero { padding: 160px 20px 0; }
-  .gj-hero-layout { grid-template-columns:1fr; }
-  .gj-col-divider { display:none; }
-  .gj-feat { padding:0; margin-bottom:32px; }
-  .gj-mid-col { padding:0; }
-  #gj-articles { padding-left:20px; padding-right:20px; }
-  .gj-articles-grid { grid-template-columns:1fr; }
-  .gj-card.wide { grid-column:span 1; display:block; }
-  #gj-newsletter { grid-template-columns:1fr; gap:40px; padding:40px 20px; }
-  #gj-topics { padding:32px 20px; }
-  .gj-section-banner { padding:14px 20px; }
-  .gj-footer { grid-template-columns:1fr; gap:16px; padding:28px 20px; }
-  .gj-f-links { justify-content:flex-start; }
-}
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .wpb-layout { grid-template-columns: 1fr; gap: 40px; }
+    .wpb-sidebar { order: -1; }
+    .wpb-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .wpb-header { padding: 80px 0 40px; }
+    .wpb-header-inner { padding: 0 20px; }
+    .wpb-cats-inner { padding: 0 20px; }
+    .wpb-layout { padding: 32px 20px 60px; }
+    .wpb-feat-body { padding: 20px 22px 22px; }
+  }
 `;
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<Post[]>(SAMPLE_POSTS);
   const [filter, setFilter] = useState<string>("all");
-  const [email, setEmail] = useState("");
-  const [subMsg, setSubMsg] = useState("");
+  const [nlEmail, setNlEmail] = useState("");
+  const [nlMsg, setNlMsg] = useState("");
 
   const load = useCallback(async () => {
     try {
@@ -530,273 +504,261 @@ export default function BlogPage() {
         .eq("published", true)
         .order("created_at", { ascending: false });
       if (data && data.length > 0) setPosts(data);
-    } catch {
-      // fallback to sample
-    }
+    } catch { /* fallback to sample */ }
   }, []);
 
   useEffect(() => { load(); }, [load]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("visible"); }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll(".gj-card").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [posts, filter]);
-
-  const displayed = filter === "all" ? posts : posts.filter((p) => p.category === filter);
-  const featured = displayed[0];
-  const midPosts = displayed.slice(1, 4);
-  const allPosts = displayed;
-
-  const today = new Date();
-  const dateStr = today.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
-
-  async function handleSubscribe(e: React.FormEvent) {
+  async function handleNl(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (!nlEmail.trim()) return;
     try {
       const sb = createAnonClient();
-      const { error } = await sb.from("newsletter_subscribers").insert({ email: email.trim() });
+      const { error } = await sb.from("newsletter_subscribers").insert({ email: nlEmail.trim() });
       if (error) throw error;
-      setSubMsg("Subscribed! Thank you.");
-      setEmail("");
+      setNlMsg("Subscribed — thank you.");
+      setNlEmail("");
     } catch {
-      setSubMsg("You are already subscribed or there was an error.");
+      setNlMsg("Already subscribed or something went wrong.");
     }
   }
 
-  function getCatCls(cat: string) {
-    if (cat === "faith") return "faith";
-    if (cat === "leadership") return "lead";
-    if (cat === "intellectuality") return "intel";
-    if (cat === "transformation") return "trans";
-    return "";
+  const displayed = filter === "all" ? posts : posts.filter((p) => p.category === filter);
+  const featured = displayed[0];
+  const rest = displayed.slice(1);
+
+  function getCls(cat: string) {
+    const map: Record<string, string> = { leadership: "lead", intellectuality: "intel", transformation: "trans" };
+    return map[cat] ?? "";
   }
 
-  return (
-    <div className="gyasi-journal">
-      <style>{journalCss}</style>
+  const catCounts = posts.reduce<Record<string, number>>((acc, p) => {
+    acc[p.category] = (acc[p.category] || 0) + 1;
+    return acc;
+  }, {});
 
-      {/* NAV */}
-      <nav className="gj-nav">
-        <div className="gj-masthead">
-          <Link href="/" className="gj-back">Portfolio</Link>
-          <div className="gj-nav-date">{dateStr}</div>
-          <div className="gj-nav-issue">The Journal · Vol. I</div>
+  return (
+    <div className="wpb">
+      <style>{blogCss}</style>
+      <Navbar />
+
+      {/* ── HEADER ── */}
+      <header className="wpb-header">
+        <div className="wpb-header-inner">
+          <div className="wpb-eyebrow">The Journal</div>
+          <h1 className="wpb-title">Essays &<br /><span>Reflections</span></h1>
+          <p className="wpb-desc">
+            Writing on leadership, collective intelligence, and transformation — from fieldwork, scholarship, and lived experience.
+          </p>
+          <div className="wpb-header-stats">
+            <div className="wpb-stat">
+              <div className="wpb-stat-val">{posts.length}<span>+</span></div>
+              <div className="wpb-stat-label">Published Essays</div>
+            </div>
+            <div className="wpb-stat">
+              <div className="wpb-stat-val">3</div>
+              <div className="wpb-stat-label">Topics</div>
+            </div>
+            <div className="wpb-stat">
+              <div className="wpb-stat-val">Samuel <span>K.</span></div>
+              <div className="wpb-stat-label">Gyasi · Author</div>
+            </div>
+          </div>
         </div>
-        <div className="gj-title-row">
-          <div className="gj-journal-name">The Gyasi Journal</div>
-          <div className="gj-tagline">On Faith, Leadership, Intellectuality &amp; Transformation</div>
-        </div>
-        <div className="gj-topics">
-          {[
-            { key: "all", label: "All", cls: "" },
-            { key: "faith", label: "Faith & Beliefs", cls: "faith" },
-            { key: "leadership", label: "Leadership", cls: "lead" },
-            { key: "intellectuality", label: "Intellectuality", cls: "intel" },
-            { key: "transformation", label: "Transformation", cls: "trans" },
-          ].map((t) => (
+      </header>
+
+      {/* ── CATEGORY BAR ── */}
+      <nav className="wpb-cats-bar" aria-label="Blog categories">
+        <div className="wpb-cats-inner">
+          {CATS.map((c) => (
             <button
-              key={t.key}
-              className={`gj-topic-btn ${t.cls} ${filter === t.key ? "active" : ""}`}
-              onClick={() => setFilter(t.key)}
+              key={c.key}
+              className={`wpb-cat-btn ${filter === c.key ? "active" : ""}`}
+              onClick={() => setFilter(c.key)}
             >
-              {t.label}
+              {c.label}
+              <span className="cnt">
+                {c.key === "all" ? posts.length : (catCounts[c.key] ?? 0)}
+              </span>
             </button>
           ))}
         </div>
       </nav>
 
-      {/* HERO */}
-      <section id="gj-hero">
-        <div className="gj-hero-rule" />
-        <div className="gj-hero-rule2" />
+      {/* ── MAIN LAYOUT ── */}
+      <div className="wpb-layout">
 
-        <div className="gj-hero-layout">
+        {/* ── MAIN CONTENT ── */}
+        <main>
           {/* FEATURED */}
-          <div className="gj-feat">
-            {featured ? (
-              <>
-                <div className={`gj-feat-cat ${getCatCls(featured.category)}`}>
+          {featured ? (
+            <Link href={`/${featured.category}/blog/${featured.slug}`} className="wpb-featured">
+              <div className="wpb-feat-image">
+                <div className="wpb-feat-image-pattern" />
+                <div className={`wpb-feat-image-accent ${getCls(featured.category)}`} />
+                <div className={`wpb-feat-badge ${getCls(featured.category)}`}>
                   {CAT_MAP[featured.category]?.label ?? featured.category}
                 </div>
-                <h1 className="gj-feat-headline">{featured.title}</h1>
-                {featured.excerpt && <p className="gj-feat-deck">{featured.excerpt}</p>}
-                <div className="gj-feat-meta">
-                  <span>Samuel K. Gyasi</span>
-                  <span className="dot">{fmt(featured.created_at)}</span>
-                  <span className="dot">{featured.read_time_minutes} min read</span>
+              </div>
+              <div className="wpb-feat-body">
+                <div className="wpb-feat-featured-pill">Featured Post</div>
+                <h2 className="wpb-feat-title">{featured.title}</h2>
+                {featured.excerpt && <p className="wpb-feat-excerpt">{featured.excerpt}</p>}
+                <div className="wpb-feat-footer">
+                  <div className="wpb-feat-meta">
+                    <span>Samuel K. Gyasi</span>
+                    <span className="wpb-feat-meta-dot" />
+                    <span>{fmt(featured.created_at)}</span>
+                    <span className="wpb-feat-meta-dot" />
+                    <span>{featured.read_time_minutes} min read</span>
+                  </div>
+                  <div className="wpb-read-btn">Read Essay →</div>
                 </div>
-                <Link
-                  href={`/${featured.category}/blog/${featured.slug}`}
-                  className="gj-feat-readmore"
-                >
-                  Continue Reading →
-                </Link>
-              </>
-            ) : (
-              <p style={{ fontStyle: "italic", color: "var(--ink-faint)" }}>No posts yet.</p>
-            )}
+              </div>
+            </Link>
+          ) : (
+            <p className="wpb-empty">No posts in this category yet.</p>
+          )}
+
+          {/* QUOTE BANNER */}
+          <div className="wpb-quote-banner">
+            <div className="wpb-quote-text">
+              &ldquo;The purpose of knowledge is not merely to know — it is to serve.&rdquo;
+            </div>
+            <div className="wpb-quote-attr">— Samuel K. Gyasi</div>
           </div>
 
-          <div className="gj-col-divider" />
+          {/* GRID */}
+          {rest.length > 0 && (
+            <>
+              <div className="wpb-section-heading">
+                <span className="wpb-section-label">More Essays</span>
+                <span className="wpb-section-rule" />
+                <span style={{ fontSize: "11px", color: "var(--muted)", whiteSpace: "nowrap" }}>{rest.length} posts</span>
+              </div>
+              <div className="wpb-grid">
+                {rest.map((p) => (
+                  <Link key={p.id} href={`/${p.category}/blog/${p.slug}`} className="wpb-card">
+                    <div className={`wpb-card-accent ${getCls(p.category)}`} />
+                    <div className="wpb-card-body">
+                      <div className={`wpb-card-cat ${getCls(p.category)}`}>
+                        {CAT_MAP[p.category]?.label ?? p.category}
+                      </div>
+                      <div className="wpb-card-title">{p.title}</div>
+                      {p.excerpt && <div className="wpb-card-excerpt">{p.excerpt}</div>}
+                      <div className="wpb-card-footer">
+                        <span>{fmtShort(p.created_at)} · {p.read_time_minutes} min</span>
+                        <span className="wpb-card-arrow">→</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
+        </main>
 
-          {/* MIDDLE */}
-          <div className="gj-mid-col">
-            {midPosts.map((p) => (
-              <Link key={p.id} href={`/${p.category}/blog/${p.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
-                <div className="gj-mid-art">
-                  <div className={`gj-mid-cat ${getCatCls(p.category)}`}>
-                    {CAT_MAP[p.category]?.label ?? p.category}
-                  </div>
-                  <div className="gj-mid-headline">{p.title}</div>
-                  {p.excerpt && <div className="gj-mid-deck">{p.excerpt}</div>}
-                  <div className="gj-mid-meta">Samuel K. Gyasi · {fmt(p.created_at)} · {p.read_time_minutes} min</div>
-                </div>
-              </Link>
-            ))}
-          </div>
+        {/* ── SIDEBAR ── */}
+        <aside className="wpb-sidebar">
 
-          <div className="gj-col-divider" />
-
-          {/* SIDEBAR */}
-          <div className="gj-right-col">
-            <h3>Most Recent</h3>
-            {allPosts.slice(0, 5).map((p, i) => (
-              <Link key={p.id} href={`/${p.category}/blog/${p.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
-                <div className="gj-sidebar-item">
-                  <div className="gj-si-num">0{i + 1}</div>
-                  <div>
-                    <div className="gj-si-title">{p.title}</div>
-                    <div className="gj-si-cat">{CAT_MAP[p.category]?.label ?? p.category} · {p.read_time_minutes} min</div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-            <div className="gj-sidebar-quote">
-              <div className="gj-sq-text">&ldquo;The purpose of knowledge is not merely to know — it is to serve.&rdquo;</div>
-              <div className="gj-sq-attr">— Samuel K. Gyasi</div>
+          {/* About */}
+          <div className="wpb-widget">
+            <div className="wpb-widget-header">
+              <span className="wpb-widget-icon" />
+              <span className="wpb-widget-title">About the Author</span>
+            </div>
+            <div className="wpb-about-body">
+              <div className="wpb-about-name">Samuel <span>K. Gyasi</span></div>
+              <p className="wpb-about-desc">
+                Junior Program Officer at the School of Collective Intelligence · UM6P, Morocco. Writing on leadership, intelligence, and transformation.
+              </p>
+              <Link href="/" className="wpb-about-link">Visit Portfolio →</Link>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ALL ARTICLES */}
-      <div className="gj-section-banner">
-        <span className="gj-sb-title">All Articles</span>
-        <span className="gj-sb-rule" />
-        <span className="gj-sb-count">{allPosts.length} {allPosts.length === 1 ? "Essay" : "Essays & Reflections"}</span>
-      </div>
+          {/* Categories */}
+          <div className="wpb-widget">
+            <div className="wpb-widget-header">
+              <span className="wpb-widget-icon" />
+              <span className="wpb-widget-title">Browse by Category</span>
+            </div>
+            <div className="wpb-cat-list">
+              {[
+                { href: "/leadership",      label: "Leadership",     color: "#d4a843" },
+                { href: "/intellectuality", label: "Intellectuality", color: "#5b9ef9" },
+                { href: "/transformation",  label: "Transformation",  color: "#e05757" },
+              ].map((c) => (
+                <Link key={c.href} href={`${c.href}/blog`} className="wpb-cat-item">
+                  <div className="wpb-cat-item-row">
+                    <span className="wpb-cat-dot" style={{ background: c.color }} />
+                    <span className="wpb-cat-item-label">{c.label}</span>
+                  </div>
+                  <span className="wpb-cat-count">{catCounts[c.href.slice(1)] ?? 0}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
 
-      <section id="gj-articles">
-        <div className="gj-filter-bar">
-          {[
-            { key: "all", label: "All", cls: "" },
-            { key: "faith", label: "Faith & Beliefs", cls: "faith" },
-            { key: "leadership", label: "Leadership", cls: "lead" },
-            { key: "intellectuality", label: "Intellectuality", cls: "intel" },
-            { key: "transformation", label: "Transformation", cls: "trans" },
-          ].map((t) => (
-            <button
-              key={t.key}
-              className={`gj-filter-btn ${t.cls} ${filter === t.key ? "active" : ""}`}
-              onClick={() => setFilter(t.key)}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="gj-articles-grid">
-          {allPosts.map((p, i) => (
-            <Link
-              key={p.id}
-              href={`/${p.category}/blog/${p.slug}`}
-              className={`gj-card${i === 0 ? " wide" : ""}`}
-              data-cat={p.category}
-            >
-              {i === 0 ? (
-                <>
+          {/* Recent */}
+          <div className="wpb-widget">
+            <div className="wpb-widget-header">
+              <span className="wpb-widget-icon" />
+              <span className="wpb-widget-title">Recent Posts</span>
+            </div>
+            <div className="wpb-recent-list">
+              {posts.slice(0, 4).map((p, i) => (
+                <Link key={p.id} href={`/${p.category}/blog/${p.slug}`} className="wpb-recent-item">
+                  <div className="wpb-recent-num">{String(i + 1).padStart(2, "0")}</div>
                   <div>
-                    <div className={`gj-ac-cat ${getCatCls(p.category)}`}>
-                      {CAT_MAP[p.category]?.label ?? p.category}
-                    </div>
-                    <div className="gj-ac-title">{p.title}</div>
-                    <div className="gj-ac-footer">
-                      <span className="gj-ac-meta">{fmt(p.created_at)}</span>
-                      <span className="gj-ac-read">{p.read_time_minutes} min read</span>
-                    </div>
+                    <div className="wpb-recent-title">{p.title}</div>
+                    <div className="wpb-recent-date">{fmtShort(p.created_at)}</div>
                   </div>
-                  <div className="gj-ac-excerpt">{p.excerpt}</div>
-                </>
-              ) : (
-                <>
-                  <div className={`gj-ac-cat ${getCatCls(p.category)}`}>
-                    {CAT_MAP[p.category]?.label ?? p.category}
-                  </div>
-                  <div className="gj-ac-title">{p.title}</div>
-                  {p.excerpt && <div className="gj-ac-excerpt">{p.excerpt}</div>}
-                  <div className="gj-ac-footer">
-                    <span className="gj-ac-meta">{fmt(p.created_at)}</span>
-                    <span className="gj-ac-read">{p.read_time_minutes} min read</span>
-                  </div>
-                </>
-              )}
-            </Link>
-          ))}
-        </div>
-      </section>
+                </Link>
+              ))}
+            </div>
+          </div>
 
-      {/* TOPICS CLOUD */}
-      <div id="gj-topics">
-        <span className="gj-topics-label">Browse by Topic</span>
-        <div className="gj-topic-tags">
-          {["Scripture", "Leadership Philosophy", "Collective Intelligence", "Data Science", "Africa", "Student Life", "Scholarships", "Morocco", "Ghana", "Research", "Gratitude", "Identity", "Purpose", "Technology", "Personal Growth"].map((tag) => (
-            <span key={tag} className="gj-tag">{tag}</span>
-          ))}
-        </div>
+          {/* Newsletter */}
+          <div className="wpb-widget">
+            <div className="wpb-widget-header">
+              <span className="wpb-widget-icon" />
+              <span className="wpb-widget-title">Newsletter</span>
+            </div>
+            <div className="wpb-nl-body">
+              <div className="wpb-nl-heading">Stay in the <span>Loop</span></div>
+              <p className="wpb-nl-desc">New essays delivered when the thinking is ready.</p>
+              <form onSubmit={handleNl}>
+                <input
+                  type="email"
+                  className="wpb-nl-input"
+                  placeholder="your@email.com"
+                  value={nlEmail}
+                  onChange={(e) => setNlEmail(e.target.value)}
+                  required
+                />
+                <button type="submit" className="wpb-nl-btn">Subscribe</button>
+                {nlMsg && <p className="wpb-nl-msg">{nlMsg}</p>}
+              </form>
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div className="wpb-widget">
+            <div className="wpb-widget-header">
+              <span className="wpb-widget-icon" />
+              <span className="wpb-widget-title">Tags</span>
+            </div>
+            <div className="wpb-tags-body">
+              <div className="wpb-tags-wrap">
+                {TAGS.map((t) => <span key={t} className="wpb-tag">{t}</span>)}
+              </div>
+            </div>
+          </div>
+
+        </aside>
       </div>
 
-      {/* NEWSLETTER */}
-      <section id="gj-newsletter">
-        <div>
-          <div className="gj-nl-heading">Subscribe to<br /><span>The Journal</span></div>
-          <p className="gj-nl-subtext">New essays on faith, leadership, intellect, and transformation — delivered when the thinking is ready. No noise. Just depth.</p>
-        </div>
-        <form className="gj-nl-form" onSubmit={handleSubscribe}>
-          <div className="gj-nl-label">Your Email Address</div>
-          <input
-            type="email"
-            className="gj-nl-input"
-            placeholder="your@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <button type="submit" className="gj-nl-btn">Subscribe to the Journal</button>
-          {subMsg ? (
-            <div className="gj-nl-note" style={{ color: "var(--gold)" }}>{subMsg}</div>
-          ) : (
-            <div className="gj-nl-note">No spam. No schedule. Just writing worth reading.</div>
-          )}
-        </form>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="gj-footer">
-        <div className="gj-f-name">The Gyasi Journal</div>
-        <div className="gj-f-center">© {today.getFullYear()} Samuel Kobina Gyasi · Vol. I</div>
-        <div className="gj-f-links">
-          <Link href="/" className="gj-f-link">Portfolio</Link>
-          <Link href="/leadership" className="gj-f-link">Leadership</Link>
-          <Link href="/faith" className="gj-f-link">Faith</Link>
-          <Link href="/intellectuality" className="gj-f-link">Intellect</Link>
-          <Link href="/transformation" className="gj-f-link">Transform</Link>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

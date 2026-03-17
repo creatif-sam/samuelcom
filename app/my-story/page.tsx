@@ -30,8 +30,7 @@ const css = `
 /* â”€â”€ HERO â”€â”€ */
 .msp-hero {
   padding: 140px 8% 80px;
-  border-bottom: 1px solid rgba(201,168,76,.18);
-  max-width: 1100px;
+  border-bottom: 1px solid rgba(34,197,94,.18);
   margin: 0 auto;
 }
 .msp-hero-eyebrow {
@@ -85,7 +84,7 @@ const css = `
   top: 16px;
   bottom: 16px;
   width: 1px;
-  background: rgba(201,168,76,.25);
+  background: rgba(34,197,94,.25);
 }
 
 /* â”€â”€ TIMELINE ITEM â”€â”€ */
@@ -114,7 +113,7 @@ const css = `
   width: 16px; height: 16px;
   border-radius: 50%;
   background: var(--black);
-  border: 2px solid rgba(201,168,76,.55);
+  border: 2px solid rgba(34,197,94,.55);
   position: relative; z-index: 2;
   transition: background 0.3s, border-color 0.3s;
 }
@@ -162,7 +161,7 @@ const css = `
   margin: 22px 0 4px;
   padding: 18px 24px;
   border-left: 3px solid var(--gold);
-  background: rgba(201,168,76,.05);
+  background: rgba(34,197,94,.05);
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: 17px;
@@ -172,9 +171,9 @@ const css = `
 
 /* â”€â”€ NOW SECTION â”€â”€ */
 .msp-now {
-  background: rgba(201,168,76,.06);
-  border-top: 1px solid rgba(201,168,76,.18);
-  border-bottom: 1px solid rgba(201,168,76,.18);
+  background: rgba(34,197,94,.06);
+  border-top: 1px solid rgba(34,197,94,.18);
+  border-bottom: 1px solid rgba(34,197,94,.18);
   padding: 72px 8%;
 }
 .msp-now-inner { max-width: 1100px; margin: 0 auto; }

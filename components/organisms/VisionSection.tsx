@@ -12,10 +12,10 @@ export function VisionSection() {
         <ScrollReveal className="vision-inner">
           <p className="vision-statement">
             To build a world where people are<br />
-            <strong>spiritually grounded,</strong><br />
+            <strong>purposefully grounded,</strong><br />
             intellectually alive, and<br />
             <strong>transformed to lead</strong><br />
-            with grace and purpose.
+            with clarity and purpose.
           </p>
           <VerseStrip />
         </ScrollReveal>

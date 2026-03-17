@@ -39,10 +39,10 @@ const samplePosts: Post[] = [
   },
   {
     id: "l3",
-    title: "On Servant Leadership: The Model of Jesus in Modern Organisations",
+    title: "The Art of Servant Leadership: Putting People First",
     slug: "servant-leadership-model",
     excerpt:
-      "The paradox of leadership: the higher you ascend, the more you are called to stoop. Jesus washed feet. What are you willing to do?",
+      "The paradox of leadership: the higher you ascend, the more you are called to serve. True servant leadership transforms people, cultures, and entire organisations.",
     created_at: "2026-01-10",
     read_time_minutes: 9,
   },
@@ -121,7 +121,7 @@ export default async function LeadershipBlogPage() {
 }
 
 const blogCss = `
-.ldp { --bg:#0c0b09; --white:#f0ede8; --gold:#c8a84b; --gray:#6b6560; --line:rgba(240,237,232,0.07); --card:#141210; }
+.ldp { --bg:#0c0b09; --white:#f0ede8; --gold:#22c55e; --gray:#6b6560; --line:rgba(240,237,232,0.07); --card:#141210; }
 .ldp footer { background:var(--bg);border-top:1px solid var(--line);padding:28px 56px;display:flex;justify-content:space-between;align-items:center; }
 .f-name { font-family:'Playfair Display',serif;font-size:16px;color:var(--white); }
 .f-copy { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase; }
@@ -136,7 +136,7 @@ const blogCss = `
 .lb-grid { display:grid;grid-template-columns:1fr 1fr;gap:2px; }
 .lb-card--featured { grid-column:1/-1; }
 .lb-card { background:var(--card);border:1px solid var(--line);padding:44px 40px;text-decoration:none;color:var(--white);display:flex;flex-direction:column;gap:14px;transition:border-color .3s,padding-left .3s;cursor:none; }
-.lb-card:hover { border-color:rgba(200,168,75,.3);padding-left:52px; }
+.lb-card:hover { border-color:rgba(34,197,94,.3);padding-left:52px; }
 .lb-card--featured { padding:56px 52px; }
 .lb-card--featured:hover { padding-left:64px; }
 .lb-card-tag { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold); }

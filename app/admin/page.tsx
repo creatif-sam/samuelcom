@@ -61,7 +61,7 @@ interface Testimonial {
 type Tab = "overview" | "analytics" | "posts" | "subscribers" | "messages" | "mail" | "whatsapp" | "testimonials";
 type MailSubTab = "compose" | "inbox" | "sent" | "templates";
 
-const CATEGORIES = ["faith", "leadership", "intellectuality", "transformation"] as const;
+const CATEGORIES = ["leadership", "intellectuality", "transformation"] as const;
 
 function slugify(t: string) {
   return t.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").slice(0, 80);
@@ -190,7 +190,7 @@ export default function AdminPage() {
           <button
             onClick={handleLogout}
             style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(240,236,228,.35)", background: "none", border: "1px solid rgba(240,236,228,.1)", padding: "8px 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", width: "100%", transition: "border-color .2s, color .2s" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(201,168,76,.4)"; (e.currentTarget as HTMLButtonElement).style.color = "#c9a84c"; }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(34,197,94,.4)"; (e.currentTarget as HTMLButtonElement).style.color = "#22c55e"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(240,236,228,.1)"; (e.currentTarget as HTMLButtonElement).style.color = "rgba(240,236,228,.35)"; }}
           >
             <LogOut size={10} /> Log Out
@@ -448,7 +448,7 @@ function AnalyticsTab({ analytics }: { analytics: AnalyticsData | null }) {
                         <a href={path} target="_blank" rel="noreferrer" style={{ color: "rgba(240,236,228,.25)", lineHeight: 0 }}><ExternalLink size={10} /></a>
                       </span>
                     </td>
-                    <td style={{ color: "#c9a84c", fontFamily: "'Playfair Display',serif", fontSize: "22px" }}>{count}</td>
+                    <td style={{ color: "#22c55e", fontFamily: "'Playfair Display',serif", fontSize: "22px" }}>{count}</td>
                     <td style={{ minWidth: "140px" }}>
                       <div className="adm-progress-row">
                         <div className="adm-progress" style={{ width: `${(count / totalViews) * 100}%` }} />
@@ -1103,7 +1103,7 @@ function TestimonialsTab({ testimonials, onNew, onEdit, onDelete, onToggle }: {
                     {[t.role, t.company].filter(Boolean).join(" · ") || "—"}
                   </td>
                   <td>
-                    <span style={{ color: "#c9a84c", letterSpacing: "2px" }}>
+                    <span style={{ color: "#22c55e", letterSpacing: "2px" }}>
                       {"★".repeat(t.rating)}{"☆".repeat(5 - t.rating)}
                     </span>
                   </td>
@@ -1215,7 +1215,7 @@ function TestimonialModal({ testimonial, onClose, onSave, db }: {
               <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
                 {[1,2,3,4,5].map((n) => (
                   <button key={n} type="button" onClick={() => setRating(n)}
-                    style={{ background: "none", border: "none", cursor: "pointer", fontSize: "24px", color: n <= rating ? "#c9a84c" : "rgba(201,168,76,.2)", padding: "0" }}>
+                    style={{ background: "none", border: "none", cursor: "pointer", fontSize: "24px", color: n <= rating ? "#22c55e" : "rgba(34,197,94,.2)", padding: "0" }}>
                     ★
                   </button>
                 ))}
@@ -1228,7 +1228,7 @@ function TestimonialModal({ testimonial, onClose, onSave, db }: {
           </div>
           <div className="adm-field" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <input type="checkbox" id="ts-pub" checked={published} onChange={(e) => setPub(e.target.checked)}
-              style={{ width: "16px", height: "16px", accentColor: "#c9a84c", cursor: "pointer" }} />
+              style={{ width: "16px", height: "16px", accentColor: "#22c55e", cursor: "pointer" }} />
             <label htmlFor="ts-pub" className="adm-label" style={{ margin: 0, cursor: "pointer" }}>
               Publish immediately (visible on site)
             </label>
@@ -1255,7 +1255,7 @@ function PostModal({ post, onClose, onSave, db }: {
   const [form, setForm] = useState({
     title:              post?.title              ?? "",
     slug:               post?.slug               ?? "",
-    category:           post?.category           ?? "faith",
+    category:           post?.category           ?? "leadership",
     excerpt:            post?.excerpt            ?? "",
     content:            post?.content            ?? "",
     read_time_minutes:  post?.read_time_minutes  ?? 5,

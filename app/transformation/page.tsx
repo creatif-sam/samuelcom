@@ -707,7 +707,7 @@ export default function TransformationPage() {
             <div className="vc-eyebrow">Long-Term</div>
             <div className="vc-title">Build Structures That Outlast</div>
             <div className="vc-body">Organisations, frameworks, and communities that do not require Samuel to function. The truest measure of a transformational leader: the work continues and deepens long after they have stepped back.</div>
-            <Link href="/faith" className="vc-cta">Faith &amp; Beliefs</Link>
+            <Link href="/intellectuality" className="vc-cta">Intelligence Page</Link>
           </div>
         </div>
       </section>
@@ -736,7 +736,6 @@ export default function TransformationPage() {
         <div className="ct-links">
           <a href="mailto:samuel.gyasi@um6p.ma" className="ct-link">Email Samuel <span>→</span></a>
           <Link href="/leadership" className="ct-link">Leadership <span>→</span></Link>
-          <Link href="/faith" className="ct-link">Faith &amp; Beliefs <span>→</span></Link>
           <Link href="/intellectuality" className="ct-link">Intellectuality <span>→</span></Link>
           <Link href="/" className="ct-link">Full Portfolio <span>→</span></Link>
         </div>

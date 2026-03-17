@@ -69,7 +69,7 @@ export default async function LeadershipBlogPostPage({ params }: Props) {
       <nav>
         <Link href="/leadership/blog" className="nav-back">Blog</Link>
         <div className="nav-logo" style={{ fontFamily: "var(--font-playfair,'Playfair Display',serif)", color: "var(--white,#f0ede8)" }}>Samuel Kobina Gyasi</div>
-        <div style={{ fontFamily: "'Space Mono',monospace", fontSize: "10px", letterSpacing: ".22em", color: "#c8a84b", textTransform: "uppercase" }}>Leadership</div>
+        <div style={{ fontFamily: "'Space Mono',monospace", fontSize: "10px", letterSpacing: ".22em", color: "#22c55e", textTransform: "uppercase" }}>Leadership</div>
       </nav>
       <article className="la-article">
         <header className="la-header">
@@ -90,14 +90,14 @@ export default async function LeadershipBlogPostPage({ params }: Props) {
       <footer style={{ background: "var(--bg,#0c0b09)", borderTop: "1px solid rgba(240,237,232,0.07)", padding: "28px 56px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "16px", color: "#f0ede8" }}>Samuel Kobina Gyasi</div>
         <div style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", letterSpacing: ".2em", textTransform: "uppercase", color: "#6b6560" }}>© {new Date().getFullYear()}</div>
-        <Link href="/" style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", letterSpacing: ".2em", color: "#c8a84b", textDecoration: "none", textTransform: "uppercase" }}>Home</Link>
+        <Link href="/" style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", letterSpacing: ".2em", color: "#22c55e", textDecoration: "none", textTransform: "uppercase" }}>Home</Link>
       </footer>
     </div>
   );
 }
 
 const articleCss = `
-.ldp { --bg:#0c0b09; --white:#f0ede8; --gold:#c8a84b; --gray:#6b6560; --line:rgba(240,237,232,.07); }
+.ldp { --bg:#0c0b09; --white:#f0ede8; --gold:#22c55e; --gray:#6b6560; --line:rgba(240,237,232,.07); }
 .ldp nav { position:fixed;top:0;left:0;right:0;z-index:200;padding:22px 56px;display:flex;justify-content:space-between;align-items:center;background:rgba(12,11,9,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line); }
 .nav-back { font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .3s; }
 .nav-back:hover { color:var(--gold); }
@@ -106,13 +106,13 @@ const articleCss = `
 .la-tag { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:24px; }
 .la-title { font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,60px);color:var(--white);line-height:1.08;margin-bottom:24px; }
 .la-meta { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap; }
-.la-lead { font-family:'Playfair Display',serif;font-size:clamp(17px,2.2vw,23px);font-style:italic;color:rgba(240,237,232,.8);line-height:1.55;padding:28px 36px;border-left:2px solid var(--gold);background:rgba(200,168,75,.04);margin:24px 0 48px; }
+.la-lead { font-family:'Playfair Display',serif;font-size:clamp(17px,2.2vw,23px);font-style:italic;color:rgba(240,237,232,.8);line-height:1.55;padding:28px 36px;border-left:2px solid var(--gold);background:rgba(34,197,94,.04);margin:24px 0 48px; }
 .la-body { font-family:'Cormorant Garamond',serif;font-size:clamp(17px,1.8vw,20px);line-height:1.9;color:var(--gray);font-weight:300; }
 .la-body h2 { font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,30px);color:var(--white);margin:52px 0 20px;font-weight:700; }
 .la-body p { margin-bottom:24px; }
 .la-body em { color:rgba(240,237,232,.85); }
 .la-body strong { color:var(--white); }
-.la-body blockquote { border-left:2px solid var(--gold);padding:20px 32px;background:rgba(200,168,75,.04);font-style:italic;font-size:18px;color:rgba(240,237,232,.8);margin:36px 0; }
+.la-body blockquote { border-left:2px solid var(--gold);padding:20px 32px;background:rgba(34,197,94,.04);font-style:italic;font-size:18px;color:rgba(240,237,232,.8);margin:36px 0; }
 .la-footer { margin-top:72px;padding-top:40px;border-top:1px solid var(--line); }
 .la-back { font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none; }
 @media(max-width:768px){ .la-article { padding:120px 24px 60px; } .ldp nav { padding:18px 24px; } }

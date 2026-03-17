@@ -858,7 +858,7 @@ export default function IntellectualityPage() {
           <div className="connect-links">
             <a href="mailto:samuel.gyasi@um6p.ma" className="c-link">Email <span>→</span></a>
             <Link href="/leadership" className="c-link">Leadership Page <span>→</span></Link>
-            <Link href="/faith" className="c-link">Faith &amp; Beliefs <span>→</span></Link>
+            <Link href="/transformation" className="c-link">Transformation <span>→</span></Link>
             <Link href="/" className="c-link">Full Portfolio <span>→</span></Link>
           </div>
         </section>

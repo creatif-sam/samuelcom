@@ -5,7 +5,6 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
 const INTERESTS = [
-  { value: "faith",           label: "Faith & Spirituality" },
   { value: "leadership",      label: "Leadership"            },
   { value: "intellectuality", label: "Intellectuality"       },
   { value: "transformation",  label: "Transformation"        },
@@ -52,9 +51,8 @@ const socialLinks = [
 ];
 
 const pillarsLinks = [
-  { href: "/faith",           label: "Beliefs"        },
   { href: "/leadership",      label: "Leadership"     },
-  { href: "/intellectuality", label: "Intellectuality" },
+  { href: "/intellectuality", label: "Intelligence"    },
   { href: "/transformation",  label: "Transformation" },
 ];
 
@@ -107,7 +105,7 @@ export function SiteFooter() {
       <div className="sf-brand-row">
         <div className="sf-brand-name">Samuel Kobina Gyasi</div>
         <p className="sf-brand-tagline">
-          Rooted in the Word.&ensp;Refined by Purpose.&ensp;Rising to Transform.
+          Refined by Purpose.&ensp;Rising to Transform.
         </p>
         <div className="sf-social-row">
           {socialLinks.map((s) => (
@@ -133,7 +131,7 @@ export function SiteFooter() {
         <div className="sf-nl-left">
           <p className="sf-nl-heading">Join the Conversation</p>
           <p className="sf-nl-sub">
-            Reflections on faith, leadership, and the pursuit of purpose —
+            Reflections on leadership, intelligence, and transformation —
             delivered to your inbox.
           </p>
         </div>
@@ -189,7 +187,7 @@ export function SiteFooter() {
       {/* ── LINKS COLUMNS ── */}
       <div className="sf-columns">
         <div className="sf-col">
-          <p className="sf-col-label">Pillars</p>
+          <p className="sf-col-label">Interests</p>
           <ul className="sf-col-list">
             {pillarsLinks.map((l) => (
               <li key={l.href}>
