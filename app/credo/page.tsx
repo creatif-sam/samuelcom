@@ -11,7 +11,7 @@ const css = `
   min-height: 100vh;
 }
 
-/* â”€â”€ HERO â”€â”€ */
+/*  HERO  */
 .cdp-hero {
   padding: 140px 8% 80px;
   border-bottom: 1px solid rgba(34,197,94,.18);
@@ -60,7 +60,7 @@ const css = `
   margin-top: 28px;
 }
 
-/* â”€â”€ ARTICLES â”€â”€ */
+/*  ARTICLES  */
 .cdp-articles {
   padding: 80px 8% 0;
   max-width: 1100px;
@@ -131,7 +131,7 @@ const css = `
 }
 .cdp-ref-marker:hover { text-decoration: underline; }
 
-/* â”€â”€ DECLARATION â”€â”€ */
+/*  DECLARATION  */
 .cdp-declaration {
   background: rgba(34,197,94,.06);
   border-top: 1px solid rgba(34,197,94,.18);
@@ -184,7 +184,7 @@ const css = `
   color: rgba(245,243,239,.8);
 }
 
-/* â”€â”€ REFERENCES â”€â”€ */
+/*  REFERENCES  */
 .cdp-references {
   padding: 72px 8%;
   max-width: 1100px;
@@ -219,7 +219,7 @@ const css = `
   min-width: 20px;
 }
 
-/* â”€â”€ RESPONSIVE â”€â”€ */
+/*  RESPONSIVE  */
 @media (max-width: 1100px) {
   .cdp-hero-divider { grid-template-columns: 1fr; gap: 28px; }
   .cdp-decl-grid { grid-template-columns: 1fr; }
@@ -251,50 +251,42 @@ const credoArticles = [
   {
     title: "I Believe Every Life Has a Design",
     body: [
-      "Before talent, before education, before opportunity â€” there is purpose. I believe that every human being enters the world carrying a design: a particular configuration of gifts, longings, questions, and capacities that, if honoured, points toward a specific contribution only they can make.",
-      "This is not merely a theological claim. It is an empirical observation. The most transformative people I have known were not the most talented or the most resourced â€” they were the most aligned. They lived as if they had somewhere to be, and that conviction made them formidable.",
+      "Before talent, before education, before opportunity ” there is purpose. I believe that every human being enters the world carrying a design: a particular configuration of gifts, longings, questions, and capacities that, if honoured, points toward a specific contribution only they can make.",
+      "This is not merely a theological claim. It is an empirical observation. The most transformative people I have known were not the most talented or the most resourced ” they were the most aligned. They lived as if they had somewhere to be, and that conviction made them formidable.",
     ],
-    refs: [1],
+
   },
   {
     title: "I Believe Faith and Reason Are Partners, Not Opponents",
     body: [
-      "To love God with all your mind is not an instruction to suspend thought â€” it is a mandate to deploy it fully. I have never found that deep faith required intellectual dishonesty, and I have never found that rigorous thinking required the abandonment of transcendence.",
-      "The command to test everything and hold fast to what is good is, in practice, a scientific disposition. The best science â€” humble, provisional, open to revision â€” rhymes deeply with a mature faith that expects to be surprised by the depth of what it doesn't yet know.",
+      "To love God with all your mind is not an instruction to suspend thought ” it is a mandate to deploy it fully. I have never found that deep faith required intellectual dishonesty, and I have never found that rigorous thinking required the abandonment of transcendence.",
+      "The command to test everything and hold fast to what is good is, in practice, a scientific disposition. The best science ” humble, provisional, open to revision ” rhymes deeply with a mature faith that expects to be surprised by the depth of what it doesn't yet know.",
     ],
-    refs: [2, 3],
+
   },
   {
     title: "I Believe Leadership Is Always Servanthood",
     body: [
-      "True authority is not claimed from above â€” it is granted from below. Every durable leadership story I have studied, and every experience of leadership I have lived, confirms this: the leaders who last are those who came to serve.",
+      "True authority is not claimed from above ” it is granted from below. Every durable leadership story I have studied, and every experience of leadership I have lived, confirms this: the leaders who last are those who came to serve.",
       "This is not weakness. Servanthood is the most demanding posture a leader can adopt, because it requires the constant subordination of personal interest to collective good. It requires listening when speaking would be easier, and sacrifice when self-protection would be cheaper.",
     ],
-    refs: [4],
   },
-  {
-    title: "I Believe Collective Intelligence Is Africa's Frontier",
-    body: [
-      "The challenges facing the African continent are not primarily resource challenges. They are knowledge challenges â€” challenges of how communities think together, make decisions together, and learn from experience together. Africa's greatest untapped resource is not underground. It is in the minds of its people.",
-      "My work in Collective Intelligence is not academic detachment. It is a conviction lived out: that building the epistemic infrastructure for groups to think more wisely together is one of the most important things any one person can contribute to this generation.",
-    ],
-    refs: [5, 6],
-  },
+
   {
     title: "I Believe Transformation Begins Within",
     body: [
       "Every external transformation I have witnessed was preceded by an interior one. Institutions change because people change. Communities are renewed because the people within them are renewed. Nations are transformed because enough individuals within them choose, one by one, to become something different.",
-      "This is why I am sceptical of systemic solutions that ignore the person. Not because systems don't matter â€” they do, enormously â€” but because systems are made, maintained, and changed by people. The inner work is never optional. It is the prerequisite.",
+      "This is why I am sceptical of systemic solutions that ignore the person. Not because systems don't matter ” they do, enormously ” but because systems are made, maintained, and changed by people. The inner work is never optional. It is the prerequisite.",
     ],
-    refs: [7],
+
   },
   {
     title: "I Believe Gratitude Is a Discipline, Not a Feeling",
     body: [
       "I was born in a small town to a tailor and a commencer. Four scholarships later, I am writing my credo from a university campus in Morocco. The distance between those two facts is not the product of my effort alone.",
-      "Gratitude, for me, is not the emotion that arises when things go well. It is the daily practice of acknowledging that much of what I have was given â€” by God, by parents who sacrificed without fanfare, by teachers who believed when belief was not obvious, and by a society that invested in me before it knew what the return would be.",
+      "Gratitude, for me, is not the emotion that arises when things go well. It is the daily practice of acknowledging that much of what I have was given ” by God, by parents who sacrificed without fanfare, by teachers who believed when belief was not obvious, and by a society that invested in me before it knew what the return would be.",
     ],
-    refs: [8],
+
   },
 ];
 
@@ -306,21 +298,11 @@ const declaration = [
   "I will not mistake the absence of certainty for the absence of truth.",
   "I will serve Africa not with pity but with expectation.",
   "I will pray as if everything depends on God, and act as if everything depends on me.",
-  "I will finish what I start â€” or have the integrity to say why I could not.",
+  "I will finish what I start ” or have the integrity to say why I could not.",
   "I will be a person worth mentoring and worth mentoring others.",
   "I will, to the last day of the last year I am given, keep becoming.",
 ];
 
-const references = [
-  "Ephesians 2:10 â€” \"For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.\"",
-  "Matthew 22:37 â€” \"Love the Lord your God with all your heart and with all your soul and with all your mind.\"",
-  "Albert Einstein â€” \"The most beautiful thing we can experience is the mysterious. It is the source of all true art and science.\"",
-  "Matthew 20:26 â€” \"Whoever wants to become great among you must be your servant.\"",
-  "Proverbs 20:18 (NLT) â€” \"Plans succeed through good counsel; don't go to war without wise advice.\"",
-  "Kenneth Blanchard â€” \"No one of us is as smart as all of us.\"",
-  "Romans 12:2 â€” \"Be transformed by the renewing of your mind.\"",
-  "1 Thessalonians 5:18 â€” \"Give thanks in all circumstances; for this is God's will for you in Christ Jesus.\"",
-];
 
 const romanNumerals = ["I", "II", "III", "IV", "V", "VI"];
 
@@ -340,14 +322,14 @@ export default function CredoPage() {
       <div className="cdp">
         <style>{css}</style>
 
-        {/* â”€â”€ HERO â”€â”€ */}
+        {/*  HERO  */}
         <div className="cdp-hero">
           <p className="cdp-hero-eyebrow">A Personal Statement of Conviction · Samuel Kobina Gyasi · 2026</p>
           <h1 className="cdp-hero-headline">I<br />Believe</h1>
           <div className="cdp-hero-divider">
             <div>
               <p className="cdp-hero-deck">
-                A credo is more than a statement of beliefs. It is a map of the territory where one has decided to live â€” the convictions that survive scrutiny, the commitments that hold when convenience pulls the other way.
+                A credo is more than a statement of beliefs. It is a map of the territory where one has decided to live ” the convictions that survive scrutiny, the commitments that hold when convenience pulls the other way.
               </p>
               <p className="cdp-hero-deck">
                 What follows is not a polished manifesto but an honest account of what has been found to be true, tested against experience and refined in the fire of real life.
@@ -355,14 +337,14 @@ export default function CredoPage() {
             </div>
             <div>
               <p className="cdp-hero-deck">
-                Each article of conviction carries numbered references, gathered at the close of this document. The ideas are Samuel&rsquo;s own; the anchors they rest on belong to a tradition larger than any one person.
+                Each article represents a conviction earned through reflection, dialogue, and the messiness of lived experience. The ideas belong to a tradition larger than any one person.
               </p>
               <p className="cdp-hero-motto">Soli Deo Gloria</p>
             </div>
           </div>
         </div>
 
-        {/* â”€â”€ ARTICLES â”€â”€ */}
+        {/*  ARTICLES  */}
         <div className="cdp-articles">
           {credoArticles.map((article, i) => (
             <div
@@ -378,12 +360,7 @@ export default function CredoPage() {
                 <h2 className="cdp-article-title">{article.title}</h2>
                 <div className="cdp-article-body">
                   {article.body.map((p, j) => (
-                    <p key={j}>
-                      {p}
-                      {j === article.body.length - 1 && article.refs.map((r) => (
-                        <a key={r} href={`#ref-${r}`} className="cdp-ref-marker">[{r}]</a>
-                      ))}
-                    </p>
+                    <p key={j}>{p}</p>
                   ))}
                 </div>
               </div>
@@ -391,7 +368,7 @@ export default function CredoPage() {
           ))}
         </div>
 
-        {/* â”€â”€ DECLARATION â”€â”€ */}
+        {/*  DECLARATION  */}
         <section className="cdp-declaration">
           <div className="cdp-decl-inner">
             <p className="cdp-decl-label">Personal Declaration</p>
@@ -406,17 +383,6 @@ export default function CredoPage() {
             </div>
           </div>
         </section>
-
-        {/* â”€â”€ REFERENCES â”€â”€ */}
-        <div className="cdp-references">
-          <p className="cdp-refs-label">References</p>
-          {references.map((ref, i) => (
-            <div key={i} id={`ref-${i + 1}`} className="cdp-ref-item">
-              <span className="cdp-ref-num">[{i + 1}]</span>
-              <span>{ref}</span>
-            </div>
-          ))}
-        </div>
       </div>
 
       <Suspense fallback={null}><SiteFooter /></Suspense>

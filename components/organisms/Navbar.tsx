@@ -6,11 +6,11 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const navLinks = [
   { href: "/my-story",  label: "My Story", external: false },
-  { href: "/credo",     label: "Credo",    external: false },
   { href: "/blog",      label: "Blog",     external: false },
   { href: "/#what-i-do",label: "What I Do",external: false },
   { href: "/#vision",   label: "Vision",   external: false },
   { href: "/#connect",  label: "Connect",  external: false },
+  { href: "/credo",     label: "Credo",    external: false },
 ];
 
 export function Navbar() {
@@ -35,7 +35,7 @@ export function Navbar() {
     <>
       {/* ── NAV BAR ── */}
       <nav className={`portfolio-nav ${scrolled ? "nav-scrolled" : ""}`}>
-        <a href="#hero" className="nav-logo" onClick={close}>S·G</a>
+        <a href="/" className="nav-logo" onClick={close}>SKG</a>
 
         {/* Desktop links */}
         <ul className="nav-links nav-desktop">
