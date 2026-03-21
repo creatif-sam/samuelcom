@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Cormorant_Garamond, Space_Mono } from "next/font/google";
+import { Playfair_Display, Cormorant_Garamond, Space_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { CustomCursor } from "@/components/organisms/CustomCursor";
 import { CookieBanner } from "@/components/organisms/CookieBanner";
@@ -26,6 +26,12 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
 });
 
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://samuelgyasi.com";
 
 export const metadata: Metadata = {
@@ -35,7 +41,7 @@ export const metadata: Metadata = {
     template: "%s | Samuel Kobina Gyasi",
   },
   description:
-    "Samuel Kobina Gyasi — Scholar, leader, and speaker dedicated to technology, leadership, collective intelligence, and transformative change.",
+    "Samuel Kobina Gyasi — Leader, Facilitator, and speaker dedicated to technology, leadership, collective intelligence, and transformative change.",
   keywords: [
     "Samuel Gyasi",
     "Samuel Kobina Gyasi",
@@ -59,7 +65,7 @@ export const metadata: Metadata = {
     siteName: "Samuel Kobina Gyasi",
     title: "Samuel Kobina Gyasi — Technology · Leadership · Intelligence · Transformation",
     description:
-      "Scholar, leader, and builder at the intersection of technology, leadership, and collective intelligence.",
+      "Leader, Facilitator, and speaker dedicated to technology, leadership, collective intelligence, and transformative change.",
     images: [
       {
         url: "/photo-hero.png",
@@ -138,7 +144,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${playfair.variable} ${cormorant.variable} ${spaceMono.variable}`}
+        className={`${playfair.variable} ${cormorant.variable} ${spaceMono.variable} ${poppins.variable}`}
       >
         <Providers>
           <CustomCursor />
