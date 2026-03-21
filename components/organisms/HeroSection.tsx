@@ -1,175 +1,103 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const heroInterests = [
-  { num: "01", label: "Leadership",        href: "/leadership"      },
-  { num: "02", label: "Intelligence",      href: "/intellectuality" },
-  { num: "03", label: "Technology",        href: "/intellectuality" },
-  { num: "04", label: "Transformation",    href: "/transformation"  },
-];
-
-// Network node positions for the GI/Leadership animation
-const NODES = [
-  { id: 0, cx: 120, cy: 60,  r: 5,  delay: "0s",    label: "Vision" },
-  { id: 1, cx: 200, cy: 130, r: 7,  delay: "0.3s",  label: "Lead" },
-  { id: 2, cx: 80,  cy: 160, r: 4,  delay: "0.6s",  label: "Data" },
-  { id: 3, cx: 160, cy: 220, r: 6,  delay: "0.9s",  label: "Group" },
-  { id: 4, cx: 270, cy: 90,  r: 5,  delay: "1.2s",  label: "Intel" },
-  { id: 5, cx: 250, cy: 200, r: 8,  delay: "0.15s", label: "Purpose" },
-  { id: 6, cx: 60,  cy: 80,  r: 3,  delay: "0.45s", label: "Action" },
-  { id: 7, cx: 310, cy: 160, r: 4,  delay: "0.75s", label: "Grow" },
-  { id: 8, cx: 140, cy: 290, r: 5,  delay: "1.05s", label: "Impact" },
-  { id: 9, cx: 220, cy: 310, r: 3,  delay: "1.35s", label: "Learn" },
-];
-
-const EDGES = [
-  [0, 1], [0, 4], [1, 3], [1, 5], [2, 3], [2, 6],
-  [3, 5], [3, 8], [4, 5], [4, 7], [5, 7], [5, 9],
-  [7, 9], [8, 9], [1, 4], [0, 6], [3, 9],
-];
-
 export function HeroSection() {
-  const photoRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let raf: number;
-    const handleMove = (e: MouseEvent) => {
-      raf = requestAnimationFrame(() => {
-        if (!photoRef.current) return;
-        const { innerWidth: w, innerHeight: h } = window;
-        const dx = (e.clientX / w - 0.5) * 12;
-        const dy = (e.clientY / h - 0.5) * 8;
-        photoRef.current.style.transform = `translate(${dx}px, ${dy}px)`;
-      });
-    };
-    window.addEventListener("mousemove", handleMove);
-    return () => { window.removeEventListener("mousemove", handleMove); cancelAnimationFrame(raf); };
-  }, []);
-
   return (
-    <section id="hero" className="hero-section hero-v2">
-      {/* ── background rings ── */}
-      <svg className="hero-rings-bg" aria-hidden="true" viewBox="0 0 800 800">
-        <circle cx="400" cy="400" r="340" />
-        <circle cx="400" cy="400" r="260" />
-        <circle cx="400" cy="400" r="180" />
-        <polygon points="400,80 700,540 100,540" />
-        <polygon points="400,720 100,260 700,260" />
-      </svg>
+    <section id="hero" className="portfolio-hero">
+      {/* Geometric background decorations */}
+      <div className="ph-geo-bg" aria-hidden="true">
+        <svg className="ph-geo-icon ph-geo-1" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M9 3v18M15 3v18M3 9h18M3 15h18" />
+        </svg>
+        <svg className="ph-geo-icon ph-geo-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 2v20M2 12h20" />
+        </svg>
+        <svg className="ph-geo-icon ph-geo-3" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="4" />
+        </svg>
+        <svg className="ph-geo-icon ph-geo-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <polygon points="12,2 22,20 2,20" />
+        </svg>
+      </div>
 
-      {/* ── left panel: text ── */}
-      <div className="hero-left-v2">
-        <p className="hero-eyebrow-v2">Leader · Group Intelligence Facilitator · Thinker · Transformation Contributor</p>
-        <h1 className="hero-name-v2">
-          <span className="hn-first">Samuel</span>
-          <span className="hn-last">Gyasi</span>
+      {/* Main content container */}
+      <div className="ph-container">
+        {/* Greeting bubble */}
+        <div className="ph-greeting">
+          <span>Hello!</span>
+          <span className="ph-greeting-emoji">👋</span>
+        </div>
+
+        {/* Main heading */}
+        <h1 className="ph-heading">
+          I'm <span className="ph-name">Samuel</span>,<br />
+          <span className="ph-role">Leader & Transformation</span><br />
+          <span className="ph-role">Contributor</span>
         </h1>
-        <div className="hero-divider-v2" />
-        <p className="hero-tagline-v2">
-          &ldquo;Grounded in Practice.<br />Refined by Purpose.<br />Rising to Transform.&rdquo;
-        </p>
-        <div className="hero-cta-row">
-          <a href="#about" className="hero-btn-primary">Explore</a>
-          <a href="#connect" className="hero-btn-ghost">Connect</a>
+
+        {/* Testimonial quote */}
+        <div className="ph-testimonial">
+          <div className="ph-quote-icon">&ldquo;</div>
+          <p className="ph-quote-text">
+            Grounded in Practice. Refined by Purpose. Rising to Transform with <span className="ph-highlight">Samuel!</span> A true professional Leader & Group Intelligence Facilitator with a great sense of vision and purpose.
+          </p>
         </div>
-      </div>
 
-      {/* ── centre: photo ── */}
-      <div className="hero-photo-wrap" ref={photoRef}>
-        <div className="hero-photo-glow" />
-        <div className="hero-photo-frame">
-          <Image
-            src="/photo-hero.png"
-            alt="Samuel Kobina Gyasi"
-            fill
-            priority
-            sizes="(max-width:768px) 260px, 380px"
-            className="hero-photo-img"
-          />
-        </div>
-        <Link href="/group-intelligence-facilitator" className="hero-photo-badge" style={{ textDecoration: 'none', cursor: 'pointer' }}>
-          <span className="hpb-line">Group Intelligence Facilitator</span>
-          <span className="hpb-sub"></span>
-        </Link>
-      </div>
+        {/* Center: Professional photo with circular backgrounds */}
+        <div className="ph-photo-container">
+          {/* Large circular background - orange/red */}
+          <div className="ph-circle ph-circle-1" />
+          {/* Medium circular background - pink */}
+          <div className="ph-circle ph-circle-2" />
+          
+          {/* Photo frame */}
+          <div className="ph-photo-frame">
+            <Image
+              src="/photo-hero.png"
+              alt="Samuel Kobina Gyasi"
+              fill
+              priority
+              sizes="(max-width:768px) 280px, 420px"
+              className="ph-photo-img"
+            />
+          </div>
 
-      {/* ── right panel: interests + GI network animation ── */}
-      <div className="hero-right-v2">
-        <div className="hero-interests-label">Principal Interests</div>
-        <ul className="pillar-list-v2">
-          {heroInterests.map((p) => (
-            <li key={p.num}>
-              <Link href={p.href} className="pillar-link">
-                <span className="pillar-num-v2">{p.num}</span>
-                <span className="pillar-label">{p.label}</span>
-                <span className="pillar-arrow">→</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* ── Group Intelligence / Leadership Network Animation ── */}
-        <div className="hero-gi-network" aria-hidden="true">
-          <svg
-            viewBox="0 0 360 340"
-            className="hero-gi-svg"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Edges */}
-            {EDGES.map(([a, b], i) => (
-              <line
-                key={i}
-                x1={NODES[a].cx} y1={NODES[a].cy}
-                x2={NODES[b].cx} y2={NODES[b].cy}
-                className="gi-edge"
-                style={{ animationDelay: `${i * 0.08}s` }}
-              />
-            ))}
-            {/* Pulse rings */}
-            {NODES.filter((_, i) => i % 3 === 0).map((n) => (
-              <circle
-                key={`pulse-${n.id}`}
-                cx={n.cx} cy={n.cy} r={n.r + 4}
-                className="gi-pulse-ring"
-                style={{ animationDelay: n.delay }}
-              />
-            ))}
-            {/* Nodes */}
-            {NODES.map((n) => (
-              <circle
-                key={n.id}
-                cx={n.cx} cy={n.cy} r={n.r}
-                className="gi-node"
-                style={{ animationDelay: n.delay }}
-              />
-            ))}
-            {/* Labels for larger nodes */}
-            {NODES.filter((n) => n.r >= 6).map((n) => (
-              <text
-                key={`lbl-${n.id}`}
-                x={n.cx} y={n.cy + n.r + 11}
-                className="gi-label"
-                style={{ animationDelay: n.delay }}
-              >
-                {n.label}
-              </text>
-            ))}
-            {/* Travelling signal dots */}
-            {[0, 1, 2].map((i) => (
-              <circle key={`sig-${i}`} r="2.5" className={`gi-signal gi-signal-${i}`} />
-            ))}
-          </svg>
-          <div className="hero-gi-caption">
-            <span className="hero-gi-caption-dot" />
-            Collective Intelligence Network
+          {/* Social buttons */}
+          <div className="ph-social-bar">
+            <button className="ph-follow-btn">Follow me</button>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="ph-social-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="ph-social-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6.5 4.5h5c2.5 0 4.5 1.5 4.5 3.5 0 1.5-.8 2.7-2 3.2 1.5.5 2.5 2 2.5 3.8 0 2.5-2 4.5-4.5 4.5h-5.5V4.5zm2 6h3c1 0 2-.5 2-1.5s-1-1.5-2-1.5h-3v3zm0 7h3.5c1.2 0 2.5-.8 2.5-2s-1.3-2-2.5-2H8.5v4zM15 7h5v1h-5V7z"/>
+              </svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="ph-social-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" fill="none" stroke="white" strokeWidth="1.5"/>
+                <circle cx="17.5" cy="6.5" r="1.5" fill="white"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="ph-social-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
           </div>
         </div>
 
-        <div className="hero-scroll-v2">
-          <span>Scroll</span>
+        {/* Years of experience badge */}
+        <div className="ph-experience-badge">
+          <div className="ph-exp-label">Years Of Experience</div>
+          <div className="ph-exp-number">15+</div>
         </div>
       </div>
     </section>

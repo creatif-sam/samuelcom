@@ -1,5 +1,6 @@
+import React from "react";
+import { motion } from "framer-motion";
 import { SectionLabel } from "@/components/atoms/SectionLabel";
-import { ScrollReveal } from "@/components/molecules/ScrollReveal";
 
 interface RoleArea {
   heading: string;
@@ -23,31 +24,16 @@ const roles: Role[] = [
       {
         heading: "Event Coordination",
         bullets: [
-          "Collaborate with faculty to design agendas and coordinate logistics for SCI Talks, PhD mini-seminars, workshops, social gatherings, open days, and student activities.",
-          "Build and maintain partnerships with other departments and student clubs to co-organise cross-institutional initiatives.",
-          "Support the school's representation at job fairs and student-oriented events.",
+          "Collaborating with faculty to design agendas and coordinate logistics for SCI Talks and seminars.",
+          "Building partnerships with departments and student clubs for cross-institutional initiatives.",
+          "Representing the school at job fairs and student-oriented events.",
         ],
       },
       {
-        heading: "Student Engagement & Career Support",
+        heading: "Student Engagement",
         bullets: [
-          "Welcome and guide new students during orientation, in coordination with the student liaison team.",
-          "Assist students with internship and job applications — CV reviews, cover-letter feedback, and interview preparation.",
-          "Partner with the Career Center to coordinate on-campus events and company visits.",
-        ],
-      },
-      {
-        heading: "Communication & Content",
-        bullets: [
-          "Implement internal and external communication strategies for the department.",
-          "Maintain active presence on Instagram, LinkedIn, and Spotify (podcasts).",
-          "Produce multimedia content promoting student success stories, academic updates, and upcoming opportunities in collaboration with the multimedia team.",
-        ],
-      },
-      {
-        heading: "Logistics",
-        bullets: [
-          "Oversee end-to-end logistics for students, events, staff, and guests — ensuring every experience runs with precision and care.",
+          "Guiding new students during orientation and providing career support.",
+          "Assisting with internship applications, CV reviews, and interview prep.",
         ],
       },
     ],
@@ -57,58 +43,112 @@ const roles: Role[] = [
     title: "Mentor",
     org: "Personal Ministry",
     description:
-      "Walking alongside individuals navigating questions of purpose, leadership, and identity. Mentorship, for Samuel, is the most personal form of investment — giving what was once given to him.",
+      "Walking alongside individuals navigating questions of purpose, leadership, and identity. This is a personal investment in others—giving back what was once given to me.",
   },
   {
     num: "03",
     title: "Group Intelligence Facilitator",
-    org: "Researcher & Practitioner",
+    org: "Practitioner",
     description:
-      "Applying the science of collective intelligence in real-world contexts — helping groups surface diverse perspectives, resolve complexity, and make decisions that reflect more than any single mind could produce alone.",
+      "Applying the science of collective intelligence to help groups surface diverse perspectives, resolve complexity, and make decisions that reflect a shared wisdom.",
   },
 ];
 
+// Animation Variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
+};
+
+const cardVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { 
+    y: 0, 
+    opacity: 1,
+    transition: { type: "spring", stiffness: 100 }
+  },
+};
+
+const itemVariants = {
+  hidden: { x: -10, opacity: 0 },
+  visible: { x: 0, opacity: 1 },
+};
+
 export function WhatIDoSection() {
   return (
-    <section id="what-i-do" className="portfolio-section what-i-do-section">
-      <div className="section-inner">
+    <section id="what-i-do" className="py-24 px-6 bg-background">
+      <div className="max-w-6xl mx-auto">
         <SectionLabel>What I Do</SectionLabel>
 
-        <ScrollReveal className="wid-header">
-          <h2 className="wid-title">Serving Across<br /><em>Three Spheres</em></h2>
-          <p className="wid-sub">
-            Technology. Leadership. Transformation. Each role Samuel holds is an expression of the same
-            conviction: that a life worth living is one poured out in service to others.
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <h2 className="text-5xl font-light leading-tight mb-6">
+            Serving Across<br /><em className="serif italic">Three Spheres</em>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl">
+            Technology. Leadership. Transformation. Each role I undertake is an expression of the same 
+            conviction: that a life worth living is one shared in service to others.
           </p>
-        </ScrollReveal>
+        </motion.div>
 
-        <div className="wid-grid">
-          {roles.map((role, i) => (
-            <ScrollReveal key={role.num} delay={`${i * 0.1}s`}>
-              <div className="wid-card">
-                <div className="wid-card-num">{role.num}</div>
-                <h3 className="wid-card-title">{role.title}</h3>
-                <div className="wid-card-org">{role.org}</div>
-                {role.areas ? (
-                  <div className="wid-card-areas">
-                    {role.areas.map((area) => (
-                      <div key={area.heading} className="wid-area">
-                        <div className="wid-area-heading">{area.heading}</div>
-                        <ul className="wid-area-list">
-                          {area.bullets.map((b, j) => (
-                            <li key={j}>{b}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="wid-card-body">{role.description}</p>
-                )}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
+          {roles.map((role) => (
+            <motion.div
+              key={role.num}
+              variants={cardVariants}
+              whileHover={{ y: -10 }}
+              className="p-8 rounded-2xl border border-border bg-card hover:shadow-xl transition-shadow"
+            >
+              <span className="text-xs font-mono text-primary mb-4 block">
+                [{role.num}]
+              </span>
+              <h3 className="text-2xl font-bold mb-1">{role.title}</h3>
+              <div className="text-sm text-muted-foreground mb-6 uppercase tracking-wider font-semibold">
+                {role.org}
               </div>
-            </ScrollReveal>
+
+              {role.areas ? (
+                <div className="space-y-6">
+                  {role.areas.map((area) => (
+                    <div key={area.heading}>
+                      <h4 className="font-bold text-sm mb-2 text-foreground underline decoration-primary/30">
+                        {area.heading}
+                      </h4>
+                      <ul className="space-y-2">
+                        {area.bullets.map((b, j) => (
+                          <motion.li 
+                            key={j} 
+                            variants={itemVariants}
+                            className="text-sm text-muted-foreground list-disc ml-4"
+                          >
+                            {b}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-muted-foreground leading-relaxed italic">
+                  "{role.description}"
+                </p>
+              )}
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

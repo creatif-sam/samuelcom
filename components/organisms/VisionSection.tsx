@@ -1,5 +1,4 @@
 import { SectionLabel } from "@/components/atoms/SectionLabel";
-import { VerseStrip } from "@/components/molecules/VerseStrip";
 import { ScrollReveal } from "@/components/molecules/ScrollReveal";
 
 export function VisionSection() {
@@ -17,7 +16,7 @@ export function VisionSection() {
             <strong>transformed to lead</strong><br />
             with clarity and purpose.
           </p>
-          <VerseStrip />
+      
         </ScrollReveal>
       </div>
     </section>
