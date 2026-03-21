@@ -176,6 +176,11 @@ body {
   position: relative; z-index: 2;
 }
 
+/* SKG logo visibility in light mode */
+.light .nav-logo {
+  color: #0a0a0a;
+}
+
 /* Desktop links */
 .nav-desktop { display: flex; }
 
@@ -224,6 +229,11 @@ body {
   background: #f5f3ef;
   transition: transform 0.35s ease, opacity 0.25s ease, width 0.3s ease;
   transform-origin: center;
+}
+
+/* Burger icon visibility fixes */
+.light .nav-burger span {
+  background: #0a0a0a;
 }
 .nav-burger--open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-burger--open span:nth-child(2) { opacity: 0; width: 0; }
@@ -1716,6 +1726,37 @@ body {
   }
 }
 
+/* Latest Blogs - Light Theme */
+.light .latest-blogs-section {
+  background: var(--black);
+}
+.light .lbs-card {
+  background: rgba(10,10,10,0.03);
+  border-color: rgba(10,10,10,0.12);
+}
+.light .lbs-card:hover {
+  background: rgba(10,10,10,0.06);
+  border-color: rgba(34,197,94,0.3);
+}
+.light .lbs-title {
+  color: #0a0a0a;
+}
+.light .lbs-card-title {
+  color: #0a0a0a;
+}
+.light .lbs-card:hover .lbs-card-title {
+  color: #16a34a;
+}
+.light .lbs-card-excerpt {
+  color: rgba(10,10,10,0.7);
+}
+.light .lbs-card-footer {
+  border-top-color: rgba(10,10,10,0.1);
+}
+.light .lbs-date, .light .lbs-read-time {
+  color: rgba(10,10,10,0.5);
+}
+
 /* ── PILLARS ── */
 .pillars-section { background: var(--black); }
 
@@ -2529,20 +2570,37 @@ body {
     padding: 60px 24px 32px;
   }
 
+  .sf-newsletter-container {
+    gap: 20px;
+    padding: 0;
+  }
+
   .sf-nl-wrapper {
-    padding: 32px 24px;
+    padding: 24px 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .sf-nl-heading {
-    font-size: 26px;
+    font-size: 22px;
+    word-wrap: break-word;
   }
 
   .sf-feature-card {
-    padding: 32px 24px;
+    padding: 24px 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .sf-feature-heading {
-    font-size: 22px;
+    font-size: 20px;
+    word-wrap: break-word;
+  }
+
+  .sf-feature-text {
+    font-size: 14px;
   }
 
   .sf-links-grid {
@@ -2564,6 +2622,111 @@ body {
     width: 100%;
     text-align: center;
   }
+
+  .sf-nl-avatars {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .sf-nl-heading {
+    font-size: 20px;
+  }
+
+  .sf-feature-heading {
+    font-size: 18px;
+  }
+}
+
+/* Site Footer - Light Theme */
+.light .sf-footer {
+  background: linear-gradient(to bottom, #f8f6f2 0%, #f0ede8 100%);
+  border-top-color: rgba(10,10,10,0.1);
+}
+.light .sf-nl-wrapper {
+  background: rgba(10,10,10,0.02);
+  border-color: rgba(10,10,10,0.08);
+}
+.light .sf-nl-heading {
+  color: #0a0a0a;
+}
+.light .sf-nl-sub {
+  color: rgba(10,10,10,0.65);
+}
+.light .sf-nl-input-wrapper {
+  background: rgba(10,10,10,0.03);
+  border-color: rgba(10,10,10,0.15);
+}
+.light .sf-nl-input-wrapper:focus-within {
+  border-color: rgba(34,197,94,0.5);
+}
+.light .sf-nl-input {
+  color: #0a0a0a;
+}
+.light .sf-nl-input::placeholder {
+  color: rgba(10,10,10,0.35);
+}
+.light .sf-nl-btn {
+  background: #16a34a;
+  color: #ffffff;
+}
+.light .sf-nl-btn:hover:not(:disabled) {
+  background: #15803d;
+}
+.light .sf-feature-card {
+  background: linear-gradient(135deg, #f5f3ef 0%, #e8e4de 100%);
+  border-color: rgba(34,197,94,0.2);
+}
+.light .sf-feature-heading {
+  color: #0a0a0a;
+}
+.light .sf-feature-text {
+  color: rgba(10,10,10,0.65);
+}
+.light .sf-feature-btn {
+  background: #16a34a;
+  color: #ffffff;
+}
+.light .sf-feature-btn:hover {
+  background: #15803d;
+}
+.light .sf-brand-logo {
+  color: #0a0a0a;
+}
+.light .sf-brand-tagline {
+  color: rgba(10,10,10,0.5);
+}
+.light .sf-links-label {
+  color: #16a34a;
+}
+.light .sf-link {
+  color: rgba(10,10,10,0.65);
+}
+.light .sf-link:hover {
+  color: #0a0a0a;
+}
+.light .sf-main {
+  border-top-color: rgba(10,10,10,0.08);
+}
+.light .sf-bottom {
+  border-top-color: rgba(10,10,10,0.08);
+}
+.light .sf-address, .light .sf-copyright {
+  color: rgba(10,10,10,0.5);
+}
+.light .sf-email {
+  color: rgba(10,10,10,0.65);
+}
+.light .sf-email:hover {
+  color: #0a0a0a;
+}
+.light .sf-avatar {
+  border-color: #f8f6f2;
+}
+.light .sf-avatar-more {
+  border-color: #f8f6f2;
+  background: rgba(10,10,10,0.08);
+  color: rgba(10,10,10,0.8);
 }
 
 
