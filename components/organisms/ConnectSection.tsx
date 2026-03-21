@@ -20,10 +20,10 @@ export function ConnectSection() {
             <h2 className="connect-title">
               Let&apos;s Build<br />
               Something<br />
-              <em>Eternal</em>
+              <em>Impactful</em>
             </h2>
             <p className="connect-body">
-              Whether you&apos;re seeking spiritual counsel, leadership collaboration,
+              Whether you&apos;re seeking leadership advice, leadership collaboration,
               intellectual dialogue, or transformational partnership — Samuel is open to
               meaningful connection.
             </p>
