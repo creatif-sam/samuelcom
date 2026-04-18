@@ -1121,13 +1121,11 @@ body {
   transform: translateX(-50%);
   width: clamp(200px, 22vw, 360px);
   z-index: 10;
-  overflow: hidden;
-  border-radius: 50% 50% 0 0 / 40% 40% 0 0;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.14);
 }
 .phx-photo-img {
-  object-fit: cover;
-  object-position: center top;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* Bottom bar — info left, socials right */

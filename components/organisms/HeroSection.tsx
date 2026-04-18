@@ -21,6 +21,7 @@ export function HeroSection() {
             priority
             sizes="(max-width: 768px) 220px, (max-width: 1200px) 300px, 360px"
             className="phx-photo-img"
+            style={{ objectFit: "contain", objectPosition: "center bottom" }}
           />
         </div>
       </div>
