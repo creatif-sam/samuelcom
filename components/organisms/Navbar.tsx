@@ -5,12 +5,12 @@ import Link from "next/link";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const navLinks = [
+  { href: "/",          label: "Home",     external: false },
   { href: "/my-story",  label: "My Story", external: false },
   { href: "/blog",      label: "Blog",     external: false },
   { href: "/#what-i-do",label: "What I Do",external: false },
   { href: "/#vision",   label: "Vision",   external: false },
   { href: "/#connect",  label: "Connect",  external: false },
-  { href: "/credo",     label: "Credo",    external: false },
 ];
 
 export function Navbar() {

@@ -6,29 +6,13 @@ import { SiteFooter } from "@/components/organisms/SiteFooter";
 
 const css = `
 .msp {
-  background: var(--white);
-  color: var(--black);
+  background: #f5f3ef;
+  color: #0a0a0a;
   min-height: 100vh;
   position: relative;
 }
 
-/* Dark theme override */
-@media (prefers-color-scheme: dark) {
-  .msp {
-    background: var(--black);
-    color: var(--white);
-  }
-}
 
-[data-theme="dark"] .msp {
-  background: var(--black);
-  color: var(--white);
-}
-
-[data-theme="light"] .msp {
-  background: var(--white);
-  color: var(--black);
-}
 
 /*  HERO  */
 .msp-hero {
@@ -68,12 +52,7 @@ const css = `
   line-height: 1.65;
 }
 
-[data-theme="dark"] .msp-hero-sub,
-@media (prefers-color-scheme: dark) {
-  .msp-hero-sub {
-    color: rgba(245,243,239,.65);
-  }
-}
+
 
 /*  TIMELINE SECTION  */
 .msp-section {
@@ -128,12 +107,7 @@ const css = `
   transition: background 0.3s, border-color 0.3s;
 }
 
-[data-theme="dark"] .msp-dot,
-@media (prefers-color-scheme: dark) {
-  .msp-dot {
-    background: var(--black);
-  }
-}
+
 .msp-item:hover .msp-dot {
   background: var(--gold);
   border-color: var(--gold);
@@ -173,12 +147,7 @@ const css = `
   color: var(--gray-dark);
 }
 
-[data-theme="dark"] .msp-body,
-@media (prefers-color-scheme: dark) {
-  .msp-body {
-    color: rgba(245,243,239,.75);
-  }
-}
+
 .msp-body p + p { margin-top: 14px; }
 
 .msp-pullquote {
@@ -250,12 +219,7 @@ const css = `
   color: var(--gray-dark);
 }
 
-[data-theme="dark"] .msp-now-card-body,
-@media (prefers-color-scheme: dark) {
-  .msp-now-card-body {
-    color: rgba(245,243,239,.6);
-  }
-}
+
 
 /*  RESPONSIVE  */
 @media (max-width: 768px) {
