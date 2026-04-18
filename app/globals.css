@@ -1079,7 +1079,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: clamp(420px, 68vh, 780px);
+  min-height: clamp(520px, 80vh, 960px);
 }
 
 /* "SAMUEL" — outline/hollow */
@@ -1119,7 +1119,7 @@ body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(320px, 40vw, 560px);
+  width: clamp(420px, 54vw, 720px);
   z-index: 10;
 }
 .phx-photo-img {
@@ -1252,7 +1252,7 @@ body {
 /* ── PHX RESPONSIVE ── */
 @media (max-width: 1024px) {
   .phx-photo-fg {
-    width: clamp(260px, 38vw, 460px);
+    width: clamp(340px, 52vw, 620px);
   }
 }
 
@@ -1261,32 +1261,47 @@ body {
     min-height: 100svh;
   }
   .phx-name-section {
-    padding: 24px 4% 0;
+    padding: 20px 4% 0;
+    min-height: clamp(420px, 85vw, 620px);
   }
   .phx-fname {
-    font-size: clamp(52px, 14vw, 100px);
+    font-size: clamp(44px, 12vw, 88px);
     -webkit-text-stroke: 1.5px rgba(10,10,10,0.85);
   }
   .phx-lname {
-    font-size: clamp(52px, 14vw, 100px);
+    font-size: clamp(44px, 12vw, 88px);
   }
   .phx-photo-fg {
-    width: clamp(220px, 58vw, 380px);
+    width: clamp(280px, 76vw, 480px);
   }
   .phx-bottom-bar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 28px;
-    padding: 24px 4% 44px;
+    gap: 24px;
+    padding: 20px 4% 44px;
   }
   .phx-info {
     max-width: 100%;
   }
+  .phx-avail {
+    font-size: 11px;
+  }
+  .phx-role-title {
+    font-size: 16px;
+  }
+  .phx-desc {
+    font-size: 13px;
+    margin-bottom: 18px;
+  }
+  .phx-cta {
+    font-size: 12px;
+    padding: 11px 22px;
+  }
   .phx-socials {
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 18px;
+    align-items: center;
+    gap: 16px;
   }
   .phx-soc {
     font-size: 11px;
@@ -1294,14 +1309,35 @@ body {
 }
 
 @media (max-width: 480px) {
+  .phx-name-section {
+    min-height: clamp(360px, 95vw, 500px);
+  }
   .phx-fname, .phx-lname {
-    font-size: clamp(44px, 13vw, 80px);
+    font-size: clamp(36px, 11vw, 64px);
+    -webkit-text-stroke: 1px rgba(10,10,10,0.85);
   }
   .phx-photo-fg {
-    width: clamp(200px, 62vw, 320px);
+    width: clamp(240px, 84vw, 380px);
   }
   .phx-bottom-bar {
     padding-bottom: 36px;
+    gap: 20px;
+  }
+  .phx-socials {
+    gap: 12px;
+  }
+  .phx-soc span {
+    display: none;
+  }
+  .phx-soc svg {
+    width: 18px;
+    height: 18px;
+    opacity: 1;
+  }
+  .phx-soc {
+    background: rgba(10,10,10,0.08);
+    border-radius: 50%;
+    padding: 10px;
   }
 }
 
