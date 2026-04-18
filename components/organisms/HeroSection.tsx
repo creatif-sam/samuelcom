@@ -7,24 +7,23 @@ export function HeroSection() {
   return (
     <section id="hero" className="phx-hero">
 
-      {/* ── Name row: SAMUEL | photo | GYASI ── */}
-      <div className="phx-name-row">
+      {/* ── Giant name backdrop ── */}
+      <div className="phx-name-section">
         <h1 className="phx-fname" aria-label="Samuel Gyasi">SAMUEL</h1>
+        <span className="phx-lname" aria-hidden="true">GYASI</span>
 
-        {/* Portrait — center column */}
+        {/* Floating portrait — sits over the name */}
         <div className="phx-photo-fg">
           <Image
             src="/photo-hero.png"
             alt="Samuel Kobina Gyasi"
             fill
             priority
-            sizes="(max-width: 480px) 85vw, (max-width: 768px) 70vw, (max-width: 1024px) 38vw, 30vw"
+            sizes="(max-width: 768px) 220px, (max-width: 1200px) 300px, 360px"
             className="phx-photo-img"
             style={{ objectFit: "contain", objectPosition: "center bottom" }}
           />
         </div>
-
-        <span className="phx-lname" aria-hidden="true">GYASI</span>
       </div>
 
       {/* ── Bottom info bar ── */}
