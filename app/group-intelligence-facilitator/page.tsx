@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
@@ -29,7 +29,7 @@ const css = `
     backdrop-filter: blur(16px);
   }
   .gif-nav-back {
-    font-family: 'Space Mono', monospace; font-size: 9px;
+    font-family: 'Poppins', sans-serif; font-size: 9px;
     letter-spacing: .25em; text-transform: uppercase;
     color: var(--gold); text-decoration: none;
     display: flex; align-items: center; gap: 10px;
@@ -37,7 +37,7 @@ const css = `
   }
   .gif-nav-back:hover { opacity: .7; }
   .gif-nav-logo {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px; letter-spacing: .1em;
     color: var(--white); text-decoration: none;
   }
@@ -49,14 +49,14 @@ const css = `
     border-bottom: 1px solid var(--line);
   }
   .gif-hero-eyebrow {
-    font-family: 'Space Mono', monospace; font-size: 9px;
+    font-family: 'Poppins', sans-serif; font-size: 9px;
     letter-spacing: .35em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 28px;
     display: flex; align-items: center; gap: 14px;
   }
   .gif-hero-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--line); max-width: 80px; }
   .gif-hero-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(36px, 6vw, 72px);
     line-height: 1.05; font-weight: 700;
     color: var(--white); margin-bottom: 28px;
@@ -79,7 +79,7 @@ const css = `
     align-items: start;
   }
   .gif-def-label {
-    font-family: 'Space Mono', monospace; font-size: 9px;
+    font-family: 'Poppins', sans-serif; font-size: 9px;
     letter-spacing: .3em; text-transform: uppercase;
     color: var(--gold);
     padding-top: 8px;
@@ -97,7 +97,7 @@ const css = `
     background: rgba(34,197,94,0.05);
   }
   .gif-pullquote-text {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 20px; line-height: 1.6;
     font-style: italic; color: var(--white);
   }
@@ -108,7 +108,7 @@ const css = `
     border-bottom: 1px solid var(--line);
   }
   .gif-section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(22px, 2.5vw, 32px);
     color: var(--white); margin-bottom: 36px;
   }
@@ -123,12 +123,12 @@ const css = `
     padding: 32px 28px;
   }
   .gif-card-num {
-    font-family: 'Space Mono', monospace; font-size: 9px;
+    font-family: 'Poppins', sans-serif; font-size: 9px;
     letter-spacing: .3em; color: var(--gold);
     margin-bottom: 16px;
   }
   .gif-card-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 18px; color: var(--white);
     margin-bottom: 12px;
   }
@@ -144,7 +144,7 @@ const css = `
     background: var(--bg2); padding: 28px 32px;
   }
   .gif-term-name {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 17px; color: var(--gold);
     margin-bottom: 8px;
   }
@@ -164,7 +164,7 @@ const css = `
     border-top: 1px solid var(--line); padding-top: 20px;
   }
   .gif-stat-num {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 40px; color: var(--gold);
     line-height: 1;
   }
@@ -180,7 +180,7 @@ const css = `
     display: flex; flex-direction: column; align-items: center; gap: 24px;
   }
   .gif-cta-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(24px, 3vw, 40px);
     color: var(--white);
   }
@@ -188,7 +188,7 @@ const css = `
   .gif-cta-sub { font-size: 16px; color: var(--sub); max-width: 480px; line-height: 1.7; }
   .gif-cta-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
   .gif-cta-btn {
-    font-family: 'Space Mono', monospace; font-size: 10px;
+    font-family: 'Poppins', sans-serif; font-size: 10px;
     letter-spacing: .2em; text-transform: uppercase;
     padding: 14px 32px; background: var(--gold); color: #0a0a0a;
     text-decoration: none; transition: background .25s;
@@ -207,18 +207,18 @@ const css = `
   }
   .gif-role-header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 44px; }
   .gif-role-eyebrow {
-    font-family: 'Space Mono', monospace; font-size: 9px;
+    font-family: 'Poppins', sans-serif; font-size: 9px;
     letter-spacing: .3em; text-transform: uppercase; color: var(--gold);
   }
   .gif-role-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(22px, 2.5vw, 32px); color: var(--white);
   }
   .gif-role-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
   }
   .gif-role-col-title {
-    font-family: 'Space Mono', monospace; font-size: 10px;
+    font-family: 'Poppins', sans-serif; font-size: 10px;
     letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
     margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line);
   }
@@ -233,7 +233,7 @@ const css = `
     border-left: 2px solid var(--gold); background: rgba(34,197,94,0.04);
   }
   .gif-logistics-text {
-    font-family: 'Playfair Display', serif; font-size: 17px;
+    font-family: 'Poppins', sans-serif; font-size: 17px;
     font-style: italic; color: var(--gray); line-height: 1.7;
   }
   .gif-logistics-text strong { color: var(--white); font-style: normal; font-weight: 600; }

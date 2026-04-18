@@ -1,4 +1,4 @@
-import { TutorialStep } from "./tutorial-step";
+﻿import { TutorialStep } from "./tutorial-step";
 import { CodeBlock } from "./code-block";
 
 const create = `create table notes (

@@ -1,4 +1,4 @@
-const links = [
+﻿const links = [
   { href: "#about",   label: "About"   },
   { href: "#pillars", label: "Pillars" },
   { href: "#vision",  label: "Vision"  },

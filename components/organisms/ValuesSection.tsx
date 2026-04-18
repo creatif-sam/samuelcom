@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef } from "react";
 
@@ -98,7 +98,7 @@ export function ValuesSection() {
         }
 
         .values-eyebrow {
-          font-family: var(--font-space-mono), 'Space Mono', monospace;
+          font-family: var(--font-poppins), 'Poppins', sans-serif;
           font-size: 10px;
           letter-spacing: 0.3em;
           text-transform: uppercase;
@@ -119,7 +119,7 @@ export function ValuesSection() {
         }
 
         .values-title {
-          font-family: var(--font-playfair), 'Playfair Display', serif;
+          font-family: var(--font-poppins), 'Poppins', sans-serif;
           font-size: clamp(36px, 5vw, 60px);
           font-weight: 700;
           color: var(--white);
@@ -133,7 +133,7 @@ export function ValuesSection() {
 
         .values-sub {
           margin-top: 18px;
-          font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+          font-family: var(--font-poppins), 'Poppins', sans-serif;
           font-size: clamp(16px, 1.8vw, 20px);
           color: var(--gray-mid);
           font-style: italic;
@@ -200,7 +200,7 @@ export function ValuesSection() {
         .vs-card-bg-letter {
           position: absolute;
           top: -20px; right: -10px;
-          font-family: var(--font-playfair), 'Playfair Display', serif;
+          font-family: var(--font-poppins), 'Poppins', sans-serif;
           font-size: 180px;
           font-weight: 900;
           color: rgba(34,197,94,0.04);
@@ -215,7 +215,7 @@ export function ValuesSection() {
         }
 
         .vs-card-num {
-          font-family: var(--font-space-mono), 'Space Mono', monospace;
+          font-family: var(--font-poppins), 'Poppins', sans-serif;
           font-size: 10px;
           letter-spacing: 0.25em;
           color: var(--gold);
@@ -237,7 +237,7 @@ export function ValuesSection() {
         }
 
         .vs-card-word {
-          font-family: var(--font-playfair), 'Playfair Display', serif;
+          font-family: var(--font-poppins), 'Poppins', sans-serif;
           font-size: clamp(32px, 3.5vw, 48px);
           font-weight: 700;
           line-height: 1;
@@ -258,7 +258,7 @@ export function ValuesSection() {
         .vs-card:hover .vs-card-word::after { width: 100%; }
 
         .vs-card-body {
-          font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+          font-family: var(--font-poppins), 'Poppins', sans-serif;
           font-size: clamp(15px, 1.4vw, 17px);
           line-height: 1.7;
           color: var(--gray-mid);
@@ -295,7 +295,7 @@ export function ValuesSection() {
         }
 
         .vts-big {
-          font-family: var(--font-playfair), 'Playfair Display', serif;
+          font-family: var(--font-poppins), 'Poppins', sans-serif;
           font-size: clamp(40px, 5vw, 64px);
           font-weight: 900;
           color: var(--gold);
@@ -306,7 +306,7 @@ export function ValuesSection() {
         .vts-item:nth-child(3) .vts-big { animation-delay: 0.8s; }
 
         .vts-label {
-          font-family: var(--font-space-mono), 'Space Mono', monospace;
+          font-family: var(--font-poppins), 'Poppins', sans-serif;
           font-size: 9px;
           letter-spacing: 0.25em;
           text-transform: uppercase;
@@ -344,8 +344,8 @@ export function ValuesSection() {
       <div className="values-inner">
         <header className="values-header">
           <p className="values-eyebrow">Core Values</p>
-          <h2 className="values-title">The Three <em>E&apos;s</em></h2>
-          <p className="values-sub">Principles that govern every endeavour, every decision, every day.</p>
+          <h2 className="values-title">My Three <em>E&apos;s</em></h2>
+          <p className="values-sub">Principles that guide every endeavour, every decision, every day.</p>
         </header>
 
         <div className="values-grid">

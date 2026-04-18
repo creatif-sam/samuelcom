@@ -1,4 +1,4 @@
-interface ConnectLinkProps {
+﻿interface ConnectLinkProps {
   href: string;
   label: string;
 }

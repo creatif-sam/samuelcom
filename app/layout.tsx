@@ -1,30 +1,10 @@
-import type { Metadata } from "next";
-import { Playfair_Display, Cormorant_Garamond, Space_Mono, Poppins } from "next/font/google";
+﻿import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { CustomCursor } from "@/components/organisms/CustomCursor";
 import { CookieBanner } from "@/components/organisms/CookieBanner";
 import { Analytics } from "@/components/Analytics";
 import { Providers } from "./providers";
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "700", "900"],
-  style: ["normal", "italic"],
-});
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["300", "400", "600"],
-  style: ["normal", "italic"],
-});
-
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -156,7 +136,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${playfair.variable} ${cormorant.variable} ${spaceMono.variable} ${poppins.variable}`}
+        className={`${poppins.variable}`}
       >
         <Providers>
           <CustomCursor />

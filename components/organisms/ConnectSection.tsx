@@ -1,4 +1,4 @@
-import { SectionLabel } from "@/components/atoms/SectionLabel";
+﻿import { SectionLabel } from "@/components/atoms/SectionLabel";
 import { ConnectLink } from "@/components/molecules/ConnectLink";
 import { ScrollReveal } from "@/components/molecules/ScrollReveal";
 

@@ -1,4 +1,4 @@
-export function SupabaseLogo() {
+﻿export function SupabaseLogo() {
   return (
     <svg
       aria-label="Supabase logo"

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { toast } from "sonner";
@@ -54,7 +54,7 @@ export function TplModal({ tpl, onClose, onSave }: {
               <label className="adm-label">HTML <span style={{ color: "rgba(240,236,228,.2)" }}>{html.length} chars</span></label>
               {prev
                 ? <div className="adm-html-preview" dangerouslySetInnerHTML={{ __html: html }} />
-                : <textarea className="adm-textarea" style={{ fontFamily: "'Space Mono',monospace", fontSize: "13px" }} value={html} onChange={(e) => setHtml(e.target.value)} placeholder="<h1>Hello,</h1><p>Your content here.</p>" />
+                : <textarea className="adm-textarea" style={{ fontFamily: "'Poppins',sans-serif", fontSize: "13px" }} value={html} onChange={(e) => setHtml(e.target.value)} placeholder="<h1>Hello,</h1><p>Your content here.</p>" />
               }
             </div>
           )}

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
@@ -189,7 +189,7 @@ const blogCss = `
   align-items: center;
   gap: 10px;
   padding: 20px 56px;
-  font-family: 'Space Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   font-size: 10px;
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -203,19 +203,19 @@ const blogCss = `
 /* Header */
 .ib-header { padding: 64px 56px 48px; }
 .ib-eyebrow {
-  font-family: 'Space Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   font-size: 9px; letter-spacing: .4em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 18px;
 }
 .ib-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(48px, 7vw, 96px);
   line-height: .95; color: var(--ink); margin: 0 0 22px;
   font-weight: 700;
 }
 .ib-title em { font-style: italic; color: var(--accent); display: inline; }
 .ib-subtitle {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(16px, 1.8vw, 20px);
   font-style: italic; color: var(--mid);
   max-width: 520px; line-height: 1.65; font-weight: 300;
@@ -223,7 +223,7 @@ const blogCss = `
 
 /* Content area */
 .ib-content { padding: 0 56px 80px; display: flex; flex-direction: column; gap: 32px; }
-.ib-empty { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--mid); padding: 60px 0; text-align: center; }
+.ib-empty { font-family: 'Poppins', sans-serif; font-size: 20px; font-style: italic; color: var(--mid); padding: 60px 0; text-align: center; }
 
 /* Featured card */
 .ib-featured {
@@ -247,13 +247,13 @@ const blogCss = `
   padding: 44px 40px;
   display: flex; flex-direction: column; justify-content: center; gap: 14px;
 }
-.ib-featured-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.15; color: var(--ink); }
-.ib-featured-excerpt { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: var(--mid); line-height: 1.65; font-weight: 300; flex: 1; }
-.ib-read-link { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
+.ib-featured-title { font-family: 'Poppins', sans-serif; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.15; color: var(--ink); }
+.ib-featured-excerpt { font-family: 'Poppins', sans-serif; font-size: 16px; font-style: italic; color: var(--mid); line-height: 1.65; font-weight: 300; flex: 1; }
+.ib-read-link { font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
 
 /* Card label & meta */
-.ib-card-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
-.ib-card-meta { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--mid); display: flex; gap: 10px; flex-wrap: wrap; }
+.ib-card-label { font-family: 'Poppins', sans-serif; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
+.ib-card-meta { font-family: 'Poppins', sans-serif; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--mid); display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* Grid cards */
 .ib-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -273,8 +273,8 @@ const blogCss = `
 .ib-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
 .ib-card:hover .ib-card-img img { transform: scale(1.05); }
 .ib-card-body { padding: 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.ib-card-title { font-family: 'Playfair Display', serif; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.2; color: var(--ink); }
-.ib-card-excerpt { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: var(--mid); line-height: 1.6; font-weight: 300; flex: 1; }
+.ib-card-title { font-family: 'Poppins', sans-serif; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.2; color: var(--ink); }
+.ib-card-excerpt { font-family: 'Poppins', sans-serif; font-size: 15px; font-style: italic; color: var(--mid); line-height: 1.6; font-weight: 300; flex: 1; }
 
 /* Responsive */
 @media (max-width: 900px) { .ib-grid { grid-template-columns: 1fr 1fr; } }

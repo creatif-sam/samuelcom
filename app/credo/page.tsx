@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, Suspense } from "react";
 import { Navbar } from "@/components/organisms/Navbar";
@@ -18,7 +18,7 @@ const css = `
   margin: 0 auto;
 }
 .cdp-hero-eyebrow {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 10px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
@@ -26,7 +26,7 @@ const css = `
   margin-bottom: 24px;
 }
 .cdp-hero-headline {
-  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(52px, 9vw, 110px);
   font-weight: 900;
   line-height: 0.88;
@@ -44,7 +44,7 @@ const css = `
   border-top: 1px solid rgba(34,197,94,.18);
 }
 .cdp-hero-deck {
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 18px;
   font-style: italic;
   line-height: 1.7;
@@ -52,7 +52,7 @@ const css = `
 }
 .cdp-hero-deck + .cdp-hero-deck { margin-top: 16px; }
 .cdp-hero-motto {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 9px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -87,7 +87,7 @@ const css = `
   padding-top: 6px;
 }
 .cdp-article-num-label {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 9px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -105,7 +105,7 @@ const css = `
 
 .cdp-article-right {}
 .cdp-article-title {
-  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(22px, 2.8vw, 34px);
   font-weight: 700;
   line-height: 1.1;
@@ -114,7 +114,7 @@ const css = `
   letter-spacing: -0.015em;
 }
 .cdp-article-body {
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 18px;
   line-height: 1.88;
   color: rgba(245,243,239,.72);
@@ -122,7 +122,7 @@ const css = `
 }
 .cdp-article-body p + p { margin-top: 16px; }
 .cdp-ref-marker {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 10px;
   color: var(--gold);
   vertical-align: super;
@@ -141,7 +141,7 @@ const css = `
 }
 .cdp-decl-inner { max-width: 1100px; margin: 0 auto; }
 .cdp-decl-label {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 9px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
@@ -149,7 +149,7 @@ const css = `
   margin-bottom: 20px;
 }
 .cdp-decl-heading {
-  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(28px, 4.5vw, 56px);
   font-weight: 900;
   line-height: 0.95;
@@ -170,14 +170,14 @@ const css = `
 }
 .cdp-decl-item:hover { background: rgba(34,197,94,.04); }
 .cdp-decl-num {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 9px;
   letter-spacing: 0.28em;
   color: var(--gold);
   margin-bottom: 10px;
 }
 .cdp-decl-text {
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 16px;
   line-height: 1.7;
   font-style: italic;
@@ -191,7 +191,7 @@ const css = `
   margin: 0 auto;
 }
 .cdp-refs-label {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 9px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
@@ -205,13 +205,13 @@ const css = `
   gap: 16px;
   padding: 12px 0;
   border-bottom: 1px solid rgba(245,243,239,.05);
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 15px;
   line-height: 1.65;
   color: rgba(245,243,239,.5);
 }
 .cdp-ref-num {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 9px;
   color: var(--gold);
   flex-shrink: 0;

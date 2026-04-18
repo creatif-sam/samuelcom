@@ -1,4 +1,4 @@
-import { UpdatePasswordForm } from "@/components/update-password-form";
+﻿import { UpdatePasswordForm } from "@/components/update-password-form";
 import { Navbar } from "@/components/organisms/Navbar";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
 import { Suspense } from "react";

@@ -1,4 +1,4 @@
-import { SectionLabel } from "@/components/atoms/SectionLabel";
+﻿import { SectionLabel } from "@/components/atoms/SectionLabel";
 import { ScrollReveal } from "@/components/molecules/ScrollReveal";
 
 export function VisionSection() {

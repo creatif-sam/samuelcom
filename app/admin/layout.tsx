@@ -1,4 +1,4 @@
-import { Toaster } from "sonner";
+﻿import { Toaster } from "sonner";
 
 export default async function AdminLayout({
   children,
@@ -14,7 +14,7 @@ export default async function AdminLayout({
             background: "#1a1814",
             border: "1px solid rgba(240,236,228,.12)",
             color: "#f0ece4",
-            fontFamily: "'Space Mono', monospace",
+            fontFamily: "'Poppins', sans-serif",
             fontSize: "11px",
             letterSpacing: ".05em",
           },

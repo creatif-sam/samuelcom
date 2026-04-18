@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { toast } from "sonner";
@@ -101,7 +101,7 @@ export function ComposeView({ templates, onReload }: { templates: EmailTemplate[
         <label className="adm-label">{mode === "html" ? "Body (HTML)" : "Body (Plain text)"} <span style={{ color: "rgba(240,236,228,.2)", marginLeft: 6 }}>{body.length} chars</span></label>
         {prev && mode === "html"
           ? <div className="adm-html-preview" dangerouslySetInnerHTML={{ __html: body }} />
-          : <textarea className="adm-textarea" style={{ minHeight: "300px", fontFamily: mode === "html" ? "'Space Mono',monospace" : undefined, fontSize: mode === "html" ? "13px" : undefined }} value={body} onChange={(e) => setBody(e.target.value)} placeholder={mode === "html" ? "<h1>Hello,</h1>\n<p>Your message here.</p>" : "Hello,\n\nYour message here."} />
+          : <textarea className="adm-textarea" style={{ minHeight: "300px", fontFamily: mode === "html" ? "'Poppins',sans-serif" : undefined, fontSize: mode === "html" ? "13px" : undefined }} value={body} onChange={(e) => setBody(e.target.value)} placeholder={mode === "html" ? "<h1>Hello,</h1>\n<p>Your message here.</p>" : "Hello,\n\nYour message here."} />
         }
       </div>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -133,7 +133,7 @@ export function InboxView({ emails, db, onReload, templates }: {
   return emails.length === 0 ? (
     <div>
       <p className="adm-empty">No inbound emails yet.</p>
-      <p style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", color: "rgba(240,236,228,.2)", textAlign: "center", letterSpacing: ".08em", lineHeight: 2.2, maxWidth: "440px", margin: "0 auto" }}>
+      <p style={{ fontFamily: "'Poppins',sans-serif", fontSize: "9px", color: "rgba(240,236,228,.2)", textAlign: "center", letterSpacing: ".08em", lineHeight: 2.2, maxWidth: "440px", margin: "0 auto" }}>
         To receive emails here, configure Resend inbound routing<br />
         with webhook → /api/mail/inbound
       </p>

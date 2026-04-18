@@ -1,4 +1,4 @@
-export function VerseStrip() {
+﻿export function VerseStrip() {
   return (
     <div className="verse-strip">
       <div className="verse-cross">✦</div>

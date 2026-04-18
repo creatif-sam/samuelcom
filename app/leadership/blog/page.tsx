@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
@@ -187,7 +187,7 @@ const blogCss = `
 .lb-breadcrumb {
   display: flex; align-items: center; gap: 10px;
   padding: 18px 56px;
-  font-family: 'Space Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
   color: var(--gray);
   border-bottom: 1px solid var(--line);
@@ -199,25 +199,25 @@ const blogCss = `
 /* Header */
 .lb-header { padding: 60px 56px 44px; }
 .lb-eyebrow {
-  font-family: 'Space Mono', monospace;
+  font-family: 'Poppins', sans-serif;
   font-size: 9px; letter-spacing: .4em; text-transform: uppercase;
   color: var(--gold); margin-bottom: 18px;
 }
 .lb-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(48px, 7vw, 96px); line-height: .95;
   color: var(--white); margin: 0 0 22px; font-weight: 700;
 }
 .lb-title em { font-style: italic; color: var(--gold); display: inline; }
 .lb-subtitle {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(16px, 1.8vw, 20px); font-style: italic;
   color: var(--gray); max-width: 540px; line-height: 1.65; font-weight: 300;
 }
 
 /* Content */
 .lb-content { padding: 0 56px 80px; display: flex; flex-direction: column; gap: 28px; }
-.lb-empty { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; color: var(--gray); padding: 60px 0; text-align: center; }
+.lb-empty { font-family: 'Poppins', sans-serif; font-size: 20px; font-style: italic; color: var(--gray); padding: 60px 0; text-align: center; }
 
 /* Featured card */
 .lb-featured {
@@ -234,13 +234,13 @@ const blogCss = `
 .lb-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
 .lb-featured:hover .lb-featured-img img { transform: scale(1.04); }
 .lb-featured-body { padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-.lb-featured-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.15; color: var(--white); }
-.lb-featured-excerpt { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: var(--gray); line-height: 1.65; font-weight: 300; flex: 1; }
-.lb-read-link { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
+.lb-featured-title { font-family: 'Poppins', sans-serif; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.15; color: var(--white); }
+.lb-featured-excerpt { font-family: 'Poppins', sans-serif; font-size: 16px; font-style: italic; color: var(--gray); line-height: 1.65; font-weight: 300; flex: 1; }
+.lb-read-link { font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
 
 /* Labels & meta */
-.lb-card-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
-.lb-card-meta { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--gray); display: flex; gap: 10px; flex-wrap: wrap; }
+.lb-card-label { font-family: 'Poppins', sans-serif; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+.lb-card-meta { font-family: 'Poppins', sans-serif; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--gray); display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* Grid cards */
 .lb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -256,8 +256,8 @@ const blogCss = `
 .lb-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
 .lb-card:hover .lb-card-img img { transform: scale(1.05); }
 .lb-card-body { padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.lb-card-title { font-family: 'Playfair Display', serif; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.2; color: var(--white); }
-.lb-card-excerpt { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-style: italic; color: var(--gray); line-height: 1.6; font-weight: 300; flex: 1; }
+.lb-card-title { font-family: 'Poppins', sans-serif; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.2; color: var(--white); }
+.lb-card-excerpt { font-family: 'Poppins', sans-serif; font-size: 15px; font-style: italic; color: var(--gray); line-height: 1.6; font-weight: 300; flex: 1; }
 
 /* Responsive */
 @media (max-width: 900px) { .lb-grid { grid-template-columns: 1fr 1fr; } }

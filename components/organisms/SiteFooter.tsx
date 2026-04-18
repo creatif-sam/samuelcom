@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -201,7 +201,7 @@ export function SiteFooter() {
       {/* ── FOOTER BOTTOM ── */}
       <div className="sf-bottom">
         <div className="sf-bottom-left">
-          <p className="sf-address">Ghana · United States</p>
+          <p className="sf-address">Ghana · Morocco</p>
           <a href="mailto:impact@samuelgyasi.com" className="sf-email">impact@samuelgyasi.com</a>
         </div>
         <p className="sf-copyright" suppressHydrationWarning>

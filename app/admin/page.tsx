@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
@@ -117,7 +117,7 @@ export default function AdminPage() {
         <button className="adm-hamburger" onClick={() => setNavOpen(!navOpen)} aria-label="Menu">
           <Menu size={18} />
         </button>
-        <span style={{ fontFamily: "'Playfair Display',serif", fontSize: "14px", fontWeight: 700, color: "#f0ece4" }}>Admin</span>
+        <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: "14px", fontWeight: 700, color: "#f0ece4" }}>Admin</span>
         <Link href="/" style={{ color: "rgba(240,236,228,.4)", lineHeight: 0 }}><Globe size={16} /></Link>
       </div>
 
@@ -142,12 +142,12 @@ export default function AdminPage() {
           })}
         </nav>
         <div style={{ padding: "0 28px 24px", marginTop: "auto", display: "flex", flexDirection: "column", gap: "10px" }}>
-          <Link href="/" style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(240,236,228,.3)", textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}>
+          <Link href="/" style={{ fontFamily: "'Poppins',sans-serif", fontSize: "9px", letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(240,236,228,.3)", textDecoration: "none", display: "flex", alignItems: "center", gap: "6px" }}>
             <Globe size={10} /> Back to Site
           </Link>
           <button
             onClick={handleLogout}
-            style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(240,236,228,.35)", background: "none", border: "1px solid rgba(240,236,228,.1)", padding: "8px 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", width: "100%", transition: "border-color .2s, color .2s" }}
+            style={{ fontFamily: "'Poppins',sans-serif", fontSize: "9px", letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(240,236,228,.35)", background: "none", border: "1px solid rgba(240,236,228,.1)", padding: "8px 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: "6px", width: "100%", transition: "border-color .2s, color .2s" }}
             onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(34,197,94,.4)"; (e.currentTarget as HTMLButtonElement).style.color = "#22c55e"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(240,236,228,.1)"; (e.currentTarget as HTMLButtonElement).style.color = "rgba(240,236,228,.35)"; }}
           >

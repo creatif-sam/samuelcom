@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, Suspense } from "react";
 import Link from "next/link";
@@ -23,7 +23,7 @@ const css = `
 body.on-ldp {
   background: #0c0b09;
   color: #f0ede8;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Poppins', sans-serif;
 }
 body.on-ldp .cursor {
   background: #22c55e;

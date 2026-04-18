@@ -1,4 +1,4 @@
-
+﻿
 import { SupabaseLogo } from "./supabase-logo";
 
 export function Hero() {

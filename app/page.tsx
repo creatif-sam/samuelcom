@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+﻿import { Suspense } from "react";
 import { Navbar }                from "@/components/organisms/Navbar";
 import { HeroSection }           from "@/components/organisms/HeroSection";
 import { ValuesSection }         from "@/components/organisms/ValuesSection";

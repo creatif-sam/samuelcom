@@ -1,4 +1,4 @@
-export function GeoBg() {
+﻿export function GeoBg() {
   return (
     <svg
       className="geo-bg"

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, Suspense } from "react";
 import { Navbar } from "@/components/organisms/Navbar";
@@ -37,7 +37,7 @@ const css = `
   margin: 0 auto;
 }
 .msp-hero-eyebrow {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 10px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
@@ -45,7 +45,7 @@ const css = `
   margin-bottom: 24px;
 }
 .msp-hero-headline {
-  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(42px, 7vw, 90px);
   font-weight: 900;
   line-height: 0.93;
@@ -60,7 +60,7 @@ const css = `
   margin: 28px 0;
 }
 .msp-hero-sub {
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(17px, 2vw, 22px);
   font-style: italic;
   color: var(--gray-dark);
@@ -152,7 +152,7 @@ const css = `
   margin-bottom: 14px;
 }
 .msp-year {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 11px;
   letter-spacing: 0.22em;
   color: var(--gold);
@@ -160,14 +160,14 @@ const css = `
   flex-shrink: 0;
 }
 .msp-title {
-  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(18px, 2.2vw, 24px);
   font-weight: 700;
   color: inherit;
   line-height: 1.2;
 }
 .msp-body {
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 17px;
   line-height: 1.88;
   color: var(--gray-dark);
@@ -186,7 +186,7 @@ const css = `
   padding: 18px 24px;
   border-left: 3px solid var(--gold);
   background: rgba(34,197,94,.05);
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-style: italic;
   font-size: 17px;
   line-height: 1.7;
@@ -202,7 +202,7 @@ const css = `
 }
 .msp-now-inner { max-width: 1100px; margin: 0 auto; }
 .msp-now-label {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 9px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
@@ -210,7 +210,7 @@ const css = `
   margin-bottom: 16px;
 }
 .msp-now-heading {
-  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(28px, 4vw, 52px);
   font-weight: 900;
   line-height: 1;
@@ -228,14 +228,14 @@ const css = `
   padding-top: 22px;
 }
 .msp-now-num {
-  font-family: var(--font-space-mono), 'Space Mono', monospace;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 9px;
   letter-spacing: 0.28em;
   color: var(--gold);
   margin-bottom: 12px;
 }
 .msp-now-card-title {
-  font-family: var(--font-playfair), 'Playfair Display', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: inherit;
@@ -243,7 +243,7 @@ const css = `
   line-height: 1.3;
 }
 .msp-now-card-body {
-  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 15px;
   font-style: italic;
   line-height: 1.8;

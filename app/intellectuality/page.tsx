@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
@@ -449,13 +449,13 @@ body.on-idp .cursor-ring {
   border-top: 1px solid var(--line);
 }
 .idp .bs-eyebrow {
-  font-family: 'Space Mono', monospace; font-size: 9px;
+  font-family: 'Poppins', sans-serif; font-size: 9px;
   letter-spacing: .35em; text-transform: uppercase;
   color: var(--red); display: flex; align-items: center; gap: 16px;
 }
 .idp .bs-eyebrow::before, .idp .bs-eyebrow::after { content: ''; width: 36px; height: 1px; background: var(--red); }
 .idp .bs-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(28px,4vw,52px); color: var(--ink); line-height: 1.1;
 }
 .idp .bs-title em { font-style: italic; color: var(--red); }
@@ -467,7 +467,7 @@ body.on-idp .cursor-ring {
   display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px;
 }
 .idp .bs-btn {
-  font-family: 'Space Mono', monospace; font-size: 10px;
+  font-family: 'Poppins', sans-serif; font-size: 10px;
   letter-spacing: .18em; text-transform: uppercase;
   padding: 14px 32px; background: var(--red); color: #fff;
   text-decoration: none; transition: background .25s, color .25s;

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { toast } from "sonner";
@@ -56,8 +56,8 @@ export function WhatsApp() {
             </a>
           </div>
           <div className="adm-wa-link-preview">
-            <span style={{ display: "block", fontFamily: "'Space Mono',monospace", fontSize: "9px", color: "rgba(240,236,228,.35)", marginBottom: "4px" }}>Your chat link:</span>
-            <a href={chatLink} target="_blank" rel="noreferrer" style={{ color: "#25d366", fontFamily: "'Space Mono',monospace", fontSize: "11px", wordBreak: "break-all" }}>{chatLink}</a>
+            <span style={{ display: "block", fontFamily: "'Poppins',sans-serif", fontSize: "9px", color: "rgba(240,236,228,.35)", marginBottom: "4px" }}>Your chat link:</span>
+            <a href={chatLink} target="_blank" rel="noreferrer" style={{ color: "#25d366", fontFamily: "'Poppins',sans-serif", fontSize: "11px", wordBreak: "break-all" }}>{chatLink}</a>
           </div>
         </div>
 
@@ -90,10 +90,10 @@ export function WhatsApp() {
       <div style={{ marginTop: "40px" }}>
         <div className="adm-section-title" style={{ marginBottom: "16px" }}>Chat Button Preview</div>
         <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "center" }}>
-          <a href={chatLink} target="_blank" rel="noreferrer" style={{ background: "#25d366", color: "#fff", padding: "14px 24px", display: "inline-flex", alignItems: "center", gap: "10px", fontFamily: "'Space Mono',monospace", fontSize: "10px", letterSpacing: ".15em", textDecoration: "none" }}>
+          <a href={chatLink} target="_blank" rel="noreferrer" style={{ background: "#25d366", color: "#fff", padding: "14px 24px", display: "inline-flex", alignItems: "center", gap: "10px", fontFamily: "'Poppins',sans-serif", fontSize: "10px", letterSpacing: ".15em", textDecoration: "none" }}>
             <Phone size={14} />Chat on WhatsApp
           </a>
-          <span style={{ fontFamily: "'Space Mono',monospace", fontSize: "9px", color: "rgba(240,236,228,.25)", letterSpacing: ".1em" }}>
+          <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: "9px", color: "rgba(240,236,228,.25)", letterSpacing: ".1em" }}>
             Site-visible chat button
           </span>
         </div>
