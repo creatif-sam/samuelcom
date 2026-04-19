@@ -5,10 +5,11 @@ import Link from "next/link";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const navLinks = [
-  { href: "/my-story",   label: "My Story",  badge: "" },
-  { href: "/blog",       label: "Blog",      badge: "5" },
-  { href: "/#what-i-do", label: "What I Do", badge: "3" },
-  { href: "/#connect",   label: "Connect",   badge: "" },
+  { href: "/",           label: "Home"      },
+  { href: "/my-story",   label: "My Story"  },
+  { href: "/blog",       label: "Blog"      },
+  { href: "/#what-i-do", label: "What I Do" },
+  { href: "/#connect",   label: "Connect"   },
 ];
 
 export function Navbar() {
@@ -34,20 +35,17 @@ export function Navbar() {
       {/* ── NAV BAR ── */}
       <nav className={`portfolio-nav ${scrolled ? "nav-scrolled" : ""}`}>
 
-        {/* Left: availability badge */}
-        <div className="nav-avail">
-          <span className="nav-avail-dot" />
-          Available for New Opportunities
-        </div>
+        {/* Left: logo */}
+        <Link href="/" className="nav-logo" onClick={close}>
+          <span className="nav-logo-circle">SG</span>
+          <span className="nav-logo-text">Samuel.</span>
+        </Link>
 
         {/* Center: desktop links */}
         <ul className="nav-links nav-desktop">
           {navLinks.map((l) => (
             <li key={l.href}>
-              <Link href={l.href}>
-                {l.label}
-                {l.badge && <span className="nav-badge">[{l.badge}]</span>}
-              </Link>
+              <Link href={l.href}>{l.label}</Link>
             </li>
           ))}
         </ul>
@@ -55,7 +53,7 @@ export function Navbar() {
         {/* Right: CTA button + hamburger */}
         <div className="nav-right">
           <Link href="/#connect" className="nav-cta-btn nav-desktop">
-            Let&apos;s Talk <span aria-hidden="true">↗</span>
+            Contact Me
           </Link>
           <button
             className={`nav-burger ${open ? "nav-burger--open" : ""}`}
