@@ -1,7 +1,6 @@
 ﻿import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { CustomCursor } from "@/components/organisms/CustomCursor";
 import { CookieBanner } from "@/components/organisms/CookieBanner";
 import { Analytics } from "@/components/Analytics";
 import { Providers } from "./providers";
@@ -139,7 +138,6 @@ export default function RootLayout({
         className={`${poppins.variable}`}
       >
         <Providers>
-          <CustomCursor />
           <Analytics />
           {children}
           <CookieBanner />

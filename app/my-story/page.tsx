@@ -47,7 +47,7 @@ const css = `
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(17px, 2vw, 22px);
   font-style: italic;
-  color: var(--gray-dark);
+  color: rgba(10,10,10,0.65);
   max-width: 560px;
   line-height: 1.65;
 }
@@ -144,7 +144,7 @@ const css = `
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 17px;
   line-height: 1.88;
-  color: var(--gray-dark);
+  color: rgba(10,10,10,0.62);
 }
 
 
@@ -216,7 +216,7 @@ const css = `
   font-size: 15px;
   font-style: italic;
   line-height: 1.8;
-  color: var(--gray-dark);
+  color: rgba(10,10,10,0.62);
 }
 
 

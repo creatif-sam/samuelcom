@@ -134,9 +134,8 @@ export function ValuesSection() {
         .values-sub {
           margin-top: 18px;
           font-family: var(--font-poppins), 'Poppins', sans-serif;
-          font-size: clamp(16px, 1.8vw, 20px);
+          font-size: clamp(14px, 1.5vw, 17px);
           color: var(--gray-mid);
-          font-style: italic;
         }
 
         /* ── Cards grid ── */
@@ -259,10 +258,9 @@ export function ValuesSection() {
 
         .vs-card-body {
           font-family: var(--font-poppins), 'Poppins', sans-serif;
-          font-size: clamp(15px, 1.4vw, 17px);
+          font-size: clamp(13px, 1.2vw, 15px);
           line-height: 1.7;
           color: var(--gray-mid);
-          font-style: italic;
           transition: color 0.3s;
         }
         .vs-card:hover .vs-card-body { color: var(--accent); }
