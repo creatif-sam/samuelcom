@@ -119,67 +119,100 @@ body {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 500;
-  padding: 22px 50px;
+  padding: 18px 4%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background 0.4s, border-color 0.4s, padding 0.3s;
-  background: rgba(10,10,10,0.92);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(74,222,128,0.1);
+  transition: box-shadow 0.3s, padding 0.3s;
+  background: #f5f3ef;
+  border-bottom: 1px solid rgba(10,10,10,0.06);
 }
 .portfolio-nav.nav-scrolled {
-  padding: 14px 50px;
-  background: rgba(6,6,6,0.97);
-  border-color: rgba(74,222,128,0.14);
+  padding: 12px 4%;
+  box-shadow: 0 2px 20px rgba(10,10,10,0.08);
+  border-bottom-color: rgba(10,10,10,0.1);
 }
 
-.nav-logo {
+/* Availability badge — left side */
+.nav-avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: #f5f3ef;
-  text-decoration: none;
-  position: relative; z-index: 2;
-}
-
-/* SKG logo visibility in light mode */
-.light .nav-logo {
+  font-size: 12px;
+  font-weight: 500;
   color: #0a0a0a;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(34,197,94,0.5);
+  border-radius: 100px;
+  padding: 6px 14px 6px 10px;
+  background: rgba(34,197,94,0.06);
+  white-space: nowrap;
+}
+.nav-avail-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: phx-blink 2.2s ease-in-out infinite;
 }
 
-/* Desktop links */
+/* Desktop links wrapper */
 .nav-desktop { display: flex; }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 36px;
+  gap: 32px;
 }
 
 .nav-links a {
   font-family: var(--font-poppins), 'Poppins', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #f5f3ef;
+  font-size: 13px;
+  color: rgba(10,10,10,0.65);
   text-decoration: none;
   position: relative;
-  transition: color 0.3s;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
-.nav-links a:hover { color: var(--gold-start); }
+.nav-links a:hover { color: #0a0a0a; }
 
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -3px; left: 0;
-  width: 0; height: 1px;
-  background: linear-gradient(90deg, #4ade80, #16a34a);
-  transition: width 0.3s;
+.nav-badge {
+  font-size: 10px;
+  color: rgba(10,10,10,0.35);
+  font-weight: 400;
 }
-.nav-links a:hover::after { width: 100%; }
+
+/* Right side: CTA + hamburger */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #0a0a0a;
+  color: #f5f3ef;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+  white-space: nowrap;
+}
+.nav-cta-btn:hover {
+  background: #22c55e;
+  color: #0a0a0a;
+  transform: translateY(-1px);
+}
 
 /* ── HAMBURGER ── */
 .nav-burger {
@@ -195,7 +228,7 @@ body {
 .nav-burger span {
   display: block;
   width: 24px; height: 1.5px;
-  background: #f5f3ef;
+  background: #0a0a0a;
   transition: transform 0.35s ease, opacity 0.25s ease, width 0.3s ease;
   transform-origin: center;
 }
@@ -310,17 +343,13 @@ body {
 /* ── RESPONSIVE NAV ── */
 @media (max-width: 768px) {
   .portfolio-nav {
-    padding: 18px 24px;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-bottom-color: transparent;
+    padding: 14px 5%;
   }
-  .portfolio-nav.nav-scrolled { padding: 12px 24px; }
+  .portfolio-nav.nav-scrolled { padding: 10px 5%; }
+  .nav-avail { display: none; }
   .nav-desktop { display: none; }
+  .nav-cta-btn { display: none; }
   .nav-burger { display: flex; }
-  .nav-logo { color: var(--white); }
-  .nav-burger span { background: var(--white); }
 }
 
 /* ── HERO V2 ── */
@@ -1064,62 +1093,59 @@ body {
 .phx-hero {
   position: relative;
   background: #f5f3ef;
-  min-height: 100vh;
   padding-top: 80px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-/* Name section — fills most of the hero height */
-.phx-name-section {
-  flex: 1;
+/* Name row — SAMUEL and GYASI inline with photo absolutely centered */
+.phx-name-row {
   position: relative;
-  padding: 40px 5% 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: clamp(520px, 80vh, 960px);
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: clamp(140px, 22vh, 280px) 3.5% 0;
 }
 
-/* "SAMUEL" — outline/hollow */
+/* "SAMUEL" — outline/hollow, left side */
 .phx-fname {
   display: block;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
-  font-size: clamp(64px, 14.5vw, 200px);
+  font-size: clamp(50px, 9vw, 142px);
   font-weight: 800;
   color: transparent;
-  -webkit-text-stroke: 2px rgba(10,10,10,0.85);
+  -webkit-text-stroke: 2.5px rgba(10,10,10,0.9);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  line-height: 0.88;
+  letter-spacing: -0.01em;
+  line-height: 1;
   user-select: none;
   margin: 0;
+  flex-shrink: 0;
 }
 
-/* "GYASI" — solid bold, right-aligned */
+/* "GYASI" — solid bold, right side */
 .phx-lname {
   display: block;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
-  font-size: clamp(64px, 14.5vw, 200px);
+  font-size: clamp(50px, 9vw, 142px);
   font-weight: 800;
   color: #0a0a0a;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  line-height: 0.88;
-  text-align: right;
+  letter-spacing: -0.01em;
+  line-height: 1;
   user-select: none;
-  margin-top: 6px;
+  flex-shrink: 0;
 }
 
-/* Portrait photo — floats above the name */
+/* Portrait photo — absolutely centered, head above names, body below */
 .phx-photo-fg {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: clamp(420px, 54vw, 720px);
+  width: clamp(200px, 26vw, 400px);
   z-index: 10;
 }
 .phx-photo-img {
@@ -1127,20 +1153,18 @@ body {
   object-position: center bottom;
 }
 
-/* Bottom bar — info left, socials right */
-.phx-bottom-bar {
+/* Info + social pills row */
+.phx-info-row {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: 32px 5% 56px;
-  position: relative;
-  z-index: 20;
-  background: linear-gradient(to top, #f5f3ef 70%, transparent);
+  padding: 28px 3.5% 60px;
+  gap: 20px;
 }
 
 /* Left info block */
 .phx-info {
-  max-width: 320px;
+  max-width: 300px;
 }
 
 .phx-avail {
@@ -1214,108 +1238,94 @@ body {
   transform: translateY(-2px);
 }
 
-/* Right socials block */
+/* Right socials — pill links */
 .phx-socials {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
   align-items: flex-end;
+  flex-shrink: 0;
 }
 
-.phx-soc {
+.phx-soc-pill {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: rgba(10,10,10,0.65);
-  text-decoration: none;
+  gap: 8px;
+  border: 1px solid rgba(10,10,10,0.14);
+  border-radius: 100px;
+  padding: 9px 18px;
   font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: color 0.2s, transform 0.2s;
-}
-.phx-soc svg {
-  flex-shrink: 0;
-  opacity: 0.7;
-}
-.phx-soc:hover {
   color: #0a0a0a;
-  transform: translateX(-4px);
+  text-decoration: none;
+  background: rgba(10,10,10,0.04);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  white-space: nowrap;
 }
-.phx-soc:hover svg {
-  opacity: 1;
+.phx-soc-pill:hover {
+  background: rgba(10,10,10,0.09);
+  border-color: rgba(10,10,10,0.22);
+  transform: translateX(-2px);
 }
+.phx-soc-pill svg { flex-shrink: 0; opacity: 0.65; }
+.phx-soc-pill:hover svg { opacity: 1; }
 
 /* ── PHX RESPONSIVE ── */
 @media (max-width: 1024px) {
+  .phx-name-row {
+    padding-top: clamp(120px, 20vh, 240px);
+  }
+  .phx-fname, .phx-lname {
+    font-size: clamp(42px, 8.5vw, 125px);
+  }
   .phx-photo-fg {
-    width: clamp(340px, 52vw, 620px);
+    width: clamp(180px, 28vw, 360px);
   }
 }
 
 @media (max-width: 768px) {
-  .phx-hero {
-    min-height: 100svh;
+  .phx-hero { min-height: unset; }
+  .phx-name-row {
+    padding-top: clamp(100px, 44vw, 280px);
   }
-  .phx-name-section {
-    padding: 20px 4% 0;
-    min-height: clamp(420px, 85vw, 620px);
-  }
-  .phx-fname {
-    font-size: clamp(44px, 12vw, 88px);
+  .phx-fname, .phx-lname {
+    font-size: clamp(34px, 10vw, 80px);
     -webkit-text-stroke: 1.5px rgba(10,10,10,0.85);
   }
-  .phx-lname {
-    font-size: clamp(44px, 12vw, 88px);
-  }
   .phx-photo-fg {
-    width: clamp(280px, 76vw, 480px);
+    width: clamp(170px, 58vw, 360px);
   }
-  .phx-bottom-bar {
+  .phx-info-row {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    padding: 20px 4% 44px;
+    gap: 32px;
+    padding-bottom: 48px;
   }
-  .phx-info {
-    max-width: 100%;
-  }
-  .phx-avail { font-size: 11px; }
-  .phx-role-title { font-size: 16px; }
-  .phx-desc { font-size: 13px; margin-bottom: 18px; }
-  .phx-cta { font-size: 12px; padding: 11px 22px; }
+  .phx-info { max-width: 100%; }
   .phx-socials {
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 16px;
+    align-items: flex-start;
+    gap: 10px;
   }
-  .phx-soc { font-size: 11px; }
+  .phx-role-title { font-size: 16px; }
+  .phx-desc { font-size: 13px; }
 }
 
 @media (max-width: 480px) {
-  .phx-name-section {
-    min-height: clamp(360px, 95vw, 500px);
+  .phx-name-row {
+    padding-top: clamp(90px, 54vw, 240px);
   }
   .phx-fname, .phx-lname {
-    font-size: clamp(36px, 11vw, 64px);
+    font-size: clamp(28px, 9.5vw, 62px);
     -webkit-text-stroke: 1px rgba(10,10,10,0.85);
   }
   .phx-photo-fg {
-    width: clamp(240px, 84vw, 380px);
+    width: clamp(155px, 70vw, 300px);
   }
-  .phx-bottom-bar {
-    padding-bottom: 36px;
-    gap: 20px;
-  }
-  .phx-socials { gap: 12px; }
-  .phx-soc span { display: none; }
-  .phx-soc svg { width: 18px; height: 18px; opacity: 1; }
-  .phx-soc {
-    background: rgba(10,10,10,0.08);
-    border-radius: 50%;
-    padding: 10px;
+  .phx-soc-pill {
+    padding: 7px 13px;
+    font-size: 11px;
   }
 }
 

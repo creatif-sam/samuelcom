@@ -5,12 +5,10 @@ import Link from "next/link";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const navLinks = [
-  { href: "/",          label: "Home",     external: false },
-  { href: "/my-story",  label: "My Story", external: false },
-  { href: "/blog",      label: "Blog",     external: false },
-  { href: "/#what-i-do",label: "What I Do",external: false },
-  { href: "/#vision",   label: "Vision",   external: false },
-  { href: "/#connect",  label: "Connect",  external: false },
+  { href: "/my-story",   label: "My Story",  badge: "" },
+  { href: "/blog",       label: "Blog",      badge: "5" },
+  { href: "/#what-i-do", label: "What I Do", badge: "3" },
+  { href: "/#connect",   label: "Connect",   badge: "" },
 ];
 
 export function Navbar() {
@@ -35,27 +33,39 @@ export function Navbar() {
     <>
       {/* ── NAV BAR ── */}
       <nav className={`portfolio-nav ${scrolled ? "nav-scrolled" : ""}`}>
-        <a href="/" className="nav-logo" onClick={close}>SKG</a>
 
-        {/* Desktop links */}
+        {/* Left: availability badge */}
+        <div className="nav-avail">
+          <span className="nav-avail-dot" />
+          Available for New Opportunities
+        </div>
+
+        {/* Center: desktop links */}
         <ul className="nav-links nav-desktop">
           {navLinks.map((l) => (
-            <li key={l.href}><Link href={l.href}>{l.label}</Link></li>
+            <li key={l.href}>
+              <Link href={l.href}>
+                {l.label}
+                {l.badge && <span className="nav-badge">[{l.badge}]</span>}
+              </Link>
+            </li>
           ))}
         </ul>
 
-        {/* Theme toggle (desktop) */}
-        <ThemeSwitcher />
-
-        {/* Hamburger */}
-        <button
-          className={`nav-burger ${open ? "nav-burger--open" : ""}`}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-        >
-          <span /><span /><span />
-        </button>
+        {/* Right: CTA button + hamburger */}
+        <div className="nav-right">
+          <Link href="/#connect" className="nav-cta-btn nav-desktop">
+            Let&apos;s Talk <span aria-hidden="true">↗</span>
+          </Link>
+          <button
+            className={`nav-burger ${open ? "nav-burger--open" : ""}`}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
+          >
+            <span /><span /><span />
+          </button>
+        </div>
       </nav>
 
       {/* ── MOBILE DRAWER ── */}
