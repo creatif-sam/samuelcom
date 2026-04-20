@@ -1,166 +1,145 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
 import { Navbar } from "@/components/organisms/Navbar";
 
-export const metadata: Metadata = {
-  title: "Transformation — Blog",
-  description:
-    "Stories and reflections on personal and societal transformation — breaking cycles, becoming, and building what lasts. By Samuel Kobina Gyasi.",
-};
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params;
+  const supabase = createAnonClient();
+  const { data } = await supabase
+    .from("blog_posts")
+    .select("title, excerpt")
+    .eq("slug", slug)
+    .eq("category", "transformation")
+    .single();
+  return {
+    title: data ? `${data.title} — Transformation` : "Transformation — Blog",
+    description: data?.excerpt ?? "Transformation stories by Samuel Kobina Gyasi.",
+  };
+}
 
 interface Post {
   id: string;
   title: string;
   slug: string;
   excerpt: string | null;
+  content: string | null;
   created_at: string;
   read_time_minutes: number;
   featured_image_url: string | null;
+  cover_image_url: string | null;
+  mid_image_url: string | null;
+  infographic_url: string | null;
+  spotify_url: string | null;
+  photo_attachments: { url: string; caption?: string; alt?: string }[] | null;
 }
 
-const samplePosts: Post[] = [
-  {
-    id: "t1",
-    title: "The Anatomy of Transformation: From Identity to Impact",
-    slug: "anatomy-of-transformation",
-    excerpt:
-      "True transformation is not a change of clothes — it is a change of self. It begins with an honest reckoning with who you are before it can move toward who you are becoming.",
-    created_at: "2026-02-25",
-    read_time_minutes: 10,
-    featured_image_url: null,
-  },
-  {
-    id: "t2",
-    title: "Breaking Cycles: How One Generation Can Change Everything",
-    slug: "breaking-cycles",
-    excerpt:
-      "Every generation inherits the unfinished work of the one before it. The question is not whether you received a broken inheritance — almost everyone did. The question is what you do with it.",
-    created_at: "2026-02-08",
-    read_time_minutes: 8,
-    featured_image_url: null,
-  },
-  {
-    id: "t3",
-    title: "On Becoming: A Reflection on Growth, Purpose, and Responsibility",
-    slug: "on-becoming",
-    excerpt:
-      "Becoming is uncomfortable. Becoming requires that you hold the past and the future in tension, honouring what was while refusing to be defined by it.",
-    created_at: "2026-01-22",
-    read_time_minutes: 7,
-    featured_image_url: null,
-  },
-  {
-    id: "t4",
-    title: "Ghana to the World: A Vision for the Next Generation of African Leaders",
-    slug: "ghana-to-the-world",
-    excerpt:
-      "Africa does not need saving. It needs activating. There is a generation rising — equipped, rooted, and globally connected — ready to show what transformation looks like from the inside out.",
-    created_at: "2025-12-30",
-    read_time_minutes: 9,
-    featured_image_url: null,
-  },
-];
+function toSpotifyEmbed(url: string): string {
+  return url.replace("open.spotify.com/", "open.spotify.com/embed/");
+}
 
-export default async function TransformationBlogPage() {
-  let posts: Post[] = samplePosts;
-  try {
-    const supabase = createAnonClient();
-    const { data } = await supabase
-      .from("blog_posts")
-      .select("id, title, slug, excerpt, created_at, read_time_minutes, featured_image_url")
-      .eq("category", "transformation")
-      .eq("published", true)
-      .order("created_at", { ascending: false });
-    if (data && data.length > 0) posts = data;
-  } catch { /* fallback */ }
+export default async function TransformationPostPage(
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
+  const supabase = createAnonClient();
+  const { data } = await supabase
+    .from("blog_posts")
+    .select("id, title, slug, excerpt, content, created_at, read_time_minutes, featured_image_url, cover_image_url, mid_image_url, infographic_url, spotify_url, photo_attachments")
+    .eq("slug", slug)
+    .eq("category", "transformation")
+    .eq("published", true)
+    .single();
 
-  const [featured, ...rest] = posts;
+  if (!data) notFound();
+  const post = data as Post;
 
   return (
     <>
-      <style>{blogCss}</style>
+      <style>{postCss}</style>
       <Navbar />
 
-      <main className="tb-page">
-        {/* Breadcrumb */}
-        <nav className="tb-breadcrumb" aria-label="Breadcrumb">
+      <main className="tb-post">
+        <nav className="tb-bc">
           <Link href="/">Home</Link>
           <span>›</span>
           <Link href="/transformation">Transformation</Link>
           <span>›</span>
-          <span>Blog</span>
+          <Link href="/transformation/blog">Blog</Link>
+          <span>›</span>
+          <span>{post.title}</span>
         </nav>
 
-        {/* Page header */}
-        <header className="tb-header">
-          <div className="tb-eyebrow">Writings on Change</div>
-          <h1 className="tb-title">
-            Stories of <em>Becoming</em>
-          </h1>
-          <p className="tb-subtitle">
-            On breaking cycles, building new realities, and the relentless work of becoming who you were created to be.
-          </p>
-        </header>
+        {post.cover_image_url && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <div className="tb-cover">
+            <img src={post.cover_image_url} alt={post.title} />
+          </div>
+        )}
 
-        {/* Posts */}
-        <section className="tb-content">
-          {posts.length === 0 ? (
-            <p className="tb-empty">Transformation stories coming soon.</p>
-          ) : (
-            <>
-              {/* Featured post */}
-              {featured && (
-                <Link href={`/transformation/blog/${featured.slug}`} className="tb-featured">
-                  {featured.featured_image_url && (
-                    <div className="tb-featured-img">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={featured.featured_image_url} alt={featured.title} />
-                    </div>
-                  )}
-                  <div className="tb-featured-body">
-                    <div className="tb-card-label">Transformation</div>
-                    <h2 className="tb-featured-title">{featured.title}</h2>
-                    {featured.excerpt && <p className="tb-featured-excerpt">{featured.excerpt}</p>}
-                    <div className="tb-card-meta">
-                      <span>{new Date(featured.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
-                      <span>·</span>
-                      <span>{featured.read_time_minutes} min read</span>
-                    </div>
-                    <div className="tb-read-link">Read story →</div>
-                  </div>
-                </Link>
-              )}
+        <article className="tb-article">
+          <header className="tb-art-head">
+            <div className="tb-art-label">Transformation · Story &amp; Becoming</div>
+            <h1 className="tb-art-title">{post.title}</h1>
+            {post.excerpt && <p className="tb-art-excerpt">{post.excerpt}</p>}
+            <div className="tb-art-meta">
+              <span>{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
+              <span>·</span>
+              <span>{post.read_time_minutes} min read</span>
+            </div>
+          </header>
 
-              {/* Rest of posts grid */}
-              {rest.length > 0 && (
-                <div className="tb-grid">
-                  {rest.map((post) => (
-                    <Link key={post.id} href={`/transformation/blog/${post.slug}`} className="tb-card">
-                      {post.featured_image_url && (
-                        <div className="tb-card-img">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={post.featured_image_url} alt={post.title} />
-                        </div>
-                      )}
-                      <div className="tb-card-body">
-                        <div className="tb-card-label">Transformation</div>
-                        <h2 className="tb-card-title">{post.title}</h2>
-                        {post.excerpt && <p className="tb-card-excerpt">{post.excerpt}</p>}
-                        <div className="tb-card-meta">
-                          <span>{new Date(post.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</span>
-                          <span>·</span>
-                          <span>{post.read_time_minutes} min read</span>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </>
+          {post.spotify_url && (
+            <div className="tb-spotify">
+              <iframe
+                src={toSpotifyEmbed(post.spotify_url)}
+                width="100%"
+                height="152"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                style={{ borderRadius: "12px", border: "none" }}
+                title="Listen on Spotify"
+              />
+            </div>
           )}
-        </section>
+
+          {post.content && (
+            <div
+              className="tb-art-body"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
+          )}
+
+          {post.mid_image_url && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img className="tb-art-mid-img" src={post.mid_image_url} alt="" />
+          )}
+
+          {post.photo_attachments && post.photo_attachments.length > 0 && (
+            <div className="tb-photos">
+              {post.photo_attachments.map((p, i) => (
+                <figure key={i} className="tb-photo-fig">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={p.url} alt={p.alt ?? p.caption ?? ""} />
+                  {p.caption && <figcaption>{p.caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          )}
+
+          {post.infographic_url && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img className="tb-art-infographic" src={post.infographic_url} alt="Infographic" />
+          )}
+
+          <div className="tb-back">
+            <Link href="/transformation/blog">← Back to Transformation Blog</Link>
+          </div>
+        </article>
       </main>
 
       <SiteFooter />
@@ -168,105 +147,60 @@ export default async function TransformationBlogPage() {
   );
 }
 
-const blogCss = `
-/* ── Transformation blog listing ─────────────────────────── */
-.tb-page {
+const postCss = `
+/* ── Transformation single post ──────────────────────────── */
+.tb-post {
   --void: #07080a;
   --white: #f2f0ec;
   --ember: #e8692a;
   --mist: #8a8880;
   --line: rgba(242,240,236,.06);
-  --card: #131619;
   background: var(--void);
   color: var(--white);
   min-height: 100vh;
   padding-top: 72px;
 }
-
-/* Breadcrumb */
-.tb-breadcrumb {
-  display: flex; align-items: center; gap: 10px;
+.tb-bc {
+  display: flex; align-items: center; gap: 8px;
   padding: 18px 56px;
   font-family: 'Poppins', sans-serif;
   font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
   color: var(--mist);
   border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
 }
-.tb-breadcrumb a { color: var(--mist); text-decoration: none; transition: color .25s; }
-.tb-breadcrumb a:hover { color: var(--ember); }
-.tb-breadcrumb span:last-child { color: rgba(242,240,236,.6); }
-
-/* Header */
-.tb-header { padding: 60px 56px 44px; }
-.tb-eyebrow {
-  font-family: 'Poppins', sans-serif;
-  font-size: 9px; letter-spacing: .4em; text-transform: uppercase;
-  color: var(--ember); margin-bottom: 18px;
-}
-.tb-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(48px, 7vw, 96px); line-height: .95;
-  color: var(--white); margin: 0 0 22px; font-weight: 700;
-}
-.tb-title em { font-style: italic; color: var(--ember); display: inline; }
-.tb-subtitle {
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(16px, 1.8vw, 20px); font-style: italic;
-  color: var(--mist); max-width: 540px; line-height: 1.65; font-weight: 300;
-}
-
-/* Content */
-.tb-content { padding: 0 56px 80px; display: flex; flex-direction: column; gap: 28px; }
-.tb-empty { font-family: 'Poppins', sans-serif; font-size: 20px; font-style: italic; color: var(--mist); padding: 60px 0; text-align: center; }
-
-/* Featured card */
-.tb-featured {
-  display: grid; grid-template-columns: 1fr 1fr;
-  min-height: 340px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 12px; overflow: hidden;
-  text-decoration: none; color: var(--white);
-  transition: border-color .3s, box-shadow .3s;
-}
-.tb-featured:hover { border-color: rgba(232,105,42,.35); box-shadow: 0 8px 40px rgba(0,0,0,.5); }
-.tb-featured-img { width: 100%; height: 100%; overflow: hidden; background: rgba(255,255,255,.03); }
-.tb-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
-.tb-featured:hover .tb-featured-img img { transform: scale(1.04); }
-.tb-featured-body { padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-.tb-featured-title { font-family: 'Poppins', sans-serif; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.15; color: var(--white); }
-.tb-featured-excerpt { font-family: 'Poppins', sans-serif; font-size: 16px; font-style: italic; color: var(--mist); line-height: 1.65; font-weight: 300; flex: 1; }
-.tb-read-link { font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ember); margin-top: 4px; }
-
-/* Labels & meta */
-.tb-card-label { font-family: 'Poppins', sans-serif; font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--ember); }
-.tb-card-meta { font-family: 'Poppins', sans-serif; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--mist); display: flex; gap: 10px; flex-wrap: wrap; }
-
-/* Grid cards */
-.tb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.tb-card {
-  background: var(--card); border: 1px solid var(--line);
-  border-radius: 10px; overflow: hidden;
-  text-decoration: none; color: var(--white);
-  display: flex; flex-direction: column;
-  transition: border-color .3s, transform .3s;
-}
-.tb-card:hover { border-color: rgba(232,105,42,.28); transform: translateY(-3px); }
-.tb-card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: rgba(255,255,255,.03); }
-.tb-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
-.tb-card:hover .tb-card-img img { transform: scale(1.05); }
-.tb-card-body { padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.tb-card-title { font-family: 'Poppins', sans-serif; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.2; color: var(--white); }
-.tb-card-excerpt { font-family: 'Poppins', sans-serif; font-size: 15px; font-style: italic; color: var(--mist); line-height: 1.6; font-weight: 300; flex: 1; }
-
-/* Responsive */
-@media (max-width: 900px) { .tb-grid { grid-template-columns: 1fr 1fr; } }
+.tb-bc a { color: var(--mist); text-decoration: none; transition: color .2s; }
+.tb-bc a:hover { color: var(--ember); }
+.tb-bc span:last-child { color: rgba(242,240,236,.6); max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tb-cover { width: 100%; max-height: 480px; overflow: hidden; }
+.tb-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tb-article { max-width: 760px; margin: 0 auto; padding: 56px 32px 80px; }
+.tb-art-head { margin-bottom: 40px; }
+.tb-art-label { font-family: 'Poppins', sans-serif; font-size: 9px; letter-spacing: .35em; text-transform: uppercase; color: var(--ember); margin-bottom: 16px; }
+.tb-art-title { font-family: 'Poppins', sans-serif; font-size: clamp(28px, 5vw, 52px); line-height: 1.1; color: var(--white); margin: 0 0 16px; font-weight: 700; }
+.tb-art-excerpt { font-family: 'Poppins', sans-serif; font-size: clamp(16px, 1.6vw, 20px); font-style: italic; color: var(--mist); line-height: 1.65; font-weight: 300; margin: 0 0 16px; }
+.tb-art-meta { font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--mist); display: flex; gap: 8px; flex-wrap: wrap; }
+.tb-spotify { margin: 32px 0; }
+.tb-art-body { font-family: 'Poppins', sans-serif; font-size: 17px; line-height: 1.85; color: var(--white); margin: 32px 0; }
+.tb-art-body p { margin: 0 0 1.4em; }
+.tb-art-body h2 { font-size: 1.5em; font-weight: 700; margin: 2em 0 .7em; color: var(--white); }
+.tb-art-body h3 { font-size: 1.2em; font-weight: 600; margin: 1.8em 0 .6em; color: var(--white); }
+.tb-art-body blockquote { border-left: 3px solid var(--ember); margin: 2em 0; padding: 12px 24px; font-style: italic; color: var(--mist); }
+.tb-art-body a { color: var(--ember); text-decoration: underline; }
+.tb-art-body ul, .tb-art-body ol { padding-left: 1.6em; margin: 1em 0; }
+.tb-art-body li { margin-bottom: .4em; }
+.tb-art-mid-img { width: 100%; border-radius: 10px; margin: 32px 0; display: block; }
+.tb-photos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 32px 0; }
+.tb-photo-fig { margin: 0; }
+.tb-photo-fig img { width: 100%; border-radius: 8px; display: block; }
+.tb-photo-fig figcaption { font-family: 'Poppins', sans-serif; font-size: 11px; color: var(--mist); margin-top: 6px; font-style: italic; }
+.tb-art-infographic { width: 100%; border-radius: 10px; margin: 32px 0; display: block; }
+.tb-back { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); }
+.tb-back a { font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ember); text-decoration: none; }
+.tb-back a:hover { text-decoration: underline; }
 @media (max-width: 640px) {
-  .tb-breadcrumb, .tb-header, .tb-content { padding-left: 20px; padding-right: 20px; }
-  .tb-featured { grid-template-columns: 1fr; }
-  .tb-featured-img { aspect-ratio: 16/7; height: auto; }
-  .tb-featured-body { padding: 28px 24px; }
-  .tb-grid { grid-template-columns: 1fr; }
+  .tb-bc { padding-left: 20px; padding-right: 20px; }
+  .tb-article { padding: 36px 20px 60px; }
+  .tb-photos { grid-template-columns: 1fr; }
 }
 `;
-

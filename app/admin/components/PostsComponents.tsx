@@ -1,9 +1,111 @@
 ﻿"use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, X } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Upload } from "lucide-react";
 import { BlogPost, CATEGORIES, slugify } from "./types";
+import { createClient } from "@/lib/supabase/client";
+
+// ── IMAGE UPLOAD HELPER ───────────────────────────────────────────────────
+async function uploadImage(file: File): Promise<string> {
+  const supabase = createClient();
+  const ext = file.name.split(".").pop() ?? "jpg";
+  const path = `blog/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+  const { error } = await supabase.storage.from("main_blog_images").upload(path, file, { upsert: false });
+  if (error) throw new Error(error.message);
+  const { data } = supabase.storage.from("main_blog_images").getPublicUrl(path);
+  return data.publicUrl;
+}
+
+// ── REUSABLE IMAGE URL + UPLOAD FIELD ────────────────────────────────────
+function ImageUploadField({ label, value, onChange, placeholder }: {
+  label: React.ReactNode; value: string; onChange: (v: string) => void; placeholder?: string;
+}) {
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const url = await uploadImage(file);
+      onChange(url);
+      toast.success("Image uploaded");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  }
+
+  return (
+    <div className="adm-field">
+      <label className="adm-label">{label}</label>
+      <div style={{ display: "flex", gap: "8px" }}>
+        <input className="adm-input" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder ?? "https://…"} style={{ flex: 1 }} />
+        <button type="button" onClick={() => fileRef.current?.click()}
+          style={{ background: "rgba(34,197,94,0.10)", border: "1px solid rgba(34,197,94,0.25)", color: "#22c55e", borderRadius: "7px", padding: "0 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", fontSize: "11px", fontWeight: 600, whiteSpace: "nowrap", flexShrink: 0 }}
+          disabled={uploading}>
+          <Upload size={11} />{uploading ? "…" : "Upload"}
+        </button>
+      </div>
+      <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleFile} />
+    </div>
+  );
+}
+
+// ── PHOTO ATTACHMENT ROW (with upload) ────────────────────────────────────
+function PhotoAttachmentRow({ photo, onChange, onRemove }: {
+  photo: { url: string; caption?: string; alt?: string };
+  onChange: (v: { url: string; caption?: string; alt?: string }) => void;
+  onRemove: () => void;
+}) {
+  const [uploading, setUploading] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const url = await uploadImage(file);
+      onChange({ ...photo, url });
+      toast.success("Photo uploaded");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  }
+
+  return (
+    <div style={{ padding: "14px", background: "rgba(34,197,94,0.04)", borderRadius: "8px", border: "1px solid rgba(34,197,94,0.12)", display: "flex", flexDirection: "column", gap: "8px" }}>
+      {photo.url && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={photo.url} alt={photo.alt || ""} style={{ maxHeight: "120px", objectFit: "cover", borderRadius: "5px", border: "1px solid rgba(255,255,255,0.08)" }} />
+      )}
+      <div style={{ display: "flex", gap: "8px" }}>
+        <input className="adm-input" value={photo.url} onChange={(e) => onChange({ ...photo, url: e.target.value })} placeholder="Photo URL" style={{ flex: 1, fontSize: "12px" }} />
+        <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading}
+          style={{ background: "rgba(34,197,94,0.10)", border: "1px solid rgba(34,197,94,0.25)", color: "#22c55e", borderRadius: "7px", padding: "0 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", fontSize: "11px", fontWeight: 600, flexShrink: 0 }}>
+          <Upload size={10} />{uploading ? "…" : "Upload"}
+        </button>
+        <button type="button" onClick={onRemove}
+          style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.40)", borderRadius: "7px", padding: "0 12px", cursor: "pointer", fontSize: "11px", flexShrink: 0 }}>
+          Remove
+        </button>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
+        <input className="adm-input" value={photo.caption || ""} onChange={(e) => onChange({ ...photo, caption: e.target.value })} placeholder="Caption (optional)" style={{ fontSize: "12px" }} />
+        <input className="adm-input" value={photo.alt || ""} onChange={(e) => onChange({ ...photo, alt: e.target.value })} placeholder="Alt text (optional)" style={{ fontSize: "12px" }} />
+      </div>
+      <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleFile} />
+    </div>
+  );
+}
 
 // ── POSTS TAB ─────────────────────────────────────────────────────────────
 export function PostsTab({ posts, onNew, onEdit, onDelete, onToggle }: {
@@ -67,6 +169,7 @@ export function PostModal({ post, onClose, onSave, db }: {
     cover_image_url:    post?.cover_image_url    ?? "",
     mid_image_url:      post?.mid_image_url      ?? "",
     infographic_url:    post?.infographic_url    ?? "",
+    spotify_url:        post?.spotify_url        ?? "",
     photo_attachments:  post?.photo_attachments  ?? [],
     published:          post?.published          ?? false,
   });
@@ -112,13 +215,17 @@ export function PostModal({ post, onClose, onSave, db }: {
           <div className="adm-field"><label className="adm-label">Excerpt</label><textarea className="adm-textarea" style={{ minHeight: "80px" }} value={form.excerpt} onChange={(e) => setF("excerpt", e.target.value)} placeholder="Short summary…" /></div>
           <div className="adm-field"><label className="adm-label">Content (HTML)</label><textarea className="adm-textarea" value={form.content} onChange={(e) => setF("content", e.target.value)} placeholder="<p>Full article…</p>" /></div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-            <div className="adm-field"><label className="adm-label">Featured Image URL</label><input className="adm-input" value={form.featured_image_url} onChange={(e) => setF("featured_image_url", e.target.value)} placeholder="https://…" /></div>
+            <ImageUploadField label="Featured Image" value={form.featured_image_url} onChange={(v) => setF("featured_image_url", v)} placeholder="https://… or upload" />
             <div className="adm-field"><label className="adm-label">Read Time (min)</label><input className="adm-input" type="number" min={1} max={60} value={form.read_time_minutes} onChange={(e) => setF("read_time_minutes", parseInt(e.target.value, 10) || 5)} /></div>
           </div>
-          <div className="adm-field"><label className="adm-label">Cover Image URL <span style={{fontSize:"11px",opacity:.5}}>(hero banner at top of post)</span></label><input className="adm-input" value={form.cover_image_url} onChange={(e) => setF("cover_image_url", e.target.value)} placeholder="https://… (full-width header image)" /></div>
+          <ImageUploadField label={<>Cover Image <span style={{fontSize:"11px",opacity:.5}}>(hero banner at top of post)</span></>} value={form.cover_image_url} onChange={(v) => setF("cover_image_url", v)} placeholder="https://… (full-width header image)" />
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
-            <div className="adm-field"><label className="adm-label">Mid-Article Image URL <span style={{fontSize:"11px",opacity:.5}}>(shown mid-content)</span></label><input className="adm-input" value={form.mid_image_url} onChange={(e) => setF("mid_image_url", e.target.value)} placeholder="https://…" /></div>
-            <div className="adm-field"><label className="adm-label">Infographic URL <span style={{fontSize:"11px",opacity:.5}}>(summary visual at end)</span></label><input className="adm-input" value={form.infographic_url} onChange={(e) => setF("infographic_url", e.target.value)} placeholder="https://…" /></div>
+            <ImageUploadField label={<>Mid-Article Image <span style={{fontSize:"11px",opacity:.5}}>(shown mid-content)</span></>} value={form.mid_image_url} onChange={(v) => setF("mid_image_url", v)} />
+            <ImageUploadField label={<>Infographic <span style={{fontSize:"11px",opacity:.5}}>(summary visual at end)</span></>} value={form.infographic_url} onChange={(v) => setF("infographic_url", v)} />
+          </div>
+          <div className="adm-field">
+            <label className="adm-label">Spotify Link <span style={{fontSize:"11px",opacity:.5}}>(podcast episode / track URL for listeners)</span></label>
+            <input className="adm-input" value={form.spotify_url} onChange={(e) => setF("spotify_url", e.target.value)} placeholder="https://open.spotify.com/episode/…" />
           </div>
           
           {/* Photo Attachments */}
@@ -126,35 +233,21 @@ export function PostModal({ post, onClose, onSave, db }: {
             <label className="adm-label">Photo Attachments <span style={{fontSize:"11px",opacity:.5}}>(additional photos for the blog content)</span></label>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {form.photo_attachments?.map((photo, idx) => (
-                <div key={idx} style={{ display: "flex", gap: "8px", alignItems: "flex-start", padding: "12px", background: "rgba(139,92,246,0.05)", borderRadius: "8px", border: "1px solid rgba(139,92,246,0.15)" }}>
-                  <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "8px" }}>
-                    <input className="adm-input" value={photo.url} onChange={(e) => {
-                      const newPhotos = [...(form.photo_attachments || [])];
-                      newPhotos[idx] = { ...newPhotos[idx], url: e.target.value };
-                      setF("photo_attachments", newPhotos);
-                    }} placeholder="Photo URL" style={{ fontSize: "13px" }} />
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
-                      <input className="adm-input" value={photo.caption || ""} onChange={(e) => {
-                        const newPhotos = [...(form.photo_attachments || [])];
-                        newPhotos[idx] = { ...newPhotos[idx], caption: e.target.value };
-                        setF("photo_attachments", newPhotos);
-                      }} placeholder="Caption (optional)" style={{ fontSize: "13px" }} />
-                      <input className="adm-input" value={photo.alt || ""} onChange={(e) => {
-                        const newPhotos = [...(form.photo_attachments || [])];
-                        newPhotos[idx] = { ...newPhotos[idx], alt: e.target.value };
-                        setF("photo_attachments", newPhotos);
-                      }} placeholder="Alt text (optional)" style={{ fontSize: "13px" }} />
-                    </div>
-                  </div>
-                  <button type="button" onClick={() => {
-                    const newPhotos = form.photo_attachments?.filter((_, i) => i !== idx) || [];
-                    setF("photo_attachments", newPhotos);
-                  }} style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)", color: "#ef4444", padding: "8px 12px", borderRadius: "6px", cursor: "pointer", fontSize: "12px" }}>Remove</button>
-                </div>
+                <PhotoAttachmentRow
+                  key={idx}
+                  photo={photo}
+                  onChange={(updated) => {
+                    const next = [...(form.photo_attachments || [])];
+                    next[idx] = updated;
+                    setF("photo_attachments", next);
+                  }}
+                  onRemove={() => setF("photo_attachments", form.photo_attachments?.filter((_, i) => i !== idx) || [])}
+                />
               ))}
-              <button type="button" onClick={() => {
-                setF("photo_attachments", [...(form.photo_attachments || []), { url: "", caption: "", alt: "" }]);
-              }} style={{ background: "rgba(139,92,246,0.1)", border: "1px solid rgba(139,92,246,0.3)", color: "#8b5cf6", padding: "10px 16px", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: 600 }}>+ Add Photo Attachment</button>
+              <button type="button" onClick={() => setF("photo_attachments", [...(form.photo_attachments || []), { url: "", caption: "", alt: "" }])}
+                style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.20)", color: "#22c55e", padding: "10px 16px", borderRadius: "8px", cursor: "pointer", fontSize: "12px", fontWeight: 600, display: "flex", alignItems: "center", gap: "6px" }}>
+                <Plus size={12} /> Add Photo
+              </button>
             </div>
           </div>
           <div className="adm-toggle-row">

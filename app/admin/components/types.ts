@@ -7,6 +7,7 @@ export interface BlogPost {
   cover_image_url: string | null; mid_image_url: string | null;
   infographic_url: string | null;
   photo_attachments?: { url: string; caption?: string; alt?: string }[] | null;
+  spotify_url?: string | null;
   created_at: string;
 }
 
