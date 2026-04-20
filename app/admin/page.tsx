@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
@@ -69,7 +69,7 @@ export default function AdminPage() {
   const load = useCallback(async () => {
     setLoading(true);
     const [pR, sR, mR, lR, iR, tR, aR, tsR] = await Promise.all([
-      db.from("blog_posts").select("*").order("created_at", { ascending: false }),
+      db.from("main_blog_posts").select("*").order("created_at", { ascending: false }),
       db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }),
       db.from("contact_messages").select("*").order("created_at", { ascending: false }),
       db.from("email_logs").select("*").order("sent_at", { ascending: false }),
@@ -171,12 +171,12 @@ export default function AdminPage() {
                 onNew={() => { setEditPost(null); setShowPost(true); }}
                 onEdit={(p) => { setEditPost(p); setShowPost(true); }}
                 onDelete={(id, title) => ask(`Delete "${title}"?`, async () => {
-                  const { error } = await db.from("blog_posts").delete().eq("id", id);
+                  const { error } = await db.from("main_blog_posts").delete().eq("id", id);
                   if (error) { toast.error("Delete failed"); return; }
                   toast.success("Post deleted"); await load();
                 })}
                 onToggle={async (id, val) => {
-                  const { error } = await db.from("blog_posts").update({ published: val }).eq("id", id);
+                  const { error } = await db.from("main_blog_posts").update({ published: val }).eq("id", id);
                   if (error) { toast.error("Update failed"); return; }
                   toast.success(val ? "Published" : "Unpublished"); await load();
                 }}

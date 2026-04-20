@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useRef } from "react";
 import { toast } from "sonner";
@@ -185,8 +185,8 @@ export function PostModal({ post, onClose, onSave, db }: {
     if (!form.slug.trim())  { toast.error("Slug required"); return; }
     setBusy(true);
     const { error } = post
-      ? await db.from("blog_posts").update({ ...form, updated_at: new Date().toISOString() }).eq("id", post.id)
-      : await db.from("blog_posts").insert({ ...form, author: "Samuel Kobina Gyasi" });
+      ? await db.from("main_blog_posts").update({ ...form, updated_at: new Date().toISOString() }).eq("id", post.id)
+      : await db.from("main_blog_posts").insert({ ...form, author: "Samuel Kobina Gyasi" });
     setBusy(false);
     if (error) { toast.error(error.message); return; }
     toast.success(post ? "Post updated" : "Post created");

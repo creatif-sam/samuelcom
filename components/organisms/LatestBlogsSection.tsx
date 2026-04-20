@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -53,7 +53,7 @@ export function LatestBlogsSection() {
       try {
         const db = createAnonClient();
         const { data, error } = await db
-          .from("blog_posts")
+          .from("main_blog_posts")
           .select("*")
           .eq("published", true)
           .order("created_at", { ascending: false })

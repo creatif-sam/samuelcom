@@ -11,7 +11,7 @@ export async function generateMetadata(
   const { slug } = await params;
   const supabase = createAnonClient();
   const { data } = await supabase
-    .from("blog_posts")
+    .from("main_blog_posts")
     .select("title, excerpt")
     .eq("slug", slug)
     .eq("category", "intellectuality")
@@ -48,7 +48,7 @@ export default async function IntellectualityPostPage(
   const { slug } = await params;
   const supabase = createAnonClient();
   const { data } = await supabase
-    .from("blog_posts")
+    .from("main_blog_posts")
     .select("id, title, slug, excerpt, content, created_at, read_time_minutes, featured_image_url, cover_image_url, mid_image_url, infographic_url, spotify_url, photo_attachments")
     .eq("slug", slug)
     .eq("category", "intellectuality")

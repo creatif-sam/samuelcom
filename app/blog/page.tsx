@@ -17,7 +17,7 @@ export default function BlogPage() {
     try {
       const sb = createAnonClient();
       const { data } = await sb
-        .from("blog_posts")
+        .from("main_blog_posts")
         .select("id, title, slug, category, excerpt, created_at, read_time_minutes, featured_image_url")
         .eq("published", true)
         .order("created_at", { ascending: false });

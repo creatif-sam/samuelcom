@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
@@ -68,7 +68,7 @@ export default async function TransformationBlogPage() {
   try {
     const supabase = createAnonClient();
     const { data } = await supabase
-      .from("blog_posts")
+      .from("main_blog_posts")
       .select("id, title, slug, excerpt, created_at, read_time_minutes, featured_image_url")
       .eq("category", "transformation")
       .eq("published", true)
