@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/organisms/Navbar";
@@ -18,73 +18,73 @@ const chapters = [
     imageAlt: "Samuel with family in Mpohor",
     imageSide: "right" as const,
     body: [
-      "On the 22nd of June 1999, Samuel Kobina Gyasi was born to Mr. Emmanuel Gyasi and Mrs. Regina Baidoo � a woman whose faith and warmth became the first architecture of his soul. He entered the world as the newest member of a family of three brothers raised in Mpohor, Ghana.",
-      "His earliest memories are woven with the sound of a sewing machine and the smell of finished cloth. His father's shop was not merely a trade � it was a lesson in precision, patience, and the dignity of craftsmanship. His mother's prayers taught him that a life built on faith is unshakeable.",
+      "On the 22nd of June 1999, Samuel Kobina Gyasi was born to Mr. Emmanuel Gyasi and Mrs. Regina Baidoo — a woman whose faith and warmth became the first architecture of his soul. He entered the world as the newest member of a family of three brothers raised in Mpohor, Ghana.",
+      "His earliest memories are woven with the sound of a sewing machine and the smell of finished cloth. His father's shop was not merely a trade — it was a lesson in precision, patience, and the dignity of craftsmanship. His mother's prayers taught him that a life built on faith is unshakeable."
     ],
     quote: null,
   },
   {
-    year: "2009 � 2017",
+    year: "2009 – 2017",
     tag: "Leadership Awakens",
     title: "Prefect, Student, Builder",
     image: "/my-story/2.png",
     imageAlt: "Samuel in his school years",
     imageSide: "left" as const,
     body: [
-      "At ten years old, Samuel was elected Class Prefect at Ghana-China Friendship School � a role he held for three years. It was his first encounter with what it means to lead: to be accountable not only for yourself but for the order and progress of those around you.",
-      "At Saint John's School in Sekondi-Takoradi, he pursued a General Science curriculum and served as Dining Hall Prefect � managing the sustenance and order of the entire student body. Authority without relationship is hollow; the trust of peers is harder earned and more precious than any title.",
+      "At ten years old, Samuel was elected Class Prefect at Ghana-China Friendship School — a role he held for three years. It was his first encounter with what it means to lead: to be accountable not only for yourself but for the order and progress of those around you.",
+      "At Saint John's School in Sekondi-Takoradi, he pursued a General Science curriculum and served as Dining Hall Prefect — managing the sustenance and order of the entire student body. Authority without relationship is hollow; the trust of peers is harder earned and more precious than any title."
     ],
-    quote: "A leader's worth is measured not by what they command, but by the dignity they preserve in every person they serve.",
+    quote: "A leader\u2019s worth is measured not by what they command, but by the dignity they preserve in every person they serve.",
   },
   {
     year: "2017",
     tag: "Entrepreneurship",
     title: "Managing Director at Seventeen",
     image: "/my-story/4.png",
-    imageAlt: "Samuel working � the early entrepreneur",
+    imageAlt: "Samuel working — the early entrepreneur",
     imageSide: "right" as const,
     body: [
       "Before his eighteenth birthday, Samuel worked as managing staff for a new car wash business in Mpohor. He encountered the full weight of entrepreneurial reality: profit and loss, staff decisions, customer relationships, and the daily discipline of showing up.",
-      "The experience was an education no classroom could replicate. It built in him an understanding that leadership in institutions begins with leadership of self � and that instincts sharpened in small places prepare a person for large responsibility.",
+      "The experience was an education no classroom could replicate. It built in him an understanding that leadership in institutions begins with leadership of self — and that instincts sharpened in small places prepare a person for large responsibility."
     ],
     quote: null,
   },
   {
-    year: "2020 � 2023",
+    year: "2020 – 2023",
     tag: "Scholar in Morocco",
     title: "Distinction Across Continents",
     image: "/my-story/5.png",
-    imageAlt: "Samuel at SUP Management, F�s",
+    imageAlt: "Samuel at SUP Management, F\u00e8s",
     imageSide: "left" as const,
     body: [
-      "Samuel moved to Morocco to pursue Computer Science at the Ecole Sup�rieure de Management, de Commerce et d'Informatique (ESMCI) in F�s. Navigating a new culture, a new language, and a demanding curriculum, he developed the rare ability to hold complexity without losing clarity.",
-      "He graduated with distinction and the Highest GPA in the entire school � a recognition not only of academic excellence but of the discipline and purpose that had been forged over years. The scholarship that followed was not a reward for past effort; it was a commission for future work.",
+      "Samuel moved to Morocco to pursue Computer Science at the Ecole Sup\u00e9rieure de Management, de Commerce et d\u2019Informatique (ESMCI) in F\u00e8s. Navigating a new culture, a new language, and a demanding curriculum, he developed the rare ability to hold complexity without losing clarity.",
+      "He graduated with distinction and the Highest GPA in the entire school — a recognition not only of academic excellence but of the discipline and purpose that had been forged over years. The scholarship that followed was not a reward for past effort; it was a commission for future work."
     ],
-    quote: "A scholarship is a society's investment in an individual � with the expectation that the investment will return, multiplied, to the community.",
+    quote: "A scholarship is a society\u2019s investment in an individual — with the expectation that the investment will return, multiplied, to the community."
   },
   {
-    year: "2023 � 2025",
+    year: "2023 – 2025",
     tag: "Mastery",
-    title: "Master's in Collective Intelligence � UM6P",
+    title: "Master\u2019s in Collective Intelligence · UM6P",
     image: "/my-story/6.png",
     imageAlt: "Samuel at UM6P, Morocco",
     imageSide: "right" as const,
     body: [
       "At the School of Collective Intelligence (SCI) in Rabat, Samuel completed a rigorous Master's programme fusing data science, organizational theory, and facilitation. The central question driving every module: how do groups think, decide, and create together?",
-      "While his coursework deepened his research vocabulary, it was the living laboratory of navigating cultures and communities that sharpened his understanding of transformation � as something that begins with the willingness to be made new.",
+      "While his coursework deepened his research vocabulary, it was the living laboratory of navigating cultures and communities that sharpened his understanding of transformation — as something that begins with the willingness to be made new."
     ],
     quote: null,
   },
   {
-    year: "2025 � Now",
+    year: "2025 – Now",
     tag: "The Present Chapter",
     title: "Building, Serving, Rooting",
     image: "/my-story/7.png",
-    imageAlt: "Samuel today � leader and mentor",
+    imageAlt: "Samuel today — leader and mentor",
     imageSide: "left" as const,
     body: [
       "Today, Samuel inhabits several interconnected spheres of service. As Junior Program Officer at the School of Collective Intelligence, UM6P, he helps students develop their careers and facilitates programmes that unlock the collective intelligence of teams and organisations.",
-      "In the Eglise �vang�lique Au Maroc, he serves as an elder � leading the intercession and library teams. Beyond institutions, he mentors individuals navigating the same questions of faith and purpose he once navigated alone.",
+      "In the Eglise \u00c9vang\u00e9lique Au Maroc, he serves as an elder — leading the intercession and library teams. Beyond institutions, he mentors individuals navigating the same questions of faith and purpose he once navigated alone."
     ],
     quote: null,
   },
@@ -94,23 +94,23 @@ const nowCards = [
   {
     num: "01",
     title: "Junior Program Officer",
-    org: "School of Collective Intelligence � UM6P, Morocco",
-    body: "Samuel designs and facilitates learning programmes that unlock the collective intelligence of organisations, communities, and teams.",
-    image: "/my-story/6.png",
+    org: "School of Collective Intelligence \u00b7 UM6P, Morocco",
+    body: "Designing and coordinating programs that unlock collective intelligence \u2014 guiding students through career development, seminars, and cross-institutional initiatives.",
+    image: "/JPO.png",
   },
   {
     num: "02",
-    title: "Elder & Community Leader",
-    org: "Eglise �vang�lique Au Maroc",
-    body: "Spiritual formation, community accountability, and pastoral care � leading both the intercession team and the library team.",
-    image: "/my-story/3.png",
+    title: "Mentor",
+    org: "Personal Ministry",
+    body: "Walking alongside individuals navigating questions of purpose, leadership, and identity. A personal investment in others \u2014 giving back what was once given to me.",
+    image: "/PersonalMinistry.png",
   },
   {
     num: "03",
-    title: "Mentor",
-    org: "Individuals � Faith � Purpose � Leadership",
-    body: "Quietly and faithfully walking alongside individuals navigating questions of faith, purpose, leadership, and identity.",
-    image: "/my-story/7.png",
+    title: "Group Intelligence Facilitator",
+    org: "Practitioner",
+    body: "Applying the science of collective intelligence to help groups surface diverse perspectives, resolve complexity, and make decisions that reflect shared wisdom.",
+    image: "/Group Intelligence faci.png",
   },
 ];
 
@@ -593,6 +593,12 @@ const css = `
 export default function MyStoryPage() {
   const chapterRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  const age = useMemo(() => {
+    const now = new Date();
+    const hasBdayPassed = now.getMonth() > 5 || (now.getMonth() === 5 && now.getDate() >= 22);
+    return now.getFullYear() - 1999 - (hasBdayPassed ? 0 : 1);
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add("msp-visible"); }),
@@ -620,7 +626,7 @@ export default function MyStoryPage() {
           />
           <div className="msp-hero-gradient" />
           <div className="msp-hero-content">
-            <p className="msp-hero-eyebrow">Samuel Kobina Gyasi � Born 22 June 1999 � Mpohor, Ghana</p>
+            <p className="msp-hero-eyebrow">Samuel Kobina Gyasi \u00b7 Born 22 June 1999 \u00b7 Mpohor, Ghana</p>
             <h1 className="msp-hero-headline">My<br />Story</h1>
             <div className="msp-hero-rule" />
             <p className="msp-hero-sub">
@@ -640,7 +646,7 @@ export default function MyStoryPage() {
           </p>
           <div className="msp-intro-stats">
             <div className="msp-intro-stat">
-              <div className="msp-intro-stat-val">26</div>
+              <div className="msp-intro-stat-val">{age}</div>
               <div className="msp-intro-stat-label">Years of Life</div>
             </div>
             <div className="msp-intro-stat">
@@ -648,8 +654,8 @@ export default function MyStoryPage() {
               <div className="msp-intro-stat-label">Countries</div>
             </div>
             <div className="msp-intro-stat">
-              <div className="msp-intro-stat-val">10+</div>
-              <div className="msp-intro-stat-label">Years Leading</div>
+              <div className="msp-intro-stat-val">15+</div>
+              <div className="msp-intro-stat-label">Years of Leadership</div>
             </div>
           </div>
         </div>
@@ -724,10 +730,10 @@ export default function MyStoryPage() {
             <em>Something Together?</em>
           </h2>
           <p className="msp-cta-sub">
-            Whether you&apos;re seeking collaboration, mentorship, or meaningful conversation � Samuel is open to connection.
+            Whether you&apos;re seeking collaboration, mentorship, or meaningful conversation — Samuel is open to connection.
           </p>
           <div className="msp-cta-btns">
-            <Link href="/#connect" className="msp-cta-btn-primary">Get in Touch ?</Link>
+            <Link href="/#connect" className="msp-cta-btn-primary">Get in Touch →</Link>
             <Link href="/blog" className="msp-cta-btn-ghost">Read the Blog</Link>
           </div>
         </section>
