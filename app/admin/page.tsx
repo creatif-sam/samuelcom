@@ -119,6 +119,10 @@ export default function AdminPage() {
         </button>
         <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: "13px", fontWeight: 700, color: "#ffffff" }}>Admin</span>
         <Link href="/" style={{ color: "rgba(255,255,255,.4)", lineHeight: 0 }}><Globe size={16} /></Link>
+      </div>
+
+      {/* Sidebar */}
+      <aside className={`adm-sidebar${navOpen ? " adm-sidebar--open" : ""}`}>
         <div className="adm-logo">
           <span>Admin</span>
           Samuel Gyasi
