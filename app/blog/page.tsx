@@ -29,6 +29,512 @@ const SAMPLE_POSTS: Post[] = [
   { id: "s12", title: "Ghana to Morocco: The Interior Journey", slug: "ghana-to-morocco", category: "transformation", excerpt: "Geography changes everything — the food, the language, the weather — but the deepest transformation happens in the interior landscape of assumptions and certainties.", created_at: "2025-04-11", read_time_minutes: 7, featured_image_url: null },
 ];
 
+const CAT_META: Record<string, { label: string; color: string; bg: string; gradient: string }> = {
+  leadership:      { label: "Leadership",      color: "#b45309", bg: "#fef3c7", gradient: "linear-gradient(135deg,#fbbf24 0%,#d97706 100%)" },
+  intellectuality: { label: "Intellectuality", color: "#1d4ed8", bg: "#dbeafe", gradient: "linear-gradient(135deg,#60a5fa 0%,#2563eb 100%)" },
+  transformation:  { label: "Transformation",  color: "#be123c", bg: "#fce7f3", gradient: "linear-gradient(135deg,#f472b6 0%,#e11d48 100%)" },
+};
+
+const PAGE_SIZE = 6;
+
+function fmtCard(d: string) {
+  return new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+const css = `
+/* ── BLOG PAGE (light) ── */
+.blgp {
+  background: #f9fafb;
+  min-height: 100vh;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  color: #101828;
+}
+
+/* ── FEATURED HERO ── */
+.blgp-featured-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 100px 32px 0;
+}
+
+.blgp-featured {
+  display: block;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  height: clamp(340px, 42vw, 480px);
+  background: #1d2939;
+}
+
+.blgp-feat-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  transition: transform 0.6s ease;
+}
+.blgp-featured:hover .blgp-feat-img { transform: scale(1.03); }
+
+.blgp-feat-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.08) 0%,
+    rgba(0,0,0,0.18) 40%,
+    rgba(0,0,0,0.72) 100%
+  );
+  z-index: 1;
+}
+
+.blgp-feat-tag {
+  position: absolute;
+  top: 24px; left: 28px;
+  z-index: 2;
+  display: inline-flex; align-items: center;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px; font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.blgp-feat-category {
+  position: absolute;
+  top: 24px; left: 110px;
+  z-index: 2;
+  display: inline-flex; align-items: center;
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.blgp-feat-body {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 2;
+  padding: 28px 80px 36px 36px;
+}
+
+.blgp-feat-title {
+  font-size: clamp(22px, 3.2vw, 38px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  max-width: 680px;
+}
+
+.blgp-feat-desc {
+  font-size: clamp(13px, 1.3vw, 15px);
+  line-height: 1.65;
+  color: rgba(255,255,255,0.78);
+  max-width: 560px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blgp-feat-arrow {
+  position: absolute;
+  right: 28px;
+  bottom: 36px;
+  z-index: 2;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  color: #fff;
+  transition: background 0.2s, transform 0.2s;
+}
+.blgp-featured:hover .blgp-feat-arrow {
+  background: rgba(255,255,255,0.28);
+  transform: translateX(3px);
+}
+
+/* ── CONTENT AREA ── */
+.blgp-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 52px 32px 80px;
+}
+
+/* ── SECTION TITLE ── */
+.blgp-section-title {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  color: #101828;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+
+/* ── 3-COL GRID ── */
+.blgp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 48px;
+}
+
+/* ── POST CARD ── */
+.blgp-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #eaecf0;
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #101828;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.blgp-card:hover {
+  box-shadow: 0 8px 30px rgba(16,24,40,0.1);
+  transform: translateY(-3px);
+}
+
+.blgp-card-img {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.blgp-card-img-inner {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+.blgp-card:hover .blgp-card-img-inner { transform: scale(1.05); }
+
+/* Decorative pattern overlay on placeholder */
+.blgp-card-img-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: 1;
+}
+
+.blgp-card-body {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.blgp-card-cat {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  width: fit-content;
+  letter-spacing: 0.01em;
+}
+
+.blgp-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #101828;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s;
+}
+.blgp-card:hover .blgp-card-title { color: #22c55e; }
+
+.blgp-card-excerpt {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #667085;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+  margin-bottom: 18px;
+}
+
+.blgp-card-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid #f2f4f7;
+}
+
+.blgp-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: #22c55e;
+  color: #0a0a0a;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.blgp-card-author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.blgp-card-author-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #344054;
+}
+.blgp-card-author-date {
+  font-size: 12px;
+  color: #667085;
+}
+
+/* ── LOAD MORE ── */
+.blgp-load-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.blgp-load-btn {
+  padding: 14px 36px;
+  border: 1.5px solid #d0d5dd;
+  border-radius: 8px;
+  background: #fff;
+  color: #344054;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.blgp-load-btn:hover {
+  border-color: #22c55e;
+  color: #22c55e;
+  box-shadow: 0 2px 10px rgba(34,197,94,0.12);
+}
+.blgp-load-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── EMPTY STATE ── */
+.blgp-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: #667085;
+  font-size: 15px;
+  grid-column: 1 / -1;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .blgp-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .blgp-featured-wrap { padding: 90px 20px 0; }
+  .blgp-feat-body { padding: 20px 70px 28px 24px; }
+  .blgp-feat-arrow { right: 16px; bottom: 28px; width: 42px; height: 42px; font-size: 18px; }
+  .blgp-main { padding: 36px 20px 60px; }
+}
+@media (max-width: 640px) {
+  .blgp-grid { grid-template-columns: 1fr; }
+  .blgp-featured { height: clamp(280px, 72vw, 380px); }
+}
+`;
+
+// Gradient patterns per category (placeholder images)
+const CAT_GRADIENTS: Record<string, string> = {
+  leadership:      "linear-gradient(135deg,#78350f 0%,#d97706 40%,#fbbf24 100%)",
+  intellectuality: "linear-gradient(135deg,#1e3a8a 0%,#2563eb 40%,#60a5fa 100%)",
+  transformation:  "linear-gradient(135deg,#881337 0%,#e11d48 40%,#f472b6 100%)",
+};
+
+export default function BlogPage() {
+  const [posts, setPosts] = useState<Post[]>(SAMPLE_POSTS);
+  const [visible, setVisible] = useState(PAGE_SIZE);
+
+  const load = useCallback(async () => {
+    try {
+      const sb = createAnonClient();
+      const { data } = await sb
+        .from("blog_posts")
+        .select("id, title, slug, category, excerpt, created_at, read_time_minutes, featured_image_url")
+        .eq("published", true)
+        .order("created_at", { ascending: false });
+      if (data && data.length > 0) setPosts(data);
+    } catch { /* fallback to sample */ }
+  }, []);
+
+  useEffect(() => { load(); }, [load]);
+
+  const featured = posts[0];
+  const recent = posts.slice(1, 1 + visible);
+  const hasMore = 1 + visible < posts.length;
+
+  return (
+    <div className="blgp">
+      <style>{css}</style>
+      <Navbar />
+
+      {/* ── FEATURED HERO CARD ── */}
+      {featured && (
+        <div className="blgp-featured-wrap">
+          <Link
+            href={`/${featured.category}/blog/${featured.slug}`}
+            className="blgp-featured"
+          >
+            <div
+              className="blgp-feat-img"
+              style={{
+                background: featured.featured_image_url
+                  ? `url(${featured.featured_image_url})`
+                  : CAT_GRADIENTS[featured.category] ?? "#1d2939",
+              }}
+            />
+            <div className="blgp-feat-overlay" />
+
+            <span className="blgp-feat-tag">Featured</span>
+            <span
+              className="blgp-feat-category"
+              style={{
+                background: CAT_META[featured.category]?.bg ?? "#f3f4f6",
+                color: CAT_META[featured.category]?.color ?? "#374151",
+              }}
+            >
+              {CAT_META[featured.category]?.label ?? featured.category}
+            </span>
+
+            <div className="blgp-feat-body">
+              <h1 className="blgp-feat-title">{featured.title}</h1>
+              {featured.excerpt && (
+                <p className="blgp-feat-desc">{featured.excerpt}</p>
+              )}
+            </div>
+
+            <div className="blgp-feat-arrow">→</div>
+          </Link>
+        </div>
+      )}
+
+      {/* ── RECENT POSTS ── */}
+      <div className="blgp-main">
+        <h2 className="blgp-section-title">Recent blog posts</h2>
+
+        {recent.length > 0 ? (
+          <div className="blgp-grid">
+            {recent.map((post) => {
+              const meta = CAT_META[post.category];
+              return (
+                <Link
+                  key={post.id}
+                  href={`/${post.category}/blog/${post.slug}`}
+                  className="blgp-card"
+                >
+                  {/* Card image / placeholder */}
+                  <div className="blgp-card-img">
+                    <div
+                      className="blgp-card-img-inner"
+                      style={{
+                        background: post.featured_image_url
+                          ? `url(${post.featured_image_url})`
+                          : CAT_GRADIENTS[post.category] ?? "#e5e7eb",
+                      }}
+                    />
+                    <div className="blgp-card-img-pattern" />
+                  </div>
+
+                  {/* Card body */}
+                  <div className="blgp-card-body">
+                    <span
+                      className="blgp-card-cat"
+                      style={{ background: meta?.bg ?? "#f3f4f6", color: meta?.color ?? "#374151" }}
+                    >
+                      {meta?.label ?? post.category}
+                    </span>
+
+                    <div className="blgp-card-title">{post.title}</div>
+                    {post.excerpt && (
+                      <p className="blgp-card-excerpt">{post.excerpt}</p>
+                    )}
+
+                    <div className="blgp-card-author">
+                      <span className="blgp-avatar">SG</span>
+                      <div className="blgp-card-author-info">
+                        <span className="blgp-card-author-name">Samuel K. Gyasi</span>
+                        <span className="blgp-card-author-date">{fmtCard(post.created_at)}</span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="blgp-empty">No posts found.</div>
+        )}
+
+        {/* Load more */}
+        <div className="blgp-load-row">
+          <button
+            className="blgp-load-btn"
+            onClick={() => setVisible((v) => v + PAGE_SIZE)}
+            disabled={!hasMore}
+          >
+            {hasMore ? "Load more posts" : "All posts loaded"}
+          </button>
+        </div>
+      </div>
+
+      <SiteFooter />
+    </div>
+  );
+}
+
+
+interface Post {
+  id: string;
+  title: string;
+  slug: string;
+  category: string;
+  excerpt: string | null;
+  created_at: string;
+  read_time_minutes: number;
+  featured_image_url: string | null;
+}
+
+const SAMPLE_POSTS: Post[] = [
+  { id: "s2", title: "Fifteen Years of Leading: What No One Taught Me", slug: "fifteen-years-of-leading", category: "leadership", excerpt: "A personal inventory of hard-won lessons — from Class Prefect to Consortium President — about what leadership actually costs and what it gives back.", created_at: "2026-02-10", read_time_minutes: 6, featured_image_url: null },
+  { id: "s3", title: "SARIMAX and Systems: Forecasting & Uncertainty", slug: "sarimax-and-systems", category: "intellectuality", excerpt: "While modelling irradiation data in Benguerrir, Samuel found unexpected parallels between statistical confidence intervals and the nature of strategic planning.", created_at: "2026-01-22", read_time_minutes: 5, featured_image_url: null },
+  { id: "s4", title: "Why Africa's Next Revolution Will Be Intellectual", slug: "africa-next-revolution", category: "transformation", excerpt: "Resources are not what Africa lacks. The missing ingredient is epistemic infrastructure — ways of knowing and deciding that belong to Africa itself.", created_at: "2025-12-15", read_time_minutes: 8, featured_image_url: null },
+  { id: "s6", title: "The Servant at the Centre: Rethinking Authority", slug: "servant-at-the-centre", category: "leadership", excerpt: "True authority is not claimed from above — it is granted from below, by the people you serve.", created_at: "2025-10-05", read_time_minutes: 5, featured_image_url: null },
+  { id: "s7", title: "Collective Intelligence: A Primer for the Genuinely Curious", slug: "collective-intelligence-primer", category: "intellectuality", excerpt: "How do groups think? What happens when diverse minds work on the same problem? A beginner's guide to the science Samuel studies every day.", created_at: "2025-09-18", read_time_minutes: 6, featured_image_url: null },
+  { id: "s8", title: "The Scholarship That Changed Everything", slug: "scholarship-that-changed-everything", category: "transformation", excerpt: "The moment a Government of Ghana award letter arrived — and the quiet understanding that it was not a reward for past effort but a commission for future work.", created_at: "2025-08-22", read_time_minutes: 4, featured_image_url: null },
+  { id: "s10", title: "Managing Director at 17: What Running a Business Early Taught Me", slug: "managing-director-at-17", category: "leadership", excerpt: "Cash Washing Bay, Mpohor, 2017. Samuel's first experience of P&L, staff decisions, and the sharp education of early entrepreneurship.", created_at: "2025-06-08", read_time_minutes: 5, featured_image_url: null },
+  { id: "s11", title: "Reading Non-Fiction as a Discipline", slug: "nonfiction-as-discipline", category: "intellectuality", excerpt: "Every book is a conversation with a mind sharper than the moment. Samuel reflects on how reading non-fiction has been as formative as any formal education.", created_at: "2025-05-20", read_time_minutes: 5, featured_image_url: null },
+  { id: "s12", title: "Ghana to Morocco: The Interior Journey", slug: "ghana-to-morocco", category: "transformation", excerpt: "Geography changes everything — the food, the language, the weather — but the deepest transformation happens in the interior landscape of assumptions and certainties.", created_at: "2025-04-11", read_time_minutes: 7, featured_image_url: null },
+];
+
 const CAT_MAP: Record<string, { label: string; color: string; bg: string; href: string }> = {
   leadership:     { label: "Leadership",     color: "#d4a843", bg: "rgba(212,168,67,0.12)",  href: "/leadership"     },
   intellectuality:{ label: "Intellectuality", color: "#5b9ef9", bg: "rgba(91,158,249,0.12)", href: "/intellectuality" },
