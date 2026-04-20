@@ -18,7 +18,7 @@ const chapters = [
     imageAlt: "Samuel with family in Mpohor",
     imageSide: "right" as const,
     body: [
-      "On the 22nd of June 1999, Samuel Kobina Gyasi was born to Mr. Emmanuel Gyasi and Mrs. Regina Baidoo — a woman whose faith and warmth became the first architecture of his soul. He entered the world as the newest member of a family of three brothers raised in Mpohor, Ghana.",
+      "On the 22nd of June 1999, Samuel Kobina Gyasi was born to Mr. Emmanuel Gyasi and Mrs. Regina Baidoo,a woman whose discipline and warmth became the first architecture of his soul. He entered the world as the newest member of a family of three brothers raised in Mpohor, Ghana.",
       "His earliest memories are woven with the sound of a sewing machine and the smell of finished cloth. His father's shop was not merely a trade — it was a lesson in precision, patience, and the dignity of craftsmanship. His mother's prayers taught him that a life built on faith is unshakeable."
     ],
     quote: null,
@@ -34,7 +34,7 @@ const chapters = [
       "At ten years old, Samuel was elected Class Prefect at Ghana-China Friendship School — a role he held for three years. It was his first encounter with what it means to lead: to be accountable not only for yourself but for the order and progress of those around you.",
       "At Saint John's School in Sekondi-Takoradi, he pursued a General Science curriculum and served as Dining Hall Prefect — managing the sustenance and order of the entire student body. Authority without relationship is hollow; the trust of peers is harder earned and more precious than any title."
     ],
-    quote: "A leader\u2019s worth is measured not by what they command, but by the dignity they preserve in every person they serve.",
+    quote: "A leader's worth is measured not by what they command, but by the dignity they preserve in every person they serve.",
   },
   {
     year: "2017",
@@ -54,13 +54,13 @@ const chapters = [
     tag: "Scholar in Morocco",
     title: "Distinction Across Continents",
     image: "/my-story/5.png",
-    imageAlt: "Samuel at SUP Management, F\u00e8s",
+    imageAlt: "Samuel at SUP Management, Fès",
     imageSide: "left" as const,
     body: [
-      "Samuel moved to Morocco to pursue Computer Science at the Ecole Sup\u00e9rieure de Management, de Commerce et d\u2019Informatique (ESMCI) in F\u00e8s. Navigating a new culture, a new language, and a demanding curriculum, he developed the rare ability to hold complexity without losing clarity.",
+      "Samuel moved to Morocco to pursue Computer Science at the Ecole Supérieure de Management, de Commerce et d'Informatique (Sup Management) in Fès. Navigating a new culture, a new language, and a demanding curriculum, he developed the rare ability to hold complexity without losing clarity.",
       "He graduated with distinction and the Highest GPA in the entire school — a recognition not only of academic excellence but of the discipline and purpose that had been forged over years. The scholarship that followed was not a reward for past effort; it was a commission for future work."
     ],
-    quote: "A scholarship is a society\u2019s investment in an individual — with the expectation that the investment will return, multiplied, to the community."
+    quote: "A scholarship is a society's investment in an individual — with the expectation that the investment will return, multiplied, to the community."
   },
   {
     year: "2023 – 2025",
@@ -84,7 +84,7 @@ const chapters = [
     imageSide: "left" as const,
     body: [
       "Today, Samuel inhabits several interconnected spheres of service. As Junior Program Officer at the School of Collective Intelligence, UM6P, he helps students develop their careers and facilitates programmes that unlock the collective intelligence of teams and organisations.",
-      "In the Eglise \u00c9vang\u00e9lique Au Maroc, he serves as an elder — leading the intercession and library teams. Beyond institutions, he mentors individuals navigating the same questions of faith and purpose he once navigated alone."
+      "In the Eglise Evangélique Au Maroc(EEAM-Rabat), he serves as an elder,mentoring the intercession and library teams. Beyond institutions, he mentors individuals navigating the same questions of faith and purpose he once navigated alone."
     ],
     quote: null,
   },
@@ -93,9 +93,9 @@ const chapters = [
 const nowCards = [
   {
     num: "01",
-    title: "Junior Program Officer",
-    org: "School of Collective Intelligence \u00b7 UM6P, Morocco",
-    body: "Designing and coordinating programs that unlock collective intelligence \u2014 guiding students through career development, seminars, and cross-institutional initiatives.",
+    title: "Program Officer(Jnr)",
+    org: "School of Collective Intelligence | UM6P, Morocco",
+    body: "Designing and coordinating programs that unlock collective intelligence  guiding students through career development, seminars, and cross-institutional initiatives.",
     image: "/JPO.png",
   },
   {
@@ -626,13 +626,13 @@ export default function MyStoryPage() {
           />
           <div className="msp-hero-gradient" />
           <div className="msp-hero-content">
-            <p className="msp-hero-eyebrow">Samuel Kobina Gyasi \u00b7 Born 22 June 1999 \u00b7 Mpohor, Ghana</p>
+            <p className="msp-hero-eyebrow">Samuel Kobina Gyasi | Born 22 June 1999 | Mpohor, Ghana</p>
             <h1 className="msp-hero-headline">My<br />Story</h1>
             <div className="msp-hero-rule" />
             <p className="msp-hero-sub">
-              Son of a tailor. Third of three brothers. Class Prefect at ten.
-              Scholar across continents. Program Officer. Elder. Mentor.
-              This is the story of a life built chapter by chapter.
+            A thinker. The second of three brothers. A first taste of leadership at ten.
+An excellent scholar. A Program Officer. An elder. A mentor.
+A life shaped, chapter by chapter.
             </p>
             <div className="msp-hero-scroll">Scroll to explore</div>
           </div>
@@ -654,7 +654,7 @@ export default function MyStoryPage() {
               <div className="msp-intro-stat-label">Countries</div>
             </div>
             <div className="msp-intro-stat">
-              <div className="msp-intro-stat-val">15+</div>
+              <div className="msp-intro-stat-val">16+</div>
               <div className="msp-intro-stat-label">Years of Leadership</div>
             </div>
           </div>
