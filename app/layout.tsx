@@ -4,6 +4,7 @@ import "./globals.css";
 import { CookieBanner } from "@/components/organisms/CookieBanner";
 import { Analytics } from "@/components/Analytics";
 import { Providers } from "./providers";
+import { Toaster } from "sonner";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -141,6 +142,7 @@ export default function RootLayout({
           <Analytics />
           {children}
           <CookieBanner />
+          <Toaster position="top-right" richColors />
         </Providers>
       </body>
     </html>

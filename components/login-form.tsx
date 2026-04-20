@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export function LoginForm({
   className,
@@ -22,7 +23,6 @@ export function LoginForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -30,21 +30,33 @@ export function LoginForm({
     e.preventDefault();
     const supabase = createClient();
     setIsLoading(true);
-    setError(null);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      if (error) throw error;
+      if (signInError) throw signInError;
+
       const { data: userData } = await supabase.auth.getUser();
-      const role =
-        userData?.user?.app_metadata?.role ||
-        userData?.user?.user_metadata?.role;
+      const uid = userData?.user?.id;
+
+      // Role is stored in public.profiles, not in user metadata
+      let role: string | null = null;
+      if (uid) {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role")
+          .eq("id", uid)
+          .single();
+        role = profile?.role ?? null;
+      }
+
+      toast.success("Logged in successfully");
       router.push(role === "admin" ? "/admin" : "/");
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      router.refresh();
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -91,7 +103,6 @@ export function LoginForm({
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Logging in..." : "Login"}
               </Button>

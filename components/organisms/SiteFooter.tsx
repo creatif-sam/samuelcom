@@ -157,7 +157,7 @@ export function SiteFooter() {
       <div className="sf-main">
         <div className="sf-brand">
           <div className="sf-brand-logo">Samuel Kobina Gyasi</div>
-          <p className="sf-brand-tagline">Refined by Purpose. Rising to Transform.</p>
+          <p className="sf-brand-tagline">Refined by Purpose. Working to Transform.</p>
         </div>
 
         <div className="sf-links-grid">
