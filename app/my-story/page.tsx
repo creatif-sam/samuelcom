@@ -65,7 +65,7 @@ const chapters = [
   {
     year: "2023 – 2025",
     tag: "Mastery",
-    title: "Master\u2019s in Collective Intelligence · UM6P",
+    title: "Master's in Collective Intelligence · UM6P",
     image: "/my-story/6.png",
     imageAlt: "Samuel at UM6P, Morocco",
     imageSide: "right" as const,

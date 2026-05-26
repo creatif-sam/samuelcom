@@ -52,9 +52,14 @@ export function Navbar() {
 
         {/* Right: CTA button + hamburger */}
         <div className="nav-right">
-          <Link href="/#connect" className="nav-cta-btn nav-desktop">
+          <a
+            href="https://wa.me/212684893821"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-cta-btn nav-desktop"
+          >
             Contact Me
-          </Link>
+          </a>
           <button
             className={`nav-burger ${open ? "nav-burger--open" : ""}`}
             aria-label={open ? "Close menu" : "Open menu"}
