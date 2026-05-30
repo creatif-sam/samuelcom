@@ -1,0 +1,511 @@
+/* -- ROOT -- */
+.msp {
+  background: #f5f3ef;
+  color: #0a0a0a;
+  min-height: 100vh;
+}
+
+/* -- HERO -- */
+.mspHero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+.mspHeroBg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.45;
+}
+.mspHeroGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0.2) 0%,
+    rgba(10, 10, 10, 0.15) 40%,
+    rgba(10, 10, 10, 0.85) 100%
+  );
+  z-index: 1;
+}
+.mspHeroContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 0 8% 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.mspHeroEyebrow {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #22c55e;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.mspHeroEyebrow::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 1.5px;
+  background: #22c55e;
+}
+.mspHeroHeadline {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: clamp(56px, 10vw, 130px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #f5f3ef;
+  margin-bottom: 32px;
+}
+.mspHeroRule {
+  width: 56px;
+  height: 2px;
+  background: #22c55e;
+  margin-bottom: 24px;
+}
+.mspHeroSub {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: clamp(15px, 1.8vw, 20px);
+  color: rgba(245, 243, 239, 0.75);
+  max-width: 520px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+.mspHeroScroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 243, 239, 0.45);
+  text-decoration: none;
+}
+.mspHeroScroll::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: rgba(245, 243, 239, 0.3);
+  animation: mspScrollLine 2s ease-in-out infinite;
+}
+@keyframes mspScrollLine {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 0.8; transform: scaleY(1.1); }
+}
+
+/* -- INTRO STRIP -- */
+.mspIntro {
+  background: #0a0a0a;
+  padding: 56px 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.mspIntroQuote {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 700;
+  color: #f5f3ef;
+  line-height: 1.3;
+  max-width: 700px;
+  letter-spacing: -0.01em;
+}
+.mspIntroQuote em { color: #22c55e; font-style: normal; }
+.mspIntroStats {
+  display: flex;
+  gap: 40px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.mspIntroStat { text-align: center; }
+.mspIntroStatVal {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 900;
+  color: #22c55e;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.mspIntroStatLabel {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 243, 239, 0.45);
+}
+
+/* -- CHAPTERS -- */
+.mspChapters { padding: 0 8%; }
+.mspChapter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: 96px 0;
+  border-bottom: 1px solid rgba(10, 10, 10, 0.08);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.mspChapter:last-child { border-bottom: none; }
+
+/* Visibility driven by data attribute — avoids CSS module hash conflict */
+.mspChapter[data-visible="true"] { opacity: 1; transform: none; }
+
+.mspChapterRight .mspChText { order: 1; }
+.mspChapterRight .mspChMedia { order: 2; }
+.mspChapterLeft .mspChText { order: 2; }
+.mspChapterLeft .mspChMedia { order: 1; }
+
+/* Text column */
+.mspChTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #22c55e;
+  margin-bottom: 16px;
+}
+.mspChTag::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: #22c55e;
+}
+.mspChYear {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(10, 10, 10, 0.35);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.mspChTitle {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #0a0a0a;
+  margin-bottom: 24px;
+}
+.mspChBody {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.85;
+  color: rgba(10, 10, 10, 0.62);
+}
+.mspChBody p + p { margin-top: 16px; }
+.mspChQuote {
+  margin-top: 28px;
+  padding: 20px 24px;
+  border-left: 3px solid #22c55e;
+  background: rgba(34, 197, 94, 0.06);
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.7;
+  color: rgba(10, 10, 10, 0.7);
+  border-radius: 0 8px 8px 0;
+}
+
+/* Media column */
+.mspChMedia { position: relative; }
+.mspChImgWrap {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: #e5e0da;
+}
+.mspChImgWrap img {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.mspChapter:hover .mspChImgWrap img { transform: scale(1.04); }
+
+/* Decorative accent corners */
+.mspChCorner {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.mspChCornerTl {
+  top: -12px;
+  left: -12px;
+  border-top: 3px solid #22c55e;
+  border-left: 3px solid #22c55e;
+  border-radius: 4px 0 0 0;
+}
+.mspChCornerBr {
+  bottom: -12px;
+  right: -12px;
+  border-bottom: 3px solid #22c55e;
+  border-right: 3px solid #22c55e;
+  border-radius: 0 0 4px 0;
+}
+
+/* -- NOW SECTION -- */
+.mspNow {
+  background: #0a0a0a;
+  padding: 100px 8%;
+}
+.mspNowInner { max-width: 1100px; margin: 0 auto; }
+.mspNowEyebrow {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #22c55e;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.mspNowEyebrow::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: #22c55e;
+}
+.mspNowHeading {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: clamp(28px, 4.5vw, 56px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #f5f3ef;
+  margin-bottom: 64px;
+}
+.mspNowGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.mspNowCard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.mspNowCard:hover {
+  border-color: rgba(34, 197, 94, 0.35);
+  transform: translateY(-4px);
+}
+.mspNowCardImg {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+.mspNowCardImg img {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.mspNowCard:hover .mspNowCardImg img { transform: scale(1.06); }
+.mspNowCardBody { padding: 26px 26px 30px; }
+.mspNowCardNum {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #22c55e;
+  margin-bottom: 12px;
+}
+.mspNowCardTitle {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #f5f3ef;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.mspNowCardOrg {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 243, 239, 0.35);
+  margin-bottom: 14px;
+}
+.mspNowCardText {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(245, 243, 239, 0.55);
+}
+
+/* -- CTA SECTION -- */
+.mspCta {
+  padding: 96px 8%;
+  text-align: center;
+  background: #f5f3ef;
+}
+.mspCtaLabel {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #22c55e;
+  margin-bottom: 18px;
+}
+.mspCtaHeading {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #0a0a0a;
+  margin-bottom: 20px;
+}
+.mspCtaHeading em { color: #22c55e; font-style: normal; }
+.mspCtaSub {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 17px;
+  color: rgba(10, 10, 10, 0.55);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto 40px;
+}
+.mspCtaBtns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+/* Primary uses green for stronger visual hierarchy over ghost */
+.mspCtaBtnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #22c55e;
+  color: #0a0a0a;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.25s, transform 0.2s;
+}
+.mspCtaBtnPrimary:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+}
+.mspCtaBtnGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: #0a0a0a;
+  padding: 15px 32px;
+  border: 1.5px solid rgba(10, 10, 10, 0.2);
+  border-radius: 50px;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.mspCtaBtnGhost:hover {
+  border-color: #22c55e;
+  color: #22c55e;
+  transform: translateY(-2px);
+}
+
+/* -- BACK TO TOP -- */
+.backToTop {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  background: #0a0a0a;
+  color: #f5f3ef;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: background 0.2s, transform 0.2s, opacity 0.3s;
+}
+.backToTopVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.backToTop:hover {
+  background: #22c55e;
+  color: #0a0a0a;
+  transform: translateY(-3px);
+}
+
+/* -- REDUCED MOTION -- */
+@media (prefers-reduced-motion: reduce) {
+  .mspChapter {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .mspHeroScroll::after { animation: none; }
+  .mspChImgWrap img,
+  .mspNowCardImg img { transition: none; }
+}
+
+/* -- RESPONSIVE -- */
+@media (max-width: 900px) {
+  .mspChapter {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 64px 0;
+  }
+  .mspChapterLeft .mspChText,
+  .mspChapterRight .mspChText { order: 2; }
+  .mspChapterLeft .mspChMedia,
+  .mspChapterRight .mspChMedia { order: 1; }
+  .mspChImgWrap { aspect-ratio: 16 / 9; }
+  .mspNowGrid { grid-template-columns: 1fr; gap: 20px; }
+  .mspNowCardImg { height: 200px; }
+}
+@media (max-width: 640px) {
+  .mspHeroContent { padding: 0 6% 64px; }
+  .mspChapters { padding: 0 6%; }
+  .mspIntro { padding: 48px 6%; flex-direction: column; }
+  .mspNow { padding: 72px 6%; }
+  .mspCta { padding: 72px 6%; }
+  .mspIntroStats { justify-content: center; }
+  .backToTop { bottom: 20px; right: 20px; }
+}
