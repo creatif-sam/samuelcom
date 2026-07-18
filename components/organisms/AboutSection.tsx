@@ -16,7 +16,7 @@ const timelineEntries = [
   {
     year: "The Field",
     title: "Fifteen Years of Practice",
-    body: "Over fifteen years, Samuel worked across sectors — education, governance, civil society, and the private sector — facilitating groups, building leadership culture, and contributing to institutional transformation across Africa and beyond.",
+    body: "Over seventeen years, Samuel worked across sectors — education, governance, civil society, and the private sector — facilitating groups, building leadership culture, and contributing to institutional transformation across Africa and beyond.",
   },
   {
     year: "2023 – 2025",

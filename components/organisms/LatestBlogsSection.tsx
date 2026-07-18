@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createAnonClient } from "@/lib/supabase/anon";
 
@@ -18,7 +15,7 @@ interface BlogPost {
 const SAMPLE_POSTS: BlogPost[] = [
   {
     id: "s2",
-    title: "Fifteen Years of Leading: What No One Taught Me",
+    title: "Seventeen Years of Leading: What No One Taught Me",
     slug: "fifteen-years-of-leading",
     category: "leadership",
     excerpt: "A personal inventory of hard-won lessons — from Class Prefect to Consortium President — about what leadership actually costs and what it gives back.",
@@ -44,41 +41,33 @@ const CAT_MAP: Record<string, { label: string; color: string }> = {
   transformation: { label: "Transformation", color: "#e05757" },
 };
 
-export function LatestBlogsSection() {
-  const [posts, setPosts] = useState<BlogPost[]>(SAMPLE_POSTS);
-  const [loading, setLoading] = useState(true);
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
 
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const db = createAnonClient();
-        const { data, error } = await db
-          .from("main_blog_posts")
-          .select("*")
-          .eq("published", true)
-          .order("created_at", { ascending: false })
-          .limit(2);
+async function getLatestPosts(): Promise<BlogPost[]> {
+  try {
+    const db = createAnonClient();
+    const { data, error } = await db
+      .from("main_blog_posts")
+      .select("*")
+      .eq("published", true)
+      .order("created_at", { ascending: false })
+      .limit(2);
 
-        if (!error && data && data.length > 0) {
-          setPosts(data);
-        }
-      } catch (err) {
-        console.error("Failed to fetch blog posts:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
+    if (!error && data && data.length > 0) return data;
+  } catch (err) {
+    console.error("Failed to fetch blog posts:", err);
+  }
+  return SAMPLE_POSTS;
+}
 
-    fetchPosts();
-  }, []);
-
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  };
+export async function LatestBlogsSection() {
+  const posts = await getLatestPosts();
 
   return (
     <section className="latest-blogs-section">

@@ -8,7 +8,7 @@ const pillars = [
     name: "Leadership",
     href: "/leadership",
     description:
-      "Samuel leads as a servant first — inspiring, empowering, and calling forth greatness in others. Over fifteen years of practice, he has come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
+      "Samuel leads as a servant first — inspiring, empowering, and calling forth greatness in others. Over seventeen years of practice, he has come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
   },
   {
     icon: "◆",

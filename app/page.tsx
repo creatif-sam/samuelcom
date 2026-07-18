@@ -20,7 +20,7 @@ export default function Home() {
       <WhatIDoSection />
       <VisionSection />
       <Suspense fallback={null}><TestimonialsSection /></Suspense>
-      <LatestBlogsSection />
+      <Suspense fallback={null}><LatestBlogsSection /></Suspense>
       <ConnectSection />
       <Suspense fallback={null}><SiteFooter /></Suspense>
     </>

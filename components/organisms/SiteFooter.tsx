@@ -1,8 +1,7 @@
 ﻿"use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/client";
 
 const socialLinks = [
   {
@@ -57,8 +56,10 @@ const legalLinks = [
 
 export function SiteFooter() {
   const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const startedAtRef = useRef(Date.now());
 
   async function handleSubscribe(e: React.FormEvent) {
     e.preventDefault();
@@ -69,20 +70,20 @@ export function SiteFooter() {
     }
     setStatus("loading");
     try {
-      const supabase = createClient();
-      const { error } = await supabase
-        .from("newsletter_subscribers")
-        .insert({ email: email.trim().toLowerCase(), interests: [] });
-      if (error && error.code === "23505") {
-        setStatus("success");
-        setMessage("You're already subscribed!");
-      } else if (error) {
-        throw error;
-      } else {
-        setStatus("success");
-        setMessage("Successfully subscribed!");
-        setEmail("");
-      }
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim().toLowerCase(),
+          company,
+          startedAt: startedAtRef.current,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error);
+      setStatus("success");
+      setMessage(data.alreadySubscribed ? "You're already subscribed!" : "Successfully subscribed!");
+      setEmail("");
     } catch {
       setStatus("error");
       setMessage("Something went wrong. Please try again.");
@@ -98,6 +99,16 @@ export function SiteFooter() {
             <h3 className="sf-nl-heading">Subscribe to our newsletter</h3>
             <p className="sf-nl-sub">Get the latest insights on leadership, intelligence, and transformation.</p>
             <form className="sf-nl-form" onSubmit={handleSubscribe} noValidate>
+              <input
+                type="text"
+                name="company"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+              />
               <div className="sf-nl-input-wrapper">
                 <input
                   type="email"
@@ -140,14 +151,14 @@ export function SiteFooter() {
           </div>
           <div className="sf-feature-graphic">
             <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="100" cy="100" r="80" stroke="rgba(74,222,128,0.2)" strokeWidth="1"/>
-              <circle cx="100" cy="100" r="60" stroke="rgba(74,222,128,0.3)" strokeWidth="1"/>
-              <circle cx="100" cy="100" r="40" stroke="rgba(74,222,128,0.4)" strokeWidth="1"/>
-              <circle cx="100" cy="100" r="5" fill="rgba(74,222,128,0.8)"/>
-              <circle cx="140" cy="80" r="3" fill="rgba(74,222,128,0.6)"/>
-              <circle cx="60" cy="120" r="3" fill="rgba(74,222,128,0.6)"/>
-              <circle cx="100" cy="40" r="3" fill="rgba(74,222,128,0.6)"/>
-              <circle cx="100" cy="160" r="3" fill="rgba(74,222,128,0.6)"/>
+              <circle cx="100" cy="100" r="80" stroke="rgba(124,143,252,0.2)" strokeWidth="1"/>
+              <circle cx="100" cy="100" r="60" stroke="rgba(124,143,252,0.3)" strokeWidth="1"/>
+              <circle cx="100" cy="100" r="40" stroke="rgba(124,143,252,0.4)" strokeWidth="1"/>
+              <circle cx="100" cy="100" r="5" fill="rgba(124,143,252,0.8)"/>
+              <circle cx="140" cy="80" r="3" fill="rgba(124,143,252,0.6)"/>
+              <circle cx="60" cy="120" r="3" fill="rgba(124,143,252,0.6)"/>
+              <circle cx="100" cy="40" r="3" fill="rgba(124,143,252,0.6)"/>
+              <circle cx="100" cy="160" r="3" fill="rgba(124,143,252,0.6)"/>
             </svg>
           </div>
         </div>

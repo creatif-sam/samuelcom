@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
 import { Navbar } from "@/components/organisms/Navbar";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Intellectuality — Blog",
@@ -114,9 +117,15 @@ export default async function IntellectualityBlogPage() {
               {featured && (
                 <Link href={`/intellectuality/blog/${featured.slug}`} className="ib-featured">
                   {featured.featured_image_url && (
-                    // eslint-disable-next-line @next/next/no-img-element
                     <div className="ib-featured-img">
-                      <img src={featured.featured_image_url} alt={featured.title} />
+                      <Image
+                        src={featured.featured_image_url}
+                        alt={featured.title}
+                        fill
+                        sizes="(max-width: 900px) 100vw, 50vw"
+                        style={{ objectFit: "cover" }}
+                        priority
+                      />
                     </div>
                   )}
                   <div className="ib-featured-body">
@@ -140,8 +149,13 @@ export default async function IntellectualityBlogPage() {
                     <Link key={post.id} href={`/intellectuality/blog/${post.slug}`} className="ib-card">
                       {post.featured_image_url && (
                         <div className="ib-card-img">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={post.featured_image_url} alt={post.title} />
+                          <Image
+                            src={post.featured_image_url}
+                            alt={post.title}
+                            fill
+                            sizes="(max-width: 900px) 50vw, 33vw"
+                            style={{ objectFit: "cover" }}
+                          />
                         </div>
                       )}
                       <div className="ib-card-body">
@@ -240,8 +254,8 @@ const blogCss = `
   transition: box-shadow .3s, transform .3s;
 }
 .ib-featured:hover { box-shadow: 0 8px 40px rgba(10,9,8,.12); transform: translateY(-2px); }
-.ib-featured-img { width: 100%; height: 100%; overflow: hidden; background: var(--line); }
-.ib-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+.ib-featured-img { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--line); }
+.ib-featured-img img { transition: transform .5s; }
 .ib-featured:hover .ib-featured-img img { transform: scale(1.04); }
 .ib-featured-body {
   padding: 44px 40px;
@@ -269,8 +283,8 @@ const blogCss = `
   transition: box-shadow .3s, transform .3s;
 }
 .ib-card:hover { box-shadow: 0 6px 28px rgba(10,9,8,.1); transform: translateY(-3px); }
-.ib-card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--line); }
-.ib-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+.ib-card-img { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--line); }
+.ib-card-img img { transition: transform .5s; }
 .ib-card:hover .ib-card-img img { transform: scale(1.05); }
 .ib-card-body { padding: 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .ib-card-title { font-family: 'Poppins', sans-serif; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.2; color: var(--ink); }

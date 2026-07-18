@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
 import { Navbar } from "@/components/organisms/Navbar";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Leadership — Blog",
@@ -115,8 +118,14 @@ export default async function LeadershipBlogPage() {
                 <Link href={`/leadership/blog/${featured.slug}`} className="lb-featured">
                   {featured.featured_image_url && (
                     <div className="lb-featured-img">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={featured.featured_image_url} alt={featured.title} />
+                      <Image
+                        src={featured.featured_image_url}
+                        alt={featured.title}
+                        fill
+                        sizes="(max-width: 900px) 100vw, 50vw"
+                        style={{ objectFit: "cover" }}
+                        priority
+                      />
                     </div>
                   )}
                   <div className="lb-featured-body">
@@ -140,8 +149,13 @@ export default async function LeadershipBlogPage() {
                     <Link key={post.id} href={`/leadership/blog/${post.slug}`} className="lb-card">
                       {post.featured_image_url && (
                         <div className="lb-card-img">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={post.featured_image_url} alt={post.title} />
+                          <Image
+                            src={post.featured_image_url}
+                            alt={post.title}
+                            fill
+                            sizes="(max-width: 900px) 50vw, 33vw"
+                            style={{ objectFit: "cover" }}
+                          />
                         </div>
                       )}
                       <div className="lb-card-body">
@@ -173,7 +187,7 @@ const blogCss = `
 .lb-page {
   --bg: #0c0b09;
   --white: #f0ede8;
-  --gold: #22c55e;
+  --gold: #546cfa;
   --gray: #6b6560;
   --line: rgba(240,237,232,.07);
   --card: #141210;
@@ -229,9 +243,9 @@ const blogCss = `
   text-decoration: none; color: var(--white);
   transition: border-color .3s, box-shadow .3s;
 }
-.lb-featured:hover { border-color: rgba(34,197,94,.3); box-shadow: 0 8px 40px rgba(0,0,0,.4); }
-.lb-featured-img { width: 100%; height: 100%; overflow: hidden; background: rgba(255,255,255,.04); }
-.lb-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+.lb-featured:hover { border-color: rgba(84,108,250,.3); box-shadow: 0 8px 40px rgba(0,0,0,.4); }
+.lb-featured-img { position: relative; width: 100%; height: 100%; overflow: hidden; background: rgba(255,255,255,.04); }
+.lb-featured-img img { transition: transform .5s; }
 .lb-featured:hover .lb-featured-img img { transform: scale(1.04); }
 .lb-featured-body { padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
 .lb-featured-title { font-family: 'Poppins', sans-serif; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.15; color: var(--white); }
@@ -251,9 +265,9 @@ const blogCss = `
   display: flex; flex-direction: column;
   transition: border-color .3s, transform .3s;
 }
-.lb-card:hover { border-color: rgba(34,197,94,.25); transform: translateY(-3px); }
-.lb-card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: rgba(255,255,255,.04); }
-.lb-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+.lb-card:hover { border-color: rgba(84,108,250,.25); transform: translateY(-3px); }
+.lb-card-img { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: rgba(255,255,255,.04); }
+.lb-card-img img { transition: transform .5s; }
 .lb-card:hover .lb-card-img img { transform: scale(1.05); }
 .lb-card-body { padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .lb-card-title { font-family: 'Poppins', sans-serif; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.2; color: var(--white); }

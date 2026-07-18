@@ -46,7 +46,7 @@ function ImageUploadField({ label, value, onChange, placeholder }: {
       <div style={{ display: "flex", gap: "8px" }}>
         <input className="adm-input" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder ?? "https://…"} style={{ flex: 1 }} />
         <button type="button" onClick={() => fileRef.current?.click()}
-          style={{ background: "rgba(34,197,94,0.10)", border: "1px solid rgba(34,197,94,0.25)", color: "#22c55e", borderRadius: "7px", padding: "0 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", fontSize: "11px", fontWeight: 600, whiteSpace: "nowrap", flexShrink: 0 }}
+          style={{ background: "rgba(84,108,250,0.10)", border: "1px solid rgba(84,108,250,0.25)", color: "#546cfa", borderRadius: "7px", padding: "0 14px", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", fontSize: "11px", fontWeight: 600, whiteSpace: "nowrap", flexShrink: 0 }}
           disabled={uploading}>
           <Upload size={11} />{uploading ? "…" : "Upload"}
         </button>
@@ -82,7 +82,7 @@ function PhotoAttachmentRow({ photo, onChange, onRemove }: {
   }
 
   return (
-    <div style={{ padding: "14px", background: "rgba(34,197,94,0.04)", borderRadius: "8px", border: "1px solid rgba(34,197,94,0.12)", display: "flex", flexDirection: "column", gap: "8px" }}>
+    <div style={{ padding: "14px", background: "rgba(84,108,250,0.04)", borderRadius: "8px", border: "1px solid rgba(84,108,250,0.12)", display: "flex", flexDirection: "column", gap: "8px" }}>
       {photo.url && (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={photo.url} alt={photo.alt || ""} style={{ maxHeight: "120px", objectFit: "cover", borderRadius: "5px", border: "1px solid rgba(255,255,255,0.08)" }} />
@@ -90,7 +90,7 @@ function PhotoAttachmentRow({ photo, onChange, onRemove }: {
       <div style={{ display: "flex", gap: "8px" }}>
         <input className="adm-input" value={photo.url} onChange={(e) => onChange({ ...photo, url: e.target.value })} placeholder="Photo URL" style={{ flex: 1, fontSize: "12px" }} />
         <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading}
-          style={{ background: "rgba(34,197,94,0.10)", border: "1px solid rgba(34,197,94,0.25)", color: "#22c55e", borderRadius: "7px", padding: "0 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", fontSize: "11px", fontWeight: 600, flexShrink: 0 }}>
+          style={{ background: "rgba(84,108,250,0.10)", border: "1px solid rgba(84,108,250,0.25)", color: "#546cfa", borderRadius: "7px", padding: "0 12px", cursor: "pointer", display: "flex", alignItems: "center", gap: "5px", fontSize: "11px", fontWeight: 600, flexShrink: 0 }}>
           <Upload size={10} />{uploading ? "…" : "Upload"}
         </button>
         <button type="button" onClick={onRemove}
@@ -245,7 +245,7 @@ export function PostModal({ post, onClose, onSave, db }: {
                 />
               ))}
               <button type="button" onClick={() => setF("photo_attachments", [...(form.photo_attachments || []), { url: "", caption: "", alt: "" }])}
-                style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.20)", color: "#22c55e", padding: "10px 16px", borderRadius: "8px", cursor: "pointer", fontSize: "12px", fontWeight: 600, display: "flex", alignItems: "center", gap: "6px" }}>
+                style={{ background: "rgba(84,108,250,0.08)", border: "1px solid rgba(84,108,250,0.20)", color: "#546cfa", padding: "10px 16px", borderRadius: "8px", cursor: "pointer", fontSize: "12px", fontWeight: 600, display: "flex", alignItems: "center", gap: "6px" }}>
                 <Plus size={12} /> Add Photo
               </button>
             </div>

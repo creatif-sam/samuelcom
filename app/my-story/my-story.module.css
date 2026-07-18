@@ -45,7 +45,7 @@
   font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #22c55e;
+  color: #546cfa;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -56,7 +56,7 @@
   display: block;
   width: 28px;
   height: 1.5px;
-  background: #22c55e;
+  background: #546cfa;
 }
 .mspHeroHeadline {
   font-family: var(--font-poppins), "Poppins", sans-serif;
@@ -71,7 +71,7 @@
 .mspHeroRule {
   width: 56px;
   height: 2px;
-  background: #22c55e;
+  background: #546cfa;
   margin-bottom: 24px;
 }
 .mspHeroSub {
@@ -125,7 +125,7 @@
   max-width: 700px;
   letter-spacing: -0.01em;
 }
-.mspIntroQuote em { color: #22c55e; font-style: normal; }
+.mspIntroQuote em { color: #546cfa; font-style: normal; }
 .mspIntroStats {
   display: flex;
   gap: 40px;
@@ -137,7 +137,7 @@
   font-family: var(--font-poppins), "Poppins", sans-serif;
   font-size: clamp(28px, 3.5vw, 44px);
   font-weight: 900;
-  color: #22c55e;
+  color: #546cfa;
   line-height: 1;
   margin-bottom: 4px;
 }
@@ -182,7 +182,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #22c55e;
+  color: #546cfa;
   margin-bottom: 16px;
 }
 .mspChTag::before {
@@ -190,7 +190,7 @@
   display: block;
   width: 20px;
   height: 1.5px;
-  background: #22c55e;
+  background: #546cfa;
 }
 .mspChYear {
   font-family: var(--font-poppins), "Poppins", sans-serif;
@@ -220,8 +220,8 @@
 .mspChQuote {
   margin-top: 28px;
   padding: 20px 24px;
-  border-left: 3px solid #22c55e;
-  background: rgba(34, 197, 94, 0.06);
+  border-left: 3px solid #546cfa;
+  background: rgba(84,108,250, 0.06);
   font-family: var(--font-poppins), "Poppins", sans-serif;
   font-size: 15px;
   font-style: italic;
@@ -256,15 +256,15 @@
 .mspChCornerTl {
   top: -12px;
   left: -12px;
-  border-top: 3px solid #22c55e;
-  border-left: 3px solid #22c55e;
+  border-top: 3px solid #546cfa;
+  border-left: 3px solid #546cfa;
   border-radius: 4px 0 0 0;
 }
 .mspChCornerBr {
   bottom: -12px;
   right: -12px;
-  border-bottom: 3px solid #22c55e;
-  border-right: 3px solid #22c55e;
+  border-bottom: 3px solid #546cfa;
+  border-right: 3px solid #546cfa;
   border-radius: 0 0 4px 0;
 }
 
@@ -280,7 +280,7 @@
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #22c55e;
+  color: #546cfa;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -291,7 +291,7 @@
   display: block;
   width: 24px;
   height: 1.5px;
-  background: #22c55e;
+  background: #546cfa;
 }
 .mspNowHeading {
   font-family: var(--font-poppins), "Poppins", sans-serif;
@@ -315,7 +315,7 @@
   transition: border-color 0.3s, transform 0.3s;
 }
 .mspNowCard:hover {
-  border-color: rgba(34, 197, 94, 0.35);
+  border-color: rgba(84,108,250, 0.35);
   transform: translateY(-4px);
 }
 .mspNowCardImg {
@@ -335,7 +335,7 @@
   font-size: 9px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #22c55e;
+  color: #546cfa;
   margin-bottom: 12px;
 }
 .mspNowCardTitle {
@@ -373,7 +373,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #22c55e;
+  color: #546cfa;
   margin-bottom: 18px;
 }
 .mspCtaHeading {
@@ -385,7 +385,7 @@
   color: #0a0a0a;
   margin-bottom: 20px;
 }
-.mspCtaHeading em { color: #22c55e; font-style: normal; }
+.mspCtaHeading em { color: #546cfa; font-style: normal; }
 .mspCtaSub {
   font-family: var(--font-poppins), "Poppins", sans-serif;
   font-size: 17px;
@@ -406,7 +406,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #22c55e;
+  background: #546cfa;
   color: #0a0a0a;
   padding: 16px 36px;
   border-radius: 50px;
@@ -417,7 +417,7 @@
   transition: background 0.25s, transform 0.2s;
 }
 .mspCtaBtnPrimary:hover {
-  background: #16a34a;
+  background: #3547d1;
   transform: translateY(-2px);
 }
 .mspCtaBtnGhost {
@@ -436,8 +436,8 @@
   transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 .mspCtaBtnGhost:hover {
-  border-color: #22c55e;
-  color: #22c55e;
+  border-color: #546cfa;
+  color: #546cfa;
   transform: translateY(-2px);
 }
 
@@ -468,7 +468,7 @@
   pointer-events: auto;
 }
 .backToTop:hover {
-  background: #22c55e;
+  background: #546cfa;
   color: #0a0a0a;
   transform: translateY(-3px);
 }

@@ -1,21 +1,31 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { cache } from "react";
 import { notFound } from "next/navigation";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
 import { Navbar } from "@/components/organisms/Navbar";
 
+export const revalidate = 300;
+
+const getPost = cache(async (slug: string) => {
+  const supabase = createAnonClient();
+  const { data } = await supabase
+    .from("main_blog_posts")
+    .select("id, title, slug, excerpt, content, created_at, read_time_minutes, featured_image_url, cover_image_url, mid_image_url, infographic_url, spotify_url, photo_attachments")
+    .eq("slug", slug)
+    .eq("category", "transformation")
+    .eq("published", true)
+    .single();
+  return data as Post | null;
+});
+
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
   const { slug } = await params;
-  const supabase = createAnonClient();
-  const { data } = await supabase
-    .from("main_blog_posts")
-    .select("title, excerpt")
-    .eq("slug", slug)
-    .eq("category", "transformation")
-    .single();
+  const data = await getPost(slug);
   return {
     title: data ? `${data.title} — Transformation` : "Transformation — Blog",
     description: data?.excerpt ?? "Transformation stories by Samuel Kobina Gyasi.",
@@ -46,17 +56,10 @@ export default async function TransformationPostPage(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  const supabase = createAnonClient();
-  const { data } = await supabase
-    .from("main_blog_posts")
-    .select("id, title, slug, excerpt, content, created_at, read_time_minutes, featured_image_url, cover_image_url, mid_image_url, infographic_url, spotify_url, photo_attachments")
-    .eq("slug", slug)
-    .eq("category", "transformation")
-    .eq("published", true)
-    .single();
+  const data = await getPost(slug);
 
   if (!data) notFound();
-  const post = data as Post;
+  const post = data;
 
   return (
     <>
@@ -75,9 +78,15 @@ export default async function TransformationPostPage(
         </nav>
 
         {post.cover_image_url && (
-          // eslint-disable-next-line @next/next/no-img-element
           <div className="tb-cover">
-            <img src={post.cover_image_url} alt={post.title} />
+            <Image
+              src={post.cover_image_url}
+              alt={post.title}
+              fill
+              sizes="100vw"
+              style={{ objectFit: "cover" }}
+              priority
+            />
           </div>
         )}
 
@@ -116,7 +125,7 @@ export default async function TransformationPostPage(
 
           {post.mid_image_url && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img className="tb-art-mid-img" src={post.mid_image_url} alt="" />
+            <img className="tb-art-mid-img" src={post.mid_image_url} alt="" loading="lazy" decoding="async" />
           )}
 
           {post.photo_attachments && post.photo_attachments.length > 0 && (
@@ -124,7 +133,7 @@ export default async function TransformationPostPage(
               {post.photo_attachments.map((p, i) => (
                 <figure key={i} className="tb-photo-fig">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.url} alt={p.alt ?? p.caption ?? ""} />
+                  <img src={p.url} alt={p.alt ?? p.caption ?? ""} loading="lazy" decoding="async" />
                   {p.caption && <figcaption>{p.caption}</figcaption>}
                 </figure>
               ))}
@@ -133,7 +142,7 @@ export default async function TransformationPostPage(
 
           {post.infographic_url && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img className="tb-art-infographic" src={post.infographic_url} alt="Infographic" />
+            <img className="tb-art-infographic" src={post.infographic_url} alt="Infographic" loading="lazy" decoding="async" />
           )}
 
           <div className="tb-back">
@@ -172,8 +181,7 @@ const postCss = `
 .tb-bc a { color: var(--mist); text-decoration: none; transition: color .2s; }
 .tb-bc a:hover { color: var(--ember); }
 .tb-bc span:last-child { color: rgba(242,240,236,.6); max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tb-cover { width: 100%; max-height: 480px; overflow: hidden; }
-.tb-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tb-cover { position: relative; width: 100%; height: 480px; max-height: 480px; overflow: hidden; }
 .tb-article { max-width: 760px; margin: 0 auto; padding: 56px 32px 80px; }
 .tb-art-head { margin-bottom: 40px; }
 .tb-art-label { font-family: 'Poppins', sans-serif; font-size: 9px; letter-spacing: .35em; text-transform: uppercase; color: var(--ember); margin-bottom: 16px; }

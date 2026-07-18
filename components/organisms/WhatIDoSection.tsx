@@ -14,19 +14,19 @@ const cards = [
   },
   {
     num: "02",
-    img: "/PersonalMinistry.png",
-    alt: "Personal Ministry",
-    title: "Mentor",
-    org: "Personal Ministry",
-    body: "Walking alongside individuals navigating questions of purpose, leadership, and identity. A personal investment in others — giving back what was once given to me.",
-  },
-  {
-    num: "03",
     img: "/Group Intelligence faci.png",
     alt: "Group Intelligence Facilitator",
     title: "Group Intelligence Facilitator",
     org: "Practitioner",
     body: "Applying the science of collective intelligence to help groups surface diverse perspectives, resolve complexity, and make decisions that reflect shared wisdom.",
+  },
+  {
+    num: "03",
+    img: "/PersonalMinistry.png",
+    alt: "Personal Ministry",
+    title: "Mentor",
+    org: "Personal Ministry",
+    body: "Walking alongside individuals navigating questions of purpose, leadership, and identity. A personal investment in others — giving back what was once given to me.",
   },
 ];
 

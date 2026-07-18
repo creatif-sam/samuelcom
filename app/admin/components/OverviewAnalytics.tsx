@@ -141,7 +141,7 @@ export function AnalyticsTab({ analytics }: { analytics: AnalyticsData | null })
                         <a href={path} target="_blank" rel="noreferrer" style={{ color: "rgba(240,236,228,.25)", lineHeight: 0 }}><ExternalLink size={10} /></a>
                       </span>
                     </td>
-                    <td style={{ color: "#22c55e", fontFamily: "'Poppins',sans-serif", fontSize: "22px" }}>{count}</td>
+                    <td style={{ color: "#546cfa", fontFamily: "'Poppins',sans-serif", fontSize: "22px" }}>{count}</td>
                     <td style={{ minWidth: "140px" }}>
                       <div className="adm-progress-row">
                         <div className="adm-progress" style={{ width: `${(count / totalViews) * 100}%` }} />

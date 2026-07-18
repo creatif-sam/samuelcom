@@ -55,7 +55,7 @@ export function TestimonialsTab({ testimonials, onNew, onEdit, onDelete, onToggl
                     {[t.role, t.company].filter(Boolean).join(" · ") || "—"}
                   </td>
                   <td>
-                    <span style={{ color: "#22c55e", letterSpacing: "2px" }}>
+                    <span style={{ color: "#546cfa", letterSpacing: "2px" }}>
                       {"★".repeat(t.rating)}{"☆".repeat(5 - t.rating)}
                     </span>
                   </td>
@@ -167,7 +167,7 @@ export function TestimonialModal({ testimonial, onClose, onSave, db }: {
               <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
                 {[1,2,3,4,5].map((n) => (
                   <button key={n} type="button" onClick={() => setRating(n)}
-                    style={{ background: "none", border: "none", cursor: "pointer", fontSize: "24px", color: n <= rating ? "#22c55e" : "rgba(34,197,94,.2)", padding: "0" }}>
+                    style={{ background: "none", border: "none", cursor: "pointer", fontSize: "24px", color: n <= rating ? "#546cfa" : "rgba(84,108,250,.2)", padding: "0" }}>
                     ★
                   </button>
                 ))}
@@ -180,7 +180,7 @@ export function TestimonialModal({ testimonial, onClose, onSave, db }: {
           </div>
           <div className="adm-field" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <input type="checkbox" id="ts-pub" checked={published} onChange={(e) => setPub(e.target.checked)}
-              style={{ width: "16px", height: "16px", accentColor: "#22c55e", cursor: "pointer" }} />
+              style={{ width: "16px", height: "16px", accentColor: "#546cfa", cursor: "pointer" }} />
             <label htmlFor="ts-pub" className="adm-label" style={{ margin: 0, cursor: "pointer" }}>
               Publish immediately (visible on site)
             </label>

@@ -1,21 +1,31 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { cache } from "react";
 import { notFound } from "next/navigation";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
 import { Navbar } from "@/components/organisms/Navbar";
 
+export const revalidate = 300;
+
+const getPost = cache(async (slug: string) => {
+  const supabase = createAnonClient();
+  const { data } = await supabase
+    .from("main_blog_posts")
+    .select("id, title, slug, excerpt, content, created_at, read_time_minutes, featured_image_url, cover_image_url, mid_image_url, infographic_url, spotify_url, photo_attachments")
+    .eq("slug", slug)
+    .eq("category", "intellectuality")
+    .eq("published", true)
+    .single();
+  return data as Post | null;
+});
+
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
   const { slug } = await params;
-  const supabase = createAnonClient();
-  const { data } = await supabase
-    .from("main_blog_posts")
-    .select("title, excerpt")
-    .eq("slug", slug)
-    .eq("category", "intellectuality")
-    .single();
+  const data = await getPost(slug);
   return {
     title: data ? `${data.title} — Intellectuality` : "Intellectuality — Blog",
     description: data?.excerpt ?? "Essays by Samuel Kobina Gyasi.",
@@ -46,17 +56,10 @@ export default async function IntellectualityPostPage(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  const supabase = createAnonClient();
-  const { data } = await supabase
-    .from("main_blog_posts")
-    .select("id, title, slug, excerpt, content, created_at, read_time_minutes, featured_image_url, cover_image_url, mid_image_url, infographic_url, spotify_url, photo_attachments")
-    .eq("slug", slug)
-    .eq("category", "intellectuality")
-    .eq("published", true)
-    .single();
+  const data = await getPost(slug);
 
   if (!data) notFound();
-  const post = data as Post;
+  const post = data;
 
   return (
     <>
@@ -77,9 +80,15 @@ export default async function IntellectualityPostPage(
 
         {/* Cover image */}
         {post.cover_image_url && (
-          // eslint-disable-next-line @next/next/no-img-element
           <div className="ib-cover">
-            <img src={post.cover_image_url} alt={post.title} />
+            <Image
+              src={post.cover_image_url}
+              alt={post.title}
+              fill
+              sizes="100vw"
+              style={{ objectFit: "cover" }}
+              priority
+            />
           </div>
         )}
 
@@ -122,7 +131,7 @@ export default async function IntellectualityPostPage(
           {/* Mid-article image */}
           {post.mid_image_url && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img className="ib-art-mid-img" src={post.mid_image_url} alt="" />
+            <img className="ib-art-mid-img" src={post.mid_image_url} alt="" loading="lazy" decoding="async" />
           )}
 
           {/* Photo attachments */}
@@ -131,7 +140,7 @@ export default async function IntellectualityPostPage(
               {post.photo_attachments.map((p, i) => (
                 <figure key={i} className="ib-photo-fig">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.url} alt={p.alt ?? p.caption ?? ""} />
+                  <img src={p.url} alt={p.alt ?? p.caption ?? ""} loading="lazy" decoding="async" />
                   {p.caption && <figcaption>{p.caption}</figcaption>}
                 </figure>
               ))}
@@ -141,7 +150,7 @@ export default async function IntellectualityPostPage(
           {/* Infographic */}
           {post.infographic_url && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img className="ib-art-infographic" src={post.infographic_url} alt="Infographic" />
+            <img className="ib-art-infographic" src={post.infographic_url} alt="Infographic" loading="lazy" decoding="async" />
           )}
 
           {/* Back link */}
@@ -185,8 +194,7 @@ const postCss = `
 .ib-bc span:last-child { color: var(--ink); max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Cover image */
-.ib-cover { width: 100%; max-height: 480px; overflow: hidden; }
-.ib-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ib-cover { position: relative; width: 100%; height: 480px; max-height: 480px; overflow: hidden; }
 
 /* Article container */
 .ib-article { max-width: 760px; margin: 0 auto; padding: 56px 32px 80px; }

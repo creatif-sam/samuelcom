@@ -28,11 +28,11 @@ export default function PrivacyPolicyPage() {
           margin-bottom: 64px;
           transition: color .3s;
         }
-        .pp-back:hover { color: #22c55e; }
+        .pp-back:hover { color: #546cfa; }
         .pp-eyebrow {
           font-family: 'Poppins', sans-serif;
           font-size: 9px; letter-spacing: .4em;
-          text-transform: uppercase; color: #22c55e;
+          text-transform: uppercase; color: #546cfa;
           margin-bottom: 20px;
         }
         .pp-title {
@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
           color: #a09888; font-weight: 300;
           margin-bottom: 16px;
         }
-        .pp-body a { color: #22c55e; }
+        .pp-body a { color: #546cfa; }
         .pp-list {
           margin: 12px 0 16px 20px;
           font-size: 17px; line-height: 1.85;

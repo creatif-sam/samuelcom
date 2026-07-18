@@ -194,7 +194,7 @@ export const blogCss = `
   overflow: hidden;
   transition: color 0.2s;
 }
-.blgp-card:hover .blgp-card-title { color: #22c55e; }
+.blgp-card:hover .blgp-card-title { color: #546cfa; }
 .blgp-card-excerpt {
   font-size: 13px;
   line-height: 1.7;
@@ -214,7 +214,7 @@ export const blogCss = `
 .blgp-avatar {
   width: 34px; height: 34px;
   border-radius: 50%;
-  background: #22c55e;
+  background: #546cfa;
   color: #0a0a0a;
   font-size: 11px; font-weight: 800;
   display: flex; align-items: center; justify-content: center;
@@ -245,9 +245,9 @@ export const blogCss = `
   display: flex; align-items: center; gap: 8px;
 }
 .blgp-load-btn:hover {
-  border-color: #22c55e;
-  color: #22c55e;
-  box-shadow: 0 2px 10px rgba(34,197,94,0.12);
+  border-color: #546cfa;
+  color: #546cfa;
+  box-shadow: 0 2px 10px rgba(84,108,250,0.12);
 }
 .blgp-load-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 

@@ -66,28 +66,36 @@ export default function AdminPage() {
     router.push("/auth/login");
   };
 
-  const load = useCallback(async () => {
-    setLoading(true);
-    const [pR, sR, mR, lR, iR, tR, aR, tsR] = await Promise.all([
-      db.from("main_blog_posts").select("*").order("created_at", { ascending: false }),
-      db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false }),
-      db.from("contact_messages").select("*").order("created_at", { ascending: false }),
+  const loadPosts = useCallback(async () => {
+    const { data } = await db.from("main_blog_posts").select("*").order("created_at", { ascending: false });
+    setPosts(data ?? []);
+  }, [db]);
+
+  const loadSubs = useCallback(async () => {
+    const { data } = await db.from("newsletter_subscribers").select("*").order("created_at", { ascending: false });
+    setSubs(data ?? []);
+  }, [db]);
+
+  const loadMsgs = useCallback(async () => {
+    const { data } = await db.from("contact_messages").select("*").order("created_at", { ascending: false });
+    setMsgs(data ?? []);
+  }, [db]);
+
+  const loadMail = useCallback(async () => {
+    const [lR, iR, tR] = await Promise.all([
       db.from("email_logs").select("*").order("sent_at", { ascending: false }),
       db.from("inbound_emails").select("*").order("received_at", { ascending: false }),
       db.from("email_templates").select("*").order("created_at", { ascending: false }),
-      db.from("page_views").select("page_path,visitor_id,created_at")
-        .gte("created_at", new Date(Date.now() - 30 * 86400000).toISOString()),
-      db.from("testimonials").select("*").order("sort_order", { ascending: true }).order("created_at", { ascending: false }),
     ]);
-    setPosts(pR.data ?? []);
-    setSubs(sR.data ?? []);
-    setMsgs(mR.data ?? []);
     setLogs(lR.data ?? []);
     setInbox(iR.data ?? []);
     setTemplates(tR.data ?? []);
-    setTestimonials(tsR.data ?? []);
+  }, [db]);
 
-    const views: PageViewRow[] = aR.data ?? [];
+  const loadAnalytics = useCallback(async () => {
+    const { data } = await db.from("page_views").select("page_path,visitor_id,created_at")
+      .gte("created_at", new Date(Date.now() - 30 * 86400000).toISOString());
+    const views: PageViewRow[] = data ?? [];
     const totalViews     = views.length;
     const uniqueVisitors = new Set(views.map((v) => v.visitor_id)).size;
     const pc = views.reduce((a, v) => { a[v.page_path] = (a[v.page_path] ?? 0) + 1; return a; }, {} as Record<string, number>);
@@ -99,8 +107,18 @@ export default function AdminPage() {
       dailyViews.push({ date: str, count: views.filter((v) => v.created_at.slice(0, 10) === str).length });
     }
     setAnalytics({ totalViews, uniqueVisitors, topPages, dailyViews });
-    setLoading(false);
   }, [db]);
+
+  const loadTestimonials = useCallback(async () => {
+    const { data } = await db.from("testimonials").select("*").order("sort_order", { ascending: true }).order("created_at", { ascending: false });
+    setTestimonials(data ?? []);
+  }, [db]);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    await Promise.all([loadPosts(), loadSubs(), loadMsgs(), loadMail(), loadAnalytics(), loadTestimonials()]);
+    setLoading(false);
+  }, [loadPosts, loadSubs, loadMsgs, loadMail, loadAnalytics, loadTestimonials]);
 
   useEffect(() => { load(); }, [load]);
 
@@ -173,12 +191,12 @@ export default function AdminPage() {
                 onDelete={(id, title) => ask(`Delete "${title}"?`, async () => {
                   const { error } = await db.from("main_blog_posts").delete().eq("id", id);
                   if (error) { toast.error("Delete failed"); return; }
-                  toast.success("Post deleted"); await load();
+                  toast.success("Post deleted"); await loadPosts();
                 })}
                 onToggle={async (id, val) => {
                   const { error } = await db.from("main_blog_posts").update({ published: val }).eq("id", id);
                   if (error) { toast.error("Update failed"); return; }
-                  toast.success(val ? "Published" : "Unpublished"); await load();
+                  toast.success(val ? "Published" : "Unpublished"); await loadPosts();
                 }}
               />
             )}
@@ -188,7 +206,7 @@ export default function AdminPage() {
                 onDelete={(id: string, email: string) => ask(`Remove ${email}?`, async () => {
                   const { error } = await db.from("newsletter_subscribers").delete().eq("id", id);
                   if (error) { toast.error("Remove failed"); return; }
-                  toast.success("Removed"); await load();
+                  toast.success("Removed"); await loadSubs();
                 })}
               />
             )}
@@ -196,20 +214,20 @@ export default function AdminPage() {
               <MsgsTab
                 msgs={msgs}
                 templates={templates}
-                onRead={async (id) => { await db.from("contact_messages").update({ read: true }).eq("id", id); await load(); }}
+                onRead={async (id) => { await db.from("contact_messages").update({ read: true }).eq("id", id); await loadMsgs(); }}
               />
             )}
             {tab === "mail"         && (
               <MailTab
                 sub={mailSub} setSub={setMailSub}
                 logs={logs} inbox={inbox} templates={templates}
-                onReload={load} db={db}
+                onReload={loadMail} db={db}
                 onEditTpl={(t) => { setEditTpl(t); setShowTpl(true); }}
                 onNewTpl={() => { setEditTpl(null); setShowTpl(true); }}
                 onDeleteTpl={(id, name) => ask(`Delete template "${name}"?`, async () => {
                   const r = await fetch(`/api/mail/templates?id=${id}`, { method: "DELETE" });
                   if (!r.ok) { toast.error("Delete failed"); return; }
-                  toast.success("Template deleted"); await load();
+                  toast.success("Template deleted"); await loadMail();
                 })}
               />
             )}
@@ -222,12 +240,12 @@ export default function AdminPage() {
                 onDelete={(id, name) => ask(`Delete testimonial from "${name}"?`, async () => {
                   const { error } = await db.from("testimonials").delete().eq("id", id);
                   if (error) { toast.error("Delete failed"); return; }
-                  toast.success("Deleted"); await load();
+                  toast.success("Deleted"); await loadTestimonials();
                 })}
                 onToggle={async (id, val) => {
                   const { error } = await db.from("testimonials").update({ published: val }).eq("id", id);
                   if (error) { toast.error("Update failed"); return; }
-                  toast.success(val ? "Published" : "Unpublished"); await load();
+                  toast.success(val ? "Published" : "Unpublished"); await loadTestimonials();
                 }}
               />
             )}
@@ -239,15 +257,15 @@ export default function AdminPage() {
         <TestimonialModal
           testimonial={editTestimonial}
           onClose={() => setShowTestimonial(false)}
-          onSave={async () => { setShowTestimonial(false); await load(); }}
+          onSave={async () => { setShowTestimonial(false); await loadTestimonials(); }}
           db={db}
         />
       )}
       {showPost && (
-        <PostModal post={editPost} onClose={() => setShowPost(false)} onSave={async () => { setShowPost(false); await load(); }} db={db} />
+        <PostModal post={editPost} onClose={() => setShowPost(false)} onSave={async () => { setShowPost(false); await loadPosts(); }} db={db} />
       )}
       {showTpl && (
-        <TplModal tpl={editTpl} onClose={() => setShowTpl(false)} onSave={async () => { setShowTpl(false); await load(); }} />
+        <TplModal tpl={editTpl} onClose={() => setShowTpl(false)} onSave={async () => { setShowTpl(false); await loadMail(); }} />
       )}
       {confirm && (
         <div className="adm-form-overlay" onClick={() => setConfirm(null)}>
