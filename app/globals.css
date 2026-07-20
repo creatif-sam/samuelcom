@@ -1070,12 +1070,12 @@ body {
 .phx-container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 60px 5% 80px;
+  padding: 20px 5% 60px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 40px;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 220px);
 }
 
 /* ── Left column ── */
