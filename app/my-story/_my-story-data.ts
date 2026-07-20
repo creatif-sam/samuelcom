@@ -110,16 +110,16 @@ export const nowCards: NowCard[] = [
   },
   {
     num: "02",
-    title: "Mentor",
-    org: "Personal Ministry",
-    body: "Walking alongside individuals navigating questions of purpose, leadership, and identity. A personal investment in others — giving back what was once given to me.",
-    image: "/PersonalMinistry.png",
-  },
-  {
-    num: "03",
     title: "Group Intelligence Facilitator",
     org: "Practitioner",
     body: "Applying the science of collective intelligence to help groups surface diverse perspectives, resolve complexity, and make decisions that reflect shared wisdom.",
     image: "/Group%20Intelligence%20faci.png",
+  },
+  {
+    num: "03",
+    title: "Mentor",
+    org: "Personal Ministry",
+    body: "Walking alongside individuals navigating questions of purpose, leadership, and identity. A personal investment in others — giving back what was once given to me.",
+    image: "/PersonalMinistry.png",
   },
 ];

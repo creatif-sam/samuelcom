@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+        #root {
+          position: absolute; inset: 0;
+          container-type: size;
+          color: #0a0908;
+          font-family: Poppins, sans-serif;
+          padding: 7cqw;
+          overflow: hidden;
+        }
+        .bg {
+          position: absolute; inset: 0;
+          background: #f0ede8;
+        }
+        .ring {
+          position: absolute;
+          top: 50%; right: -6cqw;
+          width: 34cqw; height: 34cqw;
+          transform: translateY(-50%);
+          border: 1px solid #f2a93b;
+          border-radius: 50%;
+          opacity: 0.28;
+        }
+        .ring::before {
+          content: "";
+          position: absolute;
+          inset: 12%;
+          border: 1px dashed #f2a93b;
+          border-radius: 50%;
+        }
+        .label {
+          position: relative;
+          font-size: 14px; letter-spacing: 3px; text-transform: uppercase;
+          color: #4a5fdd; font-weight: 500;
+          opacity: 0;
+        }
+        .rule {
+          position: relative;
+          margin-top: 3cqw;
+          border-top: 0.07cqw solid #f2a93b;
+          padding-top: 2.4cqw;
+          display: flex;
+          align-items: baseline;
+          gap: 2.4cqw;
+        }
+        .stat-wrap {
+          position: relative;
+          width: 10cqw;
+          height: 8.4cqw;
+        }
+        .stat {
+          position: absolute;
+          left: 0; top: 0;
+          font-size: 8cqw;
+          line-height: 1;
+          font-weight: 400;
+          color: #0a0908;
+          transform-origin: left center;
+        }
+        #stat-out { opacity: 1; }
+        #stat-in { opacity: 0; }
+        .role {
+          display: flex;
+          flex-direction: column;
+          gap: 0.6cqw;
+        }
+        .role-title {
+          font-size: 2cqw;
+          line-height: 1.15;
+        }
+        .role-title span, .role-body span {
+          display: inline-block;
+          opacity: 0;
+          transform: translateY(0.5cqw);
+        }
+        .role-body {
+          font-size: 1.2cqw;
+          color: #5A5A5A;
+          max-width: 34cqw;
+          line-height: 1.6;
+        }
+      </style>
+      <div data-hf-id="hf-wbr1" id="root" data-composition-id="04-tested-early" data-width="1920" data-height="1080" data-duration="6.665">
+        <div data-hf-id="hf-bg1" class="bg"></div>
+        <div data-hf-id="hf-rg1" class="ring"></div>
+        <div data-hf-id="hf-z209" class="label" id="label">Tested early · 2017</div>
+        <div data-hf-id="hf-a46i" class="rule">
+          <div data-hf-id="hf-sw1" class="stat-wrap">
+            <div data-hf-id="hf-q3qA" class="stat" id="stat-out">10</div>
+            <div data-hf-id="hf-q3qB" class="stat" id="stat-in">17</div>
+          </div>
+          <div data-hf-id="hf-yth4" class="role">
+            <div data-hf-id="hf-1bzz" class="role-title" id="role-title">
+              <span>Managing</span> <span>Director</span>
+            </div>
+            <div data-hf-id="hf-4gz0" class="role-body" id="role-body">
+              <span>A</span> <span>car</span> <span>wash</span> <span>business</span> <span>in</span> <span>Mpohor</span> <span>—</span> <span>profit,</span> <span>loss,</span> <span>and</span> <span>people,</span> <span>before</span> <span>finishing</span> <span>school.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        const label = document.getElementById("label");
+        const statOut = document.getElementById("stat-out");
+        const statIn = document.getElementById("stat-in");
+        const roleTitleWords = document.querySelectorAll("#role-title span");
+        const roleBodyWords = document.querySelectorAll("#role-body span");
+        const ring = document.getElementById("hf-rg1") || document.querySelector(".ring");
+
+        // Scene 1 (0.0-2.0s): label crossfades in — continuity, rule already in place, no re-draw.
+        tl.fromTo(label, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.15);
+
+        // Scene 2 (2.0-5.5s): stat scale-swap handoff — "10" shrinks+fades out, "17" arrives with a bouncy pop, same screen position.
+        tl.to(statOut, { scale: 0.55, opacity: 0, duration: 0.5, ease: "power2.in" }, 2.2);
+        tl.fromTo(
+          statIn,
+          { scale: 0.55, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.65, ease: "back.out(1.6)" },
+          2.45
+        );
+
+        // Scene 3 (~3.3-5.7s): role title + body reveal via per-word staggered fade-up, timed to "running a business... profit, loss, people."
+        gsap.utils.toArray(roleTitleWords).forEach((w, i) => {
+          tl.to(w, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 3.3 + i * 0.12);
+        });
+        gsap.utils.toArray(roleBodyWords).forEach((w, i) => {
+          tl.to(w, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 3.85 + i * 0.14);
+        });
+
+        // Held read from ~5.7s to end: subtle jitter only on the "17" stat figure.
+        const IDLE_START = 5.7;
+        const IDLE_DUR = Math.max(0.1, 6.165 - IDLE_START);
+        const phase = { p: 0 };
+        tl.to(
+          phase,
+          {
+            p: Math.PI * 2 * (IDLE_DUR / 2.6),
+            duration: IDLE_DUR,
+            ease: "none",
+            onUpdate: () => {
+              const s = 1 + Math.sin(phase.p) * 0.01;
+              const y = Math.sin(phase.p) * 2;
+              statIn.style.transform = `translateY(${y}px) scale(${s})`;
+            },
+          },
+          IDLE_START
+        );
+
+        window.__timelines["04-tested-early"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

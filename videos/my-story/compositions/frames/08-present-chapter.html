@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+        #root {
+          position: absolute; inset: 0;
+          container-type: size;
+          color: #0a0908;
+          font-family: Poppins, sans-serif;
+          overflow: hidden;
+        }
+        .bg {
+          position: absolute; inset: 0;
+          background: #f0ede8;
+        }
+        .ring {
+          position: absolute;
+          top: 50%; right: -10cqw;
+          transform: translateY(-50%);
+          width: 34cqw; height: 34cqw;
+          border-radius: 50%;
+          border: 1px solid #f2a93b;
+          opacity: 0.25;
+        }
+        .ring::before {
+          content: "";
+          position: absolute; inset: 8%;
+          border-radius: 50%;
+          border: 1px dashed #f2a93b;
+        }
+        .content {
+          position: absolute; inset: 0;
+          padding: 7cqw;
+          display: flex;
+          flex-direction: column;
+        }
+        .label {
+          font-size: 14px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: #4a5fdd;
+          font-weight: 500;
+        }
+        .heading {
+          margin-top: 1.6cqw;
+          font-size: 4cqw;
+          font-weight: 400;
+          line-height: 1.1;
+          color: #0a0908;
+          max-width: 60cqw;
+        }
+        .rows {
+          margin-top: 4cqw;
+          display: flex;
+          flex-direction: column;
+        }
+        .row {
+          display: flex;
+          align-items: baseline;
+          gap: 2cqw;
+          border-bottom: 0.07cqw solid #f2a93b;
+          padding: 1.6cqw 0;
+        }
+        .num {
+          font-size: 1.6cqw;
+          color: #546cfa;
+          width: 3cqw;
+          font-weight: 400;
+          will-change: transform;
+        }
+        .role {
+          font-size: 1.9cqw;
+          font-weight: 400;
+          color: #0a0908;
+        }
+      </style>
+      <div id="root" data-composition-id="08-present-chapter" data-width="1920" data-height="1080" data-duration="8.393">
+        <div id="bg" class="clip bg" data-start="0" data-duration="8.393" data-track-index="0"></div>
+        <div id="ring" class="clip ring" data-start="0" data-duration="8.393" data-track-index="1"></div>
+
+        <div class="content">
+          <div id="label" class="label">The present chapter · 2025–now</div>
+          <div id="heading" class="heading">Building, serving, rooting.</div>
+          <div class="rows">
+            <div id="row1" class="row"><div id="num1" class="num">01</div><div class="role">Program Officer</div></div>
+            <div id="row2" class="row"><div id="num2" class="num">02</div><div class="role">Mentor</div></div>
+            <div id="row3" class="row"><div id="num3" class="num">03</div><div class="role">Group Intelligence Facilitator</div></div>
+          </div>
+        </div>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        // Scene 1 (0.0-2.0s): label + heading crossfade in together, carried by the
+        // push-slide RIGHT transition seam.
+        tl.fromTo("#label",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
+          0.2
+        );
+        tl.fromTo("#heading",
+          { opacity: 0, y: 22 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+          0.35
+        );
+
+        // Scene 2 (2.0-7.0s): each row reveals on its own spoken clause, strictly
+        // one-per-beat via a slide-up crossfade onto its hairline.
+        const rows = [
+          { row: "#row1", num: "#num1", at: 2.0 },
+          { row: "#row2", num: "#num2", at: 3.8 },
+          { row: "#row3", num: "#num3", at: 5.6 },
+        ];
+        rows.forEach(({ row, at }) => {
+          tl.fromTo(row,
+            { opacity: 0, y: 26 },
+            { opacity: 1, y: 0, duration: 0.75, ease: "power3.out" },
+            at
+          );
+        });
+
+        // Scene 3 (7.0-7.893s): all three rows held, still — subtle jitter only on
+        // the numerals.
+        const HOLD_START = 7.0;
+        const HOLD_DUR = 0.893;
+        const nums = rows.map(r => document.querySelector(r.num));
+        const phase = { p: 0 };
+        tl.to(phase, {
+          p: Math.PI * 2 * 0.4,
+          duration: HOLD_DUR,
+          ease: "none",
+          onUpdate: () => {
+            nums.forEach((el, i) => {
+              const offset = Math.sin(phase.p + i * (Math.PI / 2)) * 0.01;
+              const y = Math.sin(phase.p + i * (Math.PI / 2)) * 2;
+              el.style.transform = `translateY(${y}px) scale(${1 + offset})`;
+            });
+          },
+        }, HOLD_START);
+
+        window.__timelines["08-present-chapter"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

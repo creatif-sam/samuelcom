@@ -18,18 +18,25 @@
   position: absolute;
   inset: 0;
   object-fit: cover;
-  object-position: center top;
-  opacity: 0.45;
+  object-position: right top;
+  opacity: 0.4;
 }
 .mspHeroGradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 10, 10, 0.2) 0%,
-    rgba(10, 10, 10, 0.15) 40%,
-    rgba(10, 10, 10, 0.85) 100%
-  );
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0.55) 0%,
+      rgba(10, 10, 10, 0.4) 40%,
+      rgba(10, 10, 10, 0.92) 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(10, 10, 10, 0.75) 0%,
+      rgba(10, 10, 10, 0.35) 45%,
+      rgba(10, 10, 10, 0) 75%
+    );
   z-index: 1;
 }
 .mspHeroContent {
@@ -60,13 +67,14 @@
 }
 .mspHeroHeadline {
   font-family: var(--font-poppins), "Poppins", sans-serif;
-  font-size: clamp(56px, 10vw, 130px);
+  font-size: clamp(56px, 9vw, 118px);
   font-weight: 900;
   line-height: 0.9;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   color: #f5f3ef;
   margin-bottom: 32px;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
 }
 .mspHeroRule {
   width: 56px;

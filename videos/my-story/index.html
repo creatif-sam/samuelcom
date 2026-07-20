@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #000;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #f0ede8;
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="51.626"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div
+        id="el-01-hook"
+        class="scene"
+        data-composition-id="01-hook"
+        data-composition-src="compositions/frames/01-hook.html"
+        data-start="0"
+        data-duration="4.511"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-01-hook-voice"
+        src="assets/voice/01.wav"
+        data-start="0"
+        data-duration="4.011"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-02-origins"
+        class="scene"
+        data-composition-id="02-origins"
+        data-composition-src="compositions/frames/02-origins.html"
+        data-start="4.011"
+        data-duration="5.812"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-02-origins-voice"
+        src="assets/voice/02.wav"
+        data-start="4.011"
+        data-duration="5.312"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-03-leadership-awakens"
+        class="scene"
+        data-composition-id="03-leadership-awakens"
+        data-composition-src="compositions/frames/03-leadership-awakens.html"
+        data-start="9.323"
+        data-duration="5.684"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-03-leadership-awakens-voice"
+        src="assets/voice/03.wav"
+        data-start="9.323"
+        data-duration="5.184"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-04-tested-early"
+        class="scene"
+        data-composition-id="04-tested-early"
+        data-composition-src="compositions/frames/04-tested-early.html"
+        data-start="14.507000000000001"
+        data-duration="6.665"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-04-tested-early-voice"
+        src="assets/voice/04.wav"
+        data-start="14.507000000000001"
+        data-duration="6.165"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-05-the-crossing"
+        class="scene"
+        data-composition-id="05-the-crossing"
+        data-composition-src="compositions/frames/05-the-crossing.html"
+        data-start="20.672"
+        data-duration="7.689"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-05-the-crossing-voice"
+        src="assets/voice/05.wav"
+        data-start="20.672"
+        data-duration="7.189"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-06-distinction"
+        class="scene"
+        data-composition-id="06-distinction"
+        data-composition-src="compositions/frames/06-distinction.html"
+        data-start="27.861"
+        data-duration="6.58"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-06-distinction-voice"
+        src="assets/voice/06.wav"
+        data-start="27.861"
+        data-duration="6.08"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-07-mastery"
+        class="scene"
+        data-composition-id="07-mastery"
+        data-composition-src="compositions/frames/07-mastery.html"
+        data-start="33.941"
+        data-duration="6.644"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-07-mastery-voice"
+        src="assets/voice/07.wav"
+        data-start="33.941"
+        data-duration="6.144"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-08-present-chapter"
+        class="scene"
+        data-composition-id="08-present-chapter"
+        data-composition-src="compositions/frames/08-present-chapter.html"
+        data-start="40.085"
+        data-duration="8.393"
+        data-track-index="1"
+      ></div>
+      <audio
+        id="el-08-present-chapter-voice"
+        src="assets/voice/08.wav"
+        data-start="40.085"
+        data-duration="7.893"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+      <div
+        id="el-09-lesson-close"
+        class="scene"
+        data-composition-id="09-lesson-close"
+        data-composition-src="compositions/frames/09-lesson-close.html"
+        data-start="47.978"
+        data-duration="3.648"
+        data-track-index="0"
+      ></div>
+      <audio
+        id="el-09-lesson-close-voice"
+        src="assets/voice/09.wav"
+        data-start="47.978"
+        data-duration="3.648"
+        data-track-index="10"
+        data-volume="1"
+      ></audio>
+
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      // ── frame transitions (injected by transitions.mjs) ──
+      (function () { var tl = window.__timelines["main"];
+        tl.to("#el-01-hook", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 4.011);
+        tl.fromTo("#el-02-origins", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 4.011);
+        tl.to("#el-02-origins", { x: 1920, duration: 0.5, ease: "power3.inOut" }, 9.323);
+        tl.fromTo("#el-03-leadership-awakens", { x: -1920, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 9.323);
+        tl.to("#el-03-leadership-awakens", { x: 1920, duration: 0.5, ease: "power3.inOut" }, 14.507);
+        tl.fromTo("#el-04-tested-early", { x: -1920, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 14.507);
+        tl.to("#el-04-tested-early", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 20.672);
+        tl.fromTo("#el-05-the-crossing", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 20.672);
+        tl.to("#el-05-the-crossing", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 27.861);
+        tl.fromTo("#el-06-distinction", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 27.861);
+        tl.to("#el-06-distinction", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 33.941);
+        tl.fromTo("#el-07-mastery", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 33.941);
+        tl.to("#el-07-mastery", { x: 1920, duration: 0.5, ease: "power3.inOut" }, 40.085);
+        tl.fromTo("#el-08-present-chapter", { x: -1920, opacity: 1 }, { x: 0, duration: 0.5, ease: "power3.inOut" }, 40.085);
+        tl.to("#el-08-present-chapter", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 47.978);
+        tl.fromTo("#el-09-lesson-close", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 47.978);
+        tl.to({}, { duration: 51.626 }, 0); // full-span anchor — main.duration() == composition total (Studio master duration)
+      })();
+    </script>
+  </body>
+</html>

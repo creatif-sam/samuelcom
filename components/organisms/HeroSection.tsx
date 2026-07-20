@@ -15,8 +15,7 @@ export function HeroSection() {
           <h1 className="phx-heading">
             I&apos;m <em>Samuel Gyasi,</em><br />
             Leader &amp; Group<br />
-            Intelligence Facilitator<br />
-            Based in Africa.
+            Intelligence Facilitator.
           </h1>
 
           <p className="phx-desc">

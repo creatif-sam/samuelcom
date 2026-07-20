@@ -1,0 +1,63 @@
+{
+  "lines": [
+    {
+      "id": "01",
+      "sfx": [
+        "soft-type-tick"
+      ]
+    },
+    {
+      "id": "02",
+      "sfx": [
+        "none"
+      ]
+    },
+    {
+      "id": "03",
+      "sfx": [
+        "soft-tick"
+      ]
+    },
+    {
+      "id": "04",
+      "sfx": [
+        "soft-tick"
+      ]
+    },
+    {
+      "id": "05",
+      "sfx": [
+        "whoosh-soft"
+      ]
+    },
+    {
+      "id": "06",
+      "sfx": [
+        "none — this is a held/breather beat",
+        "deliberately quiet after Frame 5's motion"
+      ]
+    },
+    {
+      "id": "07",
+      "sfx": [
+        "soft-chime"
+      ]
+    },
+    {
+      "id": "08",
+      "sfx": [
+        "soft-tick (×3",
+        "one per row)"
+      ]
+    },
+    {
+      "id": "09",
+      "sfx": [
+        "none — the video's quietest beat by design"
+      ]
+    }
+  ],
+  "bgm": {
+    "mode": "none"
+  }
+}

@@ -16,7 +16,17 @@ export function VisionSection() {
             <strong>transformed to lead</strong><br />
             with clarity and purpose.
           </p>
-      
+
+          <div className="mission-divider" aria-hidden="true" />
+
+          <div className="mission-block">
+            <span className="mission-label">Mission</span>
+            <p className="mission-statement">
+              I equip people through teaching, mentorship, and formation to
+              grow grounded in truth, sharpen their thinking, and become
+              leaders of clarity and purpose.
+            </p>
+          </div>
         </ScrollReveal>
       </div>
     </section>

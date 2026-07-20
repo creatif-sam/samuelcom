@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+        #root {
+          position: absolute; inset: 0;
+          container-type: size;
+          color: #0a0908;
+          font-family: Poppins, sans-serif;
+          display: flex; align-items: center; justify-content: center;
+          overflow: hidden;
+        }
+        .bg {
+          position: absolute; inset: 0;
+          background: #f0ede8;
+        }
+        .ring {
+          position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+          width: 40cqw; height: 40cqw; border-radius: 50%; border: 1px solid #f2a93b; opacity: 0.4;
+        }
+        .ring::before { content: ""; position: absolute; inset: 12%; border: 1px dashed #f2a93b; border-radius: 50%; opacity: 0.6; }
+        .content { position: relative; text-align: center; max-width: 52cqw; }
+        .headline { font-size: 4cqw; line-height: 1.2; font-weight: 400; }
+        .word {
+          display: inline-block;
+          opacity: 0;
+        }
+        .word.emphasis { font-style: italic; color: #546cfa; }
+        .accent {
+          margin: 2cqw auto 0; width: 18cqw; height: 1px; background: #0a0908;
+          transform: scaleX(0); transform-origin: center;
+        }
+      </style>
+      <div data-hf-id="hf-7lwa" id="root" data-composition-id="09-lesson-close" data-width="1920" data-height="1080" data-duration="3.648">
+        <div data-hf-id="hf-bg01" class="bg clip" data-start="0" data-duration="3.648" data-track-index="0"></div>
+        <div data-hf-id="hf-0qcu" class="ring"></div>
+        <div data-hf-id="hf-mcm7" class="content">
+          <div data-hf-id="hf-zhpk" class="headline">
+            <span data-hf-id="w1" class="word">A</span>
+            <span data-hf-id="w2" class="word">life</span>
+            <span data-hf-id="w3" class="word">worth</span>
+            <span data-hf-id="w4" class="word">living</span>
+            <span data-hf-id="w5" class="word">is</span>
+            <span data-hf-id="w6" class="word">one</span>
+            <em data-hf-id="hf-r31k">
+              <span data-hf-id="w7" class="word emphasis">shared</span>
+              <span data-hf-id="w8" class="word emphasis">in</span>
+              <span data-hf-id="w9" class="word emphasis">service</span>
+              <span data-hf-id="w10" class="word emphasis">to</span>
+              <span data-hf-id="w11" class="word emphasis">others.</span>
+            </em>
+          </div>
+          <div data-hf-id="hf-hx96" class="accent"></div>
+        </div>
+      </div>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        // Scene 1 (0.0–0.6s): the geo-ring is already present, static — no entrance (callback to earlier frames).
+        gsap.set(".ring", { opacity: 0.4 });
+
+        // Scene 2 (0.6–2.7s): per-word staggered reveal, each word landing on its voiceover cue.
+        const words = gsap.utils.toArray(".word");
+        const WORD_START = 0.6;
+        const WORD_STAGGER = 0.19;
+        words.forEach((w, i) => {
+          tl.fromTo(
+            w,
+            { opacity: 0, y: 14 },
+            { opacity: 1, y: 0, duration: 0.32, ease: "power2.out" },
+            WORD_START + i * WORD_STAGGER
+          );
+        });
+
+        // Scene 3 (2.7–3.648s): the ink horizontal-accent rule draws in beneath, then a dead-still hold — the film's final image.
+        tl.fromTo(
+          ".accent",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.5, ease: "power2.out" },
+          2.95
+        );
+
+        window.__timelines["09-lesson-close"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+        #root {
+          position: absolute; inset: 0;
+          container-type: size;
+          color: #0a0908;
+          font-family: 'Poppins', sans-serif;
+          overflow: hidden;
+        }
+
+        .bg {
+          position: absolute; inset: 0;
+          background: #f0ede8;
+        }
+        .geo-ring {
+          position: absolute;
+          top: 50%; right: -8cqw;
+          width: 34cqw; height: 34cqw;
+          transform: translateY(-50%);
+          border: 1px solid #f2a93b;
+          border-radius: 50%;
+          opacity: 0.3;
+        }
+        .geo-ring::before {
+          content: "";
+          position: absolute; inset: 12%;
+          border: 1px dashed #f2a93b;
+          border-radius: 50%;
+        }
+
+        .frame-body {
+          position: absolute; inset: 0;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .col-text { padding: 7cqw; display: flex; flex-direction: column; justify-content: center; gap: 1.6cqw; position: relative; z-index: 2; }
+        .label { font-size: 14px; letter-spacing: 3px; text-transform: uppercase; color: #4a5fdd; font-weight: 500; opacity: 0; }
+        .name { font-size: 3.4cqw; line-height: 1.1; opacity: 0; }
+        .body { font-size: 1.3cqw; color: #5A5A5A; max-width: 34cqw; line-height: 1.6; }
+        .body .word { display: inline-block; opacity: 0; will-change: transform, opacity; margin-right: 0.28em; }
+        .body .word.keyword { color: #0a0908; font-weight: 500; }
+
+        .col-media {
+          position: relative; margin: 5cqw;
+          background: #FAE0B9; border: 1px solid #f2a93b;
+          opacity: 0;
+        }
+        .col-media::before, .col-media::after {
+          content: ""; position: absolute; inset: 0;
+        }
+        .col-media::before { background: linear-gradient(45deg, transparent 49.5%, #f2a93b 49.5%, #f2a93b 50.5%, transparent 50.5%); }
+        .col-media::after { background: linear-gradient(-45deg, transparent 49.5%, #f2a93b 49.5%, #f2a93b 50.5%, transparent 50.5%); }
+        .media-tag {
+          position: absolute; bottom: 1.5cqw; left: 1.5cqw;
+          font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #546cfa;
+          background: rgba(240,237,232,0.8); padding: 4px 8px;
+        }
+      </style>
+
+      <div id="root" data-composition-id="02-origins" data-width="1920" data-height="1080" data-duration="5.812">
+        <div class="bg clip" data-start="0" data-duration="5.812" data-track-index="0">
+          <div class="geo-ring"></div>
+        </div>
+
+        <div class="frame-body clip" data-start="0" data-duration="5.812" data-track-index="1">
+          <div class="col-text">
+            <div class="label" id="label">Origins</div>
+            <div class="name" id="name">Samuel Kobina Gyasi</div>
+            <div class="body" id="body"></div>
+          </div>
+          <div class="col-media" id="media">
+            <div class="media-tag">Tailor shop — family</div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        // Build the body copy as per-word spans for the staggered reveal.
+        const bodyText =
+          "Second of three brothers, raised in Mpohor. His father's tailor shop taught precision and patience; his mother's faith taught him a life built on it is unshakeable.";
+        const bodyEl = document.getElementById("body");
+        bodyText.split(" ").forEach((w) => {
+          const span = document.createElement("span");
+          span.className = "word";
+          if (w.toLowerCase().startsWith("faith")) {
+            span.classList.add("keyword");
+            span.id = "faith-word";
+          }
+          span.textContent = w;
+          bodyEl.appendChild(span);
+        });
+        const words = bodyEl.querySelectorAll(".word");
+
+        // Scene 1 (0.0-1.1s): label crossfades in, then the name locks in via
+        // a slide-up crossfade. Nothing on the right column yet.
+        tl.fromTo("#label", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.35, ease: "power1.out" }, 0.0);
+        tl.fromTo(
+          "#name",
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" },
+          0.3,
+        );
+
+        // Scene 2 (1.1-3.0s): as the VO reaches "Second of three brothers," the
+        // body reveals via a per-word staggered reveal beneath the name; at
+        // "his father's craftsmanship" the right-column image-placeholder
+        // crossfades in.
+        tl.fromTo(
+          words,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.35, ease: "power1.out", stagger: 0.055 },
+          1.1,
+        );
+        tl.fromTo(
+          "#media",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5, ease: "power1.out" },
+          2.0,
+        );
+
+        // Scene 3 (3.0-5.312s): held read on both columns; on "his mother's
+        // faith" the body's final clause gets a quiet keyword-glow, then
+        // settles still to the end.
+        tl.to(
+          "#faith-word",
+          { textShadow: "0 0 18px rgba(84,108,250,0.55)", scale: 1.06, duration: 0.4, ease: "power1.out" },
+          3.6,
+        );
+        tl.to(
+          "#faith-word",
+          { textShadow: "0 0 0px rgba(84,108,250,0)", scale: 1.0, duration: 0.6, ease: "power1.inOut" },
+          4.0,
+        );
+
+        window.__timelines["02-origins"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

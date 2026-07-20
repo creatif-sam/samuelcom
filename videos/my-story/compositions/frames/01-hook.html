@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+        #root {
+          position: absolute; inset: 0;
+          container-type: size;
+          color: #0a0908;
+          font-family: Poppins, sans-serif;
+          overflow: hidden;
+        }
+        .bg {
+          position: absolute; inset: 0;
+          background: #f0ede8;
+        }
+        .ring {
+          position: absolute; right: 8cqw; top: 50%;
+          margin-top: -17cqw;
+          width: 34cqw; height: 34cqw; border-radius: 50%;
+          border: 1px solid #f2a93b; opacity: 0.35;
+        }
+        .ring::before {
+          content: ""; position: absolute; inset: 12%;
+          border: 1px dashed #f2a93b; border-radius: 50%; opacity: 0.7;
+        }
+        .label-wrap {
+          position: absolute; left: 7cqw; top: 12cqw;
+          display: inline-flex; align-items: baseline;
+          font-size: 14px; letter-spacing: 3px; text-transform: uppercase;
+          color: #4a5fdd; font-weight: 500;
+          white-space: pre;
+        }
+        .label-text { color: #4a5fdd; }
+        .caret {
+          display: inline-block;
+          width: 8px; height: 14px;
+          margin-left: 3px;
+          background: #546cfa;
+          vertical-align: -2px;
+        }
+        .headline {
+          position: absolute; left: 7cqw; top: 42%;
+          font-size: 6.2cqw; line-height: 1.06; font-weight: 400;
+          max-width: 60cqw;
+        }
+        .headline .word { display: inline-block; opacity: 0; will-change: transform, opacity; }
+        .headline em { font-style: italic; color: #546cfa; }
+      </style>
+      <div data-hf-id="hf-lutg" id="root" data-composition-id="01-hook" data-width="1920" data-height="1080" data-duration="4.511">
+        <div data-hf-id="hf-bg01" class="bg clip" data-start="0" data-duration="4.511" data-track-index="0"></div>
+        <div data-hf-id="hf-0qcu" class="ring clip" id="ring" data-start="0" data-duration="4.511" data-track-index="1"></div>
+        <div data-hf-id="hf-xlgy" class="label-wrap clip" data-start="0" data-duration="4.511" data-track-index="2">
+          <span data-hf-id="hf-lbl-txt" class="label-text" id="label-text"></span><span data-hf-id="hf-caret" class="caret" id="caret"></span>
+        </div>
+        <div data-hf-id="hf-3ci0" class="headline clip" id="headline" data-start="1.85" data-duration="2.661" data-track-index="3">
+          <span data-hf-id="hf-w1" class="word">22</span> <span data-hf-id="hf-w2" class="word">June</span> <span data-hf-id="hf-w3" class="word">1999</span><br data-hf-id="hf-x5px"><em data-hf-id="hf-ev0b"><span data-hf-id="hf-w4" class="word">Mpohor,</span> <span data-hf-id="hf-w5" class="word">Ghana.</span></em>
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        var DURATION = 4.011;
+
+        /* Scene 1 (0.0-2.0s): label types on with caret, synced to
+           "Every story starts somewhere small." */
+        var LABEL_TEXT = "A story begins";
+        var labelTextEl = document.getElementById("label-text");
+        var caretEl = document.getElementById("caret");
+
+        var TYPE_START = 0.15;
+        var TYPE_DUR = 1.3;
+        var typeDriver = { v: 0 };
+        tl.to(typeDriver, {
+          v: LABEL_TEXT.length,
+          duration: TYPE_DUR,
+          ease: "power1.inOut",
+          onUpdate: function () {
+            labelTextEl.textContent = LABEL_TEXT.substring(0, Math.floor(typeDriver.v));
+          }
+        }, TYPE_START);
+
+        // Deterministic caret blink via sin, non-CSS.
+        var blinkDriver = { p: 0 };
+        var BLINK_CYCLES = 5;
+        tl.to(blinkDriver, {
+          p: Math.PI * 2 * BLINK_CYCLES,
+          duration: DURATION,
+          ease: "none",
+          onUpdate: function () {
+            caretEl.style.opacity = Math.sin(blinkDriver.p) > 0 ? "1" : "0";
+          }
+        }, 0);
+
+        /* Scene 2 (2.0-5.0s window, compressed to this frame's 4.011s):
+           headline builds in via per-word staggered reveal on "His started
+           in Mpohor," landing on a power3 settle. */
+        tl.fromTo(".headline .word",
+          { opacity: 0, y: 22 },
+          { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", stagger: 0.12 },
+          1.95
+        );
+
+        /* Scene 3 (held read): headline + ring sit still; subtle low-amplitude
+           jitter only on the ring (sine-wave-loop, LOW end of range). */
+        var ringEl = document.getElementById("ring");
+        var IDLE_START = 2.9;
+        var IDLE_DUR = DURATION - IDLE_START;
+        var CYCLES = Math.max(1, Math.round(IDLE_DUR / 2.2));
+        var phase = { p: 0 };
+        tl.to(phase, {
+          p: Math.PI * 2 * CYCLES,
+          duration: IDLE_DUR,
+          ease: "none",
+          onUpdate: function () {
+            var scale = 1 + Math.sin(phase.p) * 0.01;
+            var y = Math.sin(phase.p) * 2;
+            ringEl.style.transform = "translateY(" + y + "px) scale(" + scale + ")";
+          }
+        }, IDLE_START);
+
+        window.__timelines["01-hook"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

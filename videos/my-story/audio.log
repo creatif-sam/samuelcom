@@ -1,0 +1,19 @@
+· tts: kokoro · voice am_michael · 9 line(s)
+  voice 01: assets/voice/01.wav (4.011s, 0 words)
+  voice 02: assets/voice/02.wav (5.312s, 0 words)
+  voice 03: assets/voice/03.wav (5.184s, 0 words)
+  voice 04: assets/voice/04.wav (6.165s, 0 words)
+  voice 06: assets/voice/06.wav (6.08s, 0 words)
+  voice 07: assets/voice/07.wav (6.144s, 0 words)
+  voice 09: assets/voice/09.wav (3.648s, 0 words)
+· bgm: disabled
+✓ audio engine → C:\Users\Lenovo\Desktop\Samuelcom\samuelcom\videos\my-story\audio_engine_meta.json
+  heygen: no  ·  ran: tts,bgm
+  voices: 7  ·  bgm: none  ·  sfx: 0
+  total voice duration: 36.544s
+
+anomalies (non-fatal):
+  - line 05: TTS failed — omitted (kokoro (npx hyperframes tts) exited with status 1)
+  - line 08: TTS failed — omitted (kokoro (npx hyperframes tts) exited with status 1)
+  - bgm: retrieve requires a HeyGen credential — skipped (no generate fallback for an explicit retrieve)
+✓ audio generate: 7 voice + no bgm → C:\Users\Lenovo\Desktop\Samuelcom\samuelcom\videos\my-story\audio_meta.json

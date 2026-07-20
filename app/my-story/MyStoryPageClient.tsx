@@ -95,7 +95,7 @@ export default function MyStoryPageClient() {
               <div className={styles.mspIntroStatLabel}>Countries</div>
             </div>
             <div className={styles.mspIntroStat}>
-              <div className={styles.mspIntroStatVal}>16+</div>
+              <div className={styles.mspIntroStatVal}>17+</div>
               <div className={styles.mspIntroStatLabel}>Years of Leadership</div>
             </div>
           </div>

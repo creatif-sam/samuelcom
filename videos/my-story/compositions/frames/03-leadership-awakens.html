@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head><meta charset="UTF-8"></head>
+  <body>
+    <template>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+        #root {
+          position: absolute; inset: 0;
+          container-type: size;
+          color: #0a0908;
+          font-family: Poppins, sans-serif;
+          overflow: hidden;
+        }
+
+        .bg {
+          position: absolute; inset: 0;
+          background: #f0ede8;
+        }
+
+        .content {
+          position: absolute; inset: 0;
+          padding: 7cqw;
+        }
+
+        .label {
+          font-size: 14px; letter-spacing: 3px; text-transform: uppercase;
+          color: #4a5fdd; font-weight: 500;
+          opacity: 0;
+        }
+
+        .rule {
+          position: relative;
+          margin-top: 3cqw;
+          padding-top: 2.4cqw;
+          display: flex; align-items: baseline; gap: 2.4cqw;
+        }
+        .rule-svg {
+          position: absolute; top: 0; left: 0;
+          width: 100%; height: 2px;
+          overflow: visible;
+        }
+        .rule-svg line {
+          stroke: #f2a93b;
+          stroke-width: 1;
+          vector-effect: non-scaling-stroke;
+        }
+
+        .stat {
+          font-size: 8cqw; line-height: 1;
+          font-variant-numeric: tabular-nums;
+          transform-origin: left center;
+        }
+
+        .role { display: flex; flex-direction: column; gap: 0.6cqw; }
+        .role-title { font-size: 2cqw; }
+        .role-body { font-size: 1.2cqw; color: #5A5A5A; max-width: 34cqw; }
+
+        .word {
+          display: inline-block;
+          opacity: 0;
+          will-change: transform, opacity;
+        }
+      </style>
+
+      <div data-hf-id="hf-artv" id="root" data-composition-id="03-leadership-awakens" data-width="1920" data-height="1080" data-duration="5.684">
+        <div data-hf-id="hf-bg" class="bg clip" data-start="0" data-duration="5.684" data-track-index="0"></div>
+
+        <div data-hf-id="hf-content" class="content clip" data-start="0" data-duration="5.684" data-track-index="1">
+          <div data-hf-id="hf-k8h1" class="label" id="label">Leadership awakens · 2009</div>
+          <div data-hf-id="hf-a46i" class="rule">
+            <svg class="rule-svg" viewBox="0 0 100 1" preserveAspectRatio="none">
+              <line id="rule-line" x1="0" y1="0.5" x2="100" y2="0.5" />
+            </svg>
+            <div data-hf-id="hf-owtr" class="stat" id="stat">0</div>
+            <div data-hf-id="hf-yth4" class="role">
+              <div data-hf-id="hf-kk48" class="role-title" id="role-title"></div>
+              <div data-hf-id="hf-jtfm" class="role-body" id="role-body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+
+        // ---- word-split helper: wraps each word of a sentence in .word spans ----
+        function splitWords(el, text) {
+          el.innerHTML = "";
+          const words = text.split(" ");
+          words.forEach((w, i) => {
+            const span = document.createElement("span");
+            span.className = "word";
+            span.textContent = w + (i < words.length - 1 ? " " : "");
+            el.appendChild(span);
+          });
+          return el.querySelectorAll(".word");
+        }
+
+        const roleTitleWords = splitWords(document.getElementById("role-title"), "Class Prefect");
+        const roleBodyWords = splitWords(
+          document.getElementById("role-body"),
+          "Ghana-China Friendship School — his first lesson in leadership."
+        );
+
+        const line = document.getElementById("rule-line");
+        const lineLen = line.getTotalLength();
+        line.style.strokeDasharray = String(lineLen);
+        line.style.strokeDashoffset = String(lineLen);
+
+        const tl = gsap.timeline({ paused: true });
+
+        // Scene 1 (0 – 1.44s): label crossfades in at top, carried by the push-slide RIGHT seam.
+        tl.fromTo(
+          "#label",
+          { opacity: 0, x: -14 },
+          { opacity: 1, x: 0, duration: 0.7, ease: "power3.out" },
+          0.15
+        );
+
+        // Scene 2 (~1.3 – 2.6s): stat counts 0 -> 10 with synchronized scale growth,
+        // hairline rule draws in beneath it (svg-path-draw).
+        const counterState = { value: 0 };
+        const statEl = document.getElementById("stat");
+        tl.fromTo(
+          statEl,
+          { scale: 0.55 },
+          { scale: 1, duration: 1.1, ease: "power3.out" },
+          1.3
+        );
+        tl.to(
+          counterState,
+          {
+            value: 10,
+            duration: 1.1,
+            ease: "power3.out",
+            onUpdate: () => {
+              statEl.textContent = Math.round(counterState.value).toLocaleString();
+            },
+          },
+          1.3
+        );
+        tl.to(
+          line,
+          { strokeDashoffset: 0, duration: 1.0, ease: "power2.out" },
+          1.35
+        );
+
+        // Scene 3 (~2.9 – 3.9s): role-title + body reveal via per-word staggered reveal
+        // beside the stat, on "elected Class Prefect".
+        tl.fromTo(
+          roleTitleWords,
+          { opacity: 0, y: 16, filter: "blur(6px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out", stagger: 0.08 },
+          2.9
+        );
+        tl.fromTo(
+          roleBodyWords,
+          { opacity: 0, y: 10, filter: "blur(4px)" },
+          { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out", stagger: 0.035 },
+          3.15
+        );
+
+        // Scene 3 hold (~3.9 – 5.184s): held read — subtle jitter only on the "10".
+        tl.to(
+          statEl,
+          {
+            keyframes: [
+              { y: -2, duration: 0.6, ease: "sine.inOut" },
+              { y: 0, duration: 0.6, ease: "sine.inOut" },
+            ],
+          },
+          3.95
+        );
+
+        window.__timelines["03-leadership-awakens"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
