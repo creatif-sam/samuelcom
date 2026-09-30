@@ -1,4 +1,4 @@
-﻿import { createAnonClient } from "@/lib/supabase/anon";
+import { createAnonClient } from "@/lib/supabase/anon";
 
 interface Testimonial {
   id: string;
@@ -55,7 +55,7 @@ export async function TestimonialsSection() {
             Words from <em>Those Who Know</em>
           </h2>
           <p className="ts-sub">
-            Voices of those who have walked alongside, been mentored by, or collaborated with Samuel.
+            Voices of those who have walked alongside, been mentored by, or collaborated with me.
           </p>
         </div>
 

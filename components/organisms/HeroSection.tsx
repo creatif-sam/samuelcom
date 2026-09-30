@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -83,7 +81,7 @@ export function HeroSection() {
               className="phx-photo-img"
               style={{ objectFit: "contain", objectPosition: "center bottom" }}
             />
-            <span className="phx-badge phx-badge--1">Group Intelligence Faci.</span>
+            <span className="phx-badge phx-badge--1">Group Intelligence Facilitator</span>
             <span className="phx-badge phx-badge--2">Junior Program Officer</span>
           </div>
         </div>

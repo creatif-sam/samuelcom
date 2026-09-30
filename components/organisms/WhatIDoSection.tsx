@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 const cards = [
   {
     num: "01",
-    img: "/JPO.png",
+    img: "/jpo.webp",
     alt: "Junior Program Officer",
     title: "Junior Program Officer",
     org: "School of Collective Intelligence · UM6P, Morocco",
@@ -14,7 +14,7 @@ const cards = [
   },
   {
     num: "02",
-    img: "/Group Intelligence faci.png",
+    img: "/group-intelligence-facilitator.webp",
     alt: "Group Intelligence Facilitator",
     title: "Group Intelligence Facilitator",
     org: "Practitioner",
@@ -22,7 +22,7 @@ const cards = [
   },
   {
     num: "03",
-    img: "/PersonalMinistry.png",
+    img: "/personal-ministry.webp",
     alt: "Personal Ministry",
     title: "Mentor",
     org: "Personal Ministry",
@@ -58,11 +58,11 @@ export function WhatIDoSection() {
         <div className="widc-header">
           <p className="widc-label">What I Do</p>
           <h2 className="widc-title">
-            Serving Across<br />
-            <em>Three Spheres</em>
+            Serving Through<br />
+            <em>Three Roles</em>
           </h2>
           <p className="widc-sub">
-            Technology. Leadership. Transformation. Each role is an expression of the same conviction:
+            Program leadership. Facilitation. Mentorship. Each role is an expression of the same conviction:
             a life worth living is one shared in service to others.
           </p>
         </div>

@@ -1,4 +1,4 @@
-﻿import { SectionLabel } from "@/components/atoms/SectionLabel";
+import { SectionLabel } from "@/components/atoms/SectionLabel";
 import { PillarCard } from "@/components/molecules/PillarCard";
 import { ScrollReveal } from "@/components/molecules/ScrollReveal";
 
@@ -8,28 +8,28 @@ const pillars = [
     name: "Leadership",
     href: "/leadership",
     description:
-      "Samuel leads as a servant first — inspiring, empowering, and calling forth greatness in others. Over seventeen years of practice, he has come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
+      "I lead as a servant first — inspiring, empowering, and calling forth greatness in others. Over seventeen years of practice, I have come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
   },
   {
     icon: "◆",
     name: "Intelligence",
-    href: "/intellectuality",
+    href: "/group-intelligence-facilitator",
     description:
-      "Samuel pursues deep thinking, rigorous study, and intellectual honesty. He specialises in collective intelligence — the science of how groups think, decide, and innovate together — and brings that rigour into every programme, research project, and advisory conversation.",
+      "I pursue deep thinking, rigorous study, and intellectual honesty. I specialise in collective intelligence — the science of how groups think, decide, and innovate together — and bring that rigour into every programme, research project, and advisory conversation.",
   },
   {
     icon: "⬡",
     name: "Technology",
     href: "/intellectuality",
     description:
-      "At the intersection of data science, AI, and human systems, Samuel builds tools and frameworks that help organisations make better decisions. Technology, for Samuel, is not an end — it is a lever for human flourishing and systemic change.",
+      "At the intersection of data science, AI, and human systems, I build tools and frameworks that help organisations make better decisions. Technology, for me, is not an end — it is a lever for human flourishing and systemic change.",
   },
   {
     icon: "◎",
     name: "Transformation",
     href: "/transformation",
     description:
-      "Change that lasts begins from within and works outward. Samuel is a catalyst — carrying a vision for individuals, communities, and nations to be renewed, elevated, and equipped to meet the challenges of a rapidly shifting world.",
+      "Change that lasts begins from within and works outward. I am a catalyst — carrying a vision for individuals, communities, and nations to be renewed, elevated, and equipped to meet the challenges of a rapidly shifting world.",
   },
 ];
 

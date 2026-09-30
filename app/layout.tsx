@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { CookieBanner } from "@/components/organisms/CookieBanner";
@@ -53,14 +53,6 @@ export const metadata: Metadata = {
     title: "Samuel Kobina Gyasi — Technology · Leadership · Intelligence · Transformation",
     description:
       "Leader, Facilitator, and speaker dedicated to technology, leadership, collective intelligence, and transformative change.",
-    images: [
-      {
-        url: "/photo-hero.png",
-        width: 1200,
-        height: 630,
-        alt: "Samuel Kobina Gyasi",
-      },
-    ],
     firstName: "Samuel",
     lastName: "Gyasi",
   },
@@ -68,7 +60,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Samuel Kobina Gyasi",
     description: "Leader, Facilitator, and speaker dedicated to technology, leadership, collective intelligence, and transformative change.",
-    images: ["/photo-hero.png"],
     creator: "@samuel_gsi",
   },
   icons: {
@@ -99,9 +90,9 @@ const jsonLd = {
   alternateName: ["Samuel Gyasi", "Samuel K. Gyasi"],
   url: siteUrl,
   image: `${siteUrl}/photo-hero.png`,
-  jobTitle: "Scholar · Leader · Speaker",
+  jobTitle: "Leader & Group Intelligence Facilitator",
   description:
-    "Samuel Kobina Gyasi is a scholar, leader, and speaker dedicated to technology, leadership, collective intelligence, and transformative impact.",
+    "Samuel Kobina Gyasi is a leader and group intelligence facilitator dedicated to technology, leadership, collective intelligence, and transformative impact.",
   nationality: { "@type": "Country", name: "Ghana" },
   sameAs: [
     "https://www.linkedin.com/in/samuel-k-gyasi/",

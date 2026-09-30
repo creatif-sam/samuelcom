@@ -106,7 +106,7 @@ export const nowCards: NowCard[] = [
     title: "Program Officer (Jnr)",
     org: "School of Collective Intelligence | UM6P, Morocco",
     body: "Designing and coordinating programs that unlock collective intelligence — guiding students through career development, seminars, and cross-institutional initiatives.",
-    image: "/JPO.png",
+    image: "/jpo.webp",
   },
   {
     num: "02",
@@ -120,6 +120,6 @@ export const nowCards: NowCard[] = [
     title: "Mentor",
     org: "Personal Ministry",
     body: "Walking alongside individuals navigating questions of purpose, leadership, and identity. A personal investment in others — giving back what was once given to me.",
-    image: "/PersonalMinistry.png",
+    image: "/personal-ministry.webp",
   },
 ];

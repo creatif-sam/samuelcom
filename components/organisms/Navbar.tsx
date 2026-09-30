@@ -52,6 +52,9 @@ export function Navbar() {
 
         {/* Right: CTA button + hamburger */}
         <div className="nav-right">
+          <span className="nav-desktop">
+            <ThemeSwitcher />
+          </span>
           <a
             href="https://wa.me/212684893821"
             target="_blank"

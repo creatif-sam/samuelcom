@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { createAnonClient } from "@/lib/supabase/anon";
 
@@ -11,29 +12,6 @@ interface BlogPost {
   read_time_minutes: number;
   featured_image_url: string | null;
 }
-
-const SAMPLE_POSTS: BlogPost[] = [
-  {
-    id: "s2",
-    title: "Seventeen Years of Leading: What No One Taught Me",
-    slug: "fifteen-years-of-leading",
-    category: "leadership",
-    excerpt: "A personal inventory of hard-won lessons — from Class Prefect to Consortium President — about what leadership actually costs and what it gives back.",
-    created_at: "2026-02-10",
-    read_time_minutes: 6,
-    featured_image_url: null,
-  },
-  {
-    id: "s3",
-    title: "SARIMAX and Systems: Forecasting & Uncertainty",
-    slug: "sarimax-and-systems",
-    category: "intellectuality",
-    excerpt: "While modelling irradiation data in Benguerrir, Samuel found unexpected parallels between statistical confidence intervals and the nature of strategic planning.",
-    created_at: "2026-01-22",
-    read_time_minutes: 5,
-    featured_image_url: null,
-  },
-];
 
 const CAT_MAP: Record<string, { label: string; color: string }> = {
   leadership: { label: "Leadership", color: "#d4a843" },
@@ -54,20 +32,24 @@ async function getLatestPosts(): Promise<BlogPost[]> {
     const db = createAnonClient();
     const { data, error } = await db
       .from("main_blog_posts")
-      .select("*")
+      .select("id, title, slug, category, excerpt, created_at, read_time_minutes, featured_image_url")
       .eq("published", true)
       .order("created_at", { ascending: false })
       .limit(2);
 
-    if (!error && data && data.length > 0) return data;
+    if (error) console.error("Failed to fetch blog posts:", error);
+    return data ?? [];
   } catch (err) {
     console.error("Failed to fetch blog posts:", err);
+    return [];
   }
-  return SAMPLE_POSTS;
 }
 
 export async function LatestBlogsSection() {
   const posts = await getLatestPosts();
+
+  // Hide the section rather than show placeholder posts that link nowhere
+  if (posts.length === 0) return null;
 
   return (
     <section className="latest-blogs-section">
@@ -88,6 +70,17 @@ export async function LatestBlogsSection() {
                 href={`/${post.category}/blog/${post.slug}`}
                 className="lbs-card"
               >
+                {post.featured_image_url && (
+                  <div className="lbs-card-img">
+                    <Image
+                      src={post.featured_image_url}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                )}
                 <div className="lbs-card-header">
                   <span className="lbs-category" style={{ color: cat.color }}>
                     {cat.label}
