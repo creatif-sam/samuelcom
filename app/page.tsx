@@ -10,6 +10,9 @@ import { SiteFooter }            from "@/components/organisms/SiteFooter";
 import { TestimonialsSection }   from "@/components/organisms/TestimonialsSection";
 import { LatestBlogsSection }    from "@/components/organisms/LatestBlogsSection";
 
+// Re-fetch latest blog posts from main_blog_posts periodically instead of freezing them at build time
+export const revalidate = 300;
+
 export default function Home() {
   return (
     <>
