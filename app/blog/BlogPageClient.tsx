@@ -1,45 +1,51 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { createAnonClient } from "@/lib/supabase/anon";
+import { useState } from "react";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
 import { Navbar } from "@/components/organisms/Navbar";
-import { Post, SAMPLE_POSTS, PAGE_SIZE } from "./_blog-types";
-import { blogCss } from "./_blog-styles";
+import { Post, CAT_META, PAGE_SIZE } from "./_blog-types";
 import { FeaturedPost } from "./_FeaturedPost";
 import { PostCard } from "./_PostCard";
 
-export default function BlogPageClient() {
-  const [posts, setPosts] = useState<Post[]>(SAMPLE_POSTS);
+const FILTERS = ["all", ...Object.keys(CAT_META)];
+
+export default function BlogPageClient({ posts }: { posts: Post[] }) {
   const [visible, setVisible] = useState(PAGE_SIZE);
+  const [category, setCategory] = useState("all");
 
-  const load = useCallback(async () => {
-    try {
-      const sb = createAnonClient();
-      const { data } = await sb
-        .from("main_blog_posts")
-        .select("id, title, slug, category, excerpt, created_at, read_time_minutes, featured_image_url")
-        .eq("published", true)
-        .order("created_at", { ascending: false });
-      if (data && data.length > 0) setPosts(data);
-    } catch { /* fallback to sample */ }
-  }, []);
-
-  useEffect(() => { load(); }, [load]);
-
+  // The newest post stays featured; the filter applies to the grid below it
   const featured = posts[0];
-  const recent = posts.slice(1, 1 + visible);
-  const hasMore = 1 + visible < posts.length;
+  const rest = posts.slice(1).filter((p) => category === "all" || p.category === category);
+  const recent = rest.slice(0, visible);
+  const hasMore = visible < rest.length;
+
+  const selectCategory = (cat: string) => {
+    setCategory(cat);
+    setVisible(PAGE_SIZE);
+  };
 
   return (
     <div className="blgp">
-      <style>{blogCss}</style>
       <Navbar />
 
       {featured && <FeaturedPost post={featured} />}
 
       <div className="blgp-main">
-        <h2 className="blgp-section-title">Recent blog posts</h2>
+        <div className="blgp-main-header">
+          <h2 className="blgp-section-title">Recent blog posts</h2>
+          <div className="blgp-filters" role="group" aria-label="Filter posts by category">
+            {FILTERS.map((cat) => (
+              <button
+                key={cat}
+                className={`blgp-filter ${category === cat ? "blgp-filter--active" : ""}`}
+                aria-pressed={category === cat}
+                onClick={() => selectCategory(cat)}
+              >
+                {cat === "all" ? "All" : CAT_META[cat].label}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {recent.length > 0 ? (
           <div className="blgp-grid">
@@ -48,18 +54,18 @@ export default function BlogPageClient() {
             ))}
           </div>
         ) : (
-          <div className="blgp-empty">No posts found.</div>
+          <div className="blgp-empty">
+            {posts.length === 0 ? "No posts yet — check back soon." : "No more posts in this category yet."}
+          </div>
         )}
 
-        <div className="blgp-load-row">
-          <button
-            className="blgp-load-btn"
-            onClick={() => setVisible((v) => v + PAGE_SIZE)}
-            disabled={!hasMore}
-          >
-            {hasMore ? "Load more posts" : "All posts loaded"}
-          </button>
-        </div>
+        {hasMore && (
+          <div className="blgp-load-row">
+            <button className="blgp-load-btn" onClick={() => setVisible((v) => v + PAGE_SIZE)}>
+              Load more posts
+            </button>
+          </div>
+        )}
       </div>
 
       <SiteFooter />

@@ -23,51 +23,8 @@ interface Post {
   featured_image_url: string | null;
 }
 
-const samplePosts: Post[] = [
-  {
-    id: "l1",
-    title: "The President Who Learns to Listen: Leading the Collective Intelligence Consortium",
-    slug: "president-who-listens",
-    excerpt:
-      "True leadership is less about speaking and more about creating the conditions in which others can speak, think, and contribute at full capacity.",
-    created_at: "2026-02-18",
-    read_time_minutes: 8,
-    featured_image_url: null,
-  },
-  {
-    id: "l2",
-    title: "What Class Prefect at Saint John's Taught Me About Authority",
-    slug: "class-prefect-authority",
-    excerpt:
-      "Authority without relationship is just power. Power without character is just threat. The seeds of servant leadership were planted long before I understood the concept.",
-    created_at: "2026-01-30",
-    read_time_minutes: 6,
-    featured_image_url: null,
-  },
-  {
-    id: "l3",
-    title: "The Art of Servant Leadership: Putting People First",
-    slug: "servant-leadership-model",
-    excerpt:
-      "The paradox of leadership: the higher you ascend, the more you are called to serve. True servant leadership transforms people, cultures, and entire organisations.",
-    created_at: "2026-01-10",
-    read_time_minutes: 9,
-    featured_image_url: null,
-  },
-  {
-    id: "l4",
-    title: "Cultural Intelligence: Leading Across the Ghana-Morocco Divide",
-    slug: "cultural-intelligence",
-    excerpt:
-      "Moving between two cultures taught me that leadership is contextual. What works in one room can alienate in another. Cultural intelligence isn't optional — it is foundational.",
-    created_at: "2025-12-15",
-    read_time_minutes: 7,
-    featured_image_url: null,
-  },
-];
-
 export default async function LeadershipBlogPage() {
-  let posts: Post[] = samplePosts;
+  let posts: Post[] = [];
   try {
     const supabase = createAnonClient();
     const { data } = await supabase
@@ -76,8 +33,8 @@ export default async function LeadershipBlogPage() {
       .eq("category", "leadership")
       .eq("published", true)
       .order("created_at", { ascending: false });
-    if (data && data.length > 0) posts = data;
-  } catch { /* fallback */ }
+    if (data) posts = data;
+  } catch { /* show empty state */ }
 
   const [featured, ...rest] = posts;
 

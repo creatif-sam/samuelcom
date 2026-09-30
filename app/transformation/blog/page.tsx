@@ -23,51 +23,8 @@ interface Post {
   featured_image_url: string | null;
 }
 
-const samplePosts: Post[] = [
-  {
-    id: "t1",
-    title: "The Anatomy of Transformation: From Identity to Impact",
-    slug: "anatomy-of-transformation",
-    excerpt:
-      "True transformation is not a change of clothes — it is a change of self. It begins with an honest reckoning with who you are before it can move toward who you are becoming.",
-    created_at: "2026-02-25",
-    read_time_minutes: 10,
-    featured_image_url: null,
-  },
-  {
-    id: "t2",
-    title: "Breaking Cycles: How One Generation Can Change Everything",
-    slug: "breaking-cycles",
-    excerpt:
-      "Every generation inherits the unfinished work of the one before it. The question is not whether you received a broken inheritance — almost everyone did. The question is what you do with it.",
-    created_at: "2026-02-08",
-    read_time_minutes: 8,
-    featured_image_url: null,
-  },
-  {
-    id: "t3",
-    title: "On Becoming: A Reflection on Growth, Purpose, and Responsibility",
-    slug: "on-becoming",
-    excerpt:
-      "Becoming is uncomfortable. Becoming requires that you hold the past and the future in tension, honouring what was while refusing to be defined by it.",
-    created_at: "2026-01-22",
-    read_time_minutes: 7,
-    featured_image_url: null,
-  },
-  {
-    id: "t4",
-    title: "Ghana to the World: A Vision for the Next Generation of African Leaders",
-    slug: "ghana-to-the-world",
-    excerpt:
-      "Africa does not need saving. It needs activating. There is a generation rising — equipped, rooted, and globally connected — ready to show what transformation looks like from the inside out.",
-    created_at: "2025-12-30",
-    read_time_minutes: 9,
-    featured_image_url: null,
-  },
-];
-
 export default async function TransformationBlogPage() {
-  let posts: Post[] = samplePosts;
+  let posts: Post[] = [];
   try {
     const supabase = createAnonClient();
     const { data } = await supabase
@@ -76,8 +33,8 @@ export default async function TransformationBlogPage() {
       .eq("category", "transformation")
       .eq("published", true)
       .order("created_at", { ascending: false });
-    if (data && data.length > 0) posts = data;
-  } catch { /* fallback */ }
+    if (data) posts = data;
+  } catch { /* show empty state */ }
 
   const [featured, ...rest] = posts;
 

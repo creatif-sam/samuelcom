@@ -23,51 +23,8 @@ interface Post {
   featured_image_url: string | null;
 }
 
-const samplePosts: Post[] = [
-  {
-    id: "i1",
-    title: "Collective Intelligence: When Community Thinks Together",
-    slug: "collective-intelligence-community",
-    excerpt:
-      "The smartest thing an individual can do is create the conditions for a group to be smarter than any one of its members. This is the science — and the art — of collective intelligence.",
-    created_at: "2026-02-22",
-    read_time_minutes: 9,
-    featured_image_url: null,
-  },
-  {
-    id: "i2",
-    title: "The Bridge Between Ancient Wisdom and Modern Technology",
-    slug: "ancient-wisdom-modern-tech",
-    excerpt:
-      "African proverbs are not relics — they are compressed algorithms for collective decision-making. The question is whether we are listening closely enough.",
-    created_at: "2026-02-05",
-    read_time_minutes: 7,
-    featured_image_url: null,
-  },
-  {
-    id: "i3",
-    title: "How Scholarship Shapes Character, Not Just Knowledge",
-    slug: "scholarship-shapes-character",
-    excerpt:
-      "A university education is not primarily about information transfer. At its best, it is a formation process — a making of the person, not just the professional.",
-    created_at: "2026-01-20",
-    read_time_minutes: 6,
-    featured_image_url: null,
-  },
-  {
-    id: "i4",
-    title: "Reading as a Spiritual Discipline",
-    slug: "reading-spiritual-discipline",
-    excerpt:
-      "There are books that inform and books that transform. The discipline of deep reading — unhurried, annotating, returning — is one of the most undervalued practices of serious thinkers.",
-    created_at: "2025-12-28",
-    read_time_minutes: 5,
-    featured_image_url: null,
-  },
-];
-
 export default async function IntellectualityBlogPage() {
-  let posts: Post[] = samplePosts;
+  let posts: Post[] = [];
   try {
     const supabase = createAnonClient();
     const { data } = await supabase
@@ -76,8 +33,8 @@ export default async function IntellectualityBlogPage() {
       .eq("category", "intellectuality")
       .eq("published", true)
       .order("created_at", { ascending: false });
-    if (data && data.length > 0) posts = data;
-  } catch { /* fallback */ }
+    if (data) posts = data;
+  } catch { /* show empty state */ }
 
   const [featured, ...rest] = posts;
 

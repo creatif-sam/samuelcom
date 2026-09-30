@@ -1,18 +1,27 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Post, CAT_META, CAT_GRADIENTS, fmtCard } from "./_blog-types";
 
 export function PostCard({ post }: { post: Post }) {
   const meta = CAT_META[post.category];
-  const bgStyle = post.featured_image_url
-    ? `url(${post.featured_image_url})`
-    : (CAT_GRADIENTS[post.category] ?? "#e5e7eb");
 
   return (
     <Link href={`/${post.category}/blog/${post.slug}`} className="blgp-card">
       <div className="blgp-card-img">
-        <div className="blgp-card-img-inner" style={{ background: bgStyle }} />
+        {post.featured_image_url ? (
+          <Image
+            src={post.featured_image_url}
+            alt={post.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+            className="blgp-card-img-inner"
+            style={{ objectFit: "cover" }}
+          />
+        ) : (
+          <div className="blgp-card-img-inner" style={{ background: CAT_GRADIENTS[post.category] ?? "#e5e7eb" }} />
+        )}
         <div className="blgp-card-img-pattern" />
       </div>
 
@@ -31,7 +40,7 @@ export function PostCard({ post }: { post: Post }) {
           <span className="blgp-avatar">SG</span>
           <div className="blgp-card-author-info">
             <span className="blgp-card-author-name">Samuel K. Gyasi</span>
-            <span className="blgp-card-author-date">{fmtCard(post.created_at)}</span>
+            <span className="blgp-card-author-date">{fmtCard(post.created_at)} · {post.read_time_minutes} min read</span>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ export function HeroSection() {
           <p className="phx-desc">
             I&apos;m a dedicated leader with experience in technology, collective
             intelligence, and transformative change — collaborating with organisations
-            and communities across Africa and beyond.
+            and communities across Africa.
           </p>
 
           <div className="phx-btns">
@@ -82,7 +82,7 @@ export function HeroSection() {
               style={{ objectFit: "contain", objectPosition: "center bottom" }}
             />
             <span className="phx-badge phx-badge--1">Group Intelligence Facilitator</span>
-            <span className="phx-badge phx-badge--2">Junior Program Officer</span>
+            <span className="phx-badge phx-badge--2">Program Officer</span>
           </div>
         </div>
 
