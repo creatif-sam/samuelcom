@@ -1,29 +1,31 @@
-﻿"use client";
+"use client";
 
 import { useEffect, Suspense } from "react";
 import Link from "next/link";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
+import { Navbar } from "@/components/organisms/Navbar";
+import { ConnectSection } from "@/components/organisms/ConnectSection";
 import { TestimonialsClient } from "@/components/organisms/TestimonialsClient";
 
 const css = `
 /* ── DESIGN TOKENS (scoped) ── */
 .ldp {
-  --bg: #0c0b09;
-  --white: #f0ede8;
+  --bg: #0a0a0a;
+  --white: #f5f3ef;
   --gold: #546cfa;
   --gray: #6b6560;
   --gray-light: #a09890;
-  --line: rgba(240,237,232,0.07);
-  --card-bg: #141210;
+  --line: rgba(245,243,239,0.07);
+  --card-bg: #111111;
   min-height: 100vh;
   position: relative;
 }
 
 /* ── BODY OVERRIDES ── */
 body.on-ldp {
-  background: #0c0b09;
-  color: #f0ede8;
-  font-family: 'Poppins', sans-serif;
+  background: #0a0a0a;
+  color: #f5f3ef;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
 }
 body.on-ldp .cursor {
   background: #546cfa;
@@ -48,30 +50,7 @@ body.on-ldp .cursor-ring {
 }
 
 /* ── NAV ── */
-.ldp nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 22px 56px;
-  border-bottom: 1px solid var(--line);
-  background: rgba(12,11,9,.85);
-  backdrop-filter: blur(12px);
-}
-.ldp .nav-back {
-  font-family: 'DM Mono', monospace; font-size: 11px;
-  letter-spacing: .2em; text-transform: uppercase;
-  color: var(--gray-light); text-decoration: none;
-  display: flex; align-items: center; gap: 10px; transition: color .3s;
-}
-.ldp .nav-back:hover { color: var(--gold); }
-.ldp .nav-back::before { content: '←'; font-size: 14px; }
-.ldp .nav-title {
-  font-family: 'Bebas Neue', sans-serif; font-size: 18px;
-  letter-spacing: .2em; color: var(--white);
-}
-.ldp .nav-tag {
-  font-family: 'DM Mono', monospace; font-size: 10px;
-  letter-spacing: .2em; color: var(--gold); text-transform: uppercase;
-}
+
 
 /* ── HERO ── */
 .ldp #hero {
@@ -95,15 +74,14 @@ body.on-ldp .cursor-ring {
   50% { r: 240; opacity: .06; }
 }
 .ldp .hero-number {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(140px,18vw,240px);
   line-height: 1; color: transparent;
   -webkit-text-stroke: 1px rgba(84,108,250,.12);
   position: absolute; top: 80px; right: 40px;
-  pointer-events: none; user-select: none; letter-spacing: -.02em;
-}
+  pointer-events: none; user-select: none; letter-spacing: -.01em; font-weight: 700;}
 .ldp .hero-label {
-  font-family: 'DM Mono', monospace; font-size: 10px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .35em; text-transform: uppercase;
   color: var(--gold); margin-bottom: 20px;
   display: flex; align-items: center; gap: 14px;
@@ -111,11 +89,10 @@ body.on-ldp .cursor-ring {
 }
 .ldp .hero-label::before { content: ''; width: 36px; height: 1px; background: var(--gold); }
 .ldp .ldp-hero-name {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
   font-size: clamp(64px,9vw,128px);
-  line-height: .92; letter-spacing: .02em; color: var(--white);
-  opacity: 0; animation: ldp-fade-up .8s .5s ease forwards;
-}
+  line-height: .92; color: var(--white);
+  opacity: 0; animation: ldp-fade-up .8s .5s ease forwards; letter-spacing: -.01em; font-weight: 700;}
 .ldp .ldp-hero-name span { color: var(--gold); }
 .ldp .hero-role {
   font-size: clamp(18px,2vw,24px); font-style: italic; font-weight: 300;
@@ -127,11 +104,10 @@ body.on-ldp .cursor-ring {
   opacity: 0; animation: ldp-fade-up .8s .9s ease forwards;
 }
 .ldp .stat-num {
-  font-family: 'Bebas Neue', sans-serif; font-size: 52px;
-  color: var(--gold); line-height: 1; letter-spacing: .04em;
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 52px;
+  color: var(--gold); line-height: 1; letter-spacing: -.01em; font-weight: 700;}
 .ldp .stat-label {
-  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .25em; text-transform: uppercase; color: var(--gray); margin-top: 4px;
 }
 .ldp .ldp-hero-divider {
@@ -149,17 +125,14 @@ body.on-ldp .cursor-ring {
   display: flex; align-items: center; gap: 20px; margin-bottom: 64px;
 }
 .ldp .section-num {
-  font-family: 'Bebas Neue', sans-serif; font-size: 80px;
-  color: transparent; -webkit-text-stroke: 1px rgba(84,108,250,.2); line-height: 1;
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 80px;
+  color: transparent; -webkit-text-stroke: 1px rgba(84,108,250,.2); line-height: 1; letter-spacing: -.01em; font-weight: 700;}
 .ldp .section-tag {
-  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .3em; text-transform: uppercase; color: var(--gold);
 }
 .ldp .section-title {
-  font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px,4vw,52px);
-  letter-spacing: .05em; color: var(--white); line-height: 1;
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: clamp(32px,4vw,52px); color: var(--white); line-height: 1; letter-spacing: -.01em; font-weight: 700;}
 
 /* ── TIMELINE ── */
 .ldp #leadership { background: var(--bg); }
@@ -188,27 +161,25 @@ body.on-ldp .cursor-ring {
   border-color: rgba(84,108,250,.25); transform: translateX(6px);
 }
 .ldp .tl-period {
-  font-family: 'DM Mono', monospace; font-size: 10px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .2em; color: var(--gold); text-transform: uppercase; margin-bottom: 10px;
 }
 .ldp .tl-role {
-  font-family: 'Bebas Neue', sans-serif; font-size: 28px;
-  letter-spacing: .06em; color: var(--white); line-height: 1;
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 28px; color: var(--white); line-height: 1; letter-spacing: -.01em; font-weight: 700;}
 .ldp .tl-org { font-size: 16px; font-style: italic; color: var(--gray-light); margin-top: 6px; font-weight: 300; }
 .ldp .tl-location {
-  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .15em; color: var(--gray); text-transform: uppercase; margin-top: 4px;
 }
 .ldp .tl-badge {
   display: inline-block; margin-top: 14px; padding: 4px 12px;
   border: 1px solid rgba(84,108,250,.3);
-  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .2em; text-transform: uppercase; color: var(--gold);
 }
 
 /* ── EXPERIENCE ── */
-.ldp #experience { background: #0f0e0c; }
+.ldp #experience { background: #0d0d0d; }
 .ldp .exp-grid { display: flex; flex-direction: column; gap: 3px; }
 .ldp .exp-card {
   background: var(--card-bg); border: 1px solid var(--line);
@@ -220,14 +191,12 @@ body.on-ldp .cursor-ring {
 .ldp .exp-card.visible { opacity: 1; transform: none; }
 .ldp .exp-card:hover { border-color: rgba(84,108,250,.2); }
 .ldp .exp-period {
-  font-family: 'DM Mono', monospace; font-size: 10px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .15em; color: var(--gold); text-transform: uppercase;
   line-height: 1.7; padding-top: 4px;
 }
 .ldp .exp-role {
-  font-family: 'Bebas Neue', sans-serif; font-size: 26px;
-  letter-spacing: .06em; color: var(--white);
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 26px; color: var(--white); letter-spacing: -.01em; font-weight: 700;}
 .ldp .exp-org { font-size: 16px; font-style: italic; color: var(--gray-light); margin-top: 4px; font-weight: 300; }
 .ldp .exp-bullets {
   margin-top: 16px; list-style: none; display: flex; flex-direction: column; gap: 8px;
@@ -254,18 +223,16 @@ body.on-ldp .cursor-ring {
 .ldp .edu-card:hover::before { opacity: 1; }
 .ldp .edu-card.visible { opacity: 1; transform: none; }
 .ldp .edu-degree {
-  font-family: 'Bebas Neue', sans-serif; font-size: 24px;
-  letter-spacing: .06em; color: var(--white); line-height: 1.1;
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 24px; color: var(--white); line-height: 1.1; letter-spacing: -.01em; font-weight: 700;}
 .ldp .edu-school { font-size: 15px; font-style: italic; color: var(--gold); margin-top: 8px; font-weight: 400; }
 .ldp .edu-period {
-  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .2em; color: var(--gray); text-transform: uppercase; margin-top: 6px;
 }
 .ldp .edu-location { font-size: 14px; color: var(--gray); margin-top: 4px; font-style: italic; }
 
 /* ── AWARDS ── */
-.ldp #awards { background: #0f0e0c; }
+.ldp #awards { background: #0d0d0d; }
 .ldp .awards-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 3px; }
 .ldp .award-card {
   background: var(--card-bg); border: 1px solid var(--line);
@@ -274,15 +241,12 @@ body.on-ldp .cursor-ring {
   transition: opacity .7s, transform .7s, background .3s; cursor: none;
 }
 .ldp .award-card.visible { opacity: 1; transform: none; }
-.ldp .award-card:hover { background: #1a1814; }
+.ldp .award-card:hover { background: #161616; }
 .ldp .award-icon {
-  font-family: 'Bebas Neue', sans-serif; font-size: 40px;
-  color: var(--gold); line-height: 1; flex-shrink: 0; opacity: .7;
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 40px;
+  color: var(--gold); line-height: 1; flex-shrink: 0; opacity: .7; letter-spacing: -.01em; font-weight: 700;}
 .ldp .award-name {
-  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
-  letter-spacing: .06em; color: var(--white); line-height: 1.1;
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 20px; color: var(--white); line-height: 1.1; letter-spacing: -.01em; font-weight: 700;}
 .ldp .award-desc {
   font-size: 13px; color: var(--gray-light); margin-top: 6px;
   line-height: 1.6; font-weight: 300; font-style: italic;
@@ -297,9 +261,7 @@ body.on-ldp .cursor-ring {
 }
 .ldp .skill-group.visible { opacity: 1; transform: none; }
 .ldp .skill-group-title {
-  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
-  letter-spacing: .1em; color: var(--gold); margin-bottom: 20px;
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 20px; color: var(--gold); margin-bottom: 20px; letter-spacing: -.01em; font-weight: 700;}
 .ldp .skill-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .ldp .skill-list li {
   font-size: 14px; color: var(--gray-light);
@@ -308,7 +270,7 @@ body.on-ldp .cursor-ring {
 .ldp .skill-list li::before { content: ''; width: 16px; height: 1px; background: var(--gold); opacity: .5; flex-shrink: 0; }
 
 /* ── CERTIFICATIONS ── */
-.ldp #certs { background: #0f0e0c; }
+.ldp #certs { background: #0d0d0d; }
 .ldp .certs-list { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
 .ldp .cert-item {
   background: var(--card-bg); border: 1px solid var(--line);
@@ -320,11 +282,11 @@ body.on-ldp .cursor-ring {
 .ldp .cert-item:hover { border-color: rgba(84,108,250,.25); }
 .ldp .cert-name { font-size: 16px; color: var(--white); font-weight: 400; }
 .ldp .cert-issuer {
-  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .2em; color: var(--gold); text-transform: uppercase; margin-top: 4px;
 }
 .ldp .cert-status {
-  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .1em; text-transform: uppercase;
   padding: 4px 10px; border: 1px solid; flex-shrink: 0;
 }
@@ -342,44 +304,15 @@ body.on-ldp .cursor-ring {
 .ldp .ref-card.visible { opacity: 1; transform: none; }
 .ldp .ref-card:hover { border-color: rgba(84,108,250,.2); }
 .ldp .ref-name {
-  font-family: 'Bebas Neue', sans-serif; font-size: 22px;
-  letter-spacing: .06em; color: var(--white);
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 22px; color: var(--white); letter-spacing: -.01em; font-weight: 700;}
 .ldp .ref-role { font-size: 14px; font-style: italic; color: var(--gold); margin-top: 6px; font-weight: 300; line-height: 1.5; }
-.ldp .ref-email { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gray); margin-top: 12px; letter-spacing: .05em; }
+.ldp .ref-email { font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px; color: var(--gray); margin-top: 12px; letter-spacing: .05em; }
 
 /* ── CONTACT ── */
-.ldp #contact {
-  background: var(--white); color: var(--bg);
-  padding: 80px 56px; display: flex; justify-content: space-between; align-items: center;
-}
-.ldp .contact-cta {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(40px,5vw,72px); letter-spacing: .04em; line-height: 1; color: var(--bg);
-}
-.ldp .contact-cta span { color: var(--gold); }
-.ldp .contact-details { display: flex; flex-direction: column; gap: 16px; align-items: flex-end; }
-.ldp .contact-item {
-  font-family: 'DM Mono', monospace; font-size: 12px;
-  letter-spacing: .15em; color: var(--bg); display: flex; align-items: center; gap: 12px;
-}
-.ldp .contact-item::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+
 
 /* ── FOOTER ── */
-.ldp footer {
-  background: var(--bg); border-top: 1px solid var(--line);
-  padding: 28px 56px; display: flex; justify-content: space-between; align-items: center;
-}
-.ldp .footer-name {
-  font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: .15em; color: var(--white);
-}
-.ldp .footer-copy {
-  font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .2em; color: var(--gray); text-transform: uppercase;
-}
-.ldp .footer-link {
-  font-family: 'DM Mono', monospace; font-size: 9px;
-  letter-spacing: .2em; color: var(--gold); text-transform: uppercase; text-decoration: none;
-}
+
 
 /* ── REVEAL ── */
 .ldp .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
@@ -387,7 +320,7 @@ body.on-ldp .cursor-ring {
 
 /* ── BLOG STRIP ── */
 .ldp .blog-strip {
-  background: #0f0e0c;
+  background: #0d0d0d;
   padding: 80px 56px;
   text-align: center;
   display: flex; flex-direction: column; align-items: center; gap: 20px;
@@ -395,16 +328,14 @@ body.on-ldp .cursor-ring {
   border-top: 1px solid var(--line);
 }
 .ldp .bs-eyebrow {
-  font-family: 'DM Mono', monospace; font-size: 9px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .35em; text-transform: uppercase;
   color: var(--gold); display: flex; align-items: center; gap: 16px;
 }
 .ldp .bs-eyebrow::before, .ldp .bs-eyebrow::after { content: ''; width: 36px; height: 1px; background: var(--gold); }
 .ldp .bs-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(30px,4vw,56px); color: var(--white); line-height: 1;
-  letter-spacing: .04em;
-}
+  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-size: clamp(30px,4vw,56px); color: var(--white); line-height: 1; letter-spacing: -.01em; font-weight: 700;}
 .ldp .bs-title span { color: var(--gold); }
 .ldp .bs-sub {
   font-size: 17px; font-style: italic; font-weight: 300; color: var(--gray-light);
@@ -414,7 +345,7 @@ body.on-ldp .cursor-ring {
   display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px;
 }
 .ldp .bs-btn {
-  font-family: 'DM Mono', monospace; font-size: 10px;
+  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
   letter-spacing: .22em; text-transform: uppercase;
   padding: 14px 32px; background: var(--gold); color: var(--bg);
   text-decoration: none; transition: background .25s, color .25s;
@@ -428,25 +359,16 @@ body.on-ldp .cursor-ring {
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px) {
-  .ldp nav { padding: 18px 24px; }
   .ldp .section { padding: 70px 24px; }
   .ldp .exp-card { grid-template-columns: 1fr; gap: 12px; }
   .ldp .edu-grid, .ldp .awards-grid, .ldp .skills-layout, .ldp .certs-list, .ldp .refs-grid { grid-template-columns: 1fr; }
   .ldp #hero { padding: 100px 24px 60px; }
   .ldp .hero-stats { gap: 32px; flex-wrap: wrap; }
-  .ldp #contact { flex-direction: column; gap: 40px; align-items: flex-start; }
-  .ldp .contact-details { align-items: flex-start; }
-  .ldp footer { padding: 24px; flex-direction: column; gap: 12px; }
   .ldp .blog-strip { padding: 60px 24px; }
 }
 
 /* Gold gradient text */
-.ldp .nav-tag, .ldp .hero-label, .ldp .ldp-hero-name span,
-.ldp .stat-num, .ldp .section-tag, .ldp .tl-period, .ldp .tl-badge,
-.ldp .exp-period, .ldp .edu-school, .ldp .award-icon,
-.ldp .skill-group-title, .ldp .cert-issuer, .ldp .cert-status.done,
-.ldp .ref-role, .ldp .contact-cta span, .ldp .footer-link,
-.ldp .bs-eyebrow, .ldp .bs-title span {
+.ldp .hero-label, .ldp .ldp-hero-name span, .ldp .stat-num, .ldp .section-tag, .ldp .tl-period, .ldp .tl-badge, .ldp .exp-period, .ldp .edu-school, .ldp .award-icon, .ldp .skill-group-title, .ldp .cert-issuer, .ldp .cert-status.done, .ldp .ref-role, .ldp .bs-eyebrow, .ldp .bs-title span {
   background: var(--gold-gradient) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -512,26 +434,12 @@ export default function LeadershipPageClient() {
 
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&display=swap"
-        rel="stylesheet"
-      />
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
+      <Navbar />
       <div className="ldp">
         <div className="ldp-noise" />
 
-        {/* NAV */}
-        <nav>
-          <Link href="/" className="nav-back">Portfolio</Link>
-          <div className="nav-title">Samuel Kobina Gyasi</div>
-          <div className="nav-tag">Leadership</div>
-        </nav>
 
         {/* HERO */}
         <section id="hero">
@@ -921,7 +829,7 @@ export default function LeadershipPageClient() {
             </div>
             <div className="ref-card">
               <div className="ref-name">Hon. John Sanie</div>
-              <div className="ref-role">Deputy Minister of Energy · Member of Parliament<br />Ministry of Energy, Ghana</div>
+              <div className="ref-role">Former Deputy Minister of Energy · Former Member of Parliament<br />Ghana</div>
               <div className="ref-email">johnsanie1971@gmail.com</div>
             </div>
             <div className="ref-card">
@@ -948,24 +856,12 @@ export default function LeadershipPageClient() {
           </div>
         </div>
 
-        {/* CONTACT */}
-        <section id="contact">
-          <div className="contact-left">
-            <div className="contact-cta">Let&apos;s<br />Connect &amp;<br /><span>Collaborate</span></div>
-          </div>
-          <div className="contact-details">
-            <div className="contact-item">impact@samuelgyasi.com</div>
-            <div className="contact-item">+212 684 893 821</div>
-            <div className="contact-item">Rabat, Morocco</div>
-            <div className="contact-item">Open to Remote Work</div>
-            <div className="contact-item">Junior Program Officer · School of Collective Intelligence · UM6P</div>
-          </div>
-        </section>
 
         {/* FOOTER */}
         <TestimonialsClient />
-        <Suspense fallback={null}><SiteFooter /></Suspense>
       </div>
+      <ConnectSection />
+      <Suspense fallback={null}><SiteFooter /></Suspense>
     </>
   );
 }

@@ -1,12 +1,14 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
+import { Navbar } from "@/components/organisms/Navbar";
+import { ConnectSection } from "@/components/organisms/ConnectSection";
 
 const css = `
   .gif-page {
     --bg: #0a0a0a;
-    --bg2: #111109;
+    --bg2: #111111;
     --line: rgba(84,108,250,0.15);
     --gold: #546cfa;
     --gold2: #7c8ffc;
@@ -16,31 +18,11 @@ const css = `
     background: var(--bg);
     color: var(--white);
     min-height: 100vh;
-    font-family: 'Georgia', serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
   }
 
   /* NAV */
-  .gif-nav {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 24px 56px;
-    border-bottom: 1px solid var(--line);
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(10,10,10,0.92);
-    backdrop-filter: blur(16px);
-  }
-  .gif-nav-back {
-    font-family: 'Poppins', sans-serif; font-size: 9px;
-    letter-spacing: .25em; text-transform: uppercase;
-    color: var(--gold); text-decoration: none;
-    display: flex; align-items: center; gap: 10px;
-    transition: opacity .2s;
-  }
-  .gif-nav-back:hover { opacity: .7; }
-  .gif-nav-logo {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px; letter-spacing: .1em;
-    color: var(--white); text-decoration: none;
-  }
+  
 
   /* HERO */
   .gif-hero {
@@ -49,14 +31,14 @@ const css = `
     border-bottom: 1px solid var(--line);
   }
   .gif-hero-eyebrow {
-    font-family: 'Poppins', sans-serif; font-size: 9px;
+    font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 9px;
     letter-spacing: .35em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 28px;
     display: flex; align-items: center; gap: 14px;
   }
   .gif-hero-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--line); max-width: 80px; }
   .gif-hero-title {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
     font-size: clamp(36px, 6vw, 72px);
     line-height: 1.05; font-weight: 700;
     color: var(--white); margin-bottom: 28px;
@@ -79,7 +61,7 @@ const css = `
     align-items: start;
   }
   .gif-def-label {
-    font-family: 'Poppins', sans-serif; font-size: 9px;
+    font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 9px;
     letter-spacing: .3em; text-transform: uppercase;
     color: var(--gold);
     padding-top: 8px;
@@ -97,7 +79,7 @@ const css = `
     background: rgba(84,108,250,0.05);
   }
   .gif-pullquote-text {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
     font-size: 20px; line-height: 1.6;
     font-style: italic; color: var(--white);
   }
@@ -108,7 +90,7 @@ const css = `
     border-bottom: 1px solid var(--line);
   }
   .gif-section-title {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
     font-size: clamp(22px, 2.5vw, 32px);
     color: var(--white); margin-bottom: 36px;
   }
@@ -123,12 +105,12 @@ const css = `
     padding: 32px 28px;
   }
   .gif-card-num {
-    font-family: 'Poppins', sans-serif; font-size: 9px;
+    font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 9px;
     letter-spacing: .3em; color: var(--gold);
     margin-bottom: 16px;
   }
   .gif-card-title {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
     font-size: 18px; color: var(--white);
     margin-bottom: 12px;
   }
@@ -144,7 +126,7 @@ const css = `
     background: var(--bg2); padding: 28px 32px;
   }
   .gif-term-name {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
     font-size: 17px; color: var(--gold);
     margin-bottom: 8px;
   }
@@ -164,7 +146,7 @@ const css = `
     border-top: 1px solid var(--line); padding-top: 20px;
   }
   .gif-stat-num {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
     font-size: 40px; color: var(--gold);
     line-height: 1;
   }
@@ -180,7 +162,7 @@ const css = `
     display: flex; flex-direction: column; align-items: center; gap: 24px;
   }
   .gif-cta-title {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
     font-size: clamp(24px, 3vw, 40px);
     color: var(--white);
   }
@@ -188,7 +170,7 @@ const css = `
   .gif-cta-sub { font-size: 16px; color: var(--sub); max-width: 480px; line-height: 1.7; }
   .gif-cta-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
   .gif-cta-btn {
-    font-family: 'Poppins', sans-serif; font-size: 10px;
+    font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 10px;
     letter-spacing: .2em; text-transform: uppercase;
     padding: 14px 32px; background: var(--gold); color: #0a0a0a;
     text-decoration: none; transition: background .25s;
@@ -207,18 +189,18 @@ const css = `
   }
   .gif-role-header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 44px; }
   .gif-role-eyebrow {
-    font-family: 'Poppins', sans-serif; font-size: 9px;
+    font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 9px;
     letter-spacing: .3em; text-transform: uppercase; color: var(--gold);
   }
   .gif-role-title {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-poppins), 'Poppins', sans-serif;
     font-size: clamp(22px, 2.5vw, 32px); color: var(--white);
   }
   .gif-role-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
   }
   .gif-role-col-title {
-    font-family: 'Poppins', sans-serif; font-size: 10px;
+    font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 10px;
     letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
     margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line);
   }
@@ -233,13 +215,12 @@ const css = `
     border-left: 2px solid var(--gold); background: rgba(84,108,250,0.04);
   }
   .gif-logistics-text {
-    font-family: 'Poppins', sans-serif; font-size: 17px;
+    font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 17px;
     font-style: italic; color: var(--gray); line-height: 1.7;
   }
   .gif-logistics-text strong { color: var(--white); font-style: normal; font-weight: 600; }
 
   @media (max-width: 900px) {
-    .gif-nav { padding: 20px 24px; }
     .gif-hero { padding: 80px 24px 60px; }
     .gif-body { padding: 0 24px; }
     .gif-def, .gif-context { grid-template-columns: 1fr; gap: 32px; }
@@ -272,10 +253,7 @@ const css = `
   }
 
   /* Gold gradient text */
-  .gif-nav-back, .gif-hero-eyebrow, .gif-hero-title em,
-  .gif-def-label, .gif-card-num, .gif-section-title span,
-  .gif-term-name, .gif-stat-num, .gif-cta-title em,
-  .gif-role-eyebrow, .gif-role-col-title {
+  .gif-hero-eyebrow, .gif-hero-title em, .gif-def-label, .gif-card-num, .gif-section-title span, .gif-term-name, .gif-stat-num, .gif-cta-title em, .gif-role-eyebrow, .gif-role-col-title {
     background: var(--gold-gradient) !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
@@ -348,13 +326,9 @@ export default function GroupIntelligenceFacilitatorPageClient() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
+      <Navbar />
       <div className="gif-page">
 
-        {/* NAV */}
-        <nav className="gif-nav">
-          <Link href="/" className="gif-nav-back">← Back to Portfolio</Link>
-          <Link href="/" className="gif-nav-logo">Samuel Kobina Gyasi</Link>
-        </nav>
 
         {/* HERO */}
         <div className="gif-hero">
@@ -499,13 +473,14 @@ export default function GroupIntelligenceFacilitatorPageClient() {
             <h2 className="gif-cta-title">Work with Samuel as your<br /><em>Group Intelligence Facilitator</em></h2>
             <p className="gif-cta-sub">Whether you are navigating a strategic pivot, building a new leadership team, or seeking to unlock what your organisation already knows — Samuel can help your group think better together.</p>
             <div className="gif-cta-btns">
-              <Link href="/#connect" className="gif-cta-btn">Get in Touch →</Link>
+              <Link href="#connect" className="gif-cta-btn">Get in Touch →</Link>
               <Link href="/leadership" className="gif-cta-btn ghost">Leadership Profile →</Link>
             </div>
           </div>
 
         </div>
       </div>
+      <ConnectSection />
       <SiteFooter />
     </>
   );

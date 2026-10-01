@@ -143,7 +143,7 @@ export default function AdminPage() {
       <aside className={`adm-sidebar${navOpen ? " adm-sidebar--open" : ""}`}>
         <div className="adm-logo">
           <span>Admin</span>
-          Samuel Gyasi
+          Dashboard
         </div>
         <nav className="adm-nav">
           {NAV.map(({ id, label, Icon }) => {
