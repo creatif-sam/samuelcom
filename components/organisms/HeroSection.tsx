@@ -82,7 +82,7 @@ export function HeroSection() {
               style={{ objectFit: "contain", objectPosition: "center bottom" }}
             />
             <span className="phx-badge phx-badge--1">Group Intelligence Facilitator</span>
-            <span className="phx-badge phx-badge--2">Program Officer</span>
+            <span className="phx-badge phx-badge--2">Junior Program Officer</span>
           </div>
         </div>
 

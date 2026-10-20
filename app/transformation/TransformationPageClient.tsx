@@ -529,8 +529,8 @@ export default function TransformationPageClient() {
             { side: "right", phase: "Expansion · 2016–2017", heading: "Responsibility Scales", body: "Dining Hall Prefect at Saint John's School, then Managing Director of Cash Washing Bay — learning that transformation requires managing complexity, not avoiding it." },
             { side: "left", phase: "Crossing · 2020", heading: "Ghana to Morocco", body: "A Government of Ghana Scholarship takes Samuel across the Sahara. The discomfort of displacement becomes a forge — reshaping assumptions, expanding vision, deepening resilience." },
             { side: "right", phase: "Mastery · 2022–2023", heading: "Technical Foundation Built", body: "Professional Bachelor in Computer Science completed. Full Stack Developer internship at Octobot. The intellectual infrastructure for transformation is assembled piece by piece." },
-            { side: "left", phase: "Elevation · 2023–Present", heading: "Collective Intelligence", body: "IBN ROCHD Scholarship. MSc at UM6P. School Ambassador. Student Representative. The personal transformation becomes institutional — Samuel is now building systems that will outlast him." },
-            { side: "right", phase: "Presidency · 2024–Present", heading: "Leading the Consortium", body: "President, Collective Intelligence Consortium. Academic Affairs Delegate, International Students Club. Financial Secretary, Ghanaian Students Association. A vision becomes an organisation. An organisation becomes a movement." },
+            { side: "left", phase: "Elevation · 2023–2025", heading: "Collective Intelligence", body: "IBN ROCHD Scholarship. MSc at UM6P, completed in 2025. School Ambassador. Student Representative. The personal transformation becomes institutional — Samuel is now building systems that will outlast him." },
+            { side: "right", phase: "Presidency · 2024–2025", heading: "Leading the Consortium", body: "President, Collective Intelligence Consortium. Academic Affairs Delegate, International Students Club. Financial Secretary, Ghanaian Students Association. A vision becomes an organisation. An organisation becomes a movement." },
             { side: "left", phase: "Horizon · What Comes Next", heading: "Africa. Technology. People.", body: "The destination is not a title or a degree. It is a continent of people equipped to think, lead, and transform their own realities — with Samuel as one of the builders.", special: true },
           ].map((row, i) => (
             <div className="jt-row" key={i}>
@@ -634,8 +634,8 @@ export default function TransformationPageClient() {
           </div>
           <div className="vision-card">
             <div className="vc-eyebrow">Near-Term</div>
-            <div className="vc-title">Complete the MSc. Build the Research.</div>
-            <div className="vc-body">Graduate with distinction. Produce research that contributes meaningfully to collective decision-making science. Build a track record of rigour that opens every door.</div>
+            <div className="vc-title">Build on the MSc. Publish the Research.</div>
+            <div className="vc-body">Turn graduate work into published research that contributes meaningfully to collective decision-making science. Build a track record of rigour that opens every door.</div>
             <Link href="/intellectuality" className="vc-cta">Intellectuality Page</Link>
           </div>
           <div className="vision-card">
@@ -648,7 +648,7 @@ export default function TransformationPageClient() {
             <div className="vc-eyebrow">Long-Term</div>
             <div className="vc-title">Build Structures That Outlast</div>
             <div className="vc-body">Organisations, frameworks, and communities that do not require Samuel to function. The truest measure of a transformational leader: the work continues and deepens long after they have stepped back.</div>
-            <Link href="/intellectuality" className="vc-cta">Intelligence Page</Link>
+            <Link href="/intellectuality" className="vc-cta">Intellectuality Page</Link>
           </div>
         </div>
       </section>

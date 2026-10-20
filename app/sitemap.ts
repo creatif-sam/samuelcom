@@ -9,7 +9,6 @@ const staticRoutes = [
   "/intellectuality",
   "/transformation",
   "/my-story",
-  "/group-intelligence-facilitator",
   "/blog",
   "/leadership/blog",
   "/intellectuality/blog",

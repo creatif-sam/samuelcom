@@ -64,10 +64,10 @@ export const chapters: Chapter[] = [
     tag: "Scholar in Morocco",
     title: "Distinction Across Continents",
     image: "/my-story/5.png",
-    imageAlt: "Samuel at SUP Management, Fès",
+    imageAlt: "Samuel at SUP Management, Fez",
     imageSide: "left",
     body: [
-      "Samuel moved to Morocco to pursue Computer Science at the Ecole Supérieure de Management, de Commerce et d'Informatique (Sup Management) in Fès. Navigating a new culture, a new language, and a demanding curriculum, he developed the rare ability to hold complexity without losing clarity.",
+      "Samuel moved to Morocco to pursue Computer Science at the Ecole Supérieure de Management, de Commerce et d'Informatique (SUP Management) in Fez. Navigating a new culture, a new language, and a demanding curriculum, he developed the rare ability to hold complexity without losing clarity.",
       "He graduated with distinction and the Highest GPA in the entire school — a recognition not only of academic excellence but of the discipline and purpose that had been forged over years. The scholarship that followed was not a reward for past effort; it was a commission for future work.",
     ],
     quote: "A scholarship is a society's investment in an individual — with the expectation that the investment will return, multiplied, to the community.",
@@ -103,7 +103,7 @@ export const chapters: Chapter[] = [
 export const nowCards: NowCard[] = [
   {
     num: "01",
-    title: "Program Officer (Jnr)",
+    title: "Junior Program Officer",
     org: "School of Collective Intelligence | UM6P, Morocco",
     body: "Designing and coordinating programs that unlock collective intelligence — guiding students through career development, seminars, and cross-institutional initiatives.",
     image: "/jpo.webp",

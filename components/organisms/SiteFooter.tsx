@@ -44,8 +44,8 @@ const socialLinks = [
 
 const quickLinks = [
   { href: "/",                label: "Home"           },
-  { href: "/my-story",        label: "About Us"       },
-  { href: "/blog",            label: "Resources"      },
+  { href: "/my-story",        label: "My Story"       },
+  { href: "/blog",            label: "Blog"           },
   { href: "/#connect",        label: "Contact"        },
 ];
 
@@ -96,7 +96,7 @@ export function SiteFooter() {
       <div className="sf-newsletter-container">
         <div className="sf-nl-wrapper">
           <div className="sf-nl-content">
-            <h3 className="sf-nl-heading">Subscribe to our newsletter</h3>
+            <h3 className="sf-nl-heading">Subscribe to my newsletter</h3>
             <p className="sf-nl-sub">Get the latest insights on leadership, intelligence, and transformation.</p>
             <form className="sf-nl-form" onSubmit={handleSubscribe} noValidate>
               <input
@@ -138,7 +138,6 @@ export function SiteFooter() {
             <div className="sf-avatar"></div>
             <div className="sf-avatar"></div>
             <div className="sf-avatar"></div>
-            <div className="sf-avatar-more">+12</div>
           </div>
         </div>
 

@@ -635,11 +635,11 @@ export default function IntellectualityPageClient() {
               <div className="res-type">Engineering</div>
             </div>
             <div className="res-row">
-              <div className="res-period">Oct 2023 —<br />Present</div>
+              <div className="res-period">Oct 2023 —<br />Sep 2025</div>
               <div className="res-body">
                 <div className="res-title">MSc Collective Intelligence</div>
                 <div className="res-org">School of Collective Intelligence, UM6P — Rabat, Morocco</div>
-                <div className="res-desc">Graduate-level research into the mechanics of collective decision-making, cognitive diversity, and technology-mediated group intelligence. Serving simultaneously as Student Representative and School Ambassador.</div>
+                <div className="res-desc">Graduate-level research into the mechanics of collective decision-making, cognitive diversity, and technology-mediated group intelligence. Served simultaneously as Student Representative and School Ambassador.</div>
               </div>
               <div className="res-type">Academia</div>
             </div>
@@ -647,7 +647,7 @@ export default function IntellectualityPageClient() {
               <div className="res-period">Sep 2020 —<br />Jul 2023</div>
               <div className="res-body">
                 <div className="res-title">Professional Bachelor — Computer Science</div>
-                <div className="res-org">ESCA Fez (Ecole Supérieure de Management de Commerce et d&apos;Informatique) — Fez, Morocco</div>
+                <div className="res-org">SUP Management (Ecole Supérieure de Management de Commerce et d&apos;Informatique) — Fez, Morocco</div>
                 <div className="res-desc">Three-year programme covering software engineering, systems architecture, web development, and applied computer science. Supported by the Government of Ghana Scholarship.</div>
               </div>
               <div className="res-type">Education</div>

@@ -8,21 +8,14 @@ const pillars = [
     name: "Leadership",
     href: "/leadership",
     description:
-      "I lead as a servant first — inspiring, empowering, and calling forth greatness in others. Over seventeen years of practice, I have come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
+      "I lead as a servant first — inspiring, empowering, and calling forth greatness in others. Since my first leadership role at ten, I have come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
   },
   {
     icon: "◆",
-    name: "Intelligence",
-    href: "/group-intelligence-facilitator",
-    description:
-      "I pursue deep thinking, rigorous study, and intellectual honesty. I specialise in collective intelligence — the science of how groups think, decide, and innovate together — and bring that rigour into every programme, research project, and advisory conversation.",
-  },
-  {
-    icon: "⬡",
-    name: "Technology",
+    name: "Intellectuality",
     href: "/intellectuality",
     description:
-      "At the intersection of data science, AI, and human systems, I build tools and frameworks that help organisations make better decisions. Technology, for me, is not an end — it is a lever for human flourishing and systemic change.",
+      "I pursue deep thinking, rigorous study, and intellectual honesty — at the intersection of data science, AI, and human systems. Technology, for me, is not an end — it is a lever for human flourishing and systemic change.",
   },
   {
     icon: "◎",
@@ -40,7 +33,7 @@ export function PillarsSection() {
         <SectionLabel>Principal Interests</SectionLabel>
 
         <ScrollReveal className="pillars-header">
-          <h2 className="pillars-title">Four Principal Interests</h2>
+          <h2 className="pillars-title">Three Principal Interests</h2>
           <p className="pillars-sub">
             Each interest is a commitment — to excellence, to rigorous thinking, and to the
             flourishing of humanity.

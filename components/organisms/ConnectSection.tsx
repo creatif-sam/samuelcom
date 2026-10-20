@@ -6,7 +6,9 @@ const connectLinks = [
   { href: "mailto:impact@samuelgyasi.com",                                                    label: "Email"    },
   { href: "https://www.linkedin.com/in/samuel-k-gyasi/",                                      label: "LinkedIn" },
   { href: "https://www.instagram.com/samuel_gsi?igsh=MWswMzRycjk1dXZ0cw==",                  label: "Instagram"},
+  { href: "https://web.facebook.com/samuel.kobinagyasi/",                                    label: "Facebook" },
   { href: "https://www.tiktok.com/@samuel_gsi?_r=1&_t=ZS-94iqxzPNKqm",                       label: "TikTok"   },
+  { href: "https://wa.me/212684893821",                                                       label: "WhatsApp" },
 ];
 
 export function ConnectSection() {
@@ -23,7 +25,7 @@ export function ConnectSection() {
               <em>Impactful</em>
             </h2>
             <p className="connect-body">
-              Whether you&apos;re seeking leadership advice, leadership collaboration,
+              Whether you&apos;re seeking leadership advice, collaboration,
               intellectual dialogue, or transformational partnership — I am open to
               meaningful connection.
             </p>

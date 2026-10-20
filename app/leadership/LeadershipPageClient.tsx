@@ -849,7 +849,7 @@ export default function LeadershipPageClient() {
         <div className="blog-strip">
           <div className="bs-eyebrow">The Leadership Journal</div>
           <div className="bs-title">Writings on <span>Leadership</span></div>
-          <p className="bs-sub">Essays on servant leadership, decision-making at scale, and the hard-won lessons of 17+ years leading people and institutions.</p>
+          <p className="bs-sub">Essays on servant leadership, decision-making at scale, and the hard-won lessons of 17+ years of leadership.</p>
           <div className="bs-btns">
             <Link href="/leadership/blog" className="bs-btn">Read the Blog →</Link>
             <Link href="/blog" className="bs-btn ghost">All Writings →</Link>

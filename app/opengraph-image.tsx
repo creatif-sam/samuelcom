@@ -41,7 +41,7 @@ export default async function OpengraphImage() {
             Leader &amp; Group Intelligence Facilitator
           </div>
           <div style={{ fontSize: 24, marginTop: 40, color: "rgba(245,243,239,0.55)" }}>
-            Technology · Leadership · Intelligence · Transformation
+            Leadership · Intellectuality · Transformation
           </div>
         </div>
         {/* eslint-disable-next-line @next/next/no-img-element */}

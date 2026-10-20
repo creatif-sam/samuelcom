@@ -17,7 +17,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://samuelgyasi.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Samuel Gyasi — Technology · Leadership · Intelligence · Transformation",
+    default: "Samuel Gyasi — Leadership · Intellectuality · Transformation",
     template: "%s | Samuel Kobina Gyasi",
   },
   description:
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Samuel Kobina Gyasi",
-    title: "Samuel Kobina Gyasi — Technology · Leadership · Intelligence · Transformation",
+    title: "Samuel Kobina Gyasi — Leadership · Intellectuality · Transformation",
     description:
       "Leader, Facilitator, and speaker dedicated to technology, leadership, collective intelligence, and transformative change.",
     firstName: "Samuel",
@@ -60,7 +60,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Samuel Kobina Gyasi",
     description: "Leader, Facilitator, and speaker dedicated to technology, leadership, collective intelligence, and transformative change.",
-    creator: "@samuel_gsi",
   },
   icons: {
     icon: [
