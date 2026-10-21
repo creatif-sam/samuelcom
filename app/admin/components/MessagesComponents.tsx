@@ -79,7 +79,7 @@ export function QuickReply({ to, subject, templates, onClose }: {
   return (
     <div className="adm-quick-reply">
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-        <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: "9px", color: "rgba(240,236,228,.45)", letterSpacing: ".1em", textTransform: "uppercase" }}>Reply to {to}</span>
+        <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", color: "rgba(240,236,228,.45)", letterSpacing: ".1em", textTransform: "uppercase" }}>Reply to {to}</span>
         <button style={{ background: "none", border: "none", color: "rgba(240,236,228,.35)", cursor: "pointer" }} onClick={onClose}><X size={13} /></button>
       </div>
       {templates.length > 0 && (

@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Ubuntu, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CookieBanner } from "@/components/organisms/CookieBanner";
 import { Analytics } from "@/components/Analytics";
 import { Providers } from "./providers";
 import { Toaster } from "sonner";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const ubuntu = Ubuntu({
+  variable: "--font-ubuntu",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "700"],
+  style: ["normal", "italic"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://samuelgyasi.com";
@@ -118,16 +125,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${ubuntu.variable} ${playfair.variable}`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body
-        className={`${poppins.variable}`}
-      >
+      <body>
         <Providers>
           <Analytics />
           {children}

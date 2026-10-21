@@ -14,7 +14,7 @@ export default async function AdminLayout({
             background: "#1a1814",
             border: "1px solid rgba(240,236,228,.12)",
             color: "#f0ece4",
-            fontFamily: "'Poppins', sans-serif",
+            fontFamily: "var(--font-body)",
             fontSize: "11px",
             letterSpacing: ".05em",
           },

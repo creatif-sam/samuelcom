@@ -25,7 +25,7 @@ const css = `
 body.on-idp {
   background: #f5f3ef;
   color: #0a0a0a;
-  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-family: var(--font-body);
 }
 body.on-idp .cursor {
   background: #0a0a0a;
@@ -76,7 +76,7 @@ body.on-idp .cursor-ring {
 }
 .hero-ghost {
   position: absolute; bottom: -20px; right: -20px;
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-weight: 800;
+  font-family: var(--font-body); font-weight: 800;
   font-size: clamp(120px,18vw,220px);
   color: transparent; -webkit-text-stroke: 1px rgba(245,243,239,.06);
   line-height: 1; pointer-events: none; user-select: none; letter-spacing: -.01em;}
@@ -85,7 +85,7 @@ body.on-idp .cursor-ring {
   display: flex; flex-direction: column; justify-content: flex-end;
 }
 .idp .hero-tag {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .35em; text-transform: uppercase;
   color: var(--red); margin-bottom: 28px;
   opacity: 0; animation: idp-appear .7s .2s ease forwards;
@@ -93,7 +93,7 @@ body.on-idp .cursor-ring {
 }
 .idp .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--red); }
 .idp .hero-title {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-weight: 800;
+  font-family: var(--font-heading); font-weight: 800;
   font-size: clamp(60px,10vw,140px);
   line-height: .88; color: var(--paper);
   opacity: 0; animation: idp-appear .7s .35s ease forwards; letter-spacing: -.01em;}
@@ -104,7 +104,7 @@ body.on-idp .cursor-ring {
   opacity: 0; animation: idp-appear .7s .55s ease forwards; max-width: 720px;
 }
 .idp .def-label {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .25em; color: var(--mid); text-transform: uppercase;
   padding-top: 4px; white-space: nowrap;
 }
@@ -123,11 +123,11 @@ body.on-idp .cursor-ring {
 }
 .idp .hm-item:last-child { border-right: none; }
 .idp .hm-val {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-weight: 800;
+  font-family: var(--font-heading); font-weight: 800;
   font-size: 42px; color: var(--paper); line-height: 1; letter-spacing: -.01em;}
 .idp .hm-val span { color: var(--red); font-size: .6em; }
 .idp .hm-key {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .22em; text-transform: uppercase; color: var(--mid); margin-top: 6px;
 }
 @keyframes idp-appear {
@@ -143,11 +143,11 @@ body.on-idp .cursor-ring {
   padding-bottom: 20px; border-bottom: 1px solid var(--line);
 }
 .idp .s-title {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-weight: 800;
+  font-family: var(--font-heading); font-weight: 800;
   font-size: clamp(32px,4vw,56px); color: var(--ink); line-height: 1; letter-spacing: -.01em;}
-.idp .s-title em { font-family: var(--font-poppins), 'Poppins', sans-serif; font-style: italic; font-weight: 300; }
+.idp .s-title em { font-family: var(--font-heading); font-style: italic; font-weight: 300; }
 .idp .s-num {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .2em; color: var(--mid); text-transform: uppercase;
 }
 
@@ -171,12 +171,12 @@ body.on-idp .cursor-ring {
 .idp .domain-card:hover .dc-num { -webkit-text-stroke-color: rgba(245,243,239,.08); }
 .idp .domain-card:hover .dc-bar { background: var(--red); }
 .idp .dc-num {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-weight: 800;
+  font-family: var(--font-body); font-weight: 800;
   font-size: 80px; line-height: 1;
   color: transparent; -webkit-text-stroke: 1px var(--faint); margin-bottom: 8px;
   transition: -webkit-text-stroke-color .3s; letter-spacing: -.01em;}
 .idp .dc-title {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-weight: 700;
+  font-family: var(--font-heading); font-weight: 700;
   font-size: 22px; color: var(--ink); transition: color .3s; letter-spacing: -.01em;}
 .idp .dc-body {
   font-size: 15px; line-height: 1.7; color: var(--mid);
@@ -184,7 +184,7 @@ body.on-idp .cursor-ring {
 }
 .idp .dc-tags { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px; }
 .idp .dc-tags span {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .15em; text-transform: uppercase;
   color: var(--mid); border: 1px solid var(--faint);
   padding: 3px 10px; transition: color .3s, border-color .3s;
@@ -214,13 +214,13 @@ body.on-idp .cursor-ring {
 .idp .res-row:hover .res-period { color: var(--red); }
 .idp .res-row:hover .res-type { color: var(--red); border-color: rgba(245,243,239,.15); }
 .idp .res-period {
-  padding: 32px 28px; font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  padding: 32px 28px; font-family: var(--font-body); font-size: 11px;
   letter-spacing: .15em; text-transform: uppercase; color: var(--mid);
   line-height: 1.6; border-right: 1px solid var(--line); transition: color .3s;
 }
 .idp .res-body { padding: 32px 40px; }
 .idp .res-title {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-weight: 700;
+  font-family: var(--font-heading); font-weight: 700;
   font-size: 20px; color: var(--ink); transition: color .3s; letter-spacing: -.01em;}
 .idp .res-org { font-size: 14px; font-style: italic; color: var(--mid); margin-top: 4px; transition: color .3s; }
 .idp .res-desc { font-size: 14px; line-height: 1.65; color: var(--mid); margin-top: 12px; font-weight: 300; transition: color .3s; }
@@ -232,7 +232,7 @@ body.on-idp .cursor-ring {
 .idp .res-bullets li::before { content: '→'; color: var(--red); flex-shrink: 0; }
 .idp .res-row:hover .res-bullets li { color: rgba(245,243,239,.6); }
 .idp .res-type {
-  padding: 32px 28px; font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  padding: 32px 28px; font-family: var(--font-body); font-size: 11px;
   letter-spacing: .15em; text-transform: uppercase; color: var(--mid);
   border-left: 1px solid var(--line); white-space: nowrap;
   writing-mode: vertical-rl; text-orientation: mixed; transition: color .3s, border-color .3s;
@@ -249,7 +249,7 @@ body.on-idp .cursor-ring {
 }
 .idp .arsenal-group.visible { opacity: 1; transform: none; }
 .idp .ag-title {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-heading); font-size: 11px;
   letter-spacing: .28em; text-transform: uppercase; color: var(--red);
   margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--line);
 }
@@ -268,7 +268,7 @@ body.on-idp .cursor-ring {
 .idp #manifesto { background: var(--ink); padding: 120px 56px; }
 .idp .manifesto-inner { max-width: 900px; margin: 0 auto; }
 .idp .manifesto-label {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .3em; text-transform: uppercase; color: var(--red);
   margin-bottom: 48px; display: flex; align-items: center; gap: 16px;
   opacity: 0; transform: translateY(16px); transition: opacity .7s, transform .7s;
@@ -284,11 +284,11 @@ body.on-idp .cursor-ring {
 }
 .idp .mf-line.visible { opacity: 1; transform: none; }
 .idp .mf-n {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .15em; color: rgba(245,243,239,.2); text-align: right; padding-top: 6px;
 }
 .idp .mf-text {
-  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(22px,3vw,38px); font-style: italic; font-weight: 300;
   color: rgba(245,243,239,.85); line-height: 1.25;
   padding: 18px 0; border-bottom: 1px solid rgba(245,243,239,.06); transition: color .3s;
@@ -311,14 +311,14 @@ body.on-idp .cursor-ring {
 .idp .cert-card.visible { opacity: 1; transform: none; }
 .idp .cert-card:hover { background: var(--paper2); }
 .idp .cert-name {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-weight: 600;
+  font-family: var(--font-body); font-weight: 600;
   font-size: 16px; color: var(--ink); letter-spacing: -.01em;}
 .idp .cert-issuer {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .2em; text-transform: uppercase; color: var(--red); margin-top: 5px;
 }
 .idp .cert-badge {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .12em; text-transform: uppercase;
   padding: 5px 12px; border: 1px solid; white-space: nowrap; flex-shrink: 0;
 }
@@ -344,7 +344,7 @@ body.on-idp .cursor-ring {
 .idp .int-card:hover::before { transform: scaleX(1); }
 .idp .int-icon { font-size: 36px; margin-bottom: 16px; display: block; filter: grayscale(1); }
 .idp .int-name {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-weight: 700;
+  font-family: var(--font-body); font-weight: 700;
   font-size: 17px; color: var(--ink); letter-spacing: -.01em;}
 .idp .int-body { font-size: 14px; line-height: 1.65; color: var(--mid); margin-top: 10px; font-weight: 300; font-style: italic; }
 
@@ -352,13 +352,13 @@ body.on-idp .cursor-ring {
 .idp #quote-break { background: var(--red); padding: 90px 56px; text-align: center; }
 .idp .qb-inner { max-width: 800px; margin: 0 auto; }
 .idp .qb-text {
-  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(26px,3.5vw,46px); font-style: italic; font-weight: 300;
   color: var(--paper); line-height: 1.3;
 }
 .idp .qb-text strong { font-style: normal; font-weight: 700; }
 .idp .qb-attr {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .3em; text-transform: uppercase;
   color: rgba(245,243,239,.6); margin-top: 28px;
 }
@@ -369,14 +369,14 @@ body.on-idp .cursor-ring {
 /* ── FOOTER ── */
 
 .idp .f-name {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-weight: 700;
+  font-family: var(--font-body); font-weight: 700;
   font-size: 13px; color: var(--ink); letter-spacing: -.01em;}
 .idp .f-copy {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .2em; color: var(--mid); text-transform: uppercase;
 }
 .idp .f-link {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 11px;
+  font-family: var(--font-body); font-size: 11px;
   letter-spacing: .2em; color: var(--red); text-decoration: none; text-transform: uppercase;
 }
 
@@ -393,13 +393,13 @@ body.on-idp .cursor-ring {
   border-top: 1px solid var(--line);
 }
 .idp .bs-eyebrow {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 9px;
+  font-family: var(--font-body); font-size: 9px;
   letter-spacing: .35em; text-transform: uppercase;
   color: var(--red); display: flex; align-items: center; gap: 16px;
 }
 .idp .bs-eyebrow::before, .idp .bs-eyebrow::after { content: ''; width: 36px; height: 1px; background: var(--red); }
 .idp .bs-title {
-  font-family: var(--font-poppins), 'Poppins', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(28px,4vw,52px); color: var(--ink); line-height: 1.1;
 }
 .idp .bs-title em { font-style: italic; color: var(--red); }
@@ -411,7 +411,7 @@ body.on-idp .cursor-ring {
   display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px;
 }
 .idp .bs-btn {
-  font-family: var(--font-poppins), 'Poppins', sans-serif; font-size: 10px;
+  font-family: var(--font-body); font-size: 10px;
   letter-spacing: .18em; text-transform: uppercase;
   padding: 14px 32px; background: var(--red); color: #fff;
   text-decoration: none; transition: background .25s, color .25s;

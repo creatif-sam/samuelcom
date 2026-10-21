@@ -14,13 +14,13 @@ export default function PrivacyPolicyPage() {
           min-height: 100vh;
           background: #080807;
           color: #f0ece4;
-          font-family: 'Poppins', sans-serif;
+          font-family: var(--font-body);
           padding: 120px 56px 80px;
           max-width: 860px;
           margin: 0 auto;
         }
         .pp-back {
-          font-family: 'Poppins', sans-serif;
+          font-family: var(--font-body);
           font-size: 10px; letter-spacing: .22em;
           text-transform: uppercase;
           color: #7a7060; text-decoration: none;
@@ -30,13 +30,13 @@ export default function PrivacyPolicyPage() {
         }
         .pp-back:hover { color: #546cfa; }
         .pp-eyebrow {
-          font-family: 'Poppins', sans-serif;
+          font-family: var(--font-body);
           font-size: 9px; letter-spacing: .4em;
           text-transform: uppercase; color: #546cfa;
           margin-bottom: 20px;
         }
         .pp-title {
-          font-family: 'Poppins', sans-serif;
+          font-family: var(--font-heading);
           font-size: clamp(40px, 6vw, 72px);
           font-weight: 700;
           color: #f0ece4;
@@ -44,14 +44,14 @@ export default function PrivacyPolicyPage() {
           margin-bottom: 16px;
         }
         .pp-updated {
-          font-family: 'Poppins', sans-serif;
+          font-family: var(--font-body);
           font-size: 9px; letter-spacing: .2em;
           text-transform: uppercase; color: #7a7060;
           margin-bottom: 60px;
         }
         .pp-rule { border: none; border-top: 1px solid rgba(240,236,228,.08); margin: 48px 0; }
         .pp-section-title {
-          font-family: 'Poppins', sans-serif;
+          font-family: var(--font-heading);
           font-size: 26px; font-weight: 700;
           color: #f0ece4; margin-bottom: 16px;
         }

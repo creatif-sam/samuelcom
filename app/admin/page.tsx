@@ -135,7 +135,7 @@ export default function AdminPage() {
         <button className="adm-hamburger" onClick={() => setNavOpen(!navOpen)} aria-label="Menu">
           <Menu size={18} />
         </button>
-        <span style={{ fontFamily: "'Poppins',sans-serif", fontSize: "13px", fontWeight: 700, color: "#ffffff" }}>Admin</span>
+        <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", fontWeight: 700, color: "#ffffff" }}>Admin</span>
         <Link href="/" style={{ color: "rgba(255,255,255,.4)", lineHeight: 0 }}><Globe size={16} /></Link>
       </div>
 
@@ -160,7 +160,7 @@ export default function AdminPage() {
           })}
         </nav>
         <div style={{ padding: "0 16px 24px", marginTop: "auto", display: "flex", flexDirection: "column", gap: "8px" }}>
-          <Link href="/" style={{ fontFamily: "'Poppins',sans-serif", fontSize: "9px", letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(255,255,255,.25)", textDecoration: "none", display: "flex", alignItems: "center", gap: "6px", padding: "8px 12px" }}>
+          <Link href="/" style={{ fontFamily: "var(--font-body)", fontSize: "9px", letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(255,255,255,.25)", textDecoration: "none", display: "flex", alignItems: "center", gap: "6px", padding: "8px 12px" }}>
             <Globe size={10} /> Back to Site
           </Link>
           <button

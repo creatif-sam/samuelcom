@@ -48,7 +48,7 @@
   margin: 0 auto;
 }
 .mspHeroEyebrow {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -66,7 +66,7 @@
   background: #546cfa;
 }
 .mspHeroHeadline {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(56px, 9vw, 118px);
   font-weight: 900;
   line-height: 0.9;
@@ -83,7 +83,7 @@
   margin-bottom: 24px;
 }
 .mspHeroSub {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(15px, 1.8vw, 20px);
   color: rgba(245, 243, 239, 0.75);
   max-width: 520px;
@@ -94,7 +94,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -125,7 +125,7 @@
   flex-wrap: wrap;
 }
 .mspIntroQuote {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(20px, 2.5vw, 30px);
   font-weight: 700;
   color: #f5f3ef;
@@ -142,7 +142,7 @@
 }
 .mspIntroStat { text-align: center; }
 .mspIntroStatVal {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(28px, 3.5vw, 44px);
   font-weight: 900;
   color: #546cfa;
@@ -150,7 +150,7 @@
   margin-bottom: 4px;
 }
 .mspIntroStatLabel {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -185,7 +185,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -201,7 +201,7 @@
   background: #546cfa;
 }
 .mspChYear {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -210,7 +210,7 @@
   margin-bottom: 12px;
 }
 .mspChTitle {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(24px, 3vw, 38px);
   font-weight: 800;
   line-height: 1.15;
@@ -219,7 +219,7 @@
   margin-bottom: 24px;
 }
 .mspChBody {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(14px, 1.2vw, 16px);
   line-height: 1.85;
   color: rgba(10, 10, 10, 0.62);
@@ -230,7 +230,7 @@
   padding: 20px 24px;
   border-left: 3px solid #546cfa;
   background: rgba(84,108,250, 0.06);
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-heading);
   font-size: 15px;
   font-style: italic;
   line-height: 1.7;
@@ -283,7 +283,7 @@
 }
 .mspNowInner { max-width: 1100px; margin: 0 auto; }
 .mspNowEyebrow {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.28em;
@@ -302,7 +302,7 @@
   background: #546cfa;
 }
 .mspNowHeading {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(28px, 4.5vw, 56px);
   font-weight: 900;
   line-height: 1;
@@ -339,7 +339,7 @@
 .mspNowCard:hover .mspNowCardImg img { transform: scale(1.06); }
 .mspNowCardBody { padding: 26px 26px 30px; }
 .mspNowCardNum {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 9px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -347,7 +347,7 @@
   margin-bottom: 12px;
 }
 .mspNowCardTitle {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-heading);
   font-size: 17px;
   font-weight: 700;
   color: #f5f3ef;
@@ -355,7 +355,7 @@
   margin-bottom: 6px;
 }
 .mspNowCardOrg {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -363,7 +363,7 @@
   margin-bottom: 14px;
 }
 .mspNowCardText {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 14px;
   line-height: 1.75;
   color: rgba(245, 243, 239, 0.55);
@@ -376,7 +376,7 @@
   background: #f5f3ef;
 }
 .mspCtaLabel {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -385,7 +385,7 @@
   margin-bottom: 18px;
 }
 .mspCtaHeading {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(28px, 4vw, 52px);
   font-weight: 900;
   letter-spacing: -0.02em;
@@ -395,7 +395,7 @@
 }
 .mspCtaHeading em { color: #546cfa; font-style: normal; }
 .mspCtaSub {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 17px;
   color: rgba(10, 10, 10, 0.55);
   line-height: 1.7;
@@ -418,7 +418,7 @@
   color: #0a0a0a;
   padding: 16px 36px;
   border-radius: 50px;
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
@@ -437,7 +437,7 @@
   padding: 15px 32px;
   border: 1.5px solid rgba(10, 10, 10, 0.2);
   border-radius: 50px;
-  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;

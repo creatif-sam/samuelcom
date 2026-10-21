@@ -129,7 +129,7 @@ export function PostsTab({ posts, onNew, onEdit, onDelete, onToggle }: {
                 <tr key={p.id}>
                   <td style={{ color: "#f0ece4", maxWidth: "240px" }}>
                     <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.title}</div>
-                    <div style={{ fontSize: "10px", color: "rgba(240,236,228,.25)", fontFamily: "'Poppins',sans-serif", marginTop: "2px" }}>/{p.category}/blog/{p.slug}</div>
+                    <div style={{ fontSize: "10px", color: "rgba(240,236,228,.25)", fontFamily: "var(--font-body)", marginTop: "2px" }}>/{p.category}/blog/{p.slug}</div>
                   </td>
                   <td style={{ textTransform: "capitalize" }}>{p.category}</td>
                   <td><span className={`adm-badge ${p.published ? "adm-badge--published" : "adm-badge--draft"}`}>{p.published ? "Published" : "Draft"}</span></td>

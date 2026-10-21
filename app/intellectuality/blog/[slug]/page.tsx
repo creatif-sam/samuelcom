@@ -183,7 +183,7 @@ const postCss = `
 .ib-bc {
   display: flex; align-items: center; gap: 8px;
   padding: 18px 56px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
   color: var(--mid);
   border-bottom: 1px solid var(--line);
@@ -202,22 +202,22 @@ const postCss = `
 /* Header */
 .ib-art-head { margin-bottom: 40px; }
 .ib-art-label {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 9px; letter-spacing: .35em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 16px;
 }
 .ib-art-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(28px, 5vw, 52px); line-height: 1.1;
   color: var(--ink); margin: 0 0 16px; font-weight: 700;
 }
 .ib-art-excerpt {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(16px, 1.6vw, 20px); font-style: italic;
   color: var(--mid); line-height: 1.65; font-weight: 300; margin: 0 0 16px;
 }
 .ib-art-meta {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
   color: var(--mid); display: flex; gap: 8px; flex-wrap: wrap;
 }
@@ -227,7 +227,7 @@ const postCss = `
 
 /* Article body */
 .ib-art-body {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 17px; line-height: 1.85;
   color: var(--ink); margin: 32px 0;
 }
@@ -246,14 +246,14 @@ const postCss = `
 .ib-photos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 32px 0; }
 .ib-photo-fig { margin: 0; }
 .ib-photo-fig img { width: 100%; border-radius: 8px; display: block; }
-.ib-photo-fig figcaption { font-family: 'Poppins', sans-serif; font-size: 11px; color: var(--mid); margin-top: 6px; font-style: italic; }
+.ib-photo-fig figcaption { font-family: var(--font-body); font-size: 11px; color: var(--mid); margin-top: 6px; font-style: italic; }
 
 /* Infographic */
 .ib-art-infographic { width: 100%; border-radius: 10px; margin: 32px 0; display: block; }
 
 /* Back link */
 .ib-back { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); }
-.ib-back a { font-family: 'Poppins', sans-serif; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); text-decoration: none; }
+.ib-back a { font-family: var(--font-body); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); text-decoration: none; }
 .ib-back a:hover { text-decoration: underline; }
 
 /* Responsive */

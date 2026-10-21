@@ -120,7 +120,7 @@ export function AnalyticsTab({ analytics }: { analytics: AnalyticsData | null })
       </div>
 
       <div className="adm-section-header" style={{ marginBottom: "12px" }}>
-        <div className="adm-section-title">Daily Views <span style={{ fontSize: "12px", fontFamily: "'Poppins',sans-serif", color: "rgba(240,236,228,.3)" }}>— 14d</span></div>
+        <div className="adm-section-title">Daily Views <span style={{ fontSize: "12px", fontFamily: "var(--font-body)", color: "rgba(240,236,228,.3)" }}>— 14d</span></div>
       </div>
       <MiniBarChart data={dailyViews} />
 
@@ -135,13 +135,13 @@ export function AnalyticsTab({ analytics }: { analytics: AnalyticsData | null })
               <tbody>
                 {topPages.map(({ path, count }) => (
                   <tr key={path}>
-                    <td style={{ color: "#f0ece4", fontFamily: "'Poppins',sans-serif", fontSize: "11px" }}>
+                    <td style={{ color: "#f0ece4", fontFamily: "var(--font-body)", fontSize: "11px" }}>
                       <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                         {path}
                         <a href={path} target="_blank" rel="noreferrer" style={{ color: "rgba(240,236,228,.25)", lineHeight: 0 }}><ExternalLink size={10} /></a>
                       </span>
                     </td>
-                    <td style={{ color: "#546cfa", fontFamily: "'Poppins',sans-serif", fontSize: "22px" }}>{count}</td>
+                    <td style={{ color: "#546cfa", fontFamily: "var(--font-body)", fontSize: "22px" }}>{count}</td>
                     <td style={{ minWidth: "140px" }}>
                       <div className="adm-progress-row">
                         <div className="adm-progress" style={{ width: `${(count / totalViews) * 100}%` }} />
