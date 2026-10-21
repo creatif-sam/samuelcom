@@ -6,6 +6,7 @@ const pillars = [
   {
     icon: "▲",
     name: "Leadership",
+    href: "/leadership",
     description:
       "I lead as a servant first — inspiring, empowering, and calling forth greatness in others. Since my first leadership role at ten, I have come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
   },
@@ -44,6 +45,7 @@ export function PillarsSection() {
                 icon={pillar.icon}
                 name={pillar.name}
                 description={pillar.description}
+                href={"href" in pillar ? pillar.href : undefined}
               />
             </ScrollReveal>
           ))}
