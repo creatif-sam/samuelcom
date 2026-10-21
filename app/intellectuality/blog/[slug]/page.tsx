@@ -71,9 +71,9 @@ export default async function IntellectualityPostPage(
         <nav className="ib-bc">
           <Link href="/">Home</Link>
           <span>›</span>
-          <Link href="/intellectuality">Intellectuality</Link>
+          <Link href="/blog">Blog</Link>
           <span>›</span>
-          <Link href="/intellectuality/blog">Blog</Link>
+          <Link href="/intellectuality/blog">Intellectuality</Link>
           <span>›</span>
           <span>{post.title}</span>
         </nav>

@@ -48,9 +48,9 @@ export default async function TransformationBlogPage() {
         <nav className="tb-breadcrumb" aria-label="Breadcrumb">
           <Link href="/">Home</Link>
           <span>›</span>
-          <Link href="/transformation">Transformation</Link>
+          <Link href="/blog">Blog</Link>
           <span>›</span>
-          <span>Blog</span>
+          <span>Transformation</span>
         </nav>
 
         {/* Page header */}

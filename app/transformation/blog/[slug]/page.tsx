@@ -70,9 +70,9 @@ export default async function TransformationPostPage(
         <nav className="tb-bc">
           <Link href="/">Home</Link>
           <span>›</span>
-          <Link href="/transformation">Transformation</Link>
+          <Link href="/blog">Blog</Link>
           <span>›</span>
-          <Link href="/transformation/blog">Blog</Link>
+          <Link href="/transformation/blog">Transformation</Link>
           <span>›</span>
           <span>{post.title}</span>
         </nav>

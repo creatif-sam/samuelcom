@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 
 const quickLinks = [
   { href: "/my-story",        label: "My Story"        },
-  { href: "/leadership",      label: "Leadership"      },
-  { href: "/intellectuality", label: "Intellectuality" },
-  { href: "/transformation",  label: "Transformation"  },
+  { href: "/blog",            label: "Blog"            },
 ];
 
 export default function NotFound() {

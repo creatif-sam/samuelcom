@@ -5,9 +5,6 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://samuelgyasi.com";
 
 const staticRoutes = [
   "",
-  "/leadership",
-  "/intellectuality",
-  "/transformation",
   "/my-story",
   "/blog",
   "/leadership/blog",

@@ -6,21 +6,18 @@ const pillars = [
   {
     icon: "▲",
     name: "Leadership",
-    href: "/leadership",
     description:
       "I lead as a servant first — inspiring, empowering, and calling forth greatness in others. Since my first leadership role at ten, I have come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
   },
   {
     icon: "◆",
     name: "Intellectuality",
-    href: "/intellectuality",
     description:
       "I pursue deep thinking, rigorous study, and intellectual honesty — at the intersection of data science, AI, and human systems. Technology, for me, is not an end — it is a lever for human flourishing and systemic change.",
   },
   {
     icon: "◎",
     name: "Transformation",
-    href: "/transformation",
     description:
       "Change that lasts begins from within and works outward. I am a catalyst — carrying a vision for individuals, communities, and nations to be renewed, elevated, and equipped to meet the challenges of a rapidly shifting world.",
   },
@@ -46,7 +43,6 @@ export function PillarsSection() {
               <PillarCard
                 icon={pillar.icon}
                 name={pillar.name}
-                href={pillar.href}
                 description={pillar.description}
               />
             </ScrollReveal>

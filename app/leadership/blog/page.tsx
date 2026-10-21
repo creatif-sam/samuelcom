@@ -48,9 +48,9 @@ export default async function LeadershipBlogPage() {
         <nav className="lb-breadcrumb" aria-label="Breadcrumb">
           <Link href="/">Home</Link>
           <span>›</span>
-          <Link href="/leadership">Leadership</Link>
+          <Link href="/blog">Blog</Link>
           <span>›</span>
-          <span>Blog</span>
+          <span>Leadership</span>
         </nav>
 
         {/* Page header */}

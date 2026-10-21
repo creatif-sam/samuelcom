@@ -70,9 +70,9 @@ export default async function LeadershipPostPage(
         <nav className="lb-bc">
           <Link href="/">Home</Link>
           <span>›</span>
-          <Link href="/leadership">Leadership</Link>
+          <Link href="/blog">Blog</Link>
           <span>›</span>
-          <Link href="/leadership/blog">Blog</Link>
+          <Link href="/leadership/blog">Leadership</Link>
           <span>›</span>
           <span>{post.title}</span>
         </nav>

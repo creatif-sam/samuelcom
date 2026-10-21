@@ -48,9 +48,9 @@ export default async function IntellectualityBlogPage() {
         <nav className="ib-breadcrumb" aria-label="Breadcrumb">
           <Link href="/">Home</Link>
           <span>›</span>
-          <Link href="/intellectuality">Intellectuality</Link>
+          <Link href="/blog">Blog</Link>
           <span>›</span>
-          <span>Blog</span>
+          <span>Intellectuality</span>
         </nav>
 
         {/* Page header */}
