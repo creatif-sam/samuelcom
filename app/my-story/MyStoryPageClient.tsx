@@ -56,9 +56,6 @@ export default function MyStoryPageClient() {
           />
           <div className={styles.mspHeroGradient} />
           <div className={styles.mspHeroContent}>
-            <p className={styles.mspHeroEyebrow}>
-              Samuel Kobina Gyasi | Born 22 June 1999 | Mpohor, Ghana
-            </p>
             <h1 className={styles.mspHeroHeadline}>
               My<br />Story
             </h1>

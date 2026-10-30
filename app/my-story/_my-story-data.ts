@@ -93,7 +93,9 @@ export const chapters: Chapter[] = [
     },
     body: [
       "At the School of Collective Intelligence (SCI) in Rabat, Samuel completed a rigorous Master's programme fusing data science, organizational theory, and facilitation. The central question driving every module: how do groups think, decide, and create together?",
-      "Leadership followed him into the programme. He served as class delegate for his cohort and as Academic Affairs Delegate of the ISC UM6P International Students Club, work that culminated in his receiving the club's Innovation Award. He was also Financial Secretary of GHASAM, the Ghanaian Students Association.",
+      "Leadership followed him into the programme. Within the School of Collective Intelligence he served as School Ambassador (December 2023 – July 2025) and as moderator of SCI Talk (October 2024 – June 2025), a weekly scientific talk where researchers and practitioners present their work on the science of collective intelligence.",
+      "He was also class delegate for his cohort. Separately, as Academic Affairs Delegate of the International Students Club at UM6P (ISC UM6P), he led work that earned him the Innovation Award.",
+      "As Financial Secretary of GHASAM, the Ghanaian Students Association (September 2024 – August 2025), he helped establish the GHASAM E-Fund, which raised nearly 20,000 MAD to support students facing emergencies and in need of loans. He formed the GHASAM Financial Committee to strengthen accountability and transparency, and replaced Excel spreadsheets with simplified, student-friendly PDF financial reports.",
       "He co-founded and served as President of the Collective Intelligence Consortium, a student-led organisation that trains students to facilitate collective intelligence and grow as leaders.",
       "While his coursework deepened his research vocabulary, it was the living laboratory of navigating cultures and communities that sharpened his understanding of transformation — as something that begins with the willingness to be made new.",
     ],
