@@ -7,6 +7,7 @@ import { Navbar } from "@/components/organisms/Navbar";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
 import styles from "./my-story.module.css";
 import { chapters, nowCards } from "./_my-story-data";
+import { Gallery } from "./_Gallery";
 
 export default function MyStoryPageClient() {
   const chapterRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -182,6 +183,9 @@ export default function MyStoryPageClient() {
             );
           })}
         </div>
+
+        {/* -- GALLERY -- */}
+        <Gallery />
 
         {/* -- NOW SECTION -- */}
         <section className={styles.mspNow}>

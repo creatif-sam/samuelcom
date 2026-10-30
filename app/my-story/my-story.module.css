@@ -313,6 +313,181 @@
   padding: 8px 0 10px;
 }
 
+/* -- GALLERY -- */
+.mspGallery { padding: 110px 8% 120px; }
+.mspGalleryInner { max-width: 1240px; margin: 0 auto; }
+.mspGalleryHeader { text-align: center; max-width: 620px; margin: 0 auto 56px; }
+.mspGalleryEyebrow {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #546cfa;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.mspGalleryEyebrow::before,
+.mspGalleryEyebrow::after {
+  content: "";
+  width: 24px;
+  height: 1.5px;
+  background: #546cfa;
+}
+.mspGalleryHeading {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #0a0a0a;
+  margin-bottom: 18px;
+}
+.mspGalleryHeading em { color: #546cfa; }
+.mspGallerySub {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(10, 10, 10, 0.55);
+}
+
+/* Masonry columns keep each photo at its natural shape */
+.mspGalleryGrid { columns: 4 240px; column-gap: 16px; }
+.mspGalleryTile {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #e5e0da;
+  cursor: zoom-in;
+  break-inside: avoid;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.4s ease;
+}
+.mspGalleryTile[data-visible="true"] { opacity: 1; transform: none; }
+.mspGalleryTile img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.5s ease;
+}
+.mspGalleryTile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.6), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.mspGalleryTile:hover { box-shadow: 0 18px 40px rgba(10, 10, 10, 0.18); }
+.mspGalleryTile:hover img { transform: scale(1.05); }
+.mspGalleryTile:hover::after { opacity: 1; }
+.mspGalleryTile:focus-visible { outline: 3px solid #546cfa; outline-offset: 3px; }
+.mspGalleryCaption {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  z-index: 1;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #f5f3ef;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.mspGalleryTile:hover .mspGalleryCaption { opacity: 1; transform: none; }
+
+.mspGalleryMore { text-align: center; margin-top: 40px; }
+.mspGalleryMore button {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 34px;
+  border-radius: 999px;
+  border: 1.5px solid #0a0a0a;
+  background: transparent;
+  color: #0a0a0a;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.mspGalleryMore button:hover { background: #0a0a0a; color: #f5f3ef; }
+
+/* Lightbox */
+.mspLightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px;
+  background: rgba(8, 8, 10, 0.94);
+  backdrop-filter: blur(6px);
+  animation: mspFadeIn 0.3s ease;
+}
+@keyframes mspFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.mspLightboxFigure {
+  margin: 0;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mspLightboxImg {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 160px);
+  border-radius: 10px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  animation: mspZoomIn 0.35s ease;
+}
+@keyframes mspZoomIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: none; } }
+.mspLightboxFigure figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(245, 243, 239, 0.8);
+}
+.mspLightboxCount { color: rgba(245, 243, 239, 0.45); white-space: nowrap; }
+.mspLightboxClose,
+.mspLightboxNav {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(245, 243, 239, 0.1);
+  color: #f5f3ef;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.mspLightboxClose:hover,
+.mspLightboxNav:hover { background: #546cfa; }
+.mspLightboxClose { top: 20px; right: 20px; width: 44px; height: 44px; font-size: 18px; }
+.mspLightboxNav { top: 50%; width: 52px; height: 52px; margin-top: -26px; font-size: 32px; line-height: 1; }
+.mspLightboxPrev { left: 20px; }
+.mspLightboxNext { right: 20px; }
+
 /* -- NOW SECTION -- */
 .mspNow {
   background: #0a0a0a;
@@ -528,6 +703,10 @@
   .mspHeroScroll::after { animation: none; }
   .mspChImgWrap img,
   .mspNowCardImg img { transition: none; }
+  .mspGalleryTile { opacity: 1; transform: none; transition: none; }
+  .mspGalleryTile img { transition: none; }
+  .mspLightbox,
+  .mspLightboxImg { animation: none; }
 }
 
 /* -- RESPONSIVE -- */
@@ -544,6 +723,14 @@
   .mspChImgWrap { aspect-ratio: 16 / 9; }
   .mspChInset { width: 28%; left: 12px; bottom: -28px; padding: 6px 6px 0; }
   .mspChInsetWide { width: 40%; }
+  .mspGallery { padding: 80px 6% 90px; }
+  .mspGalleryGrid { columns: 2; column-gap: 10px; }
+  .mspGalleryTile { margin-bottom: 10px; border-radius: 10px; }
+  .mspGalleryCaption { opacity: 1; transform: none; font-size: 11px; left: 10px; bottom: 8px; }
+  .mspGalleryTile::after { opacity: 1; background: linear-gradient(to top, rgba(10, 10, 10, 0.45), transparent 35%); }
+  .mspLightbox { padding: 64px 12px 24px; }
+  .mspLightboxNav { top: auto; bottom: 20px; margin-top: 0; width: 44px; height: 44px; }
+  .mspLightboxImg { max-height: calc(100vh - 180px); }
   .mspChInset figcaption { font-size: 0.7rem; padding: 4px 0 6px; }
   .mspNowGrid { grid-template-columns: 1fr; gap: 20px; }
   .mspNowCardImg { height: 200px; }
