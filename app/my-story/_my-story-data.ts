@@ -129,7 +129,7 @@ export const nowCards: NowCard[] = [
     title: "Group Intelligence Facilitator",
     org: "Practitioner",
     body: "Applying the science of collective intelligence to help groups surface diverse perspectives, resolve complexity, and make decisions that reflect shared wisdom.",
-    image: "/Group%20Intelligence%20faci.png",
+    image: "/group-intelligence-facilitator.webp",
   },
   {
     num: "03",
