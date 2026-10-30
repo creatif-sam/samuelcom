@@ -159,7 +159,7 @@ export default async function LeadershipPostPage(
 const postCss = `
 /* ── Leadership single post ───────────────────────────────── */
 .lb-post {
-  --bg: #0c0b09;
+  --bg: #0b1230;
   --white: #f0ede8;
   --gold: #546cfa;
   --gray: #6b6560;

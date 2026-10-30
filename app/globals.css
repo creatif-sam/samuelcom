@@ -6,7 +6,7 @@
 :root {
   --font-body: var(--font-ubuntu), 'Ubuntu', sans-serif;
   --font-heading: var(--font-playfair), 'Playfair Display', Georgia, serif;
-  --black: #0a0a0a;
+  --black: #0b1230;
   --white: #f5f3ef;
   --pure-white: #ffffff;
   --gray-light: #e8e4de;
@@ -19,15 +19,16 @@
   --gold-end: #3547d1;
   --accent-strong: #3547d1;        /* buttons with white text */
   --accent-strong-hover: #2a3aa8;
-  --accent-text: #546cfa;          /* small blue text; deepened on light backgrounds */
+  --accent-text: #7c8ffc;          /* small blue text: lighter on navy, deepened on light backgrounds */
   --amber: #f2a93b;
-  --nav-bg: rgba(10,10,10,0.96);
+  --nav-bg: rgba(11, 18, 48, 0.96);
 }
 
 /* ── LIGHT THEME OVERRIDES ── */
 .light {
   --black: #f8f6f2;
-  --white: #0a0a0a;
+  --white: #0b1230;
+  --gold-gradient: linear-gradient(90deg, #3547d1, #2a3aa8);
   --gray-light: #1a1818;
   --gray-mid: #4a4640;
   --gray-dark: #e8e4de;
@@ -47,7 +48,7 @@
 .light .nd-links a { color: #0a0a0a; border-bottom-color: rgba(10,10,10,0.08); }
 .light .nd-links a:hover { color: var(--accent-text); }
 .light .nd-name { color: rgba(10,10,10,0.4); }
-.light .nav-backdrop { background: rgba(0,0,0,0.3); }
+.light .nav-backdrop { background: rgba(11, 18, 48, 0.3); }
 /* Fix card hover backgrounds in light mode */
 .light .wid-card:hover { background: rgba(0,0,0,0.045); }
 .light .pillar-card:hover { background: #ccc8c0; }
@@ -197,14 +198,14 @@ body {
 .nav-burger span {
   display: block;
   width: 24px; height: 1.5px;
-  background: #0a0a0a;
+  background: #0b1230;
   transition: transform 0.35s ease, opacity 0.25s ease, width 0.3s ease;
   transform-origin: center;
 }
 
 /* Burger icon visibility fixes */
 .light .nav-burger span {
-  background: #0a0a0a;
+  background: #0b1230;
 }
 .nav-burger--open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-burger--open span:nth-child(2) { opacity: 0; width: 0; }
@@ -215,7 +216,7 @@ body {
   position: fixed;
   top: 0; right: 0; bottom: 0;
   width: min(360px, 100vw);
-  background: #0e0d0b;
+  background: #121b45;
   border-left: 1px solid rgba(245,243,239,0.07);
   z-index: 550;
   transform: translateX(100%);
@@ -304,7 +305,7 @@ body {
 /* Backdrop */
 .nav-backdrop {
   position: fixed; inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(11, 18, 48, 0.6);
   backdrop-filter: blur(4px);
   z-index: 540;
 }
@@ -452,7 +453,7 @@ body {
   font-family: var(--font-body);
   font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
   color: #f5f3ef;
-  background: #0a0a0a;
+  background: #0b1230;
   padding: 14px 28px;
   text-decoration: none;
   transition: background 0.3s, color 0.3s;
@@ -469,7 +470,7 @@ body {
   transition: background 0.3s, color 0.3s;
   cursor: pointer;
 }
-.hero-btn-ghost:hover { background: #0a0a0a; color: #f5f3ef; }
+.hero-btn-ghost:hover { background: #0b1230; color: #f5f3ef; }
 
 @keyframes hero-rise {
   from { opacity: 0; transform: translateY(20px); }
@@ -528,7 +529,7 @@ body {
   position: absolute;
   bottom: 48px; left: 50%;
   transform: translateX(-50%);
-  background: rgba(10,10,10,0.9);
+  background: rgba(11, 18, 48, 0.9);
   border: 1px solid rgba(84,108,250,0.3);
   backdrop-filter: blur(12px);
   padding: 12px 22px;
@@ -866,7 +867,7 @@ body {
 
 /* ── TIMELINE (My Story) ── */
 .about-timeline-section {
-  background: #0a0a0a;
+  background: #0b1230;
   color: #f5f3ef;
 }
 
@@ -1253,7 +1254,7 @@ body {
 .phx-badge {
   position: absolute;
   z-index: 5;
-  background: #0a0a0a;
+  background: #0b1230;
   color: #f5f3ef;
   font-family: var(--font-body);
   font-size: 12px;
@@ -1676,7 +1677,7 @@ body {
 .widc-photo-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.55) 100%);
+  background: linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(11, 18, 48, 0.55) 100%);
   z-index: 1;
 }
 
@@ -1834,7 +1835,16 @@ body {
 }
 
 /* ── CONNECT ── */
-.connect-section { background: var(--black); }
+/* The one fully blue section: trust + calm at the moment visitors decide to reach out */
+.connect-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(124, 143, 252, 0.45), transparent 42%),
+    radial-gradient(circle at 88% 85%, rgba(11, 18, 48, 0.45), transparent 50%),
+    linear-gradient(135deg, #3547d1 0%, #2a3aa8 55%, #1d2a86 100%);
+}
+.connect-section .section-inner { position: relative; }
 
 .connect-layout {
   display: grid;
@@ -1847,16 +1857,16 @@ body {
   font-family: var(--font-heading);
   font-size: clamp(44px, 5vw, 72px);
   font-weight: 900;
-  color: var(--white);
+  color: #ffffff;
   line-height: 1;
 }
 
-.connect-title em { font-style: italic; font-weight: 400; color: var(--gold); }
+.connect-title em { font-style: italic; font-weight: 400; color: #ffffff; }
 
 .connect-body {
   font-size: 18px;
   line-height: 1.8;
-  color: var(--gray-mid);
+  color: rgba(255, 255, 255, 0.85);
   margin-top: 24px;
 }
 
@@ -1867,17 +1877,20 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 28px 36px;
-  background: var(--gray-dark);
-  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
   text-decoration: none;
   font-family: var(--font-body);
   font-size: 22px;
   font-weight: 700;
-  transition: background 0.3s, padding-left 0.3s;
+  transition: background 0.3s, color 0.3s, padding-left 0.3s;
   cursor: pointer;
 }
 
-.connect-link:hover { background: var(--white); color: var(--black); padding-left: 48px; }
+.connect-link:hover { background: #ffffff; color: #2a3aa8; padding-left: 48px; }
 
 .connect-link span {
   font-family: var(--font-body);
@@ -1994,7 +2007,7 @@ body {
    FOOTER
    ════════════════════════════════════════════════ */
 .sf-footer {
-  background: linear-gradient(to bottom, #0a0a0a 0%, #050505 100%);
+  background: linear-gradient(to bottom, #0b1230 0%, #0b1230 100%);
   border-top: 1px solid rgba(245,243,239,0.05);
   padding: 80px 60px 40px;
   color: var(--white);
@@ -2153,7 +2166,7 @@ body {
 
 /* Feature Card */
 .sf-feature-card {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #121b45 100%);
   border: 1px solid rgba(124,143,252,0.15);
   border-radius: 16px;
   padding: 40px;
@@ -2565,7 +2578,7 @@ body {
   bottom: 24px; left: 50%;
   transform: translateX(-50%);
   width: min(760px, calc(100vw - 32px));
-  background: #111009;
+  background: #121b45;
   border: 1px solid rgba(245,243,239,0.1);
   backdrop-filter: blur(16px);
   z-index: 8000;
@@ -3386,6 +3399,19 @@ body {
   color: transparent !important;
 }
 
+/* Gradient text would vanish on the blue Connect section — keep it white there */
+.connect-section .connect-title em {
+  background: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+}
+.connect-section .section-label {
+  background: none;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.85);
+}
+.connect-section .section-label::before { background: rgba(255, 255, 255, 0.6); }
+
 /* Reset gradient for pillar-cta when hovering to white */
 .pillar-cta:hover {
   background: none !important;
@@ -3405,7 +3431,7 @@ body {
 /* ── TESTIMONIALS SECTION ──────────────────────────────────────────────────── */
 .ts-section {
   padding: 120px 0;
-  background: #0d0c0a;
+  background: #0b1230;
   position: relative;
   overflow: hidden;
 }
@@ -3468,7 +3494,7 @@ body {
   gap: 2px;
 }
 .ts-card {
-  background: #111009;
+  background: #121b45;
   border: 1px solid rgba(240,236,228,.06);
   padding: 44px 40px;
   display: flex;
@@ -3478,11 +3504,11 @@ body {
 }
 .ts-card:hover {
   border-color: rgba(84,108,250,.18);
-  background: #141210;
+  background: #121b45;
 }
 .ts-card--featured {
   grid-column: span 2;
-  background: #141210;
+  background: #121b45;
   border-color: rgba(84,108,250,.12);
 }
 .ts-card--featured .ts-quote {
@@ -3889,7 +3915,7 @@ body {
     to bottom,
     rgba(0,0,0,0.08) 0%,
     rgba(0,0,0,0.18) 40%,
-    rgba(0,0,0,0.72) 100%
+    rgba(11, 18, 48, 0.72) 100%
   );
   z-index: 1;
 }

@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
       <style>{`
         .pp-page {
           min-height: 100vh;
-          background: #080807;
+          background: #0b1230;
           color: #f0ece4;
           font-family: var(--font-body);
           padding: 120px 56px 80px;

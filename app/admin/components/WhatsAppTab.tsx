@@ -6,7 +6,7 @@ import { Phone, Send, Copy, CheckCheck, ExternalLink } from "lucide-react";
 
 // ── WHATSAPP ──────────────────────────────────────────────────────────────
 export function WhatsApp() {
-  const DEFAULT_NUM = "233244000000";
+  const DEFAULT_NUM = "212684893821";
   const [num, setNum]     = useState(DEFAULT_NUM);
   const [saved, setSaved] = useState(DEFAULT_NUM);
   const [recip, setRecip] = useState("");

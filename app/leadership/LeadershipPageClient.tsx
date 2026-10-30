@@ -10,20 +10,20 @@ import { TestimonialsClient } from "@/components/organisms/TestimonialsClient";
 const css = `
 /* ── DESIGN TOKENS (scoped) ── */
 .ldp {
-  --bg: #0a0a0a;
+  --bg: #0b1230;
   --white: #f5f3ef;
   --gold: #546cfa;
   --gray: #6b6560;
   --gray-light: #a09890;
   --line: rgba(245,243,239,0.07);
-  --card-bg: #111111;
+  --card-bg: #121b45;
   min-height: 100vh;
   position: relative;
 }
 
 /* ── BODY OVERRIDES ── */
 body.on-ldp {
-  background: #0a0a0a;
+  background: #0b1230;
   color: #f5f3ef;
   font-family: var(--font-body);
 }
@@ -179,7 +179,7 @@ body.on-ldp .cursor-ring {
 }
 
 /* ── EXPERIENCE ── */
-.ldp #experience { background: #0d0d0d; }
+.ldp #experience { background: #0b1230; }
 .ldp .exp-grid { display: flex; flex-direction: column; gap: 3px; }
 .ldp .exp-card {
   background: var(--card-bg); border: 1px solid var(--line);
@@ -232,7 +232,7 @@ body.on-ldp .cursor-ring {
 .ldp .edu-location { font-size: 14px; color: var(--gray); margin-top: 4px; font-style: italic; }
 
 /* ── AWARDS ── */
-.ldp #awards { background: #0d0d0d; }
+.ldp #awards { background: #0b1230; }
 .ldp .awards-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 3px; }
 .ldp .award-card {
   background: var(--card-bg); border: 1px solid var(--line);
@@ -270,7 +270,7 @@ body.on-ldp .cursor-ring {
 .ldp .skill-list li::before { content: ''; width: 16px; height: 1px; background: var(--gold); opacity: .5; flex-shrink: 0; }
 
 /* ── CERTIFICATIONS ── */
-.ldp #certs { background: #0d0d0d; }
+.ldp #certs { background: #0b1230; }
 .ldp .certs-list { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
 .ldp .cert-item {
   background: var(--card-bg); border: 1px solid var(--line);
@@ -320,7 +320,7 @@ body.on-ldp .cursor-ring {
 
 /* ── BLOG STRIP ── */
 .ldp .blog-strip {
-  background: #0d0d0d;
+  background: #0b1230;
   padding: 80px 56px;
   text-align: center;
   display: flex; flex-direction: column; align-items: center; gap: 20px;

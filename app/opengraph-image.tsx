@@ -17,7 +17,7 @@ export default async function OpengraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          background: "#0a0a0a",
+          background: "#0b1230",
           color: "#f5f3ef",
           fontFamily: "sans-serif",
         }}

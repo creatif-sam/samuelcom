@@ -142,7 +142,7 @@ export default async function LeadershipBlogPage() {
 const blogCss = `
 /* ── Leadership blog listing ──────────────────────────────── */
 .lb-page {
-  --bg: #0c0b09;
+  --bg: #0b1230;
   --white: #f0ede8;
   --gold: #546cfa;
   --gray: #6b6560;
