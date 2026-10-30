@@ -19,7 +19,7 @@ export function SubscribersTab({ subs, onDelete }: {
             <tbody>
               {subs.map((s) => (
                 <tr key={s.id}>
-                  <td style={{ color: "#f0ece4" }}>{s.email}</td>
+                  <td style={{ color: "#0f172a" }}>{s.email}</td>
                   <td>{s.name ?? "—"}</td>
                   <td style={{ maxWidth: 220 }}>
                     {s.interests && s.interests.length > 0
@@ -28,7 +28,7 @@ export function SubscribersTab({ subs, onDelete }: {
                             {i.replace(/_/g, " ")}
                           </span>
                         ))
-                      : <span style={{ color: "rgba(245,243,239,0.3)" }}>—</span>}
+                      : <span style={{ color: "rgba(15,23,42,.5)" }}>—</span>}
                   </td>
                   <td><span className={`adm-badge ${s.confirmed ? "adm-badge--published" : "adm-badge--draft"}`}>{s.confirmed ? "Yes" : "Pending"}</span></td>
                   <td>{new Date(s.created_at).toLocaleDateString("en-GB")}</td>

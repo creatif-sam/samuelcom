@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
@@ -135,15 +136,21 @@ export default function AdminPage() {
         <button className="adm-hamburger" onClick={() => setNavOpen(!navOpen)} aria-label="Menu">
           <Menu size={18} />
         </button>
-        <span style={{ fontFamily: "var(--font-body)", fontSize: "13px", fontWeight: 700, color: "#ffffff" }}>Admin</span>
-        <Link href="/" style={{ color: "rgba(255,255,255,.4)", lineHeight: 0 }}><Globe size={16} /></Link>
+        <span className="adm-mobile-brand">
+          <Image src="/logo-mark.png" alt="" width={256} height={241} />
+          Dashboard
+        </span>
+        <Link href="/" className="adm-mobile-link" aria-label="Back to site"><Globe size={16} /></Link>
       </div>
 
       {/* Sidebar */}
       <aside className={`adm-sidebar${navOpen ? " adm-sidebar--open" : ""}`}>
         <div className="adm-logo">
-          <span>Admin</span>
-          Dashboard
+          <Image src="/logo-mark.png" alt="Samuel Kobina Gyasi logo" width={256} height={241} priority />
+          <div className="adm-logo-text">
+            <span className="adm-logo-name">Samuel K. Gyasi</span>
+            <span className="adm-logo-sub">Admin Dashboard</span>
+          </div>
         </div>
         <nav className="adm-nav">
           {NAV.map(({ id, label, Icon }) => {
@@ -159,8 +166,8 @@ export default function AdminPage() {
             );
           })}
         </nav>
-        <div style={{ padding: "0 16px 24px", marginTop: "auto", display: "flex", flexDirection: "column", gap: "8px" }}>
-          <Link href="/" style={{ fontFamily: "var(--font-body)", fontSize: "9px", letterSpacing: ".15em", textTransform: "uppercase", color: "rgba(255,255,255,.25)", textDecoration: "none", display: "flex", alignItems: "center", gap: "6px", padding: "8px 12px" }}>
+        <div className="adm-sidebar-foot">
+          <Link href="/" className="adm-back-link">
             <Globe size={10} /> Back to Site
           </Link>
           <button

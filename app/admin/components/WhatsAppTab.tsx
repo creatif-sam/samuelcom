@@ -56,7 +56,7 @@ export function WhatsApp() {
             </a>
           </div>
           <div className="adm-wa-link-preview">
-            <span style={{ display: "block", fontFamily: "var(--font-body)", fontSize: "9px", color: "rgba(240,236,228,.35)", marginBottom: "4px" }}>Your chat link:</span>
+            <span style={{ display: "block", fontFamily: "var(--font-body)", fontSize: "9px", color: "rgba(15,23,42,.55)", marginBottom: "4px" }}>Your chat link:</span>
             <a href={chatLink} target="_blank" rel="noreferrer" style={{ color: "#25d366", fontFamily: "var(--font-body)", fontSize: "11px", wordBreak: "break-all" }}>{chatLink}</a>
           </div>
         </div>
@@ -93,7 +93,7 @@ export function WhatsApp() {
           <a href={chatLink} target="_blank" rel="noreferrer" style={{ background: "#25d366", color: "#fff", padding: "14px 24px", display: "inline-flex", alignItems: "center", gap: "10px", fontFamily: "var(--font-body)", fontSize: "10px", letterSpacing: ".15em", textDecoration: "none" }}>
             <Phone size={14} />Chat on WhatsApp
           </a>
-          <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", color: "rgba(240,236,228,.25)", letterSpacing: ".1em" }}>
+          <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", color: "rgba(15,23,42,.45)", letterSpacing: ".1em" }}>
             Site-visible chat button
           </span>
         </div>

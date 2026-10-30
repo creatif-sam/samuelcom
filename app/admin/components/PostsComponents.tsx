@@ -85,7 +85,7 @@ function PhotoAttachmentRow({ photo, onChange, onRemove }: {
     <div style={{ padding: "14px", background: "rgba(84,108,250,0.04)", borderRadius: "8px", border: "1px solid rgba(84,108,250,0.12)", display: "flex", flexDirection: "column", gap: "8px" }}>
       {photo.url && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={photo.url} alt={photo.alt || ""} style={{ maxHeight: "120px", objectFit: "cover", borderRadius: "5px", border: "1px solid rgba(255,255,255,0.08)" }} />
+        <img src={photo.url} alt={photo.alt || ""} style={{ maxHeight: "120px", objectFit: "cover", borderRadius: "5px", border: "1px solid rgba(53,71,209,0.14)" }} />
       )}
       <div style={{ display: "flex", gap: "8px" }}>
         <input className="adm-input" value={photo.url} onChange={(e) => onChange({ ...photo, url: e.target.value })} placeholder="Photo URL" style={{ flex: 1, fontSize: "12px" }} />
@@ -94,7 +94,7 @@ function PhotoAttachmentRow({ photo, onChange, onRemove }: {
           <Upload size={10} />{uploading ? "…" : "Upload"}
         </button>
         <button type="button" onClick={onRemove}
-          style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.40)", borderRadius: "7px", padding: "0 12px", cursor: "pointer", fontSize: "11px", flexShrink: 0 }}>
+          style={{ background: "transparent", border: "1px solid rgba(53,71,209,0.14)", color: "rgba(15,23,42,.58)", borderRadius: "7px", padding: "0 12px", cursor: "pointer", fontSize: "11px", flexShrink: 0 }}>
           Remove
         </button>
       </div>
@@ -127,9 +127,9 @@ export function PostsTab({ posts, onNew, onEdit, onDelete, onToggle }: {
             <tbody>
               {posts.map((p) => (
                 <tr key={p.id}>
-                  <td style={{ color: "#f0ece4", maxWidth: "240px" }}>
+                  <td style={{ color: "#0f172a", maxWidth: "240px" }}>
                     <div style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.title}</div>
-                    <div style={{ fontSize: "10px", color: "rgba(240,236,228,.25)", fontFamily: "var(--font-body)", marginTop: "2px" }}>/{p.category}/blog/{p.slug}</div>
+                    <div style={{ fontSize: "10px", color: "rgba(15,23,42,.45)", fontFamily: "var(--font-body)", marginTop: "2px" }}>/{p.category}/blog/{p.slug}</div>
                   </td>
                   <td style={{ textTransform: "capitalize" }}>{p.category}</td>
                   <td><span className={`adm-badge ${p.published ? "adm-badge--published" : "adm-badge--draft"}`}>{p.published ? "Published" : "Draft"}</span></td>
@@ -198,7 +198,7 @@ export function PostModal({ post, onClose, onSave, db }: {
       <div className="adm-form-modal">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
           <div className="adm-form-title" style={{ margin: 0 }}>{post ? "Edit Post" : "New Blog Post"}</div>
-          <button onClick={onClose} style={{ background: "none", border: "none", color: "rgba(240,236,228,.4)", cursor: "pointer" }}><X size={16} /></button>
+          <button onClick={onClose} style={{ background: "none", border: "none", color: "rgba(15,23,42,.58)", cursor: "pointer" }}><X size={16} /></button>
         </div>
         <form onSubmit={save}>
           <div className="adm-field"><label className="adm-label">Title *</label>

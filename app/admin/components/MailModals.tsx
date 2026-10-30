@@ -37,7 +37,7 @@ export function TplModal({ tpl, onClose, onSave }: {
       <div className="adm-form-modal">
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
           <div className="adm-form-title" style={{ margin: 0 }}>{tpl ? "Edit Template" : "New Template"}</div>
-          <button onClick={onClose} style={{ background: "none", border: "none", color: "rgba(240,236,228,.4)", cursor: "pointer" }}><X size={16} /></button>
+          <button onClick={onClose} style={{ background: "none", border: "none", color: "rgba(15,23,42,.58)", cursor: "pointer" }}><X size={16} /></button>
         </div>
         <form onSubmit={save}>
           <div className="adm-field"><label className="adm-label">Template Name *</label><input className="adm-input" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Welcome Email" required /></div>
@@ -51,7 +51,7 @@ export function TplModal({ tpl, onClose, onSave }: {
 
           {tab === "html" && (
             <div className="adm-field">
-              <label className="adm-label">HTML <span style={{ color: "rgba(240,236,228,.2)" }}>{html.length} chars</span></label>
+              <label className="adm-label">HTML <span style={{ color: "rgba(15,23,42,.42)" }}>{html.length} chars</span></label>
               {prev
                 ? <div className="adm-html-preview" dangerouslySetInnerHTML={{ __html: html }} />
                 : <textarea className="adm-textarea" style={{ fontFamily: "var(--font-body)", fontSize: "13px" }} value={html} onChange={(e) => setHtml(e.target.value)} placeholder="<h1>Hello,</h1><p>Your content here.</p>" />
@@ -60,7 +60,7 @@ export function TplModal({ tpl, onClose, onSave }: {
           )}
           {tab === "text" && (
             <div className="adm-field">
-              <label className="adm-label">Plain Text Fallback <span style={{ color: "rgba(240,236,228,.2)" }}>{text.length} chars</span></label>
+              <label className="adm-label">Plain Text Fallback <span style={{ color: "rgba(15,23,42,.42)" }}>{text.length} chars</span></label>
               <textarea className="adm-textarea" value={text} onChange={(e) => setText(e.target.value)} placeholder={"Hello,\n\nYour content here."} />
             </div>
           )}

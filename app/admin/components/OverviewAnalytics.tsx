@@ -81,7 +81,7 @@ export function OverviewTab({ posts, subs, msgs, logs, analytics, onNav }: {
           <tbody>
             {posts.slice(0, 5).map((p) => (
               <tr key={p.id}>
-                <td style={{ color: "#f0ece4" }}>{p.title}</td>
+                <td style={{ color: "#0f172a" }}>{p.title}</td>
                 <td style={{ textTransform: "capitalize" }}>{p.category}</td>
                 <td><span className={`adm-badge ${p.published ? "adm-badge--published" : "adm-badge--draft"}`}>{p.published ? "Published" : "Draft"}</span></td>
                 <td>{new Date(p.created_at).toLocaleDateString("en-GB")}</td>
@@ -120,7 +120,7 @@ export function AnalyticsTab({ analytics }: { analytics: AnalyticsData | null })
       </div>
 
       <div className="adm-section-header" style={{ marginBottom: "12px" }}>
-        <div className="adm-section-title">Daily Views <span style={{ fontSize: "12px", fontFamily: "var(--font-body)", color: "rgba(240,236,228,.3)" }}>— 14d</span></div>
+        <div className="adm-section-title">Daily Views <span style={{ fontSize: "12px", fontFamily: "var(--font-body)", color: "rgba(15,23,42,.5)" }}>— 14d</span></div>
       </div>
       <MiniBarChart data={dailyViews} />
 
@@ -135,10 +135,10 @@ export function AnalyticsTab({ analytics }: { analytics: AnalyticsData | null })
               <tbody>
                 {topPages.map(({ path, count }) => (
                   <tr key={path}>
-                    <td style={{ color: "#f0ece4", fontFamily: "var(--font-body)", fontSize: "11px" }}>
+                    <td style={{ color: "#0f172a", fontFamily: "var(--font-body)", fontSize: "11px" }}>
                       <span style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                         {path}
-                        <a href={path} target="_blank" rel="noreferrer" style={{ color: "rgba(240,236,228,.25)", lineHeight: 0 }}><ExternalLink size={10} /></a>
+                        <a href={path} target="_blank" rel="noreferrer" style={{ color: "rgba(15,23,42,.45)", lineHeight: 0 }}><ExternalLink size={10} /></a>
                       </span>
                     </td>
                     <td style={{ color: "#546cfa", fontFamily: "var(--font-body)", fontSize: "22px" }}>{count}</td>

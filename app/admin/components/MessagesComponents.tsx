@@ -79,8 +79,8 @@ export function QuickReply({ to, subject, templates, onClose }: {
   return (
     <div className="adm-quick-reply">
       <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-        <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", color: "rgba(240,236,228,.45)", letterSpacing: ".1em", textTransform: "uppercase" }}>Reply to {to}</span>
-        <button style={{ background: "none", border: "none", color: "rgba(240,236,228,.35)", cursor: "pointer" }} onClick={onClose}><X size={13} /></button>
+        <span style={{ fontFamily: "var(--font-body)", fontSize: "9px", color: "rgba(15,23,42,.6)", letterSpacing: ".1em", textTransform: "uppercase" }}>Reply to {to}</span>
+        <button style={{ background: "none", border: "none", color: "rgba(15,23,42,.55)", cursor: "pointer" }} onClick={onClose}><X size={13} /></button>
       </div>
       {templates.length > 0 && (
         <select className="adm-select" value={tpl} onChange={(e) => applyTpl(e.target.value)} style={{ fontSize: "12px", padding: "7px 10px", marginBottom: "8px" }}>

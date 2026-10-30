@@ -98,7 +98,7 @@ export function ComposeView({ templates, onReload }: { templates: EmailTemplate[
       <div className="adm-field"><label className="adm-label">To</label><input className="adm-input" type="email" value={to} onChange={(e) => setTo(e.target.value)} placeholder="recipient@email.com" /></div>
       <div className="adm-field"><label className="adm-label">Subject</label><input className="adm-input" value={sub} onChange={(e) => setSub(e.target.value)} placeholder="Email subject" /></div>
       <div className="adm-field">
-        <label className="adm-label">{mode === "html" ? "Body (HTML)" : "Body (Plain text)"} <span style={{ color: "rgba(240,236,228,.2)", marginLeft: 6 }}>{body.length} chars</span></label>
+        <label className="adm-label">{mode === "html" ? "Body (HTML)" : "Body (Plain text)"} <span style={{ color: "rgba(15,23,42,.42)", marginLeft: 6 }}>{body.length} chars</span></label>
         {prev && mode === "html"
           ? <div className="adm-html-preview" dangerouslySetInnerHTML={{ __html: body }} />
           : <textarea className="adm-textarea" style={{ minHeight: "300px", fontFamily: mode === "html" ? "var(--font-body)" : undefined, fontSize: mode === "html" ? "13px" : undefined }} value={body} onChange={(e) => setBody(e.target.value)} placeholder={mode === "html" ? "<h1>Hello,</h1>\n<p>Your message here.</p>" : "Hello,\n\nYour message here."} />
@@ -133,7 +133,7 @@ export function InboxView({ emails, db, onReload, templates }: {
   return emails.length === 0 ? (
     <div>
       <p className="adm-empty">No inbound emails yet.</p>
-      <p style={{ fontFamily: "var(--font-body)", fontSize: "9px", color: "rgba(240,236,228,.2)", textAlign: "center", letterSpacing: ".08em", lineHeight: 2.2, maxWidth: "440px", margin: "0 auto" }}>
+      <p style={{ fontFamily: "var(--font-body)", fontSize: "9px", color: "rgba(15,23,42,.42)", textAlign: "center", letterSpacing: ".08em", lineHeight: 2.2, maxWidth: "440px", margin: "0 auto" }}>
         To receive emails here, configure Resend inbound routing<br />
         with webhook → /api/mail/inbound
       </p>

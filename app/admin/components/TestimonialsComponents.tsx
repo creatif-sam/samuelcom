@@ -45,13 +45,13 @@ export function TestimonialsTab({ testimonials, onNew, onEdit, onDelete, onToggl
             <tbody>
               {testimonials.map((t) => (
                 <tr key={t.id}>
-                  <td style={{ color: "#f0ece4", maxWidth: "200px" }}>
+                  <td style={{ color: "#0f172a", maxWidth: "200px" }}>
                     <div style={{ fontWeight: 600 }}>{t.name}</div>
-                    <div style={{ fontSize: "11px", color: "rgba(240,236,228,.4)", marginTop: "2px", fontStyle: "italic" }}>
+                    <div style={{ fontSize: "11px", color: "rgba(15,23,42,.58)", marginTop: "2px", fontStyle: "italic" }}>
                       {t.quote.slice(0, 60)}{t.quote.length > 60 ? "…" : ""}
                     </div>
                   </td>
-                  <td style={{ fontSize: "12px", color: "rgba(240,236,228,.5)" }}>
+                  <td style={{ fontSize: "12px", color: "rgba(15,23,42,.65)" }}>
                     {[t.role, t.company].filter(Boolean).join(" · ") || "—"}
                   </td>
                   <td>

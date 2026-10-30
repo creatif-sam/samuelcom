@@ -11,12 +11,14 @@ export default async function AdminLayout({
         position="top-right"
         toastOptions={{
           style: {
-            background: "#1a1814",
-            border: "1px solid rgba(240,236,228,.12)",
-            color: "#f0ece4",
+            background: "rgba(255,255,255,.85)",
+            backdropFilter: "blur(16px)",
+            border: "1px solid rgba(53,71,209,.15)",
+            boxShadow: "0 10px 30px rgba(53,71,209,.15)",
+            color: "#0f172a",
             fontFamily: "var(--font-body)",
-            fontSize: "11px",
-            letterSpacing: ".05em",
+            fontSize: "12px",
+            letterSpacing: ".02em",
           },
         }}
         richColors
