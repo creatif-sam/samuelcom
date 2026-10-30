@@ -9,6 +9,8 @@
 .mspHero {
   position: relative;
   min-height: 92vh;
+  /* Clear the fixed navbar so the headline never slides under it */
+  padding-top: 140px;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -547,6 +549,7 @@
   .mspNowCardImg { height: 200px; }
 }
 @media (max-width: 640px) {
+  .mspHero { padding-top: 110px; }
   .mspHeroContent { padding: 0 6% 64px; }
   .mspChapters { padding: 0 6%; }
   .mspIntro { padding: 48px 6%; flex-direction: column; }
