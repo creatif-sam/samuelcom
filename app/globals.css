@@ -161,8 +161,8 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #0a0a0a;
-  color: #f5f3ef;
+  background: #546cfa;
+  color: #ffffff;
   padding: 10px 22px;
   border-radius: 100px;
   font-family: var(--font-body);
@@ -174,8 +174,8 @@ body {
   white-space: nowrap;
 }
 .nav-cta-btn:hover {
-  background: #546cfa;
-  color: #0a0a0a;
+  background: #3d55e8;
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
