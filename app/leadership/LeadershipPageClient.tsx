@@ -347,15 +347,15 @@ body.on-ldp .cursor-ring {
 .ldp .bs-btn {
   font-family: var(--font-body); font-size: 11px;
   letter-spacing: .22em; text-transform: uppercase;
-  padding: 14px 32px; background: var(--gold); color: var(--bg);
+  padding: 14px 32px; background: #3547d1; color: #ffffff;
   text-decoration: none; transition: background .25s, color .25s;
   cursor: none;
 }
-.ldp .bs-btn:hover { background: var(--white); }
+.ldp .bs-btn:hover { background: var(--white); color: var(--bg); }
 .ldp .bs-btn.ghost {
   background: transparent; color: var(--gold); border: 1px solid var(--gold);
 }
-.ldp .bs-btn.ghost:hover { background: var(--gold); color: var(--bg); }
+.ldp .bs-btn.ghost:hover { background: #3547d1; color: #ffffff; }
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px) {

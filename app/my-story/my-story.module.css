@@ -192,7 +192,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #546cfa;
+  color: #3547d1;
   margin-bottom: 16px;
 }
 .mspChTag::before {
@@ -323,7 +323,7 @@
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #546cfa;
+  color: #3547d1;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -593,7 +593,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #546cfa;
+  color: #3547d1;
   margin-bottom: 18px;
 }
 .mspCtaHeading {
@@ -626,8 +626,8 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #546cfa;
-  color: #0a0a0a;
+  background: #3547d1;
+  color: #ffffff;
   padding: 16px 36px;
   border-radius: 50px;
   font-family: var(--font-body);
@@ -637,7 +637,7 @@
   transition: background 0.25s, transform 0.2s;
 }
 .mspCtaBtnPrimary:hover {
-  background: #3547d1;
+  background: #2a3aa8;
   transform: translateY(-2px);
 }
 .mspCtaBtnGhost {
@@ -656,8 +656,8 @@
   transition: border-color 0.2s, color 0.2s, transform 0.2s;
 }
 .mspCtaBtnGhost:hover {
-  border-color: #546cfa;
-  color: #546cfa;
+  border-color: #3547d1;
+  color: #3547d1;
   transform: translateY(-2px);
 }
 

@@ -17,6 +17,9 @@
   --gold-gradient: linear-gradient(90deg, #7c8ffc, #3547d1);
   --gold-start: #7c8ffc;
   --gold-end: #3547d1;
+  --accent-strong: #3547d1;        /* buttons with white text */
+  --accent-strong-hover: #2a3aa8;
+  --accent-text: #546cfa;          /* small blue text; deepened on light backgrounds */
   --amber: #f2a93b;
   --nav-bg: rgba(10,10,10,0.96);
 }
@@ -29,6 +32,7 @@
   --gray-mid: #4a4640;
   --gray-dark: #e8e4de;
   --accent: #2a2520;
+  --accent-text: #3547d1;
 }
 .light body {
   background: #f8f6f2;
@@ -41,22 +45,22 @@
   border-left-color: rgba(10,10,10,0.1);
 }
 .light .nd-links a { color: #0a0a0a; border-bottom-color: rgba(10,10,10,0.08); }
-.light .nd-links a:hover { color: var(--gold); }
+.light .nd-links a:hover { color: var(--accent-text); }
 .light .nd-name { color: rgba(10,10,10,0.4); }
 .light .nav-backdrop { background: rgba(0,0,0,0.3); }
 /* Fix card hover backgrounds in light mode */
 .light .wid-card:hover { background: rgba(0,0,0,0.045); }
 .light .pillar-card:hover { background: #ccc8c0; }
 /* Fix drawer elements in light mode */
-.light .nav-drawer .theme-toggle-btn { color: var(--gold-start); border-color: rgba(124,143,252,0.45); }
+.light .nav-drawer .theme-toggle-btn { color: var(--accent-text); border-color: rgba(124,143,252,0.45); }
 .light .nav-drawer .theme-toggle-btn:hover { border-color: var(--gold-start); }
 .light .nd-social-link { color: rgba(10,10,10,0.5); border-color: rgba(10,10,10,0.18); }
-.light .nd-social-link:hover { color: var(--gold-start); border-color: var(--gold-start); }
+.light .nd-social-link:hover { color: var(--accent-text); border-color: var(--gold-start); }
 .light .nd-divider { background: rgba(10,10,10,0.12); }
 .light .nav-drawer-close { border-color: rgba(10,10,10,0.18); color: rgba(10,10,10,0.7); }
-.light .nav-drawer-close:hover { background: rgba(10,10,10,0.06); color: var(--gold); }
+.light .nav-drawer-close:hover { background: rgba(10,10,10,0.06); color: var(--accent-text); }
 /* Nav theme toggle in light mode (transparent mobile bg) */
-.light .portfolio-nav > .theme-toggle-btn { color: var(--gold-start); border-color: rgba(124,143,252,0.45); }
+.light .portfolio-nav > .theme-toggle-btn { color: var(--accent-text); border-color: rgba(124,143,252,0.45); }
 .light .portfolio-nav > .theme-toggle-btn:hover { border-color: var(--gold-start); }
 
 /* ── THEME TOGGLE BUTTON ── */
@@ -161,7 +165,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #546cfa;
+  background: var(--accent-strong);
   color: #ffffff;
   padding: 10px 22px;
   border-radius: 100px;
@@ -174,7 +178,7 @@ body {
   white-space: nowrap;
 }
 .nav-cta-btn:hover {
-  background: #3d55e8;
+  background: var(--accent-strong-hover);
   color: #ffffff;
   transform: translateY(-1px);
 }
@@ -254,7 +258,7 @@ body {
 .nd-sub-label {
   font-family: var(--font-body);
   font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 16px;
+  color: var(--accent-text); margin-bottom: 16px;
 }
 
 .nd-pillar-links {
@@ -280,7 +284,7 @@ body {
   transition: color 0.3s;
 }
 .nd-pillar-links a:hover { color: var(--white); }
-.nd-arrow { font-size: 14px; color: var(--gold); font-style: normal; }
+.nd-arrow { font-size: 14px; color: var(--accent-text); font-style: normal; }
 
 .nd-bottom {
   margin-top: 48px;
@@ -293,7 +297,7 @@ body {
 .nd-email {
   font-family: var(--font-body);
   font-size: 10px; letter-spacing: 0.12em;
-  color: var(--gold); text-decoration: none;
+  color: var(--accent-text); text-decoration: none;
 }
 .nd-email:hover { text-decoration: underline; }
 
@@ -1126,8 +1130,8 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  background: #0a0a0a;
-  color: #f5f3ef;
+  background: var(--accent-strong);
+  color: #ffffff;
   padding: 14px 22px 14px 28px;
   border-radius: 50px;
   font-family: var(--font-body);
@@ -1137,8 +1141,8 @@ body {
   transition: background 0.3s, color 0.3s, transform 0.2s;
 }
 .phx-btn-primary:hover {
-  background: #546cfa;
-  color: #0a0a0a;
+  background: var(--accent-strong-hover);
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
@@ -1154,7 +1158,7 @@ body {
   flex-shrink: 0;
 }
 .phx-btn-primary:hover .phx-btn-icon {
-  background: rgba(10,10,10,0.12);
+  background: rgba(255,255,255,0.25);
 }
 
 .phx-btn-ghost {
@@ -1332,7 +1336,7 @@ body {
   font-size: 12px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--accent-text);
   text-decoration: none;
   transition: color 0.3s;
   flex-shrink: 0;
@@ -1445,7 +1449,7 @@ body {
   font-size: 10px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--accent-text);
   transition: color 0.3s;
 }
 .lbs-card:hover .lbs-read-more {
@@ -1581,7 +1585,7 @@ body {
   font-family: var(--font-body);
   font-style: italic;
   font-size: 13px;
-  color: var(--gold);
+  color: var(--accent-text);
   opacity: 0.8;
 }
 
@@ -1594,7 +1598,7 @@ body {
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--accent-text);
   text-decoration: none;
   transition: gap 0.3s, color 0.3s;
   cursor: pointer;
@@ -1615,7 +1619,7 @@ body {
   font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--accent-text);
   margin-bottom: 16px;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
@@ -1684,7 +1688,7 @@ body {
   font-family: var(--font-body);
   font-size: 10px;
   letter-spacing: 0.22em;
-  color: var(--gold);
+  color: var(--accent-text);
 }
 
 .widc-content { padding: 28px 28px 32px; }
@@ -1694,7 +1698,7 @@ body {
   font-size: 9px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--accent-text);
   opacity: 0.75;
   margin-bottom: 10px;
 }
@@ -2070,8 +2074,8 @@ body {
 }
 
 .sf-nl-btn {
-  background: var(--gold);
-  color: #080807;
+  background: var(--accent-strong);
+  color: #ffffff;
   border: none;
   font-family: var(--font-body);
   font-size: 15px;
@@ -2083,7 +2087,7 @@ body {
 }
 
 .sf-nl-btn:hover:not(:disabled) {
-  background: var(--gold-end);
+  background: var(--accent-strong-hover);
 }
 
 .sf-nl-btn:disabled {
@@ -2094,7 +2098,7 @@ body {
 .sf-nl-msg {
   font-family: var(--font-body);
   font-size: 13px;
-  color: var(--gold);
+  color: var(--accent-text);
   padding: 4px 0;
 }
 
@@ -2187,8 +2191,8 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--gold);
-  color: #080807;
+  background: var(--accent-strong);
+  color: #ffffff;
   border: none;
   font-family: var(--font-body);
   font-size: 15px;
@@ -2201,7 +2205,7 @@ body {
 }
 
 .sf-feature-btn:hover {
-  background: var(--gold-end);
+  background: var(--accent-strong-hover);
 }
 
 .sf-feature-graphic {
@@ -2592,9 +2596,9 @@ body {
   transition: background 0.3s;
 }
 .ck-btn--accept {
-  background: var(--gold); color: #080807;
+  background: var(--accent-strong); color: #ffffff;
 }
-.ck-btn--accept:hover { background: var(--gold-end); }
+.ck-btn--accept:hover { background: var(--accent-strong-hover); }
 .ck-btn--decline {
   background: rgba(245,243,239,0.07); color: rgba(245,243,239,0.55);
   border: 1px solid rgba(245,243,239,0.12);
@@ -3564,7 +3568,7 @@ body {
   font-size: 9px;
   letter-spacing: .38em;
   text-transform: uppercase;
-  color: #546cfa;
+  color: var(--accent-text);
   margin-bottom: 28px;
 }
 .ts-label-line {
@@ -3745,7 +3749,7 @@ body {
   font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--accent-text);
   margin-bottom: 18px;
   display: flex;
   align-items: center;
@@ -3860,7 +3864,7 @@ body {
   font-family: var(--font-body);
   font-size: 10px;
   letter-spacing: 0.25em;
-  color: var(--gold);
+  color: var(--accent-text);
   opacity: 0.6;
   margin-bottom: 24px;
 }
@@ -4128,11 +4132,11 @@ body {
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
-.blgp-filter:hover { border-color: #546cfa; color: #546cfa; }
+.blgp-filter:hover { border-color: #3547d1; color: #3547d1; }
 .blgp-filter--active,
 .blgp-filter--active:hover {
-  background: #546cfa;
-  border-color: #546cfa;
+  background: #3547d1;
+  border-color: #3547d1;
   color: #fff;
 }
 
@@ -4208,7 +4212,7 @@ body {
   overflow: hidden;
   transition: color 0.2s;
 }
-.blgp-card:hover .blgp-card-title { color: #546cfa; }
+.blgp-card:hover .blgp-card-title { color: #3547d1; }
 .blgp-card-excerpt {
   font-size: 13px;
   line-height: 1.7;
@@ -4259,8 +4263,8 @@ body {
   display: flex; align-items: center; gap: 8px;
 }
 .blgp-load-btn:hover {
-  border-color: #546cfa;
-  color: #546cfa;
+  border-color: #3547d1;
+  color: #3547d1;
   box-shadow: 0 2px 10px rgba(84,108,250,0.12);
 }
 .blgp-load-btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -4352,8 +4356,8 @@ body {
   transition: color 0.2s, border-color 0.2s;
 }
 .nf-link:hover {
-  color: #546cfa;
-  border-color: #546cfa;
+  color: #3547d1;
+  border-color: #3547d1;
 }
 
 /* Right: big code + network with one lost node */
