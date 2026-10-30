@@ -145,7 +145,7 @@ export function SiteFooter() {
         <div className="sf-feature-card">
           <div className="sf-feature-content">
             <h4 className="sf-feature-heading">Experience transformational growth</h4>
-            <p className="sf-feature-text">Join leaders worldwide in unlocking collective intelligence.</p>
+            <p className="sf-feature-text">Join young African leaders in unlocking collective intelligence with your teams.</p>
             <Link href="/#connect" className="sf-feature-btn">Get in touch →</Link>
           </div>
           <div className="sf-feature-graphic">
