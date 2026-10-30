@@ -276,6 +276,41 @@
   border-radius: 0 0 4px 0;
 }
 
+/* Inset photo print overlapping the chapter image */
+.mspChInset {
+  position: absolute;
+  left: -32px;
+  bottom: -44px;
+  width: 40%;
+  margin: 0;
+  padding: 10px 10px 0;
+  background: #fbf9f6;
+  border-radius: 4px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  transform: rotate(-4deg);
+  transition: transform 0.5s ease;
+  z-index: 3;
+}
+.mspChapter:hover .mspChInset { transform: rotate(-1.5deg) translateY(-6px); }
+.mspChInsetImg {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #e5e0da;
+}
+.mspChInsetImg img { object-fit: cover; object-position: top; }
+.mspChInsetWide { width: 56%; }
+.mspChInsetWide .mspChInsetImg { aspect-ratio: 3 / 2; }
+.mspChInsetWide .mspChInsetImg img { object-position: center; }
+.mspChInset figcaption {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #3a3530;
+  text-align: center;
+  padding: 8px 0 10px;
+}
+
 /* -- NOW SECTION -- */
 .mspNow {
   background: #0a0a0a;
@@ -505,6 +540,9 @@
   .mspChapterLeft .mspChMedia,
   .mspChapterRight .mspChMedia { order: 1; }
   .mspChImgWrap { aspect-ratio: 16 / 9; }
+  .mspChInset { width: 28%; left: 12px; bottom: -28px; padding: 6px 6px 0; }
+  .mspChInsetWide { width: 40%; }
+  .mspChInset figcaption { font-size: 0.7rem; padding: 4px 0 6px; }
   .mspNowGrid { grid-template-columns: 1fr; gap: 20px; }
   .mspNowCardImg { height: 200px; }
 }

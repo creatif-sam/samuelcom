@@ -7,6 +7,7 @@ export interface Chapter {
   image: string;
   imageAlt: string;
   imageSide: ImageSide;
+  inset?: { image: string; alt: string; caption: string; landscape?: boolean };
   body: string[];
   quote: string | null;
 }
@@ -27,8 +28,13 @@ export const chapters: Chapter[] = [
     image: "/my-story/3.png",
     imageAlt: "Samuel with family in Mpohor",
     imageSide: "right",
+    inset: {
+      image: "/my-story/childhood.webp",
+      alt: "Samuel as a young boy in a white embroidered outfit",
+      caption: "The early years",
+    },
     body: [
-      "On the 22nd of June 1999, Samuel Kobina Gyasi was born to Mr. Emmanuel Gyasi and Mrs. Regina Baidoo,a woman whose discipline and warmth became the first architecture of his soul. He entered the world as the newest member of a family of three brothers raised in Mpohor, Ghana.",
+      "On the 22nd of June, just two years after the first members of Generation Z were born, Samuel Kobina Gyasi was born to Mr. Emmanuel Gyasi and Mrs. Regina Baidoo, a woman whose discipline and warmth became the first architecture of his soul. He entered the world as the newest member of a family of three brothers raised in Mpohor, Ghana.",
       "His earliest memories are woven with the sound of a sewing machine and the smell of finished cloth. His father's shop was not merely a trade — it was a lesson in precision, patience, and the dignity of craftsmanship. His mother's prayers taught him that a life built on faith is unshakeable.",
     ],
     quote: null,
@@ -42,7 +48,7 @@ export const chapters: Chapter[] = [
     imageSide: "left",
     body: [
       "At ten years old, Samuel was elected Class Prefect at Ghana-China Friendship School — a role he held for three years. It was his first encounter with what it means to lead: to be accountable not only for yourself but for the order and progress of those around you.",
-      "At Saint John's School in Sekondi-Takoradi, he pursued a General Science curriculum and served as Dining Hall Prefect — managing the sustenance and order of the entire student body. Authority without relationship is hollow; the trust of peers is harder earned and more precious than any title.",
+      "At Saint John's School in Sekondi-Takoradi, he pursued a General Science curriculum and served as Dining Hall Prefect, responsible for breakfast, lunch, and dinner for between 900 and 1,200 boys. The role taught him crowd management, clear communication with stakeholders, and the art of influencing without imposing.",
     ],
     quote: "A leader's worth is measured not by what they command, but by the dignity they preserve in every person they serve.",
   },
@@ -68,9 +74,9 @@ export const chapters: Chapter[] = [
     imageSide: "left",
     body: [
       "Samuel moved to Morocco to pursue Computer Science at the Ecole Supérieure de Management, de Commerce et d'Informatique (SUP Management) in Fez. Navigating a new culture, a new language, and a demanding curriculum, he developed the rare ability to hold complexity without losing clarity.",
-      "He graduated with distinction and the Highest GPA in the entire school — a recognition not only of academic excellence but of the discipline and purpose that had been forged over years. The scholarship that followed was not a reward for past effort; it was a commission for future work.",
+      "He graduated with distinction and the Highest GPA in the entire school — a recognition not only of academic excellence but of the discipline and purpose that had been forged over years.",
     ],
-    quote: "A scholarship is a society's investment in an individual — with the expectation that the investment will return, multiplied, to the community.",
+    quote: "I believe a scholarship is a society's investment in an individual — with the expectation that the investment will return, multiplied, to the community.",
   },
   {
     year: "2023 – 2025",
@@ -79,8 +85,16 @@ export const chapters: Chapter[] = [
     image: "/my-story/6.png",
     imageAlt: "Samuel at UM6P, Morocco",
     imageSide: "right",
+    inset: {
+      image: "/my-story/innovation-award.webp",
+      alt: "Samuel receiving the Innovation Award at UM6P",
+      caption: "Innovation Award · ISC UM6P",
+      landscape: true,
+    },
     body: [
       "At the School of Collective Intelligence (SCI) in Rabat, Samuel completed a rigorous Master's programme fusing data science, organizational theory, and facilitation. The central question driving every module: how do groups think, decide, and create together?",
+      "Leadership followed him into the programme. He served as class delegate for his cohort and as Academic Affairs Delegate of the ISC UM6P International Students Club, work that culminated in his receiving the club's Innovation Award. He was also Financial Secretary of GHASAM, the Ghanaian Students Association.",
+      "He co-founded and served as President of the Collective Intelligence Consortium, a student-led organisation that trains students to facilitate collective intelligence and grow as leaders.",
       "While his coursework deepened his research vocabulary, it was the living laboratory of navigating cultures and communities that sharpened his understanding of transformation — as something that begins with the willingness to be made new.",
     ],
     quote: null,
@@ -94,7 +108,7 @@ export const chapters: Chapter[] = [
     imageSide: "left",
     body: [
       "Today, Samuel inhabits several interconnected spheres of service. As Junior Program Officer at the School of Collective Intelligence, UM6P, he helps students develop their careers and facilitates programmes that unlock the collective intelligence of teams and organisations.",
-      "In the Eglise Evangélique Au Maroc(EEAM-Rabat), he serves as an elder,mentoring the intercession and library teams. Beyond institutions, he mentors individuals navigating the same questions of faith and purpose he once navigated alone.",
+      "At the Église Évangélique au Maroc (EEAM) in Rabat, a congregation of some 450 members, he serves as an elder and Vice President of the Presbyteral Council, and mentors the intercession and library teams. Beyond institutions, he mentors individuals navigating the same questions of purpose, fulfilment, leadership, and faith that he once navigated alone.",
     ],
     quote: null,
   },

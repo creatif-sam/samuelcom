@@ -129,6 +129,23 @@ export default function MyStoryPageClient() {
                     sizes="(max-width:900px) 100vw, 48vw"
                   />
                 </div>
+                {ch.inset && (
+                  <figure
+                    className={`${styles.mspChInset} ${
+                      ch.inset.landscape ? styles.mspChInsetWide : ""
+                    }`}
+                  >
+                    <div className={styles.mspChInsetImg}>
+                      <Image
+                        src={ch.inset.image}
+                        alt={ch.inset.alt}
+                        fill
+                        sizes="(max-width:900px) 45vw, 20vw"
+                      />
+                    </div>
+                    <figcaption>{ch.inset.caption}</figcaption>
+                  </figure>
+                )}
               </div>
             );
 
