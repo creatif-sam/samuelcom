@@ -62,7 +62,7 @@ export default function MyStoryPageClient() {
             </h1>
             <div className={styles.mspHeroRule} />
             <p className={styles.mspHeroSub}>
-              A thinker. The second of three brothers. A first taste of leadership at ten.
+              A pragmatic thinker. The second of three brothers. A first taste of leadership at ten.
               An excellent scholar. A Junior Program Officer. An elder. A mentor.
               A life shaped, chapter by chapter.
             </p>

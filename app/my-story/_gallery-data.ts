@@ -7,6 +7,15 @@ export interface GalleryPhoto {
 }
 
 export const galleryPhotos: GalleryPhoto[] = [
+  { src: "/gallery/ci-conference-scott-page.webp", width: 1080, height: 810, alt: "Samuel with Scott Page at the Collective Intelligence Conference in the US", caption: "With Scott Page \u00b7 CI Conference, US 2024" },
+  { src: "/gallery/um6p-vision-2030.webp", width: 1600, height: 1066, alt: "Samuel presenting a UM6P Vision 2030 programme", caption: "UM6P" },
+  { src: "/gallery/u17-world-cup.webp", width: 1600, height: 1200, alt: "Samuel at the U-17 World Cup stadium at sunset", caption: "At the U-17 World Cup" },
+  { src: "/gallery/facilitation.webp", width: 1200, height: 1600, alt: "Samuel facilitating a session with a remote audience on screen", caption: "Facilitation" },
+  { src: "/gallery/ghasam.webp", width: 1600, height: 1067, alt: "Samuel speaking at a GHASAM gathering", caption: "GHASAM" },
+  { src: "/gallery/ci-conference-talk.webp", width: 1280, height: 853, alt: "Samuel presenting at the Collective Intelligence Conference", caption: "CI Conference \u00b7 US 2024" },
+  { src: "/gallery/um6p-talk.webp", width: 1600, height: 1066, alt: "Samuel speaking at UM6P", caption: "UM6P" },
+  { src: "/gallery/um6p-laptop.webp", width: 1600, height: 1066, alt: "Samuel deep in thought at his laptop at UM6P", caption: "UM6P" },
+  { src: "/gallery/um6p-session.webp", width: 1600, height: 1066, alt: "Samuel at a session at UM6P", caption: "UM6P" },
   { src: "/gallery/01.webp", width: 1133, height: 1600, alt: "Samuel speaking on stage in a red suit" },
   { src: "/gallery/02.webp", width: 855, height: 1280, alt: "Samuel at the School of Collective Intelligence, UM6P", caption: "School of Collective Intelligence · UM6P" },
   { src: "/gallery/03.webp", width: 1600, height: 1251, alt: "Samuel working on his laptop" },
