@@ -78,7 +78,7 @@ export default function ContactPageClient() {
             {/* -- INFO -- */}
             <div className={styles.info}>
               <p className={styles.lead}>
-                If you&apos;re interested in booking Samuel for a facilitation, workshop, team
+                If you&apos;re interested in inviting Samuel for a facilitation, workshop, team
                 development programme, or podcast/interview, please complete the form, and
                 someone from our team will be in touch soon.
               </p>
