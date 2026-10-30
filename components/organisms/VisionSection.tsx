@@ -10,8 +10,8 @@ export function VisionSection() {
 
         <ScrollReveal className="vision-inner">
           <p className="vision-statement">
-            I equip people through teaching, mentorship, and formation to<br />
-            <strong>grow grounded in reality and science,</strong><br />
+            I equip people through teaching, mentorship, and character formation to<br />
+            <strong>grow more grounded in reality and science,</strong><br />
             sharpen their thinking, and<br />
             <strong>become leaders</strong><br />
             of clarity and purpose.
