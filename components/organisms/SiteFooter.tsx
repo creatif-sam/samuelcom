@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 const socialLinks = [
@@ -166,7 +167,13 @@ export function SiteFooter() {
       {/* ── FOOTER LINKS ── */}
       <div className="sf-main">
         <div className="sf-brand">
-          <div className="sf-brand-logo">Samuel Kobina Gyasi</div>
+          <Image
+            src="/logo-full.png"
+            alt="Samuel Kobina Gyasi"
+            width={468}
+            height={480}
+            className="sf-brand-logo-img"
+          />
           <p className="sf-brand-tagline">Refined by Purpose. Working to Transform.</p>
         </div>
 

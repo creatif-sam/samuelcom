@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
@@ -37,7 +38,14 @@ export function Navbar() {
 
         {/* Left: logo */}
         <Link href="/" className="nav-logo" onClick={close}>
-          <span className="nav-logo-circle">SG</span>
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={256}
+            height={241}
+            priority
+            className="nav-logo-mark"
+          />
           <span className="nav-logo-text">Samuel.</span>
         </Link>
 

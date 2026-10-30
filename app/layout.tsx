@@ -70,10 +70,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png" },
     ],
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    shortcut: "/icon.png",
+    apple: "/apple-icon.png",
   },
   robots: {
     index: true,

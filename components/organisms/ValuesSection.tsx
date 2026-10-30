@@ -24,7 +24,7 @@ const values = [
     word: "Excellence",
     number: "03",
     body:
-      "Mediocrity is never an option. Excellence is not a ceiling to reach but a standard to embody — in thought, in craft, in character, in service.",
+      "Mediocrity is never an option for me. Excellence is not a ceiling to reach but a standard I believe we should embody — in thought, in craft, in character, and in service.",
     glyph: "◯",
   },
 ];
