@@ -10,6 +10,7 @@ import styles from "./contact.module.css";
 const INQUIRIES = [
   "Facilitation",
   "Workshop",
+  "Conference",
   "Team development programme",
   "Podcast / interview",
   "Question, comment or suggestion",
@@ -68,7 +69,7 @@ export default function ContactPageClient() {
               Let&apos;s Work <em>Together</em>
             </h1>
             <p className={styles.heroSub}>
-              Facilitation · Workshops · Team development · Podcasts &amp; interviews
+              Facilitation · Workshops · Conferences · Team development · Podcasts &amp; interviews
             </p>
           </div>
         </section>

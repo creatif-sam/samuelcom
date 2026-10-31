@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const navLinks = [
@@ -16,6 +17,11 @@ const navLinks = [
 export function Navbar() {
   const [open, setOpen]         = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  // Section links (/#...) are never "current"; blog posts keep Blog highlighted
+  const isActive = (href: string) =>
+    !href.includes("#") && (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`) || (href === "/blog" && pathname.includes("/blog")));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -53,7 +59,7 @@ export function Navbar() {
         <ul className="nav-links nav-desktop">
           {navLinks.map((l) => (
             <li key={l.href}>
-              <Link href={l.href}>{l.label}</Link>
+              <Link href={l.href} aria-current={isActive(l.href) ? "page" : undefined}>{l.label}</Link>
             </li>
           ))}
         </ul>
@@ -100,7 +106,7 @@ export function Navbar() {
           <ul className="nd-links">
             {navLinks.map((l, i) => (
               <li key={l.href} style={{ "--i": i } as React.CSSProperties}>
-                <Link href={l.href} onClick={close}>{l.label}</Link>
+                <Link href={l.href} onClick={close} aria-current={isActive(l.href) ? "page" : undefined}>{l.label}</Link>
               </li>
             ))}
           </ul>

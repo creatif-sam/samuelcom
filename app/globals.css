@@ -142,18 +142,31 @@ body {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 32px;
+  gap: 10px;
 }
 
 .nav-links a {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
   font-family: var(--font-body);
   font-size: 13px;
-  color: rgba(10,10,10,0.65);
+  color: rgba(11, 18, 48, 0.68);
   text-decoration: none;
   position: relative;
-  transition: color 0.2s;
+  transition: color 0.2s, background 0.2s;
 }
-.nav-links a:hover { color: #0a0a0a; }
+.nav-links a:hover {
+  color: #3547d1;
+  background: rgba(84, 108, 250, 0.12);
+}
+.nav-links a.active,
+.nav-links a[aria-current="page"] {
+  color: #3547d1;
+  font-weight: 500;
+  background: rgba(84, 108, 250, 0.08);
+}
+.nav-links a:focus-visible { outline: 2px solid #546cfa; outline-offset: 2px; }
 
 /* Right side: CTA + hamburger */
 .nav-right {
@@ -253,6 +266,7 @@ body {
   transition: color 0.3s, padding-left 0.3s;
 }
 .nd-links a:hover { color: var(--gold); padding-left: 8px; }
+.nd-links a[aria-current="page"] { color: var(--accent-text); }
 
 .nd-divider { width: 40px; height: 1px; background: rgba(245,243,239,0.15); margin: 4px 0 24px; }
 
@@ -4011,6 +4025,60 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+.blgp-search {
+  position: relative;
+  flex: 1 1 240px;
+  max-width: 340px;
+  margin-left: auto;
+}
+.blgp-search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #667085;
+  pointer-events: none;
+}
+.blgp-search-input {
+  width: 100%;
+  padding: 10px 38px 10px 40px;
+  border: 1.5px solid #d0d5dd;
+  border-radius: 100px;
+  background: #fff;
+  color: #101828;
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.blgp-search-input::placeholder { color: #98a2b3; }
+.blgp-search-input::-webkit-search-cancel-button { display: none; }
+.blgp-search-input:focus {
+  border-color: #3547d1;
+  box-shadow: 0 0 0 4px rgba(84, 108, 250, 0.14);
+}
+.blgp-search:focus-within .blgp-search-icon { color: #3547d1; }
+.blgp-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: #f2f4f7;
+  color: #475467;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.blgp-search-clear:hover { background: #3547d1; color: #fff; }
+@media (max-width: 640px) {
+  .blgp-search { flex-basis: 100%; max-width: none; margin-left: 0; }
 }
 .blgp-filter {
   padding: 8px 16px;
