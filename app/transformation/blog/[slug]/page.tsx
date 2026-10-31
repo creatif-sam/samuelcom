@@ -27,7 +27,7 @@ export async function generateMetadata(
   const { slug } = await params;
   const data = await getPost(slug);
   return {
-    title: data ? `${data.title} — Transformation` : "Transformation — Blog",
+    title: data ? `${data.title} | Transformation` : "Transformation Blog",
     description: data?.excerpt ?? "Transformation stories by Samuel Kobina Gyasi.",
   };
 }

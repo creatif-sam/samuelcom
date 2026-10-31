@@ -8,7 +8,7 @@ const values = [
     word: "Execution",
     number: "01",
     body:
-      "Ideas without action are just dreams. I convert vision into measurable outcomes — moving with precision from conception to completion, leaving nothing half-done.",
+      "Ideas without action are just dreams. I convert vision into measurable outcomes, moving with precision from conception to completion, leaving nothing half-done.",
     glyph: "◎",
   },
   {
@@ -16,7 +16,7 @@ const values = [
     word: "Efficiency",
     number: "02",
     body:
-      "Every resource — time, energy, attention — is sacred. I operate with intentional economy, eliminating waste and maximising impact across every domain I touch.",
+      "Every resource, whether time, energy, or attention, is sacred. I operate with intentional economy, eliminating waste and maximising impact across every domain I touch.",
     glyph: "◆",
   },
   {
@@ -24,7 +24,7 @@ const values = [
     word: "Excellence",
     number: "03",
     body:
-      "Mediocrity is never an option for me. Excellence is not a ceiling to reach but a standard I believe we should embody — in thought, in craft, in character, and in service.",
+      "Mediocrity is never an option for me. Excellence is not a ceiling to reach but a standard I believe we should embody: in thought, in craft, in character, and in service.",
     glyph: "◯",
   },
 ];

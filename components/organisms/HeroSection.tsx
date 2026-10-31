@@ -18,7 +18,7 @@ export function HeroSection() {
 
           <p className="phx-desc">
             I&apos;m a dedicated leader with experience in technology, collective
-            intelligence, and transformative change — collaborating with organisations
+            intelligence, and transformative change, collaborating with organisations
             and communities across Africa.
           </p>
 
@@ -26,7 +26,7 @@ export function HeroSection() {
             <Link href="/my-story" className="phx-btn-primary">
               My Story <span className="phx-btn-icon">▶</span>
             </Link>
-            <Link href="/#connect" className="phx-btn-ghost">
+            <Link href="/contact" className="phx-btn-ghost">
               Let&apos;s Connect
             </Link>
           </div>
@@ -82,7 +82,7 @@ export function HeroSection() {
               style={{ objectFit: "contain", objectPosition: "center bottom" }}
             />
             <span className="phx-badge phx-badge--1">Group Intelligence Facilitator</span>
-            <span className="phx-badge phx-badge--2">Junior Program Officer</span>
+            <span className="phx-badge phx-badge--2">Program Officer (JPO)</span>
           </div>
         </div>
 

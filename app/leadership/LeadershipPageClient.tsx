@@ -205,7 +205,7 @@ body.on-ldp .cursor-ring {
   font-size: 15px; line-height: 1.65; color: var(--gray-light); font-weight: 300;
   display: flex; gap: 12px; align-items: flex-start;
 }
-.ldp .exp-bullets li::before { content: '—'; color: var(--gold); opacity: .6; flex-shrink: 0; margin-top: 1px; }
+.ldp .exp-bullets li::before { content: '•'; color: var(--gold); opacity: .6; flex-shrink: 0; margin-top: 1px; }
 
 /* ── EDUCATION ── */
 .ldp #education { background: var(--bg); }
@@ -541,7 +541,7 @@ export default function LeadershipPageClient() {
             <div className="timeline-item">
               <div className="timeline-dot" />
               <div className="timeline-card">
-                <div className="tl-period">Sep 2022 — Jun 2023</div>
+                <div className="tl-period">Sep 2022 – Jun 2023</div>
                 <div className="tl-role">Assistant Class Delegate</div>
                 <div className="tl-org">Ecole Supérieure de Management de Commerce et d&apos;Informatique</div>
                 <div className="tl-location">Fez, Morocco</div>
@@ -551,7 +551,7 @@ export default function LeadershipPageClient() {
             <div className="timeline-item">
               <div className="timeline-dot" />
               <div className="timeline-card">
-                <div className="tl-period">Feb 2016 — Feb 2017</div>
+                <div className="tl-period">Feb 2016 – Feb 2017</div>
                 <div className="tl-role">Dining Hall Prefect</div>
                 <div className="tl-org">Saint John&apos;s School</div>
                 <div className="tl-location">Sekondi-Takoradi, Ghana</div>
@@ -561,7 +561,7 @@ export default function LeadershipPageClient() {
             <div className="timeline-item">
               <div className="timeline-dot" />
               <div className="timeline-card">
-                <div className="tl-period">2009 — 2011</div>
+                <div className="tl-period">2009 – 2011</div>
                 <div className="tl-role">Class Prefect</div>
                 <div className="tl-org">Ghana-China Friendship School</div>
                 <div className="tl-location">Mpohor, Western Province, Ghana</div>
@@ -582,7 +582,7 @@ export default function LeadershipPageClient() {
 
           <div className="exp-grid">
             <div className="exp-card">
-              <div className="exp-period">September 2025 —<br />Present</div>
+              <div className="exp-period">September 2025 –<br />Present</div>
               <div className="exp-content">
                 <div className="exp-role">Junior Program Officer</div>
                 <div className="exp-org">School of Collective Intelligence, University Mohammed VI Polytechnic · Rabat, Morocco</div>
@@ -595,20 +595,20 @@ export default function LeadershipPageClient() {
             </div>
 
             <div className="exp-card">
-              <div className="exp-period">Jul 2024 —<br />Sep 2024</div>
+              <div className="exp-period">Jul 2024 –<br />Sep 2024</div>
               <div className="exp-content">
                 <div className="exp-role">Data Science Intern</div>
                 <div className="exp-org">University Mohammed VI Polytechnic, College of Computing · Benguerrir, Morocco</div>
                 <ul className="exp-bullets">
                   <li>Analyzed and processed Germany&apos;s weather and irradiation dataset using Python and Jupyter Notebook to derive actionable insights.</li>
-                  <li>Applied advanced time series forecasting models — SARIMAX, ARIMAX, and SARIMA — to predict weather patterns and irradiation levels.</li>
+                  <li>Applied advanced time series forecasting models (SARIMAX, ARIMAX, and SARIMA) to predict weather patterns and irradiation levels.</li>
                   <li>Collaborated with a co-intern to interpret results, refine methodologies, and support ongoing research initiatives.</li>
                 </ul>
               </div>
             </div>
 
             <div className="exp-card">
-              <div className="exp-period">Sep 2022 —<br />Dec 2022</div>
+              <div className="exp-period">Sep 2022 –<br />Dec 2022</div>
               <div className="exp-content">
                 <div className="exp-role">Web Full Stack Developer Intern</div>
                 <div className="exp-org">Octobot Consulting · Fez, Morocco</div>
@@ -616,7 +616,7 @@ export default function LeadershipPageClient() {
             </div>
 
             <div className="exp-card">
-              <div className="exp-period">Sep 2021 —<br />Oct 2021</div>
+              <div className="exp-period">Sep 2021 –<br />Oct 2021</div>
               <div className="exp-content">
                 <div className="exp-role">I.T Technical Support</div>
                 <div className="exp-org">School of Engineering, SUP Management · Fez, Morocco</div>
@@ -624,7 +624,7 @@ export default function LeadershipPageClient() {
             </div>
 
             <div className="exp-card">
-              <div className="exp-period">Jul 2017 —<br />Sep 2018</div>
+              <div className="exp-period">Jul 2017 –<br />Sep 2018</div>
               <div className="exp-content">
                 <div className="exp-role">Managing Director</div>
                 <div className="exp-org">Cash Washing Bay · Mpohor, Western Province, Ghana</div>
@@ -647,13 +647,13 @@ export default function LeadershipPageClient() {
             <div className="edu-card">
               <div className="edu-degree">MSc. Collective Intelligence</div>
               <div className="edu-school">University Mohammed VI Polytechnic</div>
-              <div className="edu-period">Oct 2023 — September 2025 · Graduated</div>
+              <div className="edu-period">Oct 2023 – September 2025 · Graduated</div>
               <div className="edu-location">Rabat, Morocco</div>
             </div>
             <div className="edu-card">
               <div className="edu-degree">Professional Bachelor in Computer Science</div>
               <div className="edu-school">Ecole Supérieure de Management de Commerce et d&apos;Informatique</div>
-              <div className="edu-period">Sep 2020 — Jul 2023</div>
+              <div className="edu-period">Sep 2020 – Jul 2023</div>
               <div className="edu-location">Fez, Morocco</div>
             </div>
           </div>
@@ -674,21 +674,21 @@ export default function LeadershipPageClient() {
               <div className="award-icon">◆</div>
               <div>
                 <div className="award-name">IBN ROCHD Scholarship for Science &amp; Innovation</div>
-                <div className="award-desc">Full Scholarship for Master&apos;s Level Study — Full Tuition, Accommodation &amp; Feeding</div>
+                <div className="award-desc">Full Scholarship for Master&apos;s Level Study: Full Tuition, Accommodation &amp; Feeding</div>
               </div>
             </div>
             <div className="award-card">
               <div className="award-icon">◆</div>
               <div>
                 <div className="award-name">Government of Ghana Scholarship Award</div>
-                <div className="award-desc">Full Scholarship for Undergraduate Studies — Full Tuition &amp; Monthly Stipends</div>
+                <div className="award-desc">Full Scholarship for Undergraduate Studies: Full Tuition &amp; Monthly Stipends</div>
               </div>
             </div>
             <div className="award-card">
               <div className="award-icon">◆</div>
               <div>
                 <div className="award-name">Golden Star Gold Mines Scholarship</div>
-                <div className="award-desc">Scholarship for Secondary School Studies — Full Tuition</div>
+                <div className="award-desc">Scholarship for Secondary School Studies: Full Tuition</div>
               </div>
             </div>
             <div className="award-card">

@@ -55,7 +55,7 @@ export default function BlogPageClient({ posts }: { posts: Post[] }) {
           </div>
         ) : (
           <div className="blgp-empty">
-            {posts.length === 0 ? "No posts yet — check back soon." : "No more posts in this category yet."}
+            {posts.length === 0 ? "No posts yet. Check back soon." : "No more posts in this category yet."}
           </div>
         )}
 

@@ -10,7 +10,7 @@ const cards = [
     alt: "Junior Program Officer",
     title: "Junior Program Officer",
     org: "School of Collective Intelligence · UM6P, Morocco",
-    body: "Designing and coordinating programs that unlock collective intelligence — guiding students through career development, seminars, and cross-institutional initiatives.",
+    body: "Designing and coordinating programs that unlock collective intelligence, guiding students through career development, seminars, and cross-institutional initiatives.",
   },
   {
     num: "02",
@@ -26,7 +26,7 @@ const cards = [
     alt: "Personal Ministry",
     title: "Mentor",
     org: "Personal Ministry",
-    body: "Walking alongside individuals navigating questions of purpose, leadership, and identity. A personal investment in others — giving back what was once given to me.",
+    body: "Walking alongside individuals navigating questions of purpose, leadership, and identity. A personal investment in others, giving back what was once given to me.",
   },
 ];
 

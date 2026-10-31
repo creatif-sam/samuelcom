@@ -60,7 +60,7 @@ export function SiteFooter() {
         <div className="sf-nl-wrapper">
           <div className="sf-nl-content">
             <h3 className="sf-nl-heading">Subscribe to my newsletter</h3>
-            <p className="sf-nl-sub">Get the latest insights on leadership, intelligence, and transformation.</p>
+            <p className="sf-nl-sub">Get my latest insights and thinking on leadership, intelligence, and transformation.</p>
             <form className="sf-nl-form" onSubmit={handleSubscribe} noValidate>
               <input
                 type="text"
@@ -154,7 +154,7 @@ export function SiteFooter() {
           <div className="sf-links-col">
             <h5 className="sf-links-label">Social</h5>
             <ul className="sf-links-list">
-              {socialLinks.map((link) => (
+              {socialLinks.filter((link) => link.label !== "WhatsApp").map((link) => (
                 <li key={link.label}>
                   <a href={link.href} target="_blank" rel="noopener noreferrer" className="sf-link">
                     {link.label}

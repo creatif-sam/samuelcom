@@ -77,7 +77,7 @@ export function Gallery() {
             Moments Along <em>the Way</em>
           </h2>
           <p className={styles.mspGallerySub}>
-            Gatherings, classrooms, and pulpits — snapshots of a life given to knowledge
+            Gatherings, classrooms, and pulpits: snapshots of a life given to knowledge
             sharing, service, and community.
           </p>
         </header>

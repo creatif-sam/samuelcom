@@ -27,7 +27,7 @@ export async function generateMetadata(
   const { slug } = await params;
   const data = await getPost(slug);
   return {
-    title: data ? `${data.title} — Leadership` : "Leadership — Blog",
+    title: data ? `${data.title} | Leadership` : "Leadership Blog",
     description: data?.excerpt ?? "Leadership reflections by Samuel Kobina Gyasi.",
   };
 }

@@ -120,7 +120,7 @@ export default function PrivacyPolicyPage() {
 
       <h2 id="cookies" className="pp-section-title">Cookie Policy</h2>
       <p className="pp-body">
-        This website uses cookies — small text files stored on your device — to enhance your
+        This website uses cookies (small text files stored on your device) to enhance your
         experience.
       </p>
 

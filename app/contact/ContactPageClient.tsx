@@ -84,7 +84,7 @@ export default function ContactPageClient() {
               </p>
               <p>
                 If you have other questions, comments, or suggestions, we welcome them as well.
-                Every message is read with care and love — and Samuel is always open to new
+                Every message is read with care and love, and Samuel is always open to new
                 challenges.
               </p>
               <p>
@@ -193,7 +193,7 @@ export default function ContactPageClient() {
                       rows={6}
                       value={form.message}
                       onChange={set("message")}
-                      placeholder="Tell us about your event, team, or question — dates, audience size, and goals help."
+                      placeholder="Tell us about your event, team, or question. Dates, audience size, and goals help."
                     />
                   </label>
 

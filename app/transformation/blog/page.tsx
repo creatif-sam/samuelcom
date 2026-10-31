@@ -8,9 +8,9 @@ import { Navbar } from "@/components/organisms/Navbar";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Transformation — Blog",
+  title: "Transformation Blog",
   description:
-    "Stories and reflections on personal and societal transformation — breaking cycles, becoming, and building what lasts. By Samuel Kobina Gyasi.",
+    "Stories and reflections on personal and societal transformation: breaking cycles, becoming, and building what lasts. By Samuel Kobina Gyasi.",
 };
 
 interface Post {

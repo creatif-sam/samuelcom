@@ -225,7 +225,7 @@ export default function MyStoryPageClient() {
           </h2>
           <p className={styles.mspCtaSub}>
             Whether you&apos;re seeking collaboration, mentorship, or meaningful
-            conversation — Samuel is open to connection.
+            conversation, Samuel is open to connection.
           </p>
           <div className={styles.mspCtaBtns}>
             <Link href="/#connect" className={styles.mspCtaBtnPrimary}>

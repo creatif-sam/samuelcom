@@ -8,7 +8,7 @@ import { Navbar } from "@/components/organisms/Navbar";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Intellectuality — Blog",
+  title: "Intellectuality Blog",
   description:
     "Essays on collective intelligence, scholarship, and the bridge between ancient wisdom and modern thought. By Samuel Kobina Gyasi.",
 };
@@ -67,7 +67,7 @@ export default async function IntellectualityBlogPage() {
         {/* Posts */}
         <section className="ib-content">
           {posts.length === 0 ? (
-            <p className="ib-empty">Essays coming soon — stay curious.</p>
+            <p className="ib-empty">Essays coming soon. Stay curious.</p>
           ) : (
             <>
               {/* Featured post */}

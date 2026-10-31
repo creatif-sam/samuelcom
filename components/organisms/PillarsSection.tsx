@@ -8,19 +8,19 @@ const pillars = [
     name: "Leadership",
     href: "/leadership",
     description:
-      "I lead as a servant first — inspiring, empowering, and calling forth greatness in others. Since my first leadership role at ten, I have come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
+      "I lead as a servant first: inspiring, empowering, and calling forth greatness in others. Since my first leadership role at ten, I have come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
   },
   {
     icon: "◆",
     name: "Intellectuality",
     description:
-      "I pursue deep thinking, rigorous study, and intellectual honesty — at the intersection of data science, AI, and human systems. Technology, for me, is not an end — it is a lever for human flourishing and systemic change.",
+      "I pursue deep thinking, rigorous study, and intellectual honesty at the intersection of data science, AI, and human systems. Technology, for me, is not an end; it is a lever for human flourishing and systemic change.",
   },
   {
     icon: "◎",
     name: "Transformation",
     description:
-      "Change that lasts begins from within and works outward. I am a catalyst — carrying a vision for individuals, communities, and nations to be renewed, elevated, and equipped to meet the challenges of a rapidly shifting world.",
+      "Change that lasts begins from within and works outward. I am a catalyst, carrying a vision for individuals, communities, and nations to be renewed, elevated, and equipped to meet the challenges of a rapidly shifting world.",
   },
 ];
 
@@ -33,7 +33,7 @@ export function PillarsSection() {
         <ScrollReveal className="pillars-header">
           <h2 className="pillars-title">Three Principal Interests</h2>
           <p className="pillars-sub">
-            Each interest is a commitment — to excellence, to rigorous thinking, and to the
+            Each interest is a commitment: to excellence, to rigorous thinking, and to the
             flourishing of humanity.
           </p>
         </ScrollReveal>

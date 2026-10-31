@@ -26,7 +26,7 @@ export function ConnectSection() {
             </h2>
             <p className="connect-body">
               Whether you&apos;re seeking leadership advice, collaboration,
-              intellectual dialogue, or transformational partnership — I am open to
+              intellectual dialogue, or transformational partnership, I am open to
               meaningful connection.
             </p>
           </ScrollReveal>

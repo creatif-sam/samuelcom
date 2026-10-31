@@ -8,7 +8,7 @@ import { Navbar } from "@/components/organisms/Navbar";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Leadership — Blog",
+  title: "Leadership Blog",
   description:
     "Insights on servant leadership, authority, and building institutions that outlast their founders. By Samuel Kobina Gyasi.",
 };
