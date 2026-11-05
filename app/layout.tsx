@@ -125,7 +125,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${ubuntu.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${ubuntu.variable} ${playfair.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

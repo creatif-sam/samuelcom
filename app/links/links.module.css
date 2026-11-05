@@ -1,0 +1,162 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 56px 16px 40px;
+  color: #f5f3ef;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(84, 108, 250, 0.45), transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(124, 143, 252, 0.22), transparent 45%),
+    radial-gradient(circle at 100% 70%, rgba(53, 71, 209, 0.28), transparent 45%),
+    #0b1230;
+}
+.inner { width: 100%; max-width: 560px; }
+
+/* -- PROFILE -- */
+.profile { text-align: center; margin-bottom: 24px; }
+.avatar {
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 18px;
+  padding: 4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c8ffc, #3547d1);
+  box-shadow: 0 12px 34px rgba(53, 71, 209, 0.45);
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #0b1230;
+}
+.name {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.tagline {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(245, 243, 239, 0.82);
+  margin-bottom: 6px;
+}
+.meta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #7c8ffc;
+}
+
+/* -- SOCIAL ICON ROW -- */
+.socials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #f5f3ef;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+.social:hover { background: #ffffff; color: #3547d1; transform: translateY(-3px); }
+
+/* -- LINK BUTTONS -- */
+.buttons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 60px;
+  padding: 14px 20px;
+  border-radius: 16px;
+  color: #f5f3ef;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 0.25s, background 0.25s, color 0.25s, box-shadow 0.25s;
+}
+.button:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  color: #0b1230;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+.button:focus-visible,
+.social:focus-visible { outline: 3px solid #7c8ffc; outline-offset: 3px; }
+.buttonIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(124, 143, 252, 0.18);
+  color: #c9d2ff;
+  transition: background 0.25s, color 0.25s;
+}
+.button:hover .buttonIcon { background: rgba(53, 71, 209, 0.12); color: #3547d1; }
+.buttonLabel {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+}
+.buttonArrow { flex-shrink: 0; opacity: 0.55; transition: opacity 0.25s, transform 0.25s; }
+.button:hover .buttonArrow { opacity: 1; transform: translate(2px, -2px); }
+
+/* Featured call to action */
+.featured {
+  background: linear-gradient(135deg, #546cfa 0%, #3547d1 100%);
+  border-color: transparent;
+  box-shadow: 0 12px 30px rgba(53, 71, 209, 0.45);
+}
+.featured .buttonLabel { font-weight: 700; }
+.featured .buttonIcon { background: rgba(255, 255, 255, 0.18); color: #ffffff; }
+.featured .buttonArrow { opacity: 0.85; }
+.featured:hover { background: #ffffff; color: #2a3aa8; }
+
+/* -- FOOTER -- */
+.footer { margin-top: 40px; text-align: center; }
+.footerLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(245, 243, 239, 0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footerLink img { width: 22px; height: 21px; }
+.footerLink:hover { color: #ffffff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .button, .social, .buttonArrow { transition: none; }
+  .button:hover, .social:hover { transform: none; }
+}
