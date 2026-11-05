@@ -32,9 +32,9 @@ export default async function LinksOpengraphImage() {
         <div
           style={{
             display: "flex",
-            width: 230,
-            height: 230,
-            padding: 8,
+            width: 180,
+            height: 180,
+            padding: 7,
             borderRadius: 999,
             backgroundImage: "linear-gradient(135deg, #7c8ffc, #3547d1)",
             boxShadow: "0 20px 60px rgba(53,71,209,0.6)",
@@ -43,25 +43,42 @@ export default async function LinksOpengraphImage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={photoSrc}
-            width={214}
-            height={214}
-            style={{ borderRadius: 999, border: "6px solid #0b1230" }}
+            width={166}
+            height={166}
+            style={{ borderRadius: 999, border: "5px solid #0b1230" }}
             alt=""
           />
         </div>
-        <div style={{ fontSize: 56, fontWeight: 700, marginTop: 30, lineHeight: 1 }}>
+        <div style={{ fontSize: 54, fontWeight: 700, marginTop: 24, lineHeight: 1 }}>
           Samuel Kobina Gyasi
         </div>
-        <div style={{ fontSize: 36, marginTop: 18, color: "#c9d2ff" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: 14,
+            fontSize: 30,
+            lineHeight: 1.3,
+            color: "#e4e8ff",
+          }}
+        >
+          <div>Group Intelligence Facilitator</div>
+          <div>Program Officer (JPO)</div>
+        </div>
+        <div style={{ fontSize: 24, marginTop: 10, letterSpacing: 1, color: "#9aa8ff" }}>
+          Ghana · Morocco · English &amp; Français
+        </div>
+        <div style={{ fontSize: 26, marginTop: 14, color: "#c9d2ff" }}>
           All my links in one place
         </div>
         <div
           style={{
             display: "flex",
-            marginTop: 26,
-            padding: "12px 30px",
+            marginTop: 18,
+            padding: "10px 28px",
             borderRadius: 999,
-            fontSize: 30,
+            fontSize: 26,
             color: "#ffffff",
             backgroundImage: "linear-gradient(135deg, #546cfa, #3547d1)",
             boxShadow: "0 14px 34px rgba(53,71,209,0.55)",
