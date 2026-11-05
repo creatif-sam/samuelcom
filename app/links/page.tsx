@@ -8,11 +8,11 @@ import styles from "./links.module.css";
 export const metadata: Metadata = {
   title: "Links",
   description:
-    "All of Samuel Kobina Gyasi's links in one place: invite him to speak or facilitate, read his story and blog, and follow him on social media.",
+    "Get to know more about me: my values, my story, and my thoughts. Invite me to speak, facilitate, solve problems with you, and more.",
   alternates: { canonical: "/links" },
   openGraph: {
     title: "Samuel Kobina Gyasi | Links",
-    description: "Invite Samuel to speak or facilitate, read his story and blog, and follow him on social media.",
+    description: "Get to know more about me: my values, my story, and my thoughts. Invite me to speak, facilitate, solve problems with you, and more.",
     url: "/links",
   },
 };
