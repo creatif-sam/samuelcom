@@ -87,7 +87,7 @@ export function SiteFooter() {
                   className="sf-nl-btn"
                   disabled={status === "loading" || status === "success"}
                 >
-                  {status === "loading" ? "..." : status === "success" ? "✓ Done" : "Get started"}
+                  {status === "loading" ? "..." : status === "success" ? "Subscribed" : "Get started"}
                 </button>
               </div>
               {message && (
@@ -109,7 +109,7 @@ export function SiteFooter() {
           <div className="sf-feature-content">
             <h4 className="sf-feature-heading">Experience transformational growth</h4>
             <p className="sf-feature-text">Join young African leaders in unlocking collective intelligence with your teams.</p>
-            <Link href="/contact" className="sf-feature-btn">Get in touch →</Link>
+            <Link href="/contact" className="sf-feature-btn">Get in touch</Link>
           </div>
           <div className="sf-feature-graphic">
             <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">

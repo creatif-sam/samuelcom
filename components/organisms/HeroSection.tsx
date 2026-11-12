@@ -17,14 +17,13 @@ export function HeroSection() {
           </h1>
 
           <p className="phx-desc">
-            I&apos;m a dedicated leader with experience in technology, collective
-            intelligence, and transformative change, collaborating with organisations
-            and communities across Africa.
+            I lead programs in collective intelligence and technology, and I work with
+            organisations and communities across Africa.
           </p>
 
           <div className="phx-btns">
             <Link href="/my-story" className="phx-btn-primary">
-              My Story <span className="phx-btn-icon">▶</span>
+              My Story
             </Link>
             <Link href="/contact" className="phx-btn-ghost">
               Let&apos;s Connect

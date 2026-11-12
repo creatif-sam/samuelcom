@@ -4,23 +4,20 @@ import { ScrollReveal } from "@/components/molecules/ScrollReveal";
 
 const pillars = [
   {
-    icon: "▲",
     name: "Leadership",
     href: "/leadership",
     description:
-      "I lead as a servant first: inspiring, empowering, and calling forth greatness in others. Since my first leadership role at ten, I have come to understand that true authority is born of character, not position, and that the highest form of leadership is one that multiplies leaders.",
+      "I lead as a servant first, and my aim is to help others become leaders themselves. Since my first leadership role at ten, I have learned that people follow character more than position.",
   },
   {
-    icon: "◆",
     name: "Intellectuality",
     description:
-      "I pursue deep thinking, rigorous study, and intellectual honesty at the intersection of data science, AI, and human systems. Technology, for me, is not an end; it is a lever for human flourishing and systemic change.",
+      "I study how data science, AI, and groups of people can work together, and I value evidence and honest reasoning. I use technology as a tool to help people and institutions make better decisions.",
   },
   {
-    icon: "◎",
     name: "Transformation",
     description:
-      "Change that lasts begins from within and works outward. I am a catalyst, carrying a vision for individuals, communities, and nations to be renewed, elevated, and equipped to meet the challenges of a rapidly shifting world.",
+      "Lasting change starts with the person and spreads to the community. I help individuals and communities build the skills and habits they need in a fast-changing world.",
   },
 ];
 
@@ -33,8 +30,7 @@ export function PillarsSection() {
         <ScrollReveal className="pillars-header">
           <h2 className="pillars-title">Three Principal Interests</h2>
           <p className="pillars-sub">
-            Each interest is a commitment: to excellence, to rigorous thinking, and to the
-            flourishing of humanity.
+            These are the areas I study, teach, and work in.
           </p>
         </ScrollReveal>
 
@@ -42,7 +38,6 @@ export function PillarsSection() {
           {pillars.map((pillar) => (
             <ScrollReveal key={pillar.name}>
               <PillarCard
-                icon={pillar.icon}
                 name={pillar.name}
                 description={pillar.description}
                 href={"href" in pillar ? pillar.href : undefined}

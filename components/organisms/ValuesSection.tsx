@@ -8,16 +8,14 @@ const values = [
     word: "Execution",
     number: "01",
     body:
-      "Ideas without action are just dreams. I convert vision into measurable outcomes, moving with precision from conception to completion, leaving nothing half-done.",
-    glyph: "◎",
+      "An idea only matters once it is carried out. I turn plans into measurable results and finish what I start.",
   },
   {
     letter: "E",
     word: "Efficiency",
     number: "02",
     body:
-      "Every resource, whether time, energy, or attention, is sacred. I operate with intentional economy, eliminating waste and maximising impact across every domain I touch.",
-    glyph: "◆",
+      "I treat time, energy, and attention as limited. I plan carefully, cut waste, and put effort where it has the most effect.",
   },
   {
     letter: "E",
@@ -25,7 +23,6 @@ const values = [
     number: "03",
     body:
       "Mediocrity is never an option for me. Excellence is not a ceiling to reach but a standard I believe we should embody: in thought, in craft, in character, and in service.",
-    glyph: "◯",
   },
 ];
 
@@ -54,7 +51,7 @@ export function ValuesSection() {
         <header className="values-header">
           <p className="values-eyebrow">Core Values</p>
           <h2 className="values-title">My Three <em>E&apos;s</em></h2>
-          <p className="values-sub">Principles that guide every endeavour, every decision, every day.</p>
+          <p className="values-sub">The principles behind how I work.</p>
         </header>
 
         <div className="values-grid">
@@ -66,7 +63,6 @@ export function ValuesSection() {
             >
               <span className="vs-card-bg-letter">{v.letter}</span>
               <p className="vs-card-num">{v.number}</p>
-              <span className="vs-card-glyph">{v.glyph}</span>
               <h3 className="vs-card-word">{v.word}</h3>
               <p className="vs-card-body">{v.body}</p>
             </div>

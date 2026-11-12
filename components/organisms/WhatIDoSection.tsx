@@ -10,7 +10,7 @@ const cards = [
     alt: "Junior Program Officer",
     title: "Junior Program Officer",
     org: "School of Collective Intelligence · UM6P, Morocco",
-    body: "Designing and coordinating programs that unlock collective intelligence, guiding students through career development, seminars, and cross-institutional initiatives.",
+    body: "I design and coordinate programs on collective intelligence, and I guide students through career development, seminars, and projects with other institutions.",
   },
   {
     num: "02",
@@ -18,7 +18,7 @@ const cards = [
     alt: "Group Intelligence Facilitator",
     title: "Group Intelligence Facilitator",
     org: "Practitioner",
-    body: "Applying the science of collective intelligence to help groups surface diverse perspectives, resolve complexity, and make decisions that reflect shared wisdom.",
+    body: "I use the science of collective intelligence to help groups hear every view, work through complex problems, and reach decisions they all stand behind.",
   },
   {
     num: "03",
@@ -26,7 +26,7 @@ const cards = [
     alt: "Personal Ministry",
     title: "Mentor",
     org: "Personal Ministry",
-    body: "Walking alongside individuals navigating questions of purpose, leadership, and identity. A personal investment in others, giving back what was once given to me.",
+    body: "I walk alongside people working through questions of purpose, leadership, and identity. It is my way of giving back what others once gave me.",
   },
 ];
 
@@ -62,7 +62,7 @@ export function WhatIDoSection() {
             <em>Three Roles</em>
           </h2>
           <p className="widc-sub">
-            Program leadership. Facilitation. Mentorship. Each role is an expression of the same conviction:
+            I lead programs, facilitate groups, and mentor people. All three come from one belief, that
             a life worth living is one shared in service to others.
           </p>
         </div>

@@ -33,7 +33,6 @@ export function CookieBanner() {
     <div className="ck-banner" role="dialog" aria-live="polite" aria-label="Cookie consent">
       <div className="ck-inner">
         <div className="ck-text">
-          <span className="ck-emblem">✦</span>
           <p>
             This site uses cookies to improve your experience and to analyse
             visitor behaviour. Read our{" "}

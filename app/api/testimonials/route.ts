@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please choose a rating." }, { status: 400 });
   }
   if (body.consent !== true) {
-    return NextResponse.json({ error: "Please confirm we may publish your testimony." }, { status: 400 });
+    return NextResponse.json({ error: "Please confirm that Samuel may publish your testimony." }, { status: 400 });
   }
 
   try {

@@ -1557,7 +1557,7 @@ body {
 }
 
 .pillar-card {
-  background: var(--gray-dark);
+  background: #121b45;
   padding: 60px 50px;
   position: relative;
   overflow: hidden;
@@ -1576,7 +1576,8 @@ body {
 }
 
 .pillar-card:hover::before { transform: scaleX(1); }
-.pillar-card:hover { background: #1a1814; }
+.pillar-card:hover { background: #18235a; }
+.light .pillar-card { background: var(--gray-dark); }
 
 .pillar-icon { font-size: 48px; margin-bottom: 30px; display: block; }
 
@@ -4440,24 +4441,6 @@ body {
   50%      { transform: translateY(-8px) rotate(4deg); }
 }
 
-/* Twinkling sparkles */
-.st-spark {
-  position: absolute;
-  color: #9aa8ff;
-  pointer-events: none;
-  opacity: 0;
-}
-.st-spark--1 { top: -12px; left: 76px; font-size: 18px; }
-.st-spark--2 { bottom: -10px; right: 210px; font-size: 14px; }
-.st-spark--3 { top: 14px; right: 28px; font-size: 16px; }
-.st-visible .st-spark { animation: st-twinkle 2.4s ease-in-out infinite; }
-.st-visible .st-spark--2 { animation-delay: 0.8s; }
-.st-visible .st-spark--3 { animation-delay: 1.6s; }
-@keyframes st-twinkle {
-  0%, 100% { opacity: 0; transform: scale(0.6) rotate(0deg); }
-  50%      { opacity: 1; transform: scale(1.15) rotate(20deg); }
-}
-
 .st-copy { flex: 1; min-width: 0; }
 .st-heading {
   font-family: var(--font-heading);
@@ -4687,7 +4670,6 @@ body {
 
 @media (max-width: 760px) {
   .st-banner { flex-direction: column; text-align: center; gap: 18px; padding: 28px 22px; }
-  .st-spark--2 { right: 40px; }
   .st-cta { width: 100%; }
 }
 @media (max-width: 560px) {
@@ -4697,9 +4679,8 @@ body {
 }
 @media (prefers-reduced-motion: reduce) {
   .st-banner { opacity: 1; transform: none; transition: none; }
-  .st-visible .st-bubble, .st-visible .st-spark, .st-visible .st-cta,
+  .st-visible .st-bubble, .st-visible .st-cta,
   .st-overlay, .st-modal, .st-check-circle, .st-check-tick { animation: none; }
-  .st-spark { opacity: 0.7; }
   .st-check-circle, .st-check-tick { stroke-dashoffset: 0; }
   .st-star, .st-cta, .st-close, .st-submit, .st-submit::before { transition: none; }
 }

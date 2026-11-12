@@ -57,7 +57,7 @@ export async function LatestBlogsSection() {
         <div className="lbs-header">
           <h2 className="lbs-title">Latest from the Blog</h2>
           <Link href="/blog" className="lbs-view-all">
-            View All Posts →
+            View All Posts
           </Link>
         </div>
 
@@ -91,7 +91,7 @@ export async function LatestBlogsSection() {
                 <p className="lbs-card-excerpt">{post.excerpt}</p>
                 <div className="lbs-card-footer">
                   <span className="lbs-read-time">{post.read_time_minutes} min read</span>
-                  <span className="lbs-read-more">Read More →</span>
+                  <span className="lbs-read-more">Read More</span>
                 </div>
               </Link>
             );

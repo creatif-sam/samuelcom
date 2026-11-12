@@ -65,7 +65,7 @@ export function ShareTestimonySection() {
     e.preventDefault();
     if (!consent) {
       setStatus("error");
-      setError("Please confirm we may publish your testimony.");
+      setError("Please confirm that Samuel may publish your testimony.");
       return;
     }
     setStatus("sending");
@@ -90,24 +90,19 @@ export function ShareTestimonySection() {
   return (
     <section id="share-testimony" ref={sectionRef} className="st-section" aria-labelledby="st-heading">
       <div className="st-banner">
-        {/* Twinkling sparkles */}
-        <span className="st-spark st-spark--1" aria-hidden="true">✦</span>
-        <span className="st-spark st-spark--2" aria-hidden="true">✦</span>
-        <span className="st-spark st-spark--3" aria-hidden="true">✧</span>
-
         <div className="st-bubble" aria-hidden="true">
           <span>&ldquo;</span>
         </div>
 
         <div className="st-copy">
           <h2 id="st-heading" className="st-heading">
-            Have you worked with Samuel before, <em>or mentored him?</em>
+            Have you worked with Samuel, mentored him, <em>or heard him speak?</em>
           </h2>
-          <p className="st-sub">Share a few words about your experience. It means the world. 💙</p>
+          <p className="st-sub">Share a few words about your experience. Samuel reads every testimony before it goes live.</p>
         </div>
 
         <button ref={openerRef} type="button" className="st-cta" onClick={openForm}>
-          Share your testimony <span aria-hidden="true">✨</span>
+          Share your testimony
         </button>
       </div>
 
@@ -131,7 +126,7 @@ export function ShareTestimonySection() {
                   <path className="st-check-tick" d="M15 27 l7 7 l15 -16" />
                 </svg>
                 <h3 id="st-modal-title">Thank you, {form.name.split(" ")[0] || "friend"}!</h3>
-                <p>Your testimony has been received and will appear on the site once it has been reviewed.</p>
+                <p>We have your testimony. It will appear on the site after Samuel reviews it.</p>
               </div>
             ) : (
               <form onSubmit={submit} noValidate>
@@ -179,7 +174,7 @@ export function ShareTestimonySection() {
                     maxLength={MAX_QUOTE}
                     value={form.quote}
                     onChange={set("quote")}
-                    placeholder="What was it like working with Samuel?"
+                    placeholder="What was your experience with Samuel?"
                   />
                   <small className="st-count">{form.quote.length}/{MAX_QUOTE}</small>
                 </label>
@@ -202,7 +197,7 @@ export function ShareTestimonySection() {
 
                 <label className="st-consent">
                   <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
-                  <span>I agree that my testimony may be published on this site with my name.</span>
+                  <span>I agree that Samuel may publish my testimony on this site with my name.</span>
                 </label>
 
                 {status === "error" && <p className="st-error" role="alert">{error}</p>}
