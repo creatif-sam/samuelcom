@@ -269,7 +269,7 @@ export default function AdminPage() {
         />
       )}
       {showPost && (
-        <PostModal post={editPost} onClose={() => setShowPost(false)} onSave={async () => { setShowPost(false); await loadPosts(); }} db={db} />
+        <PostModal post={editPost} posts={posts} onClose={() => setShowPost(false)} onSave={async () => { setShowPost(false); await loadPosts(); }} db={db} />
       )}
       {showTpl && (
         <TplModal tpl={editTpl} onClose={() => setShowTpl(false)} onSave={async () => { setShowTpl(false); await loadMail(); }} />
