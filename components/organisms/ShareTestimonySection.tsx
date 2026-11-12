@@ -96,7 +96,7 @@ export function ShareTestimonySection() {
 
         <div className="st-copy">
           <h2 id="st-heading" className="st-heading">
-            Have you worked with Samuel, mentored him, <em>or heard him speak?</em>
+            Have you worked with Samuel, mentored him, <em>or heard him speak at an event?</em>
           </h2>
           <p className="st-sub">Share a few words about your experience. Samuel reads every testimony before it goes live.</p>
         </div>

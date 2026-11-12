@@ -62,9 +62,8 @@ export default function MyStoryPageClient() {
             </h1>
             <div className={styles.mspHeroRule} />
             <p className={styles.mspHeroSub}>
-              A pragmatic thinker. The second of three brothers. A first taste of leadership at ten.
-              An excellent scholar. A Junior Program Officer. An elder. A mentor.
-              A life shaped, chapter by chapter.
+              A pragmatic thinker and the second of three brothers, Samuel first led at ten.
+              Today he is a scholar, a Junior Program Officer, an elder, and a mentor.
             </p>
             {/* Changed from <div> to <a> for correct semantics */}
             <a
@@ -224,12 +223,12 @@ export default function MyStoryPageClient() {
             <em>Something Together?</em>
           </h2>
           <p className={styles.mspCtaSub}>
-            Whether you&apos;re seeking collaboration, mentorship, or meaningful
-            conversation, Samuel is open to connection.
+            If you would like to work together, find a mentor, or talk through an idea,
+            send Samuel a message.
           </p>
           <div className={styles.mspCtaBtns}>
-            <Link href="/#connect" className={styles.mspCtaBtnPrimary}>
-              Get in Touch →
+            <Link href="/contact" className={styles.mspCtaBtnPrimary}>
+              Get in Touch
             </Link>
             <Link href="/blog" className={styles.mspCtaBtnGhost}>
               Read the Blog

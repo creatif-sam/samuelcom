@@ -97,11 +97,6 @@ export function SiteFooter() {
               )}
             </form>
           </div>
-          <div className="sf-nl-avatars">
-            <div className="sf-avatar"></div>
-            <div className="sf-avatar"></div>
-            <div className="sf-avatar"></div>
-          </div>
         </div>
 
         {/* ── FEATURE CARD ── */}
