@@ -16,9 +16,9 @@ export const CAT_META: Record<string, { label: string; color: string; bg: string
 };
 
 export const CAT_GRADIENTS: Record<string, string> = {
-  leadership:      "linear-gradient(135deg,#78350f 0%,#d97706 40%,#fbbf24 100%)",
+  leadership:      "linear-gradient(135deg,#0b1230 0%,#3547d1 55%,#7c8ffc 100%)",
   intellectuality: "linear-gradient(135deg,#1e3a8a 0%,#2563eb 40%,#60a5fa 100%)",
-  transformation:  "linear-gradient(135deg,#881337 0%,#e11d48 40%,#f472b6 100%)",
+  transformation:  "linear-gradient(135deg,#121b45 0%,#2a3aa8 50%,#546cfa 100%)",
 };
 
 export const PAGE_SIZE = 6;

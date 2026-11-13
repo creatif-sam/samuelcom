@@ -43,7 +43,7 @@ export default async function LeadershipBlogPage() {
       <style>{blogCss}</style>
       <Navbar />
 
-      <main className="lb-page">
+      <main id="main" className="lb-page">
         {/* Breadcrumb */}
         <nav className="lb-breadcrumb" aria-label="Breadcrumb">
           <Link href="/">Home</Link>
@@ -94,7 +94,7 @@ export default async function LeadershipBlogPage() {
                       <span>·</span>
                       <span>{featured.read_time_minutes} min read</span>
                     </div>
-                    <div className="lb-read-link">Read essay →</div>
+                    <div className="lb-read-link">Read essay</div>
                   </div>
                 </Link>
               )}
@@ -142,12 +142,12 @@ export default async function LeadershipBlogPage() {
 const blogCss = `
 /* ── Leadership blog listing ──────────────────────────────── */
 .lb-page {
-  --bg: #0b1230;
-  --white: #f0ede8;
-  --gold: #546cfa;
-  --gray: #6b6560;
-  --line: rgba(240,237,232,.07);
-  --card: #141210;
+  --bg: var(--surface);
+  --white: var(--ink);
+  --gold: var(--accent-text);
+  --gray: var(--ink-faint);
+  --line: var(--rule);
+  --card: var(--surface-raised);
   background: var(--bg);
   color: var(--white);
   min-height: 100vh;
@@ -165,7 +165,7 @@ const blogCss = `
 }
 .lb-breadcrumb a { color: var(--gray); text-decoration: none; transition: color .25s; }
 .lb-breadcrumb a:hover { color: var(--gold); }
-.lb-breadcrumb span:last-child { color: rgba(240,237,232,.6); }
+.lb-breadcrumb span:last-child { color: var(--ink-muted); }
 
 /* Header */
 .lb-header { padding: 60px 56px 44px; }
@@ -201,7 +201,7 @@ const blogCss = `
   transition: border-color .3s, box-shadow .3s;
 }
 .lb-featured:hover { border-color: rgba(84,108,250,.3); box-shadow: 0 8px 40px rgba(0,0,0,.4); }
-.lb-featured-img { position: relative; width: 100%; height: 100%; overflow: hidden; background: rgba(255,255,255,.04); }
+.lb-featured-img { position: relative; width: 100%; height: 100%; overflow: hidden; background: rgba(124,143,252,.08); }
 .lb-featured-img img { transition: transform .5s; }
 .lb-featured:hover .lb-featured-img img { transform: scale(1.04); }
 .lb-featured-body { padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
@@ -223,7 +223,7 @@ const blogCss = `
   transition: border-color .3s, transform .3s;
 }
 .lb-card:hover { border-color: rgba(84,108,250,.25); transform: translateY(-3px); }
-.lb-card-img { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: rgba(255,255,255,.04); }
+.lb-card-img { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: rgba(124,143,252,.08); }
 .lb-card-img img { transition: transform .5s; }
 .lb-card:hover .lb-card-img img { transform: scale(1.05); }
 .lb-card-body { padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }

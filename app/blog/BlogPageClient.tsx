@@ -44,6 +44,7 @@ export default function BlogPageClient({ posts }: { posts: Post[] }) {
     <div className="blgp">
       <Navbar />
 
+      <main id="main">
       {featured && <FeaturedPost post={featured} />}
 
       <div className="blgp-main">
@@ -107,6 +108,8 @@ export default function BlogPageClient({ posts }: { posts: Post[] }) {
           </div>
         )}
       </div>
+
+      </main>
 
       <SiteFooter />
     </div>

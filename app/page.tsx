@@ -18,6 +18,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <main id="main">
       <HeroSection />
       <ValuesSection />
       <PillarsSection />
@@ -27,6 +28,7 @@ export default function Home() {
       <ShareTestimonySection />
       <Suspense fallback={null}><LatestBlogsSection /></Suspense>
       <ConnectSection />
+      </main>
       <Suspense fallback={null}><SiteFooter /></Suspense>
     </>
   );

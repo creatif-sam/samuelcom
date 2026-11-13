@@ -1,6 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 
+// 16 x 5 grid, top row to bottom row: s = solid (page colour), h = soft blue, a = brand blue, . = empty.
+// The squares thicken towards the bottom row, which is fully solid so the photo's cut edge is always covered.
+const MOSAIC = [
+  "....a.......h...",
+  "..h.s..a.s....s.",
+  ".ss.ssh.ssa.sshs",
+  "sssassssshsssass",
+  "ssssssssssssssss",
+];
+
 export function HeroSection() {
   return (
     <section id="hero" className="phx-hero">
@@ -80,6 +90,12 @@ export function HeroSection() {
               className="phx-photo-img"
               style={{ objectFit: "contain", objectPosition: "center bottom" }}
             />
+            {/* Square mosaic that hides the cut-out's straight lower edge */}
+            <div className="phx-photo-mosaic" aria-hidden="true">
+              {MOSAIC.join("").split("").map((c, i) => (
+                <span key={i} className={c === "s" ? "is-solid" : c === "a" ? "is-accent" : c === "h" ? "is-soft" : ""} />
+              ))}
+            </div>
             <span className="phx-badge phx-badge--1">Group Intelligence Facilitator</span>
             <span className="phx-badge phx-badge--2">Program Officer (JPO)</span>
           </div>

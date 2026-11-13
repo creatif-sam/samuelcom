@@ -1,10 +1,11 @@
 ﻿"use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { socialLinks } from "@/components/molecules/socialLinks";
 
 const navLinks = [
   { href: "/",           label: "Home"      },
@@ -33,6 +34,24 @@ export function Navbar() {
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  // Move focus into the drawer when it opens, back to the burger when it closes; Esc closes it
+  const burgerRef = useRef<HTMLButtonElement>(null);
+  const drawerCloseRef = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
+  useEffect(() => {
+    if (open) {
+      drawerCloseRef.current?.focus();
+      const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+      window.addEventListener("keydown", onKey);
+      wasOpen.current = true;
+      return () => window.removeEventListener("keydown", onKey);
+    }
+    if (wasOpen.current) {
+      burgerRef.current?.focus();
+      wasOpen.current = false;
+    }
   }, [open]);
 
   const close = () => setOpen(false);
@@ -78,6 +97,7 @@ export function Navbar() {
             Contact Me
           </a>
           <button
+            ref={burgerRef}
             className={`nav-burger ${open ? "nav-burger--open" : ""}`}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
@@ -89,9 +109,17 @@ export function Navbar() {
       </nav>
 
       {/* ── MOBILE DRAWER ── */}
-      <div className={`nav-drawer ${open ? "nav-drawer--open" : ""}`} aria-hidden={!open}>
+      {/* inert while closed, so its links cannot be reached with Tab or by screen readers */}
+      <div
+        className={`nav-drawer ${open ? "nav-drawer--open" : ""}`}
+        inert={!open}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+      >
         {/* Close button inside drawer */}
         <button
+          ref={drawerCloseRef}
           className="nav-drawer-close"
           aria-label="Close menu"
           onClick={close}
@@ -116,10 +144,11 @@ export function Navbar() {
             <a href="mailto:impact@samuelgyasi.com" className="nd-email">impact@samuelgyasi.com</a>
             <ThemeSwitcher />
             <div className="nd-social-row">
-              <a href="https://www.linkedin.com/in/samuel-k-gyasi/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="nd-social-link">in</a>
-              <a href="https://www.instagram.com/samuel_gsi?igsh=MWswMzRycjk1dXZ0cw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="nd-social-link">ig</a>
-              <a href="https://web.facebook.com/samuel.kobinagyasi/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="nd-social-link">fb</a>
-              <a href="https://www.tiktok.com/@samuel_gsi?_r=1&_t=ZS-94iqxzPNKqm" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="nd-social-link">tt</a>
+              {socialLinks.filter((s) => s.label !== "WhatsApp").map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} title={s.label} className="nd-social-link">
+                  {s.icon}
+                </a>
+              ))}
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import styles from "./my-story.module.css";
 import { galleryPhotos } from "./_gallery-data";
 
@@ -138,7 +139,7 @@ export function Gallery() {
             onClick={close}
             aria-label="Close"
           >
-            ✕
+            <X size={18} aria-hidden="true" />
           </button>
           <button
             type="button"
@@ -146,7 +147,7 @@ export function Gallery() {
             onClick={(e) => { e.stopPropagation(); step(-1); }}
             aria-label="Previous photo"
           >
-            ‹
+            <ChevronLeft size={26} aria-hidden="true" />
           </button>
           <figure className={styles.mspLightboxFigure} onClick={(e) => e.stopPropagation()}>
             <Image
@@ -172,7 +173,7 @@ export function Gallery() {
             onClick={(e) => { e.stopPropagation(); step(1); }}
             aria-label="Next photo"
           >
-            ›
+            <ChevronRight size={26} aria-hidden="true" />
           </button>
         </div>
       )}

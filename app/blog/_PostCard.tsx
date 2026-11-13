@@ -26,10 +26,7 @@ export function PostCard({ post }: { post: Post }) {
       </div>
 
       <div className="blgp-card-body">
-        <span
-          className="blgp-card-cat"
-          style={{ background: meta?.bg ?? "#f3f4f6", color: meta?.color ?? "#374151" }}
-        >
+        <span className="blgp-card-cat">
           {meta?.label ?? post.category}
         </span>
 
@@ -37,7 +34,7 @@ export function PostCard({ post }: { post: Post }) {
         {post.excerpt && <p className="blgp-card-excerpt">{post.excerpt}</p>}
 
         <div className="blgp-card-author">
-          <span className="blgp-avatar">SG</span>
+          <Image src="/logo-mark.png" alt="" width={256} height={241} className="blgp-avatar-img" />
           <div className="blgp-card-author-info">
             <span className="blgp-card-author-name">Samuel K. Gyasi</span>
             <span className="blgp-card-author-date">{fmtCard(post.created_at)} · {post.read_time_minutes} min read</span>

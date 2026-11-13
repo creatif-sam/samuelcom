@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { Post, CAT_META, CAT_GRADIENTS } from "./_blog-types";
 
 export function FeaturedPost({ post }: { post: Post }) {
@@ -26,10 +27,7 @@ export function FeaturedPost({ post }: { post: Post }) {
         <div className="blgp-feat-overlay" />
 
         <span className="blgp-feat-tag">Featured</span>
-        <span
-          className="blgp-feat-category"
-          style={{ background: meta?.bg ?? "#f3f4f6", color: meta?.color ?? "#374151" }}
-        >
+        <span className="blgp-feat-category">
           {meta?.label ?? post.category}
         </span>
 
@@ -38,7 +36,7 @@ export function FeaturedPost({ post }: { post: Post }) {
           {post.excerpt && <p className="blgp-feat-desc">{post.excerpt}</p>}
         </div>
 
-        <div className="blgp-feat-arrow">→</div>
+        <div className="blgp-feat-arrow" aria-hidden="true"><ArrowUpRight size={22} /></div>
       </Link>
     </div>
   );

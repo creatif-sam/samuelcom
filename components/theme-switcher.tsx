@@ -9,7 +9,8 @@ const ThemeSwitcher = () => {
 
   useEffect(() => { setMounted(true); }, []);
 
-  if (!mounted) return null;
+  // Reserve the button's space before the theme is known, so the nav does not shift on load
+  if (!mounted) return <span className="theme-toggle-btn theme-toggle-btn--placeholder" aria-hidden="true" />;
 
   const isDark = theme === "dark";
 

@@ -60,7 +60,7 @@ export default function ContactPageClient() {
   return (
     <>
       <Navbar />
-      <main className={styles.page}>
+      <main id="main" className={styles.page}>
         {/* -- HERO -- */}
         <section className={styles.hero}>
           <div className={styles.heroInner}>
@@ -201,7 +201,7 @@ export default function ContactPageClient() {
                   {status === "error" && <p className={styles.error} role="alert">{error}</p>}
 
                   <button type="submit" className={styles.submit} disabled={status === "sending"}>
-                    {status === "sending" ? "Sending…" : "Send message →"}
+                    {status === "sending" ? "Sending…" : "Send message"}
                   </button>
                 </form>
               )}

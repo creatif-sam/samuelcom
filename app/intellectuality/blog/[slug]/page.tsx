@@ -66,7 +66,7 @@ export default async function IntellectualityPostPage(
       <style>{postCss}</style>
       <Navbar />
 
-      <main className="ib-post">
+      <main id="main" className="ib-post">
         {/* Breadcrumb */}
         <nav className="ib-bc">
           <Link href="/">Home</Link>
@@ -168,11 +168,11 @@ export default async function IntellectualityPostPage(
 const postCss = `
 /* ── Intellectuality single post ───────────────────────────── */
 .ib-post {
-  --ink: #0a0908;
-  --paper: #f4f1eb;
-  --accent: #c0392b;
-  --mid: #7a746a;
-  --line: rgba(10,9,8,.1);
+  
+  --paper: var(--surface);
+  --accent: var(--accent-text);
+  --mid: var(--ink-faint);
+  --line: var(--rule);
   background: var(--paper);
   color: var(--ink);
   min-height: 100vh;

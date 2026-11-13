@@ -1,7 +1,7 @@
 /* -- PAGE -- */
 .page {
-  background: #f5f3ef;
-  color: #0b1230;
+  background: var(--surface);
+  color: var(--ink);
   min-height: 100vh;
 }
 
@@ -67,21 +67,21 @@
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.8;
-  color: rgba(11, 18, 48, 0.72);
+  color: var(--ink-muted);
   margin-bottom: 18px;
 }
 .info .lead {
   font-family: var(--font-heading);
   font-size: 22px;
   line-height: 1.55;
-  color: #0b1230;
+  color: var(--ink);
 }
 .card {
   margin-top: 28px;
   padding: 26px 28px;
   border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid rgba(53, 71, 209, 0.10);
+  background: var(--surface-raised);
+  border: 1px solid var(--rule);
   box-shadow: 0 10px 30px rgba(11, 18, 48, 0.06);
 }
 .cardTitle {
@@ -90,28 +90,29 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #3547d1;
+  color: var(--accent-text);
   margin-bottom: 12px;
 }
 .info .cardText { font-size: 15px; margin-bottom: 16px; }
-.cardText strong { color: #0b1230; }
+.cardText strong { color: var(--ink); }
 .langs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 4px 0;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 .langs li {
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(84, 108, 250, 0.10);
-  color: #3547d1;
+  padding: 0;
+  
+  
+  color: var(--ink);
   font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
 }
+.langs li + li::before { content: "\00B7"; margin: 0 10px; color: var(--ink-faint); font-weight: 400; }
 .email {
   display: inline-flex;
   align-items: center;
@@ -119,12 +120,12 @@
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 500;
-  color: #0b1230;
+  color: var(--ink);
   text-decoration: none;
   margin-bottom: 18px;
   transition: color 0.2s;
 }
-.email:hover { color: #3547d1; }
+.email:hover { color: var(--accent-text); }
 .socials { display: flex; flex-wrap: wrap; gap: 10px; }
 .social {
   display: flex;
@@ -133,8 +134,8 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: rgba(84, 108, 250, 0.08);
-  color: #3547d1;
+  background: rgba(124, 143, 252, 0.12);
+  color: var(--accent-text);
   transition: background 0.25s, color 0.25s, transform 0.25s;
 }
 .social:hover { background: #3547d1; color: #ffffff; transform: translateY(-3px); }
@@ -146,15 +147,15 @@
   top: 110px;
   padding: 40px;
   border-radius: 24px;
-  background: #ffffff;
-  border: 1px solid rgba(53, 71, 209, 0.10);
+  background: var(--surface-raised);
+  border: 1px solid var(--rule);
   box-shadow: 0 24px 60px rgba(11, 18, 48, 0.10);
 }
 .formTitle {
   font-family: var(--font-heading);
   font-size: 28px;
   font-weight: 700;
-  color: #0b1230;
+  color: var(--ink);
   margin-bottom: 26px;
 }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -166,7 +167,7 @@
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.04em;
-  color: rgba(11, 18, 48, 0.7);
+  color: var(--ink-muted);
 }
 .field input,
 .field select,
@@ -174,14 +175,16 @@
   width: 100%;
   padding: 13px 15px;
   border-radius: 12px;
-  border: 1px solid rgba(11, 18, 48, 0.14);
-  background: #fbfaf8;
-  color: #0b1230;
+  border: 1px solid var(--rule-strong);
+  background: var(--surface);
+  color: var(--ink);
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
+.field input::placeholder,
+.field textarea::placeholder { color: var(--placeholder); }
 .field textarea { resize: vertical; min-height: 150px; line-height: 1.6; }
 .field select {
   appearance: none;
@@ -195,7 +198,7 @@
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  background: #ffffff;
+  background: var(--surface-raised);
   border-color: #546cfa;
   box-shadow: 0 0 0 4px rgba(84, 108, 250, 0.14);
 }
@@ -210,7 +213,7 @@
   margin: -4px 0 16px;
   font-family: var(--font-body);
   font-size: 14px;
-  color: #c0392b;
+  color: var(--danger);
 }
 .submit {
   width: 100%;
@@ -248,14 +251,14 @@
 .sent h2 {
   font-family: var(--font-heading);
   font-size: 28px;
-  color: #0b1230;
+  color: var(--ink);
   margin-bottom: 12px;
 }
 .sent p {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.7;
-  color: rgba(11, 18, 48, 0.72);
+  color: var(--ink-muted);
 }
 
 /* -- RESPONSIVE -- */

@@ -2,6 +2,7 @@
 
 import { useEffect, Suspense } from "react";
 import Link from "next/link";
+import { Award } from "lucide-react";
 import { SiteFooter } from "@/components/organisms/SiteFooter";
 import { Navbar } from "@/components/organisms/Navbar";
 import { ConnectSection } from "@/components/organisms/ConnectSection";
@@ -10,21 +11,21 @@ import { TestimonialsClient } from "@/components/organisms/TestimonialsClient";
 const css = `
 /* ── DESIGN TOKENS (scoped) ── */
 .ldp {
-  --bg: #0b1230;
-  --white: #f5f3ef;
-  --gold: #546cfa;
-  --gray: #6b6560;
-  --gray-light: #a09890;
-  --line: rgba(245,243,239,0.07);
-  --card-bg: #121b45;
+  --bg: var(--surface);
+  --white: var(--ink);
+  --gold: var(--accent-text);
+  --gray: var(--ink-faint);
+  --gray-light: var(--ink-muted);
+  --line: var(--rule);
+  --card-bg: var(--surface-raised);
   min-height: 100vh;
   position: relative;
 }
 
 /* ── BODY OVERRIDES ── */
 body.on-ldp {
-  background: #0b1230;
-  color: #f5f3ef;
+  background: var(--surface);
+  color: var(--ink);
   font-family: var(--font-body);
 }
 body.on-ldp .cursor {
@@ -179,7 +180,7 @@ body.on-ldp .cursor-ring {
 }
 
 /* ── EXPERIENCE ── */
-.ldp #experience { background: #0b1230; }
+.ldp #experience { background: var(--bg); }
 .ldp .exp-grid { display: flex; flex-direction: column; gap: 3px; }
 .ldp .exp-card {
   background: var(--card-bg); border: 1px solid var(--line);
@@ -232,7 +233,7 @@ body.on-ldp .cursor-ring {
 .ldp .edu-location { font-size: 14px; color: var(--gray); margin-top: 4px; font-style: italic; }
 
 /* ── AWARDS ── */
-.ldp #awards { background: #0b1230; }
+.ldp #awards { background: var(--bg); }
 .ldp .awards-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 3px; }
 .ldp .award-card {
   background: var(--card-bg); border: 1px solid var(--line);
@@ -270,7 +271,7 @@ body.on-ldp .cursor-ring {
 .ldp .skill-list li::before { content: ''; width: 16px; height: 1px; background: var(--gold); opacity: .5; flex-shrink: 0; }
 
 /* ── CERTIFICATIONS ── */
-.ldp #certs { background: #0b1230; }
+.ldp #certs { background: var(--bg); }
 .ldp .certs-list { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
 .ldp .cert-item {
   background: var(--card-bg); border: 1px solid var(--line);
@@ -320,7 +321,7 @@ body.on-ldp .cursor-ring {
 
 /* ── BLOG STRIP ── */
 .ldp .blog-strip {
-  background: #0b1230;
+  background: var(--bg);
   padding: 80px 56px;
   text-align: center;
   display: flex; flex-direction: column; align-items: center; gap: 20px;
@@ -437,7 +438,7 @@ export default function LeadershipPageClient() {
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       <Navbar />
-      <div className="ldp">
+      <div id="main" role="main" className="ldp">
         <div className="ldp-noise" />
 
 
@@ -671,28 +672,28 @@ export default function LeadershipPageClient() {
 
           <div className="awards-grid">
             <div className="award-card">
-              <div className="award-icon">◆</div>
+              <div className="award-icon" aria-hidden="true"><Award size={28} strokeWidth={1.5} /></div>
               <div>
                 <div className="award-name">IBN ROCHD Scholarship for Science &amp; Innovation</div>
                 <div className="award-desc">Full Scholarship for Master&apos;s Level Study: Full Tuition, Accommodation &amp; Feeding</div>
               </div>
             </div>
             <div className="award-card">
-              <div className="award-icon">◆</div>
+              <div className="award-icon" aria-hidden="true"><Award size={28} strokeWidth={1.5} /></div>
               <div>
                 <div className="award-name">Government of Ghana Scholarship Award</div>
                 <div className="award-desc">Full Scholarship for Undergraduate Studies: Full Tuition &amp; Monthly Stipends</div>
               </div>
             </div>
             <div className="award-card">
-              <div className="award-icon">◆</div>
+              <div className="award-icon" aria-hidden="true"><Award size={28} strokeWidth={1.5} /></div>
               <div>
                 <div className="award-name">Golden Star Gold Mines Scholarship</div>
                 <div className="award-desc">Scholarship for Secondary School Studies: Full Tuition</div>
               </div>
             </div>
             <div className="award-card">
-              <div className="award-icon">◆</div>
+              <div className="award-icon" aria-hidden="true"><Award size={28} strokeWidth={1.5} /></div>
               <div>
                 <div className="award-name">UM6P Excellence Scholarship Recipient</div>
                 <div className="award-desc">Awarded on the basis of academic excellence and entrance examination results</div>
@@ -851,8 +852,8 @@ export default function LeadershipPageClient() {
           <div className="bs-title">Writings on <span>Leadership</span></div>
           <p className="bs-sub">Essays on servant leadership, decision-making at scale, and the hard-won lessons of 17+ years of leadership.</p>
           <div className="bs-btns">
-            <Link href="/leadership/blog" className="bs-btn">Read the Blog →</Link>
-            <Link href="/blog" className="bs-btn ghost">All Writings →</Link>
+            <Link href="/leadership/blog" className="bs-btn">Read the Blog</Link>
+            <Link href="/blog" className="bs-btn ghost">All Writings</Link>
           </div>
         </div>
 

@@ -17,7 +17,7 @@ export default function NotFound() {
   return (
     <>
       <Navbar />
-      <main className="nf-page">
+      <main id="main" className="nf-page">
         <div className="nf-container">
           <div className="nf-left">
             <div className="phx-tag">Error 404</div>
@@ -31,7 +31,7 @@ export default function NotFound() {
 
             <div className="phx-btns">
               <Link href="/" className="phx-btn-primary">
-                Back to Home <span className="phx-btn-icon">▶</span>
+                Back to Home
               </Link>
               <Link href="/blog" className="phx-btn-ghost">
                 Read the Blog

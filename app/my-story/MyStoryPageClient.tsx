@@ -43,7 +43,7 @@ export default function MyStoryPageClient() {
   return (
     <>
       <Navbar />
-      <div className={styles.msp}>
+      <div id="main" role="main" className={styles.msp}>
 
         {/* -- HERO -- */}
         <section className={styles.mspHero}>

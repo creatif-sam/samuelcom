@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="pp-page">
+    <div id="main" role="main" className="pp-page">
       <style>{`
         .pp-page {
           min-height: 100vh;

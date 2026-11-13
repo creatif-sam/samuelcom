@@ -66,7 +66,7 @@ export default async function TransformationPostPage(
       <style>{postCss}</style>
       <Navbar />
 
-      <main className="tb-post">
+      <main id="main" className="tb-post">
         <nav className="tb-bc">
           <Link href="/">Home</Link>
           <span>›</span>
@@ -159,11 +159,11 @@ export default async function TransformationPostPage(
 const postCss = `
 /* ── Transformation single post ──────────────────────────── */
 .tb-post {
-  --void: #07080a;
-  --white: #f2f0ec;
-  --ember: #e8692a;
-  --mist: #8a8880;
-  --line: rgba(242,240,236,.06);
+  --void: var(--surface);
+  --white: var(--ink);
+  --ember: var(--accent-text);
+  --mist: var(--ink-faint);
+  --line: var(--rule);
   background: var(--void);
   color: var(--white);
   min-height: 100vh;
@@ -180,7 +180,7 @@ const postCss = `
 }
 .tb-bc a { color: var(--mist); text-decoration: none; transition: color .2s; }
 .tb-bc a:hover { color: var(--ember); }
-.tb-bc span:last-child { color: rgba(242,240,236,.6); max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tb-bc span:last-child { color: var(--ink-muted); max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tb-cover { position: relative; width: 100%; height: 480px; max-height: 480px; overflow: hidden; }
 .tb-article { max-width: 760px; margin: 0 auto; padding: 56px 32px 80px; }
 .tb-art-head { margin-bottom: 40px; }

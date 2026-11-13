@@ -14,9 +14,9 @@ interface BlogPost {
 }
 
 const CAT_MAP: Record<string, { label: string; color: string }> = {
-  leadership: { label: "Leadership", color: "#d4a843" },
-  intellectuality: { label: "Intellectuality", color: "#5b9ef9" },
-  transformation: { label: "Transformation", color: "#e05757" },
+  leadership: { label: "Leadership", color: "var(--accent-text)" },
+  intellectuality: { label: "Intellectuality", color: "var(--accent-text)" },
+  transformation: { label: "Transformation", color: "var(--accent-text)" },
 };
 
 function formatDate(dateStr: string) {

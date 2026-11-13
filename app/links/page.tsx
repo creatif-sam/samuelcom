@@ -32,7 +32,7 @@ const buttons = [
 
 export default function LinksPage() {
   return (
-    <main className={styles.page}>
+    <main id="main" className={styles.page}>
       <div className={styles.inner}>
         <header className={styles.profile}>
           <div className={styles.avatar}>

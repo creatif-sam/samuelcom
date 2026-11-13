@@ -43,7 +43,7 @@ export default async function IntellectualityBlogPage() {
       <style>{blogCss}</style>
       <Navbar />
 
-      <main className="ib-page">
+      <main id="main" className="ib-page">
         {/* Breadcrumb */}
         <nav className="ib-breadcrumb" aria-label="Breadcrumb">
           <Link href="/">Home</Link>
@@ -94,7 +94,7 @@ export default async function IntellectualityBlogPage() {
                       <span>·</span>
                       <span>{featured.read_time_minutes} min read</span>
                     </div>
-                    <div className="ib-read-link">Read essay →</div>
+                    <div className="ib-read-link">Read essay</div>
                   </div>
                 </Link>
               )}
@@ -142,12 +142,12 @@ export default async function IntellectualityBlogPage() {
 const blogCss = `
 /* ── Intellectuality blog listing ──────────────────────────── */
 .ib-page {
-  --ink: #0a0908;
-  --paper: #f4f1eb;
-  --card-bg: #ffffff;
-  --accent: #c0392b;
-  --mid: #7a746a;
-  --line: rgba(10,9,8,.1);
+  
+  --paper: var(--surface);
+  --card-bg: var(--surface-raised);
+  --accent: var(--accent-text);
+  --mid: var(--ink-faint);
+  --line: var(--rule);
   background: var(--paper);
   color: var(--ink);
   min-height: 100vh;
@@ -210,7 +210,7 @@ const blogCss = `
   box-shadow: 0 2px 20px rgba(10,9,8,.06);
   transition: box-shadow .3s, transform .3s;
 }
-.ib-featured:hover { box-shadow: 0 8px 40px rgba(10,9,8,.12); transform: translateY(-2px); }
+.ib-featured:hover { box-shadow: 0 8px 40px var(--rule); transform: translateY(-2px); }
 .ib-featured-img { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--line); }
 .ib-featured-img img { transition: transform .5s; }
 .ib-featured:hover .ib-featured-img img { transform: scale(1.04); }
@@ -239,7 +239,7 @@ const blogCss = `
   box-shadow: 0 1px 12px rgba(10,9,8,.05);
   transition: box-shadow .3s, transform .3s;
 }
-.ib-card:hover { box-shadow: 0 6px 28px rgba(10,9,8,.1); transform: translateY(-3px); }
+.ib-card:hover { box-shadow: 0 6px 28px var(--rule); transform: translateY(-3px); }
 .ib-card-img { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--line); }
 .ib-card-img img { transition: transform .5s; }
 .ib-card:hover .ib-card-img img { transform: scale(1.05); }

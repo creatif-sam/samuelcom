@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { X } from "lucide-react";
 
 const MAX_QUOTE = 800;
 const RATING_WORDS = ["", "Good", "Very good", "Great", "Excellent", "Life-changing"];
@@ -116,7 +117,7 @@ export function ShareTestimonySection() {
             onClick={(e) => e.stopPropagation()}
           >
             <button type="button" className="st-close" onClick={() => setOpen(false)} aria-label="Close">
-              ✕
+              <X size={16} aria-hidden="true" />
             </button>
 
             {status === "sent" ? (

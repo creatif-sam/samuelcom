@@ -66,7 +66,7 @@ export default async function LeadershipPostPage(
       <style>{postCss}</style>
       <Navbar />
 
-      <main className="lb-post">
+      <main id="main" className="lb-post">
         <nav className="lb-bc">
           <Link href="/">Home</Link>
           <span>›</span>
@@ -159,11 +159,11 @@ export default async function LeadershipPostPage(
 const postCss = `
 /* ── Leadership single post ───────────────────────────────── */
 .lb-post {
-  --bg: #0b1230;
-  --white: #f0ede8;
-  --gold: #546cfa;
-  --gray: #6b6560;
-  --line: rgba(240,237,232,.07);
+  --bg: var(--surface);
+  --white: var(--ink);
+  --gold: var(--accent-text);
+  --gray: var(--ink-faint);
+  --line: var(--rule);
   background: var(--bg);
   color: var(--white);
   min-height: 100vh;
@@ -180,7 +180,7 @@ const postCss = `
 }
 .lb-bc a { color: var(--gray); text-decoration: none; transition: color .2s; }
 .lb-bc a:hover { color: var(--gold); }
-.lb-bc span:last-child { color: rgba(240,237,232,.6); max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lb-bc span:last-child { color: var(--ink-muted); max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .lb-cover { position: relative; width: 100%; height: 480px; max-height: 480px; overflow: hidden; }
 .lb-article { max-width: 760px; margin: 0 auto; padding: 56px 32px 80px; }
 .lb-art-head { margin-bottom: 40px; }

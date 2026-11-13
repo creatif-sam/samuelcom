@@ -43,7 +43,7 @@ export default async function TransformationBlogPage() {
       <style>{blogCss}</style>
       <Navbar />
 
-      <main className="tb-page">
+      <main id="main" className="tb-page">
         {/* Breadcrumb */}
         <nav className="tb-breadcrumb" aria-label="Breadcrumb">
           <Link href="/">Home</Link>
@@ -94,7 +94,7 @@ export default async function TransformationBlogPage() {
                       <span>·</span>
                       <span>{featured.read_time_minutes} min read</span>
                     </div>
-                    <div className="tb-read-link">Read story →</div>
+                    <div className="tb-read-link">Read story</div>
                   </div>
                 </Link>
               )}
@@ -142,12 +142,12 @@ export default async function TransformationBlogPage() {
 const blogCss = `
 /* ── Transformation blog listing ─────────────────────────── */
 .tb-page {
-  --void: #07080a;
-  --white: #f2f0ec;
-  --ember: #e8692a;
-  --mist: #8a8880;
-  --line: rgba(242,240,236,.06);
-  --card: #131619;
+  --void: var(--surface);
+  --white: var(--ink);
+  --ember: var(--accent-text);
+  --mist: var(--ink-faint);
+  --line: var(--rule);
+  --card: var(--surface-raised);
   background: var(--void);
   color: var(--white);
   min-height: 100vh;
@@ -165,7 +165,7 @@ const blogCss = `
 }
 .tb-breadcrumb a { color: var(--mist); text-decoration: none; transition: color .25s; }
 .tb-breadcrumb a:hover { color: var(--ember); }
-.tb-breadcrumb span:last-child { color: rgba(242,240,236,.6); }
+.tb-breadcrumb span:last-child { color: var(--ink-muted); }
 
 /* Header */
 .tb-header { padding: 60px 56px 44px; }
@@ -200,8 +200,8 @@ const blogCss = `
   text-decoration: none; color: var(--white);
   transition: border-color .3s, box-shadow .3s;
 }
-.tb-featured:hover { border-color: rgba(232,105,42,.35); box-shadow: 0 8px 40px rgba(0,0,0,.5); }
-.tb-featured-img { position: relative; width: 100%; height: 100%; overflow: hidden; background: rgba(255,255,255,.03); }
+.tb-featured:hover { border-color: rgba(124,143,252,.35); box-shadow: 0 8px 40px rgba(0,0,0,.5); }
+.tb-featured-img { position: relative; width: 100%; height: 100%; overflow: hidden; background: rgba(124,143,252,.08); }
 .tb-featured-img img { transition: transform .5s; }
 .tb-featured:hover .tb-featured-img img { transform: scale(1.04); }
 .tb-featured-body { padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
@@ -222,8 +222,8 @@ const blogCss = `
   display: flex; flex-direction: column;
   transition: border-color .3s, transform .3s;
 }
-.tb-card:hover { border-color: rgba(232,105,42,.28); transform: translateY(-3px); }
-.tb-card-img { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: rgba(255,255,255,.03); }
+.tb-card:hover { border-color: rgba(124,143,252,.28); transform: translateY(-3px); }
+.tb-card-img { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: rgba(124,143,252,.08); }
 .tb-card-img img { transition: transform .5s; }
 .tb-card:hover .tb-card-img img { transform: scale(1.05); }
 .tb-card-body { padding: 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
